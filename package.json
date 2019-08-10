@@ -23,7 +23,8 @@
   },
   "homepage": "https://github.com/selder18/blue-ocean-rewrite#readme",
   "dependencies": {
-    "dotenv": "^8.0.0"
+    "dotenv": "^8.0.0",
+    "lodash": "^4.17.15"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.1",
