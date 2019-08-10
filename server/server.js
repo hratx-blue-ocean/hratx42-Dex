@@ -2,7 +2,7 @@ const createError = require('http-errors');
 const logger = require('morgan');
 const express = require('express');
 const app = express();
-
+const path = require('path');
 
 // open up CORS 
 app.use((_, res, next) => {
@@ -14,23 +14,24 @@ app.use((_, res, next) => {
 app.use(logger('dev'));
 
 // You can place your routes here, feel free to refactor:
+app.use(express.static(path.join(__dirname, '../client/public')));
+
 const { example } = require('./routes');
 app.use('/api/example', example)
-
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
     next(createError(404));
 });
 
 // error handler
-// app.use(function (err, req, res, next) {
-//     // set locals, only providing error in development
-//     res.locals.message = err.message;
-//     res.locals.error = req.app.get('env') === 'development' ? err : {};
+app.use(function (err, req, res, next) {
+    // set locals, only providing error in development
+    res.locals.message = err.message;
+    res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-//     // render the error page
-//     res.status(err.status || 500);
-//     res.json('error');
-// });
+    // render the error page
+    res.status(err.status || 500);
+    res.json('error');
+});
 
 module.exports = app;
