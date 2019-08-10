@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function BoardThumbnails(props) {
+export default function TableThumbnails(props) {
   return (
     <div>
       thumbnails

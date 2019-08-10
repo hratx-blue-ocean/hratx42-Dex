@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-export default class Board extends Component {
+export default class Table extends Component {
   constructor(props){
     super(props)
     this.state = {
