@@ -13,7 +13,7 @@
   "dependencies": {
     "debug": "^4.1.1",
     "express": "^4.16.4",
-    "lodash": "^4.17.13",
+    "lodash": "^4.17.15",
     "nyc": "^14.1.0"
   },
   "devDependencies": {
