@@ -1,6 +1,7 @@
 const faker = require('faker');
 const writeFile = require('./writeFile');
 const config = require('./config');
+const generateCards = require('./generateCards');
 
 function generateDecks(numberOfTables, decksPerTable) {
   let decks = [];
@@ -10,6 +11,7 @@ function generateDecks(numberOfTables, decksPerTable) {
         id: deckNumber,
         table_id: tableNumber,
         title: faker.hacker.noun(),
+        cards: generateCards(config.numberOfCards),
       };
       decks.push(deck);
     }

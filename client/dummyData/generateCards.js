@@ -9,7 +9,7 @@ function generateCards(n) {
       id: i,
       createdAt: faker.date.recent(),
       updatedAt: faker.date.recent(),
-      labels: makeLabels(),
+      labels: generateLabels(),
       impact: Math.floor(Math.random() * 13),
       dueDate: faker.date.future(),
       description: faker.hacker.phrase(),
@@ -20,10 +20,10 @@ function generateCards(n) {
     };
     cards.push(card);
   }
-  writeFile('cards', cards);
+  return cards;
 }
 
-function makeLabels() {
+function generateLabels() {
   const labels = [];
   const numberOfLabels = Math.floor(Math.random() * 4);
   for (let i = 0; i < numberOfLabels; i++) {
@@ -48,3 +48,5 @@ function generateComments(n) {
 }
 
 generateCards(config.numberOfCards);
+
+module.exports = generateCards;
