@@ -14,16 +14,16 @@ bserver.listen(webPort, function(){
 });
 const wss=new WebSocket.Server({server:bserver});
 
-wss.on('connection',ws=>{
-  ws.room=[];
-  ws.send(JSON.stringify({msg:"user joined"}));
+wss.on('connection', ws => {
+  ws.room=null;
+  ws.send(JSON.stringify({msg:"connected"}));
   console.log('connected');
-  ws.on('message', messageJSON=>{
+  ws.on('message', messageJSON => {
     console.log('message: ',messageJSON);
     //try{
     var message=JSON.parse(messageJSON);
     //}catch(e){console.log(e)}
-    if(message.join){ws.room.push(message.join)}
+    if(message.join){ws.room = message.join}
     if(message.room){broadcast(message);}
     if(message.msg){console.log('message: ',message.msg)}
   })
@@ -34,9 +34,13 @@ wss.on('connection',ws=>{
 })
 
 function broadcast(message){
+  //console.log(wss.clients);
   wss.clients.forEach(client=>{
-    if(client.room.indexOf(JSON.parse(message).room)>-1){
-      client.send(message)
+    //if(client.room.indexOf(message.room) > -1){
+    // console.log('client rooms', client.room[0]);
+    console.log('client room', client.room);
+    if(client.room === message.room){
+      client.send(JSON.stringify(message))
     }
   })
 }

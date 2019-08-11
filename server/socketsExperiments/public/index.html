@@ -20,7 +20,16 @@
         ws.onopen=function(){
             out.innerHTML='connected ';
         }
-        ws.onmessage=function(ms){out.innerHTML+=ms.data+'<br>';}
+        ws.onmessage=function(message){
+            // const message = JSON.parse(messageJSON);
+            const messageData = JSON.parse(message.data);
+            if (messageData.msg && messageData.msg === 'connected'){
+                console.log('connected!');
+                bjoin()
+            }else{
+                out.innerHTML += message.data + '<br>';
+            }
+        }
         function send(msg){
             ws.send(JSON.stringify({msg:msg}));
         }
@@ -32,7 +41,6 @@
         }
         function bjoin(){
             group=document.getElementById("group").value;
-            alert(group);
             join(group);
         }
         text.onchange=function(el){
