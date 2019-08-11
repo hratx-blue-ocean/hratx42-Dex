@@ -14,7 +14,8 @@
     "debug": "^4.1.1",
     "express": "^4.16.4",
     "lodash": "^4.17.15",
-    "nyc": "^14.1.0"
+    "nyc": "^14.1.0",
+    "socketio": "^1.0.0"
   },
   "devDependencies": {
     "chai": "^4.2.0",
