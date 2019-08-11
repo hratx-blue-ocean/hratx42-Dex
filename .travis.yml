@@ -1,6 +1,9 @@
 language: node_js
 node_js:
  - "10.6.0 "
+env:
+  global:
+  - 'PORT=8000'
 before_script:
  - "npm run-script setup"
- - "npm run-script launch"
+ - "npm run-script launch" 
