@@ -60,8 +60,8 @@
           console.log('Successfully connected!');
           socket.emit('room', group);
         });
-        socket.on('update', (data)=>{
-            alert(data);
+        socket.on('connected', (message)=>{
+            console.log(message);
         })
 
         socket.on('new_data', (data) => {

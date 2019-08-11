@@ -15,7 +15,7 @@ tableSpace.on('connection', (socket) => {
   console.log('connected');
 
   // broadcast to all clients in the given sub-namespace
-  tableSpace.emit('update', 'hello');
+  tableSpace.emit('connected', `successfully connected to tablespace`);
   socket.on('room', function(room) {
     socket.join(room);
   });
