@@ -4,10 +4,10 @@
 <body>
     <h1>Dex</h1>
     <select id="group">
-        <option>group 1</option>
-        <option>group 2</option>
-        <option>group 3</option>
-        <option>group 4</option>
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
     </select>
     <button onclick="bjoin();">join group</button><br>
     <form>
@@ -22,7 +22,8 @@
     </form>
     <input id="msg" type="text"/>
     <div id="out"></div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js" integrity="sha256-yr4fRk/GU1ehYJPAs8P4JlTgu0Hdsp4ZKrx8bDEDC3I=" crossorigin="anonymous"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js" integrity="sha256-yr4fRk/GU1ehYJPAs8P4JlTgu0Hdsp4ZKrx8bDEDC3I=" crossorigin="anonymous"></script> -->
+    <script src = "/socket.io/socket.io.js"></script>
     <script
       src="https://code.jquery.com/jquery-3.4.1.slim.js"
       integrity="sha256-BTlTdQO9/fascB1drekrDVkaKd9PkwBymMlHOiG+qLI="
@@ -49,45 +50,53 @@
             e.preventDefault();
             var data = $(this).serializeFormJSON();
             console.log(data);
-            broadcast(data,group)
+            // broadcast(data,group)
+            socket.emit('post', data);
         });
-        let group = $('#group').value;
-        var ws = new WebSocket('ws://localhost:5000');
-        ws.onerror = function(e){out.innerHTML=e;}
-        ws.onclose = function(e){out.innerHTML='closed'+e;}
-        ws.onopen = function(){
-            out.innerHTML='connected <br>';
-        }
-        ws.onmessage = function(message){
-            const messageData = JSON.parse(message.data).msg;
-            console.log(messageData);
-            if (messageData && messageData === 'connected'){
-                console.log('connected!');
-                bjoin()
-            }else{
-                let newCard = $('<div>');
-                newCard.data(messageData);
-                newCard.append('<h2>' + messageData.title + '</h2>');
-                newCard.append('<p>' + messageData.description + '</p>');
-                newCard.append('<p>' + messageData.label + '</p>');
-                newCard.append('<p>' + messageData.due_date + '</p>');
-                newCard.append('<p>' + messageData.working_users + '</p>');
-                newCard.append('<p>' + messageData.weight + '/' + messageData.impact + '</p>');
-                $('#out').append(newCard);
-            }
-        }
-        function send(msg){
-            ws.send(JSON.stringify({msg:msg}));
-        }
-        function broadcast(msg,room){
-            ws.send(JSON.stringify({room:room,msg:msg}))
-        }
-        function join(room){
-            ws.send(JSON.stringify({join:room}));
-        }
-        function bjoin(){
-            group=document.getElementById("group").value;
-            join(group);
-        }
+        let group = $('#group').val();
+        console.log(group);
+        const socket = io.connect('/table/');
+        socket.on('connect', () => {
+          console.log('Successfully connected!');
+          socket.emit('room', group);
+        });
+        socket.on('update', (data)=>{
+            alert(data);
+        })
+
+        socket.on('new_data', (data) => {
+            console.log(data);
+        })
+        // ws.onmessage = function(message){
+        //     const messageData = JSON.parse(message.data).msg;
+        //     console.log(messageData);
+        //     if (messageData && messageData === 'connected'){
+        //         console.log('connected!');
+        //         bjoin()
+        //     }else{
+        //         let newCard = $('<div>');
+        //         newCard.data(messageData);
+        //         newCard.append('<h2>' + messageData.title + '</h2>');
+        //         newCard.append('<p>' + messageData.description + '</p>');
+        //         newCard.append('<p>' + messageData.label + '</p>');
+        //         newCard.append('<p>' + messageData.due_date + '</p>');
+        //         newCard.append('<p>' + messageData.working_users + '</p>');
+        //         newCard.append('<p>' + messageData.weight + '/' + messageData.impact + '</p>');
+        //         $('#out').append(newCard);
+        //     }
+        // }
+        // function send(msg){
+        //     ws.send(JSON.stringify({msg:msg}));
+        // }
+        // function broadcast(msg,room){
+        //     ws.send(JSON.stringify({room:room,msg:msg}))
+        // }
+        // function join(room){
+        //     ws.send(JSON.stringify({join:room}));
+        // }
+        // function bjoin(){
+        //     group=document.getElementById("group").value;
+        //     join(group);
+        // }
     </script>
 </body>
