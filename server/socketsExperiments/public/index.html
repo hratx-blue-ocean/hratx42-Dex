@@ -1,33 +1,79 @@
 <html>
+<head>
+</head>
 <body>
-    <h4>websocket</h4>
+    <h1>Dex</h1>
     <select id="group">
         <option>group 1</option>
         <option>group 2</option>
         <option>group 3</option>
         <option>group 4</option>
     </select>
-    <!-- <h5>Group: <span id="group">darwin</span></h5> -->
-    <!-- a hardoced group name -->
     <button onclick="bjoin();">join group</button><br>
-    <input id="text" type="text"/>
-    <span id="out"></span>
+    <form>
+        <input type="text" name="title" id="title" placeholder="">
+        <input type="number" name="weight" id="weight">
+        <input type="number" name="impact" id="impact">
+        <input type="text" name="label" id="label">
+        <input type="date" name="due_date" id="due_date">
+        <input type="text" name="description" id="description">
+        <input type="text" name="working_users" id="working_users">
+        <button type="submit">submit</button>
+    </form>
+    <input id="msg" type="text"/>
+    <div id="out"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js" integrity="sha256-yr4fRk/GU1ehYJPAs8P4JlTgu0Hdsp4ZKrx8bDEDC3I=" crossorigin="anonymous"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.slim.js"
+      integrity="sha256-BTlTdQO9/fascB1drekrDVkaKd9PkwBymMlHOiG+qLI="
+      crossorigin="anonymous"></script>
     <script>
-        var group=document.getElementById("group").value;
-        var ws=new  WebSocket('ws://localhost:5000');
-        ws.onerror=function(e){out.innerHTML=e;}
-        ws.onclose=function(e){out.innerHTML='closed'+e;}
-        ws.onopen=function(){
-            out.innerHTML='connected ';
+        (function ($) {
+            $.fn.serializeFormJSON = function () {
+                var o = {};
+                var a = this.serializeArray();
+                $.each(a, function () {
+                    if (o[this.name]) {
+                        if (!o[this.name].push) {
+                            o[this.name] = [o[this.name]];
+                        }
+                        o[this.name].push(this.value || '');
+                    } else {
+                        o[this.name] = this.value || '';
+                    }
+                });
+                return o;
+            };
+        })(jQuery);
+        $('form').submit(function (e) {
+            e.preventDefault();
+            var data = $(this).serializeFormJSON();
+            console.log(data);
+            broadcast(data,group)
+        });
+        let group = $('#group').value;
+        var ws = new WebSocket('ws://localhost:5000');
+        ws.onerror = function(e){out.innerHTML=e;}
+        ws.onclose = function(e){out.innerHTML='closed'+e;}
+        ws.onopen = function(){
+            out.innerHTML='connected <br>';
         }
-        ws.onmessage=function(message){
-            // const message = JSON.parse(messageJSON);
-            const messageData = JSON.parse(message.data);
-            if (messageData.msg && messageData.msg === 'connected'){
+        ws.onmessage = function(message){
+            const messageData = JSON.parse(message.data).msg;
+            console.log(messageData);
+            if (messageData && messageData === 'connected'){
                 console.log('connected!');
                 bjoin()
             }else{
-                out.innerHTML += message.data + '<br>';
+                let newCard = $('<div>');
+                newCard.data(messageData);
+                newCard.append('<h2>' + messageData.title + '</h2>');
+                newCard.append('<p>' + messageData.description + '</p>');
+                newCard.append('<p>' + messageData.label + '</p>');
+                newCard.append('<p>' + messageData.due_date + '</p>');
+                newCard.append('<p>' + messageData.working_users + '</p>');
+                newCard.append('<p>' + messageData.weight + '/' + messageData.impact + '</p>');
+                $('#out').append(newCard);
             }
         }
         function send(msg){
@@ -42,10 +88,6 @@
         function bjoin(){
             group=document.getElementById("group").value;
             join(group);
-        }
-        text.onchange=function(el){
-            //alert(el.target.value);
-            broadcast(el.target.value,group);
         }
     </script>
 </body>

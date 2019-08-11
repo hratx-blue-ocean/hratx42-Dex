@@ -2,17 +2,12 @@ const WebSocket = require('ws');
 const http = require('http');
 const path = require('path')
 
-const express = require('express');
-const app = express();
+const app = require('express')();
+const server = require('http').createServer(app);
+const io = require('socket.io')(server);
+io.on('connection', () => { /* … */ });
 
 app.use('/', express.static(path.join(__dirname, 'public')));
-const bserver=http.createServer(app);
-const webPort = 5000;
-
-bserver.listen(webPort, function(){
- console.log('Web server start. http://localhost:' + webPort );
-});
-const wss=new WebSocket.Server({server:bserver});
 
 wss.on('connection', ws => {
   ws.room=null;
@@ -28,8 +23,8 @@ wss.on('connection', ws => {
     if(message.msg){console.log('message: ',message.msg)}
   })
 
-  ws.on('error',e=>console.log(e))
-  ws.on('close',(e)=>console.log('websocket closed'+e))
+  ws.on('error', e => console.log(e))
+  ws.on('close', e => console.log('websocket closed' + e))
 
 })
 
@@ -44,3 +39,15 @@ function broadcast(message){
     }
   })
 }
+server.listen(3000, (err) => {
+  if (err) console.error(err);
+  else console.log('listening on 3000');
+});
+
+// const server=http.createServer(app);
+// const webPort = 5000;
+
+// server.listen(webPort, function(){
+//  console.log('Web server start. http://localhost:' + webPort );
+// });
+// const wss = new WebSocket.Server({ server });
