@@ -1,10 +1,11 @@
 const WebSocket = require('ws');
-const http=require('http');
+const http = require('http');
+const path = require('path')
 
 const express = require('express');
 const app = express();
 
-app.use(express.static('public'));
+app.use('/', express.static(path.join(__dirname, 'public')));
 const bserver=http.createServer(app);
 const webPort = 5000;
 
@@ -17,14 +18,14 @@ wss.on('connection',ws=>{
   ws.room=[];
   ws.send(JSON.stringify({msg:"user joined"}));
   console.log('connected');
-  ws.on('message', message=>{
-    console.log('message: ',message);
+  ws.on('message', messageJSON=>{
+    console.log('message: ',messageJSON);
     //try{
-    var messag=JSON.parse(message);
+    var message=JSON.parse(messageJSON);
     //}catch(e){console.log(e)}
-    if(messag.join){ws.room.push(messag.join)}
-    if(messag.room){broadcast(message);}
-    if(messag.msg){console.log('message: ',messag.msg)}
+    if(message.join){ws.room.push(message.join)}
+    if(message.room){broadcast(message);}
+    if(message.msg){console.log('message: ',message.msg)}
   })
 
   ws.on('error',e=>console.log(e))

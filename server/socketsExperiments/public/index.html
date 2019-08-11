@@ -1,13 +1,19 @@
 <html>
 <body>
     <h4>websocket</h4>
-    <h5>Group: <span id="group">darwin</span></h5>
+    <select id="group">
+        <option>group 1</option>
+        <option>group 2</option>
+        <option>group 3</option>
+        <option>group 4</option>
+    </select>
+    <!-- <h5>Group: <span id="group">darwin</span></h5> -->
     <!-- a hardoced group name -->
     <button onclick="bjoin();">join group</button><br>
     <input id="text" type="text"/>
     <span id="out"></span>
     <script>
-        var group=document.getElementById("group").textContent;
+        var group=document.getElementById("group").value;
         var ws=new  WebSocket('ws://localhost:5000');
         ws.onerror=function(e){out.innerHTML=e;}
         ws.onclose=function(e){out.innerHTML='closed'+e;}
@@ -25,7 +31,8 @@
             ws.send(JSON.stringify({join:room}));
         }
         function bjoin(){
-            //alert(group);
+            group=document.getElementById("group").value;
+            alert(group);
             join(group);
         }
         text.onchange=function(el){
