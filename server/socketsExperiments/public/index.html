@@ -3,7 +3,7 @@
 </head>
 <body>
     <h1>Dex</h1>
-    <select id="group">
+    <select id="group" onchange="changeRoom();">
         <option>1</option>
         <option>2</option>
         <option>3</option>
@@ -55,6 +55,7 @@
             socket.emit('post', data);
         });
         let group = $('#group').val();
+        let oldGroup = group;
         console.log(group);
         const socket = io.connect('/table/');
         socket.on('connect', () => {
@@ -77,6 +78,16 @@
             newCard.append('<p>' + data.weight + '/' + data.impact + '</p>');
             $('#out').append(newCard);
         })
+
+        function changeRoom(){
+            oldGroup = group;
+            group = $('#group').val();
+        }
+
+        function bjoin(){
+            socket.emit('leaveRoom', oldGroup);
+            socket.emit('room', group);
+        }
         // ws.onmessage = function(message){
         //     const messageData = JSON.parse(message.data).msg;
         //     console.log(messageData);

@@ -38,6 +38,11 @@
     socket.on('room', function(room) {
       socket.join(room);
     });
+
+    socket.on('leaveRoom', function(room) {
+      socket.leave(room);
+    });
+    
     socket.on('post', async data => {
       // const data = JSON.parse(JSONdata);
       console.log(data);
