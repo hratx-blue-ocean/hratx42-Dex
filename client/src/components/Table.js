@@ -4,15 +4,15 @@ import Controls from './Controls';
 import Deck from './Deck'
 
 export default class Table extends Component {
-  constructor(props){
-    super(props)
+  constructor(props) {
+    super(props);
     this.state = {
       decks: [{}],
       tickets: [{}],
       users: [],
       filterBy: '',
-      sortBy: ''
-    }
+      sortBy: '',
+    };
   }
   render() {
     return (

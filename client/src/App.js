@@ -12,7 +12,7 @@ export default class App extends Component {
     super(props);
     this.state = {
       userid: '',
-      boards: []
+      boards: [],
     };
     this.api = `http://localhost:8000/api/example`;
   }
