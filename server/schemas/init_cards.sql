@@ -39,6 +39,7 @@ CREATE TABLE IF NOT EXISTS cards (
 CREATE TRIGGER before_insert_cards_trigger BEFORE INSERT ON cards FOR EACH ROW EXECUTE PROCEDURE cards_notify();
 CREATE TRIGGER update_cards_trigger AFTER UPDATE ON cards FOR EACH ROW EXECUTE PROCEDURE cards_notify();
 CREATE TRIGGER after_delete_cards_trigger AFTER DELETE ON cards FOR EACH ROW EXECUTE PROCEDURE cards_notify();
+CREATE TRIGGER set_timestamp BEFORE UPDATE ON cards FOR EACH ROW EXECUTE PROCEDURE trigger_set_timestamp();
 
 CREATE OR REPLACE FUNCTION labels_notify() RETURNS trigger AS $$
 BEGIN
@@ -91,9 +92,9 @@ CREATE TRIGGER after_delete_card_label_trigger AFTER DELETE ON cards_labels FOR 
 CREATE OR REPLACE FUNCTION card_members_notify() RETURNS trigger AS $$
 BEGIN
     IF TG_OP = 'INSERT' THEN
-      PERFORM pg_notify('insert_card_label', row_to_json(NEW)::text);
+      PERFORM pg_notify('insert_card_member', row_to_json(NEW)::text);
     ELSIF TG_OP = 'DELETE' THEN
-      PERFORM pg_notify(CAST('delete_card_label' AS text), row_to_json(old)::text);
+      PERFORM pg_notify(CAST('delete_card_member' AS text), row_to_json(old)::text);
     END IF;
 
     RETURN NEW;
