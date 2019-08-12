@@ -20,4 +20,9 @@ const db = async (id) => {
     return product;
 }
 
-module.exports = db;
+const getUserInfoByEmail = async (email) => {
+    const userInfo = await pgClient.query(`SELECT * FROM User where email=${email};`)
+    return userInfo;
+}
+
+module.exports = { db, getUserInfoByEmail };
