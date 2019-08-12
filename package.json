@@ -24,7 +24,9 @@
   },
   "homepage": "https://github.com/selder18/blue-ocean-rewrite#readme",
   "dependencies": {
+    "bcrypt": "^3.0.6",
     "dotenv": "^8.0.0",
+    "jest-css-modules": "^2.1.0",
     "lodash": "^4.17.13"
   },
   "devDependencies": {

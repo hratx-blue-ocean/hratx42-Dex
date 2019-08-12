@@ -7,7 +7,8 @@ export default function NavBar(props) {
       <div>NavBar be here</div>
         <li><Link to={'/'}>Landing Page</Link></li>
         <li><Link to={'/profile'}>Profile Page</Link></li>
-        <li><Link to ={'/boards'}>Boards Page</Link></li>
+        <li><Link to ={'/dashboard'}>Dashboard Page</Link></li>
+        <li><Link to ={'/table'}>Table Page</Link></li>
     </div>
   )
 }
