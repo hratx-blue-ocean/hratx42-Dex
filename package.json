@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/selder18/blue-ocean-rewrite#readme",
   "dependencies": {
+    "bcrypt": "^3.0.6",
     "dotenv": "^8.0.0",
     "express": "^4.17.1",
     "http-errors": "^1.7.3",
