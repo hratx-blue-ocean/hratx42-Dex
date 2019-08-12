@@ -16,8 +16,8 @@ app.use(logger('dev'));
 // You can place your routes here, feel free to refactor:
 app.use(express.static(path.join(__dirname, '../client/public')));
 
-const { example } = require('./routes');
-app.use('/api/example', example)
+const { db } = require('./routes');
+app.use('/api/db', db)
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
     next(createError(404));

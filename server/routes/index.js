@@ -1,3 +1,3 @@
-const example = require('./example');
+const db = require('/Users/hh/Documents/Coding/hackReactor/hratx42-Dex/db/hosteddb.js');
 
-module.exports = { example }
+module.exports = { db }
