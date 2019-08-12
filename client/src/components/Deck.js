@@ -18,7 +18,7 @@ export default function Deck(props) {
             <div style = {{paddingLeft: '20px'}}></div>
             <CardThumbnail />
             <div style = {{paddingLeft: '20px'}}></div>
-            <Button onClick = {()=> addCard()} style = {{height: '75px', width: '75px'}} variant='success'>Add New Card</Button>
+            <Button style = {{height: '75px', width: '75px'}} variant='success'>Add New Card</Button>
           </Card.Body>
         </Card>
       </div>
