@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import Landing from './components/Landing.js';
+import Landing from './components/landing/Landing.js';
 import Dashboard from './components/Dashboard.js';
 import Profile from './components/Profile.js';
-import NavBar from './components/NavBar.js'
-// import './App.css';
+import NavBar from './components/NavBar.js';
+import styles from './App.css';
 
 export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       userid: '',
-      boards: []
+      boards: [],
     };
     this.api = `http://localhost:8000/api/example`;
   }
@@ -27,11 +27,11 @@ export default class App extends Component {
     return (
       <>
         <Router>
-        <h1>Welcome to Blue Ocean!</h1>
-        <NavBar />
-          <Route path="/" exact component={ Landing } />
-          <Route path="/boards" component={ Dashboard } />
-          <Route path="/profile" component={ Profile } />
+          <h1 className={styles.App}>Welcome to Blue Ocean!</h1>
+          <NavBar />
+          <Route path="/" exact component={Landing} />
+          <Route path="/boards" component={Dashboard} />
+          <Route path="/profile" component={Profile} />
         </Router>
       </>
     );
