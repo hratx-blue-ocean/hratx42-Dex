@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 //services
-import mockHttp from '../../../services/http/__mocks__/mockHttp';
+import http from '../../../services/http/__mocks__/http';
 
 //utils
 import global from '../../../utils/global';
@@ -19,7 +19,7 @@ export default function Register() {
       global.flash("Passwords should match", 2000)
     } else {
       //@TODO: verify email/password input
-      mockHttp.postUser(email, password1)
+      http.postUser(email, password1)
     }
   };
 
