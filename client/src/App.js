@@ -7,22 +7,27 @@ import NavBar from './components/NavBar.js'
 import Table from './components/Table.js'
 // import './App.css';
 
+import global from '../utils/global'
+
 export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       userid: '',
       boards: [],
+      flash: false,
     };
     this.api = `http://localhost:8000/api/example`;
   }
-  componentDidMount() {
-    // fetch(this.api)
-    //   .then(res => res.json())
-    //   .then(seaCreatures => {
-    //     this.setState({ seaCreatures: seaCreatures.data });
-    //   });
+  componentDidMount() {    
+    global.flash = this.flash.bind(this)
   }
+  flash(message, interval){
+    this.setState({flash: message});
+    setTimeout(()=>{
+        this.setState({flash:false})
+    }, interval)
+}
 
   render() {
     return (
