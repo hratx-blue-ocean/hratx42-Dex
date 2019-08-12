@@ -15,11 +15,7 @@ afterEach(cleanup);
 it('CheckboxWithLabel changes the text after click', async () => {
   const { getByText } = render(<App />);
 
-<<<<<<< HEAD
-  const boards = await waitForElement(() => getByText(/board/i));
-=======
     const boards = await waitForElement(() => getByText(/Tables/i),)
->>>>>>> fixing test
 
   expect(boards).toBeTruthy();
 });
