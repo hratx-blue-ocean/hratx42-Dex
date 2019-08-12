@@ -34,7 +34,6 @@ export default class App extends Component {
           <Route path="/dashboard" component={ Dashboard } />
           <Route path="/profile" component={ Profile } />
           <Route path="/table" component={ Table } />
-          <Table />
         </Router>
       </>
     );
