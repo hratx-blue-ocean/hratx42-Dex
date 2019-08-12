@@ -14,6 +14,18 @@ export default class Table extends Component {
       sortBy: '',
     };
   }
+  componentDidMount() {
+
+  }
+
+  saveTable(tableName, descName) {
+    //create/edit table
+  }
+
+  newPlayer(playerName) {
+    //add user to users Array
+  }
+
   render() {
     return (
       <div>
