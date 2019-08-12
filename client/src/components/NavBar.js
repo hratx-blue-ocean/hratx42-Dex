@@ -14,9 +14,9 @@ export default function NavBar(props) {
     <Nav className="mr-auto">
     </Nav>
     <NavDropdown title="Tables" id="collasible-nav-dropdown">
-        <NavDropdown.Item href="#action/3.1">tables 1</NavDropdown.Item>
-        <NavDropdown.Item href="#action/3.2">tables 2</NavDropdown.Item>
-        <NavDropdown.Item href="#action/3.3">tables 3</NavDropdown.Item>
+        <NavDropdown.Item href="#action/3.1"><Link to ={'/table'}>Table Page</Link></NavDropdown.Item>
+        <NavDropdown.Item href="#action/3.2">table 2</NavDropdown.Item>
+        <NavDropdown.Item href="#action/3.3">table 3</NavDropdown.Item>
         <NavDropdown.Divider />
         <NavDropdown.Item href="#action/3.4">Add a table</NavDropdown.Item>
       </NavDropdown>   
