@@ -1,8 +1,7 @@
 const faker = require('faker');
-const writeFile = require('./writeFile.js');
 const config = require('./config.js');
 
-function generateCards(n) {
+function generateCards(deckId, n) {
   const cards = [];
   for (let i = 0; i < n; i++) {
     let card = {
@@ -16,7 +15,7 @@ function generateCards(n) {
       weight: Math.floor(Math.random() * 13),
       gitLink: 'https://github.com/hratx-blue-ocean/hratx42-Dex',
       comments: generateComments(Math.floor(Math.random() * 4)),
-      deck_id: Math.floor(Math.random() * (config.numberOfDecks + 1)),
+      deck_id: deckId,
     };
     cards.push(card);
   }
