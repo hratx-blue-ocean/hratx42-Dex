@@ -4,6 +4,7 @@ import Landing from './components/Landing.js';
 import Dashboard from './components/Dashboard.js';
 import Profile from './components/Profile.js';
 import NavBar from './components/NavBar.js'
+import Table from './components/Table.js'
 // import './App.css';
 
 export default class App extends Component {
@@ -11,7 +12,7 @@ export default class App extends Component {
     super(props);
     this.state = {
       userid: '',
-      boards: []
+      boards: [],
     };
     this.api = `http://localhost:8000/api/example`;
   }
@@ -30,8 +31,9 @@ export default class App extends Component {
         <h1>Welcome to Blue Ocean!</h1>
         <NavBar />
           <Route path="/" exact component={ Landing } />
-          <Route path="/boards" component={ Dashboard } />
+          <Route path="/dashboard" component={ Dashboard } />
           <Route path="/profile" component={ Profile } />
+          <Route path="/table" component={ Table } />
         </Router>
       </>
     );
