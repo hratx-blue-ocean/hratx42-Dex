@@ -13,7 +13,7 @@ export default function NavBar(props) {
   <Navbar.Collapse id="basic-navbar-nav">
     <Nav className="mr-auto">
     </Nav>
-    <NavDropdown title="Tables" id="collasible-nav-dropdown">
+    <NavDropdown title="Table" id="collasible-nav-dropdown">
         <NavDropdown.Item href="#action/3.1"><Link to ={'/table'}>Table Page</Link></NavDropdown.Item>
         <NavDropdown.Item href="#action/3.2">Table 2</NavDropdown.Item>
         <NavDropdown.Item href="#action/3.3">Table 3</NavDropdown.Item>
