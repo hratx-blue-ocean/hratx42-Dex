@@ -4,7 +4,6 @@ import Landing from './components/Landing.js';
 import Dashboard from './components/Dashboard.js';
 import Profile from './components/Profile.js';
 import NavBar from './components/NavBar.js';
-// import styles from './App.css';
 
 import global from '../utils/global'
 
@@ -17,6 +16,7 @@ export default class App extends Component {
       flash: false,
     };
     this.api = `http://localhost:8000/api/example`;
+    this.flash=this.flash.bind(this)
   }
   componentDidMount() {    
     global.flash = this.flash.bind(this)
