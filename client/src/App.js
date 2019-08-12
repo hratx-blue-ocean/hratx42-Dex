@@ -8,10 +8,13 @@ import Table from './components/Table.js';
 import TableThumbnails from './components/TableThumbnails.js';
 // import './App.css';
 
+import global from '../utils/global'
+
 export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+<<<<<<< HEAD
       userid: 0,
       boards: [
         {"id":0,
@@ -39,7 +42,23 @@ export default class App extends Component {
     //   .then(seaCreatures => {
     //     this.setState({ seaCreatures: seaCreatures.data });
     //   });
+=======
+      userid: '',
+      boards: [],
+      flash: false,
+    };
+    this.api = `http://localhost:8000/api/example`;
   }
+  componentDidMount() {    
+    global.flash = this.flash.bind(this)
+>>>>>>> 43901aea520564af11227ff76ebb2f5f7d624031
+  }
+  flash(message, interval){
+    this.setState({flash: message});
+    setTimeout(()=>{
+        this.setState({flash:false})
+    }, interval)
+}
 
   render() {
     return (
