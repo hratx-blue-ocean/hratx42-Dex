@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Card, Button } from 'react-bootstrap';
 import Controls from './Controls';
 import Deck from './Deck';
-import mockHttp from '../../services/http/__mocks__/mockHttp';
+import mockHttp from '../../services/http/__mocks__/http';
 
 export default class Table extends Component {
   constructor(props) {
