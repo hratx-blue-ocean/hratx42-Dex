@@ -23,7 +23,8 @@
 
   console.log('Subscribing to channels...');
 
-  await db.query('LISTEN insert');
+  // await db.query('LISTEN insert');
+  await db.query('LISTEN insert_card');
   await db.query('LISTEN delete');
   await db.query('LISTEN update');
 
