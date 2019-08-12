@@ -1,7 +1,7 @@
 
-var pg = require('pg');
-var WebSocket = require('ws');
-var squel = require('squel').useFlavour('postgres');
+const pg = require('pg');
+const io = require('socket.io-client');
+const squel = require('squel').useFlavour('postgres');
 
 (async function() {
   var db = new pg.Client({
@@ -22,49 +22,56 @@ var squel = require('squel').useFlavour('postgres');
   await db.query('LISTEN delete');
   await db.query('LISTEN update');
 
-  console.log('Starting WebSocket server...');
+  const socket = io();
 
-  var server = new WebSocket.Server({
-    port: 8080
+  db.on('notification', function(message) {
+    console.log(message);
+    const data = JSON.parse(message.payload);
+    const room = data;
+    console.log(room);
   });
 
-  server.on('connection', async function(connection) {
-    console.log('Connection opened...');
+  // console.log('connection to socket.io');
 
-    db.on('notification', function(message) {
-      connection.send(JSON.stringify({
-        channel: message.channel,
-        payload: JSON.parse(message.payload)
-      }));
-    });
 
-    connection.on('message', async function(message) {
-      console.log(message);
 
-      if (message === 'insert') {
-        var sql = squel.insert()
-          .into('accounts')
-          .set('email', 'a@aol.com')
-          .set('name', 'name')
-          .toParam();
-
-        await db.query(sql.text, sql.values);
-      } else if (message === 'update') {
-        var sql = squel.update()
-          .table('accounts')
-          .set('name', 'name2')
-          .where('email = ?', 'a@aol.com')
-          .toParam();
-
-        await db.query(sql.text, sql.values);
-      } else if (message === 'delete') {
-        var sql = squel.delete()
-          .from('accounts')
-          .where('email = ?', 'a@aol.com')
-          .toParam();
-
-        await db.query(sql.text, sql.values);
-      }
-    });
-  });
+//   server.on('connection', async function(connection) {
+//     console.log('Connection opened...');
+// 
+//     db.on('notification', function(message) {
+//       connection.send(JSON.stringify({
+//         channel: message.channel,
+//         payload: JSON.parse(message.payload)
+//       }));
+//     });
+// 
+//     connection.on('message', async function(message) {
+//       console.log(message);
+// 
+//       if (message === 'insert') {
+//         var sql = squel.insert()
+//           .into('accounts')
+//           .set('email', 'a@aol.com')
+//           .set('name', 'name')
+//           .toParam();
+// 
+//         await db.query(sql.text, sql.values);
+//       } else if (message === 'update') {
+//         var sql = squel.update()
+//           .table('accounts')
+//           .set('name', 'name2')
+//           .where('email = ?', 'a@aol.com')
+//           .toParam();
+// 
+//         await db.query(sql.text, sql.values);
+//       } else if (message === 'delete') {
+//         var sql = squel.delete()
+//           .from('accounts')
+//           .where('email = ?', 'a@aol.com')
+//           .toParam();
+// 
+//         await db.query(sql.text, sql.values);
+//       }
+//     });
+//   });
 })();

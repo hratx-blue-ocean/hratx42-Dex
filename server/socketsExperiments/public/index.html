@@ -12,6 +12,7 @@
     <button onclick="bjoin();">join group</button><br>
     <form>
         <input type="text" name="title" id="title" placeholder="">
+        <input type="number" name="table_id" id="table_id">
         <input type="number" name="weight" id="weight">
         <input type="number" name="impact" id="impact">
         <input type="text" name="label" id="label">
@@ -66,6 +67,15 @@
 
         socket.on('new_data', (data) => {
             console.log(data);
+            let newCard = $('<div>');
+            newCard.data(data);
+            newCard.append('<h2>' + data.title + '</h2>');
+            newCard.append('<p>' + data.description + '</p>');
+            newCard.append('<p>' + data.label + '</p>');
+            newCard.append('<p>' + data.due_date + '</p>');
+            newCard.append('<p>' + data.working_users + '</p>');
+            newCard.append('<p>' + data.weight + '/' + data.impact + '</p>');
+            $('#out').append(newCard);
         })
         // ws.onmessage = function(message){
         //     const messageData = JSON.parse(message.data).msg;
@@ -74,15 +84,6 @@
         //         console.log('connected!');
         //         bjoin()
         //     }else{
-        //         let newCard = $('<div>');
-        //         newCard.data(messageData);
-        //         newCard.append('<h2>' + messageData.title + '</h2>');
-        //         newCard.append('<p>' + messageData.description + '</p>');
-        //         newCard.append('<p>' + messageData.label + '</p>');
-        //         newCard.append('<p>' + messageData.due_date + '</p>');
-        //         newCard.append('<p>' + messageData.working_users + '</p>');
-        //         newCard.append('<p>' + messageData.weight + '/' + messageData.impact + '</p>');
-        //         $('#out').append(newCard);
         //     }
         // }
         // function send(msg){

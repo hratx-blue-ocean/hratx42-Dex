@@ -1,4 +1,5 @@
 DROP FUNCTION trigger_notify() CASCADE;
+DROP TABLE cards; 
 
 CREATE OR REPLACE FUNCTION trigger_notify() RETURNS trigger AS $$
 BEGIN
@@ -16,6 +17,7 @@ $$ LANGUAGE 'plpgsql';
 
 CREATE TABLE IF NOT EXISTS cards (
     id serial primary key,
+    table_id int,
     title varchar,
     weight int,
     impact int,
