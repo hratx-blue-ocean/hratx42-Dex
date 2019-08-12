@@ -1,4 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { Card, Button, Row, Col, Table, Form } from 'react-bootstrap';
+import styles from '../modules/TableSettings.module.css';
 
 export default function TableSettings(props) {
   const [tableName, setTableName] = useState('');
@@ -9,7 +11,6 @@ export default function TableSettings(props) {
       <Card>
         <div>
           <div className = {styles.header}>Create/Edit<Button className = {`${styles.buttonx} float-right`} variant = 'light'>x</Button></div>
-          
         </div>
         <hr/>
         <Row>
