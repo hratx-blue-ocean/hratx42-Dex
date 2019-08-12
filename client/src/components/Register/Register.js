@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 //services
-import mockHttp from '../../../services/mockHttp';
+import mockHttp from '../../../services/http/__mocks__/mockHttp';
 
 //utils
 import global from '../../../utils/global';

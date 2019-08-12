@@ -1,6 +1,6 @@
 
-import tables from '../dummyData/tables.js'
-import decks from '../dummyData/decks';
+import tables from '../../../dummyData/tables.js'
+import decks from '../../../dummyData/decks';
 
 const mockHttp = {
   async getTables(userId) {
