@@ -39,7 +39,7 @@ const auth = (req, res, next) => {
   db.getUserLoginInfo(email)
   //if user email not found send error message
   .catch((noUser) => {
-    res.json({
+    res.send(403).json({
       success: false,
       message: "Email not found"
     });
@@ -48,9 +48,14 @@ const auth = (req, res, next) => {
   .then(async (user) => {
     const match = await bcrypt.compare(password, user.password);
     if(match) {
-      res.json({success: true})
-    } else {
+      let token = jwt.sign({ email }, config.secret, { expiresIn: '7 days' });
       res.json({
+        success: true, 
+        message: "Authentication Successful", 
+        token
+      })
+    } else {
+      res.send(403).json({
         success: false,
         message: "Password is incorrect"
       })
