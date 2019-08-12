@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 //connect to db later
-const db;
+const db = require('../../db/hosteddb.js');
 
 const auth = (req, res, next) => {
   const { email, password } = req.body;
