@@ -11,7 +11,7 @@ export default class App extends Component {
     super(props);
     this.state = {
       userid: '',
-      boards: [],
+      boards: []
     };
     this.api = `http://localhost:8000/api/example`;
   }
@@ -30,8 +30,12 @@ export default class App extends Component {
           <h1>Welcome to Blue Ocean!</h1>
           <NavBar />
           <Route path="/" exact component={Landing} />
-          <Route path="/boards" component={Dashboard} />
+          <Route 
+            path="/boards"
+            render={props => <Dashboard {...props} boards={this.state.boards} />}
+           />
           <Route path="/profile" component={Profile} />
+          <Dashboard boards={this.state.boards} />
         </Router>
       </>
     );
