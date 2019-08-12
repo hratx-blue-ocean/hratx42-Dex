@@ -4,25 +4,31 @@ import Landing from './components/Landing.js';
 import Dashboard from './components/Dashboard.js';
 import Profile from './components/Profile.js';
 import NavBar from './components/NavBar.js'
-import Table from './components/Table.js'
+import Table from './components/Table.js';
+import TableSettings from './components/TableSettings/TableSettings.js';
 // import './App.css';
+
+import global from '../utils/global'
 
 export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userid: '',
-      boards: [],
-    };
-    this.api = `http://localhost:8000/api/example`;
+      userid: 0,
+      boards: []
   }
-  componentDidMount() {
-    // fetch(this.api)
-    //   .then(res => res.json())
-    //   .then(seaCreatures => {
-    //     this.setState({ seaCreatures: seaCreatures.data });
-    //   });
-  }
+}
+
+componentDidMount() {    
+  global.flash = this.flash.bind(this)
+}
+
+flash(message, interval){
+  this.setState({flash: message});
+  setTimeout(()=>{
+      this.setState({flash:false})
+  }, interval)
+}
 
   render() {
     return (
@@ -35,6 +41,7 @@ export default class App extends Component {
           <Route path="/profile" component={ Profile } />
           <Route path="/table" component={ Table } />
         </Router>
+        <TableSettings />
       </>
     );
   }
