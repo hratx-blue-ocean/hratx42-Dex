@@ -1,9 +1,9 @@
 import React from 'react'
 
-export default function TicketModal(props) {
+export default function CardModal(props) {
   return (
     <div>
-      Ticket Model
+      Card Model
     </div>
   )
 }
