@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Card, Button, Row, Col, Table, Form } from 'react-bootstrap';
-import styles from '../modules/TableSettings.module.css';
+import styles from './tableSettings.module.css';
 
 export default function TableSettings(props) {
   const [tableName, setTableName] = useState('');
@@ -55,7 +55,7 @@ export default function TableSettings(props) {
                   <tr>
                     <td>brooke</td>
                     <td><Form.Check  type = 'checkbox'/></td>
-                    <td onClick = {() => {}} className = {styles.xbutton}>x</td>
+                    <td className = {styles.xbutton}>x</td>
                   </tr>
                 </tbody>
               </Table>

@@ -6,7 +6,6 @@ import mockHttp from '../../../services/http/__mocks__/mockHttp';
 //utils
 import global from '../../../utils/global';
 
-import styles from './register.css';
 
 export default function Register() {
   const [email, setEmail] = useState('');

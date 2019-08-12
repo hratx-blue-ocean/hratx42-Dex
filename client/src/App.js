@@ -5,7 +5,7 @@ import Dashboard from './components/Dashboard.js';
 import Profile from './components/Profile.js';
 import NavBar from './components/NavBar.js'
 import Table from './components/Table.js';
-import TableSettings from './components/TableSettings.js';
+import TableSettings from './components/TableSettings/TableSettings.js';
 // import './App.css';
 
 import global from '../utils/global'
@@ -18,6 +18,7 @@ export default class App extends Component {
       boards: []
   }
 }
+
 componentDidMount() {    
   global.flash = this.flash.bind(this)
 }
@@ -27,17 +28,6 @@ flash(message, interval){
   setTimeout(()=>{
       this.setState({flash:false})
   }, interval)
-}
-
-  componentDidMount() {    
-    global.flash = this.flash.bind(this)
-  }
-
-  flash(message, interval){
-    this.setState({flash: message});
-    setTimeout(()=>{
-        this.setState({flash:false})
-    }, interval)
 }
 
   render() {
