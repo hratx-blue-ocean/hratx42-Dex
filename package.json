@@ -26,10 +26,6 @@
   "dependencies": {
     "bcrypt": "^3.0.6",
     "dotenv": "^8.0.0",
-<<<<<<< HEAD
-    "jest-css-modules": "^2.1.0",
-=======
->>>>>>> faa05a8b5bbbc244b46e33506d42e90976069802
     "lodash": "^4.17.13",
     "pg": "^7.12.1"
   },
