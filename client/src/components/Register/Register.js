@@ -12,7 +12,6 @@ export default function Register() {
   const [password1, setPassword1] = useState('');
   const [password2, setPassword2] = useState('');
 
-
   const handleSubmit = function(event) {
     event.preventDefault();
     //verify passwords match
