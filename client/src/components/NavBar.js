@@ -1,24 +1,24 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import { Navbar, Button ,NavDropdown, Nav, Form,FormControl} from 'react-bootstrap';
+import { Navbar, Button ,NavDropdown, Nav, Form} from 'react-bootstrap';
 export default function NavBar(props) {
   return (
     <div>
       <div>
 <Navbar bg="light" expand="lg">
 
-  <Navbar.Brand href="#home" ><h2>Dex</h2></Navbar.Brand>
+  <Navbar.Brand href="Table" ><h2>Dex</h2></Navbar.Brand>
   <Navbar.Toggle aria-controls="basic-navbar-nav" />
   <Navbar.Collapse id="basic-navbar-nav">
     <Nav className="mr-auto">
     </Nav>
     <NavDropdown title="Table" id="collasible-nav-dropdown">
-        <NavDropdown.Item href="#action/3.1"><Link to ={'/table'}>Table Page</Link></NavDropdown.Item>
-        <NavDropdown.Item href="#action/3.2">Table</NavDropdown.Item>
-        <NavDropdown.Item href="#action/3.3">Table</NavDropdown.Item>
+        <NavDropdown.Item href="Table"><Link to ={'/table'}>Table Page</Link></NavDropdown.Item>
+        <NavDropdown.Item href="Table">Table</NavDropdown.Item>
+        <NavDropdown.Item href="Table">Table</NavDropdown.Item>
         <NavDropdown.Divider />
-        <NavDropdown.Item href="#action/3.4">Add a table</NavDropdown.Item>
+        <NavDropdown.Item href="Table">Add a table</NavDropdown.Item>
       </NavDropdown>   
           <Form style={{marginRight: '25px' }}>
     <Button variant="outline-primary" className="mr-sm-2" >+</Button>
