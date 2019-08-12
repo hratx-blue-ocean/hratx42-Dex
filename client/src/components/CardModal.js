@@ -1,9 +1,9 @@
 import React from 'react'
 
-export default function Register(props) {
+export default function CardModal(props) {
   return (
     <div>
-      Register
+      Card Model
     </div>
   )
 }
