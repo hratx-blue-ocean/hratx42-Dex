@@ -1,21 +1,17 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
 export default class Table extends Component {
-  constructor(props){
-    super(props)
+  constructor(props) {
+    super(props);
     this.state = {
       decks: [{}],
       tickets: [{}],
       users: [],
       filterBy: '',
-      sortBy: ''
-    }
+      sortBy: '',
+    };
   }
   render() {
-    return (
-      <div>
-        This is your board
-      </div>
-    )
+    return <div>This is your table</div>;
   }
 }
