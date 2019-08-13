@@ -42,8 +42,8 @@ flash(message, variant, interval){
     return (
       <>
         <Router>
-        <h1>Welcome to Blue Ocean!</h1>
-        <NavBar userid={this.state.userid} />
+          <h1>Welcome to Blue Ocean!</h1>
+          <NavBar userid={this.state.userid} />
           <Route path="/" exact component={ Landing } />
           <Route path="/dashboard" component={ Dashboard } />
           <Route path="/profile" component={ Profile } />
