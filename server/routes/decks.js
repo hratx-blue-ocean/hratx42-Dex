@@ -1,21 +1,26 @@
 var express = require('express')
 var router = express.Router()
-// const db = require('../../db/hosteddb');
+const decksModel = require('../../db/models/decks');
+const tryCatch = require('../utils/tryCatch');
 
 router.get('/', (req, res)=>{
     //query string like ?tableId=123
     const {tableId} = req.query;
     //if req.user && user owns table
-        //db.get decks where table_id = tableId
-        //populate decks with cards
-    res.status(200).send(`Decks for table ${tableId}`)
+    tryCatch(async()=>{
+        //this is where the monster query goes
+        const {rows: decks} = await decksModel.getByTableId(tableId);
+        res.status(200).send(decks)
+    })
 })
 
 router.post('/', (req, res)=>{
     const deck = req.body;
     //if req.user
-        //post table
-    res.status(200).send(JSON.stringify(deck))
+    tryCatch(async ()=>{
+        const result = await decksModel.post(deck)
+        res.status(200).send(result)
+    })
 })
 
 router.put('/:id', (req, res)=>{
@@ -23,14 +28,18 @@ router.put('/:id', (req, res)=>{
     const id = req.params.id
     deck.id=id
     //if req.user && user owns deck's table
-        //update table
-    res.status(200).send(JSON.stringify(deck));
+    tryCatch(async ()=>{
+        let result = await decksModel.put(deck)
+        console.log(result)
+        res.status(200).send(deck)
+    })
 })
 
-router.delete('/:id', (req, res)=>{
+router.delete('/:id', async (req, res)=>{
     const id = req.params.id
     //if req.user && user owns table of deck
-        //delete table
+    const result = await decksModel.delete(id);
+    console.log(result)
     res.status(200).send(`Deleted deck ${id}`);
 })
 
