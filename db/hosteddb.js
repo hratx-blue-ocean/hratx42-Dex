@@ -1,5 +1,6 @@
 const pg = require('pg');
 require('dotenv').config();
+// console.log(require('dotenv').config());
 const pgClient = new pg.Client({
     host: process.env.DB_HOST,
     port: 5432,
@@ -21,8 +22,10 @@ const db = async (id) => {
 }
 
 const getUserInfoByEmail = async (email) => {
-    const userInfo = await pgClient.query(`SELECT * FROM User where email=${email};`)
+    const userInfo = await pgClient.query(`SELECT * FROM Users where email=${email};`)
     return userInfo;
 }
+
+pgClient.query('INSERT INTO Users ')
 
 module.exports = { db, getUserInfoByEmail };

@@ -1,6 +1,5 @@
 const router = require('express').Router();
 const db = require('../../db/hosteddb');
-
 // dashboard or login/sign up page
 router.get('/', (req, res) => {
     // if cookies, let front end know
@@ -8,6 +7,7 @@ router.get('/', (req, res) => {
 })
 
 // USERS
+
 router.get('/users:id', (req, res) => {    // get user based on id
     // query db for user based on id
 });
