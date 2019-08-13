@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, Button } from 'react-bootstrap';
+import { Card, Button, Modal } from 'react-bootstrap';
 import Controls from './Controls';
 import Deck from './Deck';
 import mockHttp from '../../services/http/__mocks__/http';
@@ -13,8 +13,13 @@ export default class Table extends Component {
       users: ['Michael', 'Brian', 'Laine', 'Rachel', 'Miles', 'Ibrahim'],
       filterBy: '',
       sortBy: '',
-      searchName: ''
+      searchName: '',
+      newDeck: {
+        newDeckModal: false,
+        newDeckTitle: ''
+      }
     };
+    this.handleModal = this.handleModal.bind(this);
   }
   componentDidMount() {
     mockHttp.getDecks(0)
@@ -57,6 +62,17 @@ export default class Table extends Component {
     this.setState({cards, searchName: text})
   }
 
+  handleModal() {
+    let { newDeck } = this.state;
+    if (newDeck.newDeckModal){
+      this.setState({newDeck})
+    } else {this.setState({newDeckModal: true})}
+  }
+
+  submitNewDeck() {
+
+  }
+
   render() {
     return (
       <div>
@@ -76,7 +92,20 @@ export default class Table extends Component {
             </>)
           }
           <Card style = {{width: '75%', height: '150px'}}>
-            <Button style = {{height: '75px', width: '75px'}} variant='success'>Add New Deck</Button>
+            <Button onClick = {()=>this.handleModal()} style = {{height: '75px', width: '75px'}} variant='success'>Add New Deck</Button>
+            <Modal show = {this.state.newDeckModal}>
+              <Modal.Header>
+                <Modal.Title>New Deck</Modal.Title>
+                <Modal.Body>
+                  <p>Input Deck Title</p>
+                  <input type="text"/>
+                </Modal.Body>
+                <Modal.Footer>
+                  <Button variant='success' onClick={()=> this.submitNewDeck()}>Save Deck</Button>
+                  <Button variant='Danger' onClick={()=>this.handleModal()}>Cancel</Button>
+                </Modal.Footer>
+              </Modal.Header>
+            </Modal>
           </Card>
         </>) : (<></>)}
         
