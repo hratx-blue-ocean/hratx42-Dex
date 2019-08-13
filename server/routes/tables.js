@@ -1,7 +1,8 @@
 var express = require('express')
 var router = express.Router()
-// const db = require('../../db/hosteddb');
-
+const jwtChecker = require('../middleware/jwtChecker')
+const db = require('../../db/hosteddb');
+// router.use(jwtChecker.checkToken);
 router.get('/', (req, res)=>{
     //query string like ?userId=123
     const {userId} = req.query;
@@ -9,6 +10,19 @@ router.get('/', (req, res)=>{
         //db.get tables where user_id = userId
     res.status(200).send(`Tables for user ${userId}`)
 })
+
+// router.get('/table-master/:id', async (req, res) => {
+//     console.log(req.params.id);
+//     // console.log(req.id);
+//     const tableDataRows = await db.getMasterTableData(req.params.id).rows;
+//     // tableData = tableData.
+//     const tableData = {
+// 
+//     };
+//     tableData.id = tableDataRows[0].table_id;
+//     tableData.name = '';
+//     res.status(200).send(JSON.stringify(tableDataRows))
+// })
 
 router.post('/', (req, res)=>{
     const table = req.body;

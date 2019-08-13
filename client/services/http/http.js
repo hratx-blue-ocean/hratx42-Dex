@@ -1,20 +1,22 @@
 import axios from 'axios';
 import global from '../../utils/global';
-import auth from '../../services/auth'
+import auth from '../auth.js'
 
 const tryAxios = async function(endpoint, method, payload){
     try {
         const response = await axios[method](endpoint,payload)
         return response.data
-      } catch (error) {
-        global.flash(error.message, 'danger', 2000)
+    } catch (error) {
+        global.flash(error.response.data.message, 'danger', 2000)
       }
 }
 
 const http ={
     users: {
-        post(email, password){
-        return tryAxios('/api/users', 'post', {email, password})
+        async post(name, email, password){
+        let result = await tryAxios('/api/users', 'post', {name, email, password})
+        console.log('result', result);
+        return result
         },
         put(id, email, password){
             return tryAxios(`/api/users/${id}`, 'put', {email, password})
@@ -24,10 +26,11 @@ const http ={
         }
     },
     auth: {
-        post(email, password){
-            const jwt = tryAxios('/api/auth', 'post', {email, password})
-            auth.login(jwt)
-            window.location = '/dashboard'
+        async post(email, password){
+            const jwt = await tryAxios('/api/auth', 'post', {email, password})
+            console.log(jwt)
+            auth.login(jwt.token)
+            return auth.userIsLoggedIn();
         },
     },
     tables: {
