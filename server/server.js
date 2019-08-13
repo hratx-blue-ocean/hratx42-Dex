@@ -3,6 +3,11 @@ const logger = require('morgan');
 const express = require('express');
 const app = express();
 const path = require('path');
+const bodyParser = require('body-parser')
+
+const port = process.env.PORT || 3000;
+
+const users  = require('./routes/users');
 
 // open up CORS 
 app.use((_, res, next) => {
@@ -12,12 +17,11 @@ app.use((_, res, next) => {
 });
 
 app.use(logger('dev'));
-
-// You can place your routes here, feel free to refactor:
+app.use(bodyParser.json())
 app.use(express.static(path.join(__dirname, '../client/public')));
 
-const { example } = require('./routes');
-app.use('/api/example', example)
+
+app.use('/api/users', users)
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
     next(createError(404));
@@ -33,5 +37,7 @@ app.use(function (err, req, res, next) {
     res.status(err.status || 500);
     res.json('error');
 });
+
+app.listen(port, () => console.log(`Example app listening on port ${port}!`))
 
 module.exports = app;
