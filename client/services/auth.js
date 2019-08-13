@@ -27,8 +27,8 @@ function userIsLoggedIn() {
 function setUser(component) {
   const jwt = localStorage.getItem(tokenKey);
   if (jwt) {
-    const { _id: userId } = jwtDecode(jwt);
-    component.setState({ userId: userId });
+    const userId = jwtDecode(jwt);
+    component.setState({ userId });
   } else {
     component.setState({ userId: null });
   }

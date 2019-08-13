@@ -6,15 +6,17 @@ const tryAxios = async function(endpoint, method, payload){
     try {
         const response = await axios[method](endpoint,payload)
         return response.data
-      } catch (error) {
-        global.flash(error.message, 'danger', 2000)
+    } catch (error) {
+        global.flash(error.response.data.message, 'danger', 2000)
       }
 }
 
 const http ={
     users: {
-        post(name, email, password){
-        return tryAxios('/api/users', 'post', {name, email, password})
+        async post(name, email, password){
+        let result = await tryAxios('/api/users', 'post', {name, email, password})
+        console.log('result', result);
+        return result
         },
         put(id, email, password){
             return tryAxios(`/api/users/${id}`, 'put', {email, password})
@@ -26,6 +28,7 @@ const http ={
     auth: {
         async post(email, password){
             const jwt = await tryAxios('/api/auth', 'post', {email, password})
+            console.log(jwt)
             auth.login(jwt.token)
             return auth.userIsLoggedIn();
         },

@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { Button } from 'react-bootstrap';
 //services
-import http from '../../../services/http/http.js'
-
+import http from '../../../services/http/http.js';
+import auth from '../../../services/auth.js';
 //utils
 import global from '../../../utils/global';
+import App from '../../App.js';
 
 export default function Register(props) {
   const [email, setEmail] = useState('');
@@ -15,7 +16,6 @@ export default function Register(props) {
 
   const handleSubmit = function(event) {
     event.preventDefault();
-    console.log('asdad')
     //verify passwords match
     if(password1 !== password2){
       global.flash("Passwords should match", "danger", 2000)
@@ -23,16 +23,20 @@ export default function Register(props) {
       //@TODO: verify email/password input
       let name = firstName + ' ' + lastName;
       http.users.post(name, email, password1)
-      .then(() => {
-        http.auth.post(email, password1)
-        .then((loggedIn) => {
-          if(loggedIn) {
-            props.history.push("/dashboard")
-          }
-        })
-        .catch((error) => {
-          console.log('error creating user and signing in', error);
-        })
+      .then((data) => {
+        if(data) {
+          http.auth.post(email, password1)
+          .then((loggedIn) => {
+            if(loggedIn) {
+              props.login();
+            }
+          })
+          .catch((error) => {
+            console.log('error creating user and signing in', error);
+          })
+        }
+      }).catch((err) => {
+        console.log(err);
       })
     }
   };
