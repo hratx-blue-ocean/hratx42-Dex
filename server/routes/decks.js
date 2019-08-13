@@ -8,9 +8,10 @@ router.get('/', async (req, res)=>{
     //query string like ?tableId=123
     const {tableId} = req.query;
     const userId = req.user;
-    console.log(userId)
+    console.log('userid', userId)
     tryCatch(async()=>{
         const authorized = await authorizationModel.user.ownsTable(userId, tableId)
+        console.log("Authorized ", authorized)
         if(authorized){
             //this is where the monster query goes
             const {rows: decks} = await decksModel.getByTableId(tableId);

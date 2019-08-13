@@ -39,7 +39,7 @@ router.post('/', (req, res, next)=>{
     })
     .catch((err) => {
         console.log('Error getting user info @users.js line 37', err);
-        res.status(404).send(JSON.stringify(user))
+        res.status(404).send("error getting user")
     })
 }, auth.auth);
 

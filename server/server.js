@@ -4,7 +4,8 @@ const logger = require('morgan');
 const express = require('express');
 const app = express();
 const path = require('path');
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
+const jwtChecker = require('./middleware/jwtChecker');
 
 const port = process.env.PORT || 3000;
 
@@ -21,7 +22,7 @@ app.use((_, res, next) => {
     next();
 });
 
-//middleware
+// middleware
 app.use(logger('dev'));
 app.use(bodyParser.json())
 app.use(express.static(path.join(__dirname, '../client/public')));
@@ -35,12 +36,13 @@ app.get('/table', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/public/index.html'))
 });
 
-//routes
-app.use('/api/users', usersRoute)
+// routes
+app.use('/api/auth', authRoute);
+app.use('/api/users', usersRoute);
+app.use(jwtChecker.checkToken);
 app.use('/api/tables', tablesRoute)
 app.use('/api/decks', decksRoute)
 app.use('/api/cards', cardsRoute)
-app.use('/api/auth', authRoute);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

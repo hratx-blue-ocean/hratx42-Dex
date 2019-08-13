@@ -22,7 +22,8 @@ export default function Register() {
     } else {
       //@TODO: verify email/password input
       let name = firstName + ' ' + lastName;
-      http.users.post(name, email, password1).then(() => {
+      http.users.post(name, email, password1).then((response) => {
+        console.log('post response', response)
         http.auth.post(email, password1)
       })
     }
