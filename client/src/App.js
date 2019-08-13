@@ -40,6 +40,7 @@ flash(message, interval){
           <Route path="/profile" component={ Profile } />
           <Route path="/table" component={ Table } />
         </Router>
+        <Table />
       </>
     );
   }

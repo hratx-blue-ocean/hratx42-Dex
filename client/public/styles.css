@@ -25,3 +25,17 @@ code {
   width: 35px;
   border-radius: 50%;
 }
+
+.ControlsSearchItems {
+  position: absolute;
+  width: 500px;
+  top: 50px;
+  left: 65px;
+  border: 1px solid black;
+  z-index: 1;
+  background-color: white;
+}
+
+.ControlsSearchItem:hover {
+  background-color: #CDCDCD;
+}
