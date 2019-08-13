@@ -25,7 +25,7 @@ $$ LANGUAGE plpgsql;
 
 CREATE TABLE IF NOT EXISTS cards (
     id serial primary key,
-    table_id int NOT NULL REFERENCES dex_tables(id),
+    table_id int NOT NULL REFERENCES tables(id),
     deck_id int NOT NULL REFERENCES decks(id),
     title varchar(255) NOT NULL,
     weight int NOT NULL,
