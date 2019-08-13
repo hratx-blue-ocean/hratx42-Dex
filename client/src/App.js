@@ -6,7 +6,6 @@ import Profile from './components/Profile.js';
 
 import NavBar from './components/NavBar.js'
 import Table from './components/Table.js';
-import TableSettings from './components/TableSettings.js'
 // import './App.css';
 
 import global from '../utils/global'

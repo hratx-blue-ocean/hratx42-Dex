@@ -7,7 +7,7 @@ export default function Deck(props) {
   if (props.filterBy === ''){
     cards = props.deck.cards.slice(0, 6);
   } else {
-    props.deck.cards.map((card) => {
+    props.deck.cards.forEach((card) => {
       if (card.users.includes(props.filterBy)){
         cards.push(card);
       }
