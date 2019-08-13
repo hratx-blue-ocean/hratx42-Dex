@@ -1,5 +1,5 @@
 import React from 'react';
-import { Navbar, Nav, Dropdown, Button } from 'react-bootstrap';
+import { Navbar, Button } from 'react-bootstrap';
 
 export default function Controls(props) {
   return (
