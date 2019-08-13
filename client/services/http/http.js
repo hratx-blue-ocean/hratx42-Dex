@@ -38,12 +38,32 @@ const http ={
             return tryAxios(`/api/tables/${table.id}`, 'put', table)
         },
         delete(id){
-            return tryAxios(`/api/tables/${id}`)
+            return tryAxios(`/api/tables/${id}`, 'delete')
         }
     },
     decks: {
         get(tableId){
             return tryAxios(`/api/decks?tableId=${tableId}`, 'get')
+        },
+        post(deck){
+            return tryAxios(`/api/decks`, 'post', deck)
+        },
+        put(deck){
+            return tryAxios(`/api/decks/${deck.id}`, 'put', deck);
+        },
+        delete(id){
+            return tryAxios(`/api/decks/${id}`, 'delete')
+        }
+    },
+    cards: {
+        post(card){
+            return tryAxios('/api/cards', 'post', card)
+        },
+        put(card){
+            return tryAxios(`/api/cards/${card.id}`,'put', card)
+        },
+        delete(id){
+            return tryAxios(`/api/cards/${id}`, 'delete')
         }
     }
 };
