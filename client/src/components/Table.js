@@ -65,12 +65,15 @@ export default class Table extends Component {
   handleModal() {
     let { newDeck } = this.state;
     if (newDeck.newDeckModal){
+      newDeck.newDeckModal = false;
       this.setState({newDeck})
-    } else {this.setState({newDeckModal: true})}
+    } else {
+      newDeck.newDeckModal = true;
+      this.setState({newDeckModal: true})}
   }
 
   submitNewDeck() {
-
+    //submit new deck with this.state.newDeck.newDecktitle and table ID
   }
 
   render() {
@@ -93,7 +96,7 @@ export default class Table extends Component {
           }
           <Card style = {{width: '75%', height: '150px'}}>
             <Button onClick = {()=>this.handleModal()} style = {{height: '75px', width: '75px'}} variant='success'>Add New Deck</Button>
-            <Modal show = {this.state.newDeckModal}>
+            <Modal show = {this.state.newDeck.newDeckModal}>
               <Modal.Header>
                 <Modal.Title>New Deck</Modal.Title>
                 <Modal.Body>
