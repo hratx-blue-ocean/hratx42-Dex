@@ -93,6 +93,7 @@ const cardsModel = {
     );
     return newCard;
   },
+  
   // update card
   async updateCard (
     {
@@ -113,6 +114,7 @@ const cardsModel = {
     );
     return updatedCard;
   },
+
   // delete card
   async deleteCard(cardID){
     const deletedCard = await pgClient.query(
