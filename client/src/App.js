@@ -5,7 +5,6 @@ import Dashboard from './components/Dashboard.js';
 import Profile from './components/Profile.js';
 import NavBar from './components/NavBar.js'
 import Table from './components/Table.js';
-import TableSettings from './components/TableSettings/TableSettings.js';
 // import './App.css';
 
 import global from '../utils/global'
@@ -41,7 +40,6 @@ flash(message, interval){
           <Route path="/profile" component={ Profile } />
           <Route path="/table" component={ Table } />
         </Router>
-        <TableSettings />
       </>
     );
   }
