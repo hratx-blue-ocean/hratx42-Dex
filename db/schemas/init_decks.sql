@@ -17,9 +17,12 @@ $$ LANGUAGE 'plpgsql';
 
 CREATE TABLE IF NOT EXISTS decks (
     id serial primary key,
-    table_id int NOT NULL REFERENCES dex_tables(id),
+    table_id int NOT NULL ,
     title varchar(150) NOT NULL,
-    table_index serial NOT NULL
+    table_index serial NOT NULL,
+    FOREIGN KEY (table_id)
+      REFERENCES dex_tables(id)
+      ON DELETE CASCADE
 );
 
 CREATE TRIGGER before_insert_decks_trigger BEFORE INSERT ON decks FOR EACH ROW EXECUTE PROCEDURE decks_notify();
