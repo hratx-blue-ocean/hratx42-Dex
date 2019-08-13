@@ -14,6 +14,8 @@ pgClient.connect(err => {
   else console.log('Connected to database!');
 });
 
+module.exports = pgClient;
+
 const db = {};
 
 db.getTables = async (id) => {
@@ -124,7 +126,7 @@ db.deleteCard = async cardID => {
   return deletedCard;
 };
 
-module.exports = db;
+// module.exports = db;
 
 
 // const getMasterTableData = async (tableId) => {
