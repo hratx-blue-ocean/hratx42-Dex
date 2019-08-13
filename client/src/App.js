@@ -6,7 +6,8 @@ import Profile from './components/Profile.js';
 
 import NavBar from './components/NavBar.js'
 import Table from './components/Table.js';
-// import './App.css';
+import Flash from './components/Flash'
+
 
 import global from '../utils/global'
 import tables from '../dummyData/tables.js';
@@ -18,11 +19,13 @@ export default class App extends Component {
     this.state = {
       userid: 'fdf',
       boards: [],
-      flash: false,
+      flash: {
+        show: false,
+        message: 'Default flash message for testing',
+        variant: 'success'
+      },
     };
     this.api = `http://localhost:8000/api/example`;
-    this.flash=this.flash.bind(this)
-
   }
 
 
@@ -30,10 +33,10 @@ componentDidMount() {
   global.flash = this.flash.bind(this)
 }
 
-flash(message, interval){
-  this.setState({flash: message});
+flash(message, variant, interval){
+  this.setState({flash: {show: true, message, variant}});
   setTimeout(()=>{
-      this.setState({flash:false})
+      this.setState({flash:{show: false, message, variant}})
   }, interval)
 }
 
@@ -52,6 +55,7 @@ logOut(){
           <Route path="/table" component={ Table } />
           <Route path="/TableSettings" component={ TableSettings } />
         </Router>
+        <Flash flashData={this.state.flash}/>
       </>
     );
   }
