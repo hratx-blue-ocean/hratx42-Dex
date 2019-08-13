@@ -18,7 +18,7 @@ export default function Register(props) {
     console.log('asdad')
     //verify passwords match
     if(password1 !== password2){
-      global.flash("Passwords should match", 2000)
+      global.flash("Passwords should match", "danger", 2000)
     } else {
       //@TODO: verify email/password input
       let name = firstName + ' ' + lastName;
