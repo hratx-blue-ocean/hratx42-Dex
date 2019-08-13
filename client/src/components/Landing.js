@@ -20,7 +20,7 @@ export default function Landing(props) {
             />
           </Col>
           <Col>
-            <Register />
+            <Register login = {props.login} />
           </Col>
         </Row>
       </Container>

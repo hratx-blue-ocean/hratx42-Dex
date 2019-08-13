@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Landing from './components/Landing.js';
 import Dashboard from './components/Dashboard.js';
 import Profile from './components/Profile.js';
-
+import auth from '../services/auth.js';
 import NavBar from './components/NavBar.js'
 import Table from './components/Table.js';
 import Flash from './components/Flash'
@@ -17,13 +17,15 @@ export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userid: 'fdf',
+      userId: '',
       boards: [],
       flash: {
         show: false,
         message: 'Default flash message for testing',
         variant: 'success'
       },
+
+      showTableModal: false
     };
     this.api = `http://localhost:8000/api/example`;
   }
@@ -40,8 +42,16 @@ flash(message, variant, interval){
   }, interval)
 }
 
+login() {
+  auth.setUser(this);
+}
+
 logOut(){
-  this.setState({userid:''})
+  this.setState({userId:''})
+}
+
+changeTableModal() {
+    this.setState({showTableModal: !this.state.showTableModal});
 }
 
   render() {
@@ -49,7 +59,7 @@ logOut(){
       <>
         <Router>
         <h1>Welcome to Blue Ocean!</h1>
-        {this.state.userid ===''?<Landing/>:<NavBar logOut ={this.logOut.bind(this)}/>}
+        {this.state.userId ===''?<Landing login={this.login.bind(this)}/>:<NavBar logOut ={this.logOut.bind(this)}/>}
           <Route path="/dashboard" component={ Dashboard } />
           <Route path="/profile" component={ Profile } />
           <Route path="/table" component={ Table } />

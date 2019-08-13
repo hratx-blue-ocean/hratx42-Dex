@@ -3,24 +3,27 @@ var router = express.Router()
 const db = require('../../db/hosteddb');
 const bcrypt = require('bcrypt');
 const saltRounds = 12;
-
+const jwtChecker = require('../middleware/jwtChecker.js')
+const auth = require('../middleware/auth.js');
+// const db = require('../../db/hosteddb');
+// router.use(jwtChecker.checkToken);
 router.get('/:id', (req, res)=>{
     const id = req.params.id
     res.status(200).send(`User ${id}`)
 })
 
-router.post('/', (req, res)=>{
+router.post('/', (req, res, next)=>{
 
     const { email, password, name } = req.body;
     //post user to db if she doesn't already exist
-
+    console.log(req.body)
     db.getUserInfoByEmail(email)
     .then((result) => {  
         if(result.rowCount === 0) {     //if email does not exist create user
             bcrypt.hash(password, saltRounds).then((hashedPassword) => {
                 db.createNewUser({name, hashedPassword, email})
                 .then((userCreated) => { 
-                    res.status(201).json({success: true, message: "Account Created!"})
+                    next();
                 })
                 .catch((err) => {
                     console.log('Error inserting user @users.js line 28', err);
@@ -36,9 +39,9 @@ router.post('/', (req, res)=>{
     })
     .catch((err) => {
         console.log('Error getting user info @users.js line 37', err);
-        res.status(404).send(JSON.stringify(user))
+        res.status(404).json({user, message: "Unexpected error occured try later"})
     })
-})
+}, auth.auth);
 
 router.put('/:id', (req, res)=>{
     const user = req.body;
