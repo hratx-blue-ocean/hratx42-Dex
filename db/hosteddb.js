@@ -14,7 +14,4 @@ pgClient.connect(err => {
   else console.log('Connected to database!');
 });
 
-
-module.exports =  pgClient
-
-
+module.exports = pgClient;

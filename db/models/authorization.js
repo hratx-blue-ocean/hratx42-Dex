@@ -1,6 +1,5 @@
 const pgClient = require('../hosteddb');
 
-
 const authorizationModel = {
     user: {
         async ownsTable(userId, tableId){

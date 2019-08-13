@@ -1,13 +1,14 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../../db/hosteddb');
+const cardsModel = require('../../db/models/cards');
 
 //get card info by cardID
 router.get('/:id', (req, res) => {
   const cardId = req.params.id;
   //if req.user && user owns table associated with card
   //get card
-  db.getCardByID(cardId)
+  cardsModel.getCardByID(cardId)
     .then(response => {
       res.status(200).json(response);
     })
@@ -21,7 +22,7 @@ router.post('/', (req, res) => {
   const card = req.body;
   //if req.user
   //post card
-  db.createNewCard(card)
+  cardsModel.createNewCard(card)
     .then(response => {
       res.status(200).json(response);
     })
@@ -36,7 +37,7 @@ router.put('/:id', (req, res) => {
   const id = req.params.id;
   //if req.user && user owns card's table
   //update table
-  db.updateCard(card, id)
+  cardsModel.updateCard(card, id)
     .then(response => {
       res.status(200).json(response);
     })
@@ -50,7 +51,7 @@ router.delete('/:id', (req, res) => {
   const id = req.params.id;
   //if req.user && user owns table of card
   //delete card
-  db.deleteCard(id)
+  cardsModel.deleteCard(id)
     .then(response => {
       res.status(200).send(`Deleted card ${id}`);
     })
