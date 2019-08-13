@@ -17,13 +17,14 @@ export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userid: 'fdf',
+      userid: 'asd',
       boards: [],
       flash: {
         show: false,
         message: 'Default flash message for testing',
         variant: 'success'
       },
+      showTableModal: false
     };
     this.api = `http://localhost:8000/api/example`;
   }
@@ -44,12 +45,15 @@ logOut(){
   this.setState({userid:''})
 }
 
+changeTableModal() {
+    this.setState({showTableModal: !this.state.showTableModal});
+}
+
   render() {
     return (
       <>
         <Router>
-        <h1>Welcome to Blue Ocean!</h1>
-        {this.state.userid ===''?<Landing/>:<NavBar logOut ={this.logOut.bind(this)}/>}
+        {this.state.userid ===''?<Landing/>:<NavBar showTableModal = {this.state.showTableModal} changeTableModal = {this.changeTableModal.bind(this)} logOut ={this.logOut.bind(this)}/>}
           <Route path="/dashboard" component={ Dashboard } />
           <Route path="/profile" component={ Profile } />
           <Route path="/table" component={ Table } />

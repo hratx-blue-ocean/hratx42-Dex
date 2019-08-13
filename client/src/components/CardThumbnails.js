@@ -4,7 +4,7 @@ import { Card, Button, Col, Row } from 'react-bootstrap';
 export default function CardThumbnails(props) {
   return (
     <div style = {{width: '150px', height: '150px'}}>
-      <Card className = 'CardThumbnailsSingleCard'>
+      <Card style = {{width: '150px', height: '150px'}} className = 'CardThumbnailsSingleCard'>
         <Row>
           <Col md={1}>
             <div className = 'cardThumbnails_impact'>{props.singleCard.weight}/{props.singleCard.impact}</div>
