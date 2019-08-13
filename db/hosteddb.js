@@ -33,4 +33,4 @@ const createNewUser = async ({name, hashedPassword, email}) => {
 // getUserInfoByEmail('ddd@aaa.com')
 // pgClient.query(`INSERT INTO Users VALUES (default, 'DUCKDUCKGO', 123, '123@123')`)
 
-module.exports = { db, getUserInfoByEmail, createNewUser };
+module.exports = db;
