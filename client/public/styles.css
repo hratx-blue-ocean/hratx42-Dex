@@ -12,3 +12,16 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.cardThumbnails_impact {
+  border: 1px solid black; 
+  width: 35px;
+  height: 35px;
+  font-size: 12px;
+}
+
+.CardThumbnails_userIcon {
+  height: 35px;
+  width: 35px;
+  border-radius: 50%;
+}
