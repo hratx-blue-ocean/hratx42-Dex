@@ -24,9 +24,9 @@ const http ={
         }
     },
     auth: {
-        post(email, password){
-            const jwt = tryAxios('/api/auth', 'post', {email, password})
-            auth.login(jwt)
+        async post(email, password){
+            const jwt = await tryAxios('/api/auth', 'post', {email, password})
+            auth.login(jwt.token)
             window.location = '/dashboard'
         },
     },
