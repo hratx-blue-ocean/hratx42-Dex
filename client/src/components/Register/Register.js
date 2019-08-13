@@ -2,10 +2,8 @@ import React, { useState } from 'react';
 import { Button } from 'react-bootstrap';
 //services
 import http from '../../../services/http/http.js';
-import auth from '../../../services/auth.js';
 //utils
 import global from '../../../utils/global';
-import App from '../../App.js';
 
 export default function Register(props) {
   const [email, setEmail] = useState('');
