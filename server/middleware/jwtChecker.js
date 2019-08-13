@@ -5,11 +5,6 @@ const config = {secret: "supersecuresecret"};
 const checkToken = (req, res, next) => {
 
   let token = req.headers['x-access-token'] || req.headers['authorization']; // Express headers are auto converted to lowercase
-  console.log('token', token)
-  // if (token.startsWith('Bearer ')) {
-  //   // Remove Bearer from string
-  //   token = token.slice(7, token.length);
-  // }
 
   if (token) {
     jwt.verify(token, config.secret, (err, decoded) => {
@@ -20,9 +15,7 @@ const checkToken = (req, res, next) => {
           message: 'Token is not valid'
         });
       } else {
-        console.log('hi');
         req.user = decoded;
-        console.log('req.user', req.user);
         next();
       }
     });
