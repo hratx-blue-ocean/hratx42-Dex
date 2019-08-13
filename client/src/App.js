@@ -8,6 +8,7 @@ import NavBar from './components/NavBar.js'
 import Table from './components/Table.js';
 import Flash from './components/Flash'
 
+
 import global from '../utils/global'
 
 export default class App extends Component {

@@ -21,8 +21,6 @@ code {
 }
 
 .CardThumbnails_userIcon {
-  height: 35px;
-  width: 35px;
   border-radius: 50%;
 }
 
@@ -33,4 +31,23 @@ code {
   left: 25%;
   width: 50%;
   text-align: center;
+  font-size: 10px;
+}
+
+.ControlsSearchItems {
+  position: absolute;
+  width: 500px;
+  top: 50px;
+  left: 65px;
+  border: 1px solid black;
+  z-index: 1;
+  background-color: #eee;
+}
+
+.ControlsSearchItem:hover {
+  background-color: #CDCDCD;
+}
+
+.CardThumbnailsSingleCard:hover {
+  background-color: #CDCDCD;
 }
