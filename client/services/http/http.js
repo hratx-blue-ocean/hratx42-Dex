@@ -1,49 +1,51 @@
 import axios from 'axios'
 
+const tryAxios = async function(endpoint, method, payload){
+    try {
+        const response = await axios[method](endpoint,payload)
+        return response.data
+      } catch (error) {
+        console.error(error)
+      }
+}
+
 const http ={
     users: {
-        async post(email, password){
-            try {
-              const response = await axios.post('/users', {
-                  email, password
-              })
-              return response.data
-            } catch (error) {
-              console.error(error)
-            }
-          },
+        post(email, password){
+        return tryAxios('/api/users', 'post', {email, password})
+        },
+        put(id, email, password){
+            return tryAxios(`/api/users/${id}`, 'put', {email, password})
+        },
+        delete(id){
+            return tryAxios(`/api/users${id}`)
+        }
     },
     auth: {
-       async post(email, password){
-            try {
-               const response = axios.post('/auth', { email, password });
-               const jwt = response.data;
-                //do something with jwt
-            } catch (error) {
-                console.error(error)
-            }
+        post(email, password){
+            const jwt = tryAxios('/api/auth', 'post', {email, password})
+            //do something with jwt
         },
     },
     tables: {
-        async get(userId){
-            try {
-              const response = axios.get(`/tables?user=${userId}`);
-              return response.data;
-            } catch (error) {
-              console.error(error);
-            }
-          },
+        get(userId){
+            return tryAxios(`/api/tables?user=${userId}`, 'get')
+        },
+        post(table){
+            return tryAxios(`/api/tables`, 'post', table)
+        },
+        put(table){
+            return tryAxios(`/api/tables/${table.id}`, 'put', table)
+        },
+        delete(id){
+            return tryAxios(`/api/tables/${id}`)
+        }
     },
     decks: {
-        async get(tableId){
-            try {
-                const response = axios.get(`/decks?tableId=${tableId}`)
-                return response.data;
-            } catch (error) {
-                console.error(error)
-            }
+        get(tableId){
+            return tryAxios(`/api/decks?tableId=${tableId}`, 'get')
         }
     }
-  };
+};
 
 export default http;
