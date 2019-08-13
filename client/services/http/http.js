@@ -13,8 +13,8 @@ const tryAxios = async function(endpoint, method, payload){
 
 const http ={
     users: {
-        post(email, password){
-        return tryAxios('/api/users', 'post', {email, password})
+        post(name, email, password){
+        return tryAxios('/api/users', 'post', {name, email, password})
         },
         put(id, email, password){
             return tryAxios(`/api/users/${id}`, 'put', {email, password})

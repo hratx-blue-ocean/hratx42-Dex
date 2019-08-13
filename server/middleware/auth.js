@@ -1,5 +1,4 @@
 const bcrypt = require('bcrypt');
-const saltRounds = 10;
 // const config = require('./config.js');
 const jwt = require('jsonwebtoken');
 const config = {secret: "supersecuresecret"}
