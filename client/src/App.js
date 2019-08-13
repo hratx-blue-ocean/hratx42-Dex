@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Landing from './components/Landing.js';
 import Dashboard from './components/Dashboard.js';
 import Profile from './components/Profile.js';
+
 import NavBar from './components/NavBar.js'
 import Table from './components/Table.js';
 // import './App.css';
@@ -14,9 +15,14 @@ export default class App extends Component {
     super(props);
     this.state = {
       userid: '',
-      boards: []
+      boards: [],
+      flash: false,
+    };
+    this.api = `http://localhost:8000/api/example`;
+    this.flash=this.flash.bind(this)
+
   }
-}
+
 
 componentDidMount() {    
   global.flash = this.flash.bind(this)
