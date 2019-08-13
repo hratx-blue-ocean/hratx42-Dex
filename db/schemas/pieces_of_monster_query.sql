@@ -44,3 +44,22 @@ from
     cards c 
     join cards_members cm on c.id = cm.card_id
     join users u on cm.user_id = u.id;
+
+
+select 
+    c.id, 
+    c.title as card_title, 
+    c.description as card_description, 
+    c.updated_at,
+    c.created_at, 
+    c.weight as card_weight,
+    c.impact as card_impact,
+    array_agg(array[cast(u.id as varchar), u.name]) as users,
+    array_agg(array[l.label_name, l.color]) as labels
+from
+    cards c 
+    join cards_members cm on c.id = cm.card_id
+    join users u on cm.user_id = u.id
+    join cards_labels cl on c.id = cl.card_id
+    join labels l on cl.label_id = l.id
+group by c.id;
