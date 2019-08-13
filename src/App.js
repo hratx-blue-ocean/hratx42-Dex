@@ -54,8 +54,7 @@ flash(message, interval){
   }
 
   submitProfileChanges() {
-    // send post request with the edited data
-    console.log(this.state.editProfileEmail, this.state.editProfileName, this.state.editProfilePassword);
+    http.users.post(this.state.editProfileName, this.state.editProfileEmail, this.state.editProfilePassword)
   }
 
   render() {
