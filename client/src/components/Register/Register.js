@@ -6,7 +6,6 @@ import http from '../../../services/http/__mocks__/http';
 //utils
 import global from '../../../utils/global';
 
-
 export default function Register() {
   const [email, setEmail] = useState('');
   const [password1, setPassword1] = useState('');
@@ -16,7 +15,7 @@ export default function Register() {
     event.preventDefault();
     //verify passwords match
     if(password1 !== password2){
-      global.flash("Passwords should match", 2000)
+      global.flash("Passwords should match", "danger", 2000)
     } else {
       //@TODO: verify email/password input
       http.postUser(email, password1)
@@ -27,18 +26,19 @@ export default function Register() {
     <div>
       <h1>Register</h1>
       <form onSubmit={(event)=>handleSubmit(event)}>
-        <label htmlFor={'email'}>Email: </label>
+        <label htmlFor={'register-email'}>Email: </label>
         <input
           type="text"
-          name="email"
-          defaultValue={email}
+          id="register-email"
+          value={email}
+          placeholder={'Email'}
           onChange={(event) => {setEmail(event.target.value)}}
         />
-        <label htmlFor={'password1'}>Password: </label>
-        <input type="text" name="password1" defaultValue={password1}
+        <label htmlFor={'register-password1'}>Password: </label>
+        <input type="text" id="register-password1" value={password1} placeholder={'Password'}
         onChange={(event)=>{setPassword1(event.target.value)}}/>
-        <label htmlFor={'password2'}>Confirm Password: </label>
-        <input type="text" name="password2" defaultValue={password2}
+        <label htmlFor={'register-password2'}>Confirm Password: </label>
+        <input type="text" id="register-password2" value={password2} placeholder={'Password'}
         onChange={(event)=>{setPassword2(event.target.value)}} />
         <input type="submit" style={{display: "none"}} />
       </form>
