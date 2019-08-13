@@ -15,19 +15,3 @@ pgClient.connect(err => {
 });
 
 module.exports = pgClient;
-
-getUserInfoByEmail = async (email) => {
-    const userInfo = await pgClient.query(`SELECT * FROM users WHERE email = '${email}';`)
-    return userInfo;
-}
-
-createNewUser = async ({name, hashedPassword, email}) => {
-    const userInfo = await pgClient.query(`INSERT INTO users VALUES (default, '${name}', '${hashedPassword}', '${email}');`)
-    return userInfo
-}
-
-// getUserInfoByEmail('ddd@aaa.com')
-// pgClient.query(`INSERT INTO Users VALUES (default, 'DUCKDUCKGO', 123, '123@123')`)
-
-module.exports = pgClient;
-
