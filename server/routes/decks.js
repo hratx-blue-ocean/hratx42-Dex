@@ -1,12 +1,9 @@
 var express = require('express')
 var router = express.Router()
-<<<<<<< HEAD
-const db = require('../../db/hosteddb');
-=======
+
 const decksModel = require('../../db/models/decks');
 const authorization = require('../../db/models/authorization');
 const tryCatch = require('../utils/tryCatch');
->>>>>>> 64efcd5adf801791c2d04e8431d506445f355c8f
 
 router.get('/', async (req, res)=>{
     //query string like ?tableId=123
