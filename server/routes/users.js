@@ -10,9 +10,8 @@ router.get('/:id', (req, res)=>{
 })
 
 router.post('/', (req, res)=>{
-    console.log(req.body);
+
     const { email, password, name } = req.body;
-    console.log(email, password)
     //post user to db if she doesn't already exist
 
     db.getUserInfoByEmail(email)
