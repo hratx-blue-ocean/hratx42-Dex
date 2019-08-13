@@ -17,7 +17,7 @@ router.put('/:id', (req, res)=>{
     const user = req.body;
     const id = req.params.id
     user.id=id
-    //if user logged in
+    //if req.user
         //if user exists
             //update user
     res.status(200).send(JSON.stringify(user));
@@ -25,7 +25,7 @@ router.put('/:id', (req, res)=>{
 
 router.delete('/:id', (req, res)=>{
     const id = req.params.id
-    //if logged in
+    //if req.user
         //if user exists
             //delete user
     res.status(200).send(`Deleted user ${id}`);

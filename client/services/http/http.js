@@ -29,7 +29,7 @@ const http ={
     },
     tables: {
         get(userId){
-            return tryAxios(`/api/tables?user=${userId}`, 'get')
+            return tryAxios(`/api/tables?userId=${userId}`, 'get')
         },
         post(table){
             return tryAxios(`/api/tables`, 'post', table)
