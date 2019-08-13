@@ -46,6 +46,7 @@ from
     join users u on cm.user_id = u.id;
 
 
+
 select 
     c.id, 
     c.title as card_title, 
@@ -62,4 +63,35 @@ from
     join users u on cm.user_id = u.id
     join cards_labels cl on c.id = cl.card_id
     join labels l on cl.label_id = l.id
-group by c.id;
+group by c.id; 
+
+
+select 
+    json_build_object(
+        'card_id', c.id, 
+        'card_title', c.title, 
+        'card_description', c.description, 
+        'card_updated', c.updated_at,
+        'card_created', c.created_at, 
+        'card_weight', c.weight,
+        'card_impact', c.impact,
+        'cards_members', array_agg(
+            json_build_object(
+                'member_id', cast(u.id as varchar),
+                'member_name', u.name
+            )
+        ),
+        'card_labels', array_agg(
+            json_build_object(
+                'label_name', l.label_name,
+                'color', l.color
+            )
+        )
+    )
+from
+    cards c 
+    join cards_members cm on c.id = cm.card_id
+    join users u on cm.user_id = u.id
+    join cards_labels cl on c.id = cl.card_id
+    join labels l on cl.label_id = l.id
+group by c.id; 
