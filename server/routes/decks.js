@@ -1,6 +1,6 @@
 var express = require('express')
 var router = express.Router()
-// const db = require('../../db/hosteddb');
+const db = require('../../db/hosteddb');
 
 router.get('/', (req, res)=>{
     //query string like ?tableId=123
@@ -9,6 +9,13 @@ router.get('/', (req, res)=>{
         //db.get decks where table_id = tableId
         //populate decks with cards
     res.status(200).send(`Decks for table ${tableId}`)
+})
+
+router.get('/:id/cards', (req, res) =>{
+    db.getCardsByDeckId(req.params.id)
+    .then(results => results.rows)
+    .then(rows => res.status(200).json(rows))
+    .catch(err => console.error(err))
 })
 
 router.post('/', (req, res)=>{
