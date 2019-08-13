@@ -111,4 +111,3 @@ module.exports = {
   deleteCard
 };
 
->>>>>>> a03f09d5c330eeeb7d10635de5d7714126da5831
