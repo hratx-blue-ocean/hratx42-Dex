@@ -10,18 +10,22 @@ import Flash from './components/Flash'
 
 
 import global from '../utils/global'
+import tables from '../dummyData/tables.js';
+import TableSettings from './components/TableSettings.js';
 
 export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userid: '',
+      userid: 'asd',
       boards: [],
       flash: {
         show: false,
         message: 'Default flash message for testing',
         variant: 'success'
       },
+
+      showTableModal: false
     };
     this.api = `http://localhost:8000/api/example`;
   }
@@ -38,16 +42,24 @@ flash(message, variant, interval){
   }, interval)
 }
 
+logOut(){
+  this.setState({userid:''})
+}
+
+changeTableModal() {
+    this.setState({showTableModal: !this.state.showTableModal});
+}
+
   render() {
     return (
       <>
         <Router>
-          <h1>Welcome to Blue Ocean!</h1>
-          <NavBar userid={this.state.userid} />
           <Route path="/" exact component={ Landing } />
+        {this.state.userid ===''?<Landing/>:<NavBar showTableModal = {this.state.showTableModal} changeTableModal = {this.changeTableModal.bind(this)} logOut ={this.logOut.bind(this)}/>}
           <Route path="/dashboard" component={ Dashboard } />
           <Route path="/profile" component={ Profile } />
           <Route path="/table" component={ Table } />
+          <Route path="/TableSettings" component={ TableSettings } />
         </Router>
         <Flash flashData={this.state.flash}/>
       </>

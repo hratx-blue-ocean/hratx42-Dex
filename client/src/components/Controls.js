@@ -24,7 +24,7 @@ export default function Controls(props) {
         <div style = {{paddingLeft: '10px'}}></div>
         <DropdownButton id="dropdown-basic-button" variant = 'success' title="Filter">
           {props.users.map((user) => 
-            <Dropdown.Item onClick = {(e) => props.changeFilter(e)} href={user}>{user}</Dropdown.Item>)
+            <Dropdown.Item key = {user} onClick = {(e) => props.changeFilter(e)} href={user}>{user}</Dropdown.Item>)
           }
         </DropdownButton>
         <div style = {{position: 'relative', left: '30%'}}>

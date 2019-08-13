@@ -1,7 +1,8 @@
 var express = require('express')
 var router = express.Router()
+const jwtChecker = require('../middleware/jwtChecker')
 // const db = require('../../db/hosteddb');
-
+router.use(jwtChecker.checkToken);
 router.get('/', (req, res)=>{
     //query string like ?userId=123
     const {userId} = req.query;
