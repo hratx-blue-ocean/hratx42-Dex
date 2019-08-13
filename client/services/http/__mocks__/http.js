@@ -1,3 +1,4 @@
+
 import tables from '../../../dummyData/tables.js'
 import decks from '../../../dummyData/decks';
 
