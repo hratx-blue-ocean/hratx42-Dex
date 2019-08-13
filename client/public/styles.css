@@ -39,3 +39,7 @@ code {
 .ControlsSearchItem:hover {
   background-color: #CDCDCD;
 }
+
+.CardThumbnailsSingleCard:hover {
+  background-color: #CDCDCD;
+}

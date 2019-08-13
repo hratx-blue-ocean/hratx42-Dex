@@ -1,5 +1,6 @@
 import React from 'react';
 import { Navbar, Button } from 'react-bootstrap';
+import CardThumbnails from './CardThumbnails';
 
 export default function Controls(props) {
   const cards = props.cards.slice(0, 10)
@@ -9,8 +10,11 @@ export default function Controls(props) {
         <Navbar.Brand>Dex</Navbar.Brand>
         <input onChange = {(e) => props.searchText(e.target.value)} type="text" placeholder = 'Search cards'/>
         {props.searchName === '' ? (<></>) : (
-          <div className = 'ControlsSearchItems'>
-            {cards.map((item) => <div className = 'ControlsSearchItem'>{item.substring(0, 40)}</div>)}
+          <div className = 'ControlsSearchItems row'>
+            {cards.map((item) => 
+            <div className = 'ControlsSearchItem'>
+              <CardThumbnails singleCard = {item} background = 'true'/>
+            </div>)}
           </div>
         )}
         <Button style = {{height: '30px'}} variant = 'light'></Button>

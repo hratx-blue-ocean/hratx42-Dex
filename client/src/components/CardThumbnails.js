@@ -4,10 +4,10 @@ import { Card, Button, Col, Row } from 'react-bootstrap';
 export default function CardThumbnails(props) {
   return (
     <div style = {{maxWidth: '150px', maxHeight: '150px'}}>
-      <Card>
+      <Card className = 'CardThumbnailsSingleCard'>
         <Row>
           <Col md={1}>
-            <div className = 'cardThumbnails_impact'>{props.singleCard.impact}/{props.singleCard.weight}</div>
+            <div className = 'cardThumbnails_impact'>{props.singleCard.weight}/{props.singleCard.impact}</div>
           </Col>
           <Col md={9}>
             {props.singleCard.labels.map((label) => <div key = {Math.random()} style = {{paddingLeft: '5px', fontSize: '8px', color: 'blue'}}>{label}</div>)}

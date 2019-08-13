@@ -37,16 +37,17 @@ export default class Table extends Component {
     for (let i = 0; i < decks.length; i++){
       for(let j = 0; j < decks[i].cards.length; j++){
         if (decks[i].cards[j].description.includes(text)){
-          cards.push(decks[i].cards[j].description)
+          cards.push(decks[i].cards[j])
+          // if (decks[i].cards[j].description.length > 50){
+          //   cards[cards.length - 1] = cards[cards.length - 1].substring(0, 47) + '...';
+          // }
         }
       }
     }
-    console.log(cards)
     this.setState({cards, searchName: text})
   }
 
   render() {
-    console.log(this.state.decks.length)
     return (
       <div>
         <Controls searchText = {this.searchText.bind(this)} searchName = {this.state.searchName} cards = {this.state.cards}/>

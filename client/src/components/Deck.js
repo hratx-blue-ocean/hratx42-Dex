@@ -3,7 +3,7 @@ import { Card, Button } from 'react-bootstrap';
 import CardThumbnail from './CardThumbnails'
 
 export default function Deck(props) {
-  let cards = props.deck.cards.slice(0, 5)
+  let cards = props.deck.cards.slice(0, 6)
   return (
     <div style = {{width: '75%'}}>
       <div>
