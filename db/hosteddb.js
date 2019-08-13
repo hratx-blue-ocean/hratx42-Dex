@@ -15,13 +15,13 @@ pgClient.connect((err) => {
 
 const db = async (id) => {
     const product = await pgClient.query(
-        `SELECT * FROM tables`
+        `SELECT * FROM dex_tables`
     );
     return product;
 }
 
 const getUserInfoByEmail = async (email) => {
-    const userInfo = await pgClient.query(`SELECT * FROM User where email=${email};`)
+    const userInfo = await pgClient.query(`SELECT * FROM users where email=${email};`)
     return userInfo;
 }
 
