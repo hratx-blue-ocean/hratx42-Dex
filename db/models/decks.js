@@ -8,6 +8,11 @@ const decksModel = {
         const decks = await pgClient.query(query, values);
         return decks;
     },
+    async get(id){
+        const query = 'select * from decks where id = $1'
+        const {rows: decks} = pgClient.query(query, id);
+        return decks[0];
+    },
     async post(deck){
         const query = 'Insert into decks (id, table_id, title, table_index) values (default, $1, $2, 1)';
         const values = [deck.table_id, deck.title]
