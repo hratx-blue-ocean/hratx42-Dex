@@ -26,14 +26,20 @@ $$ LANGUAGE plpgsql;
 CREATE TABLE IF NOT EXISTS cards (
     id serial primary key,
     table_id int NOT NULL REFERENCES dex_tables(id),
-    deck_id int NOT NULL REFERENCES decks(id),
+    deck_id int NOT NULL ,
     title varchar(255) NOT NULL,
     weight int NOT NULL,
     impact int NOT NULL,
     due_date DATE,
     description text NOT NULL,
     created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-    updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    FOREIGN KEY (deck_id)
+      REFERENCES decks (id)
+      ON DELETE CASCADE,
+    FOREIGN KEY (table_id)
+      REFERENCES tables (id)
+      ON DELETE CASCADE
 );
 
 CREATE TRIGGER before_insert_cards_trigger BEFORE INSERT ON cards FOR EACH ROW EXECUTE PROCEDURE cards_notify();
