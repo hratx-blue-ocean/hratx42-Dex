@@ -14,8 +14,18 @@ export default class App extends Component {
     super(props);
     this.state = {
       userid: 0,
-      boards: []
+      boards: [],
+      // dashboard edit profile form
+      editProfileName: '',
+      editProfileEmail: '',
+      editProfilePassword: ''
   }
+
+  // dashboard onChange event functions
+  this.changeProfileName = this.changeProfileName.bind(this);
+  this.changeProfileEmail = this.changeProfileEmail.bind(this);
+  this.changeProfilePassword = this.changeProfilePassword.bind(this);
+  this.submitProfileChanges = this.submitProfileChanges.bind(this);
 }
 
 componentDidMount() {    
@@ -29,7 +39,23 @@ flash(message, interval){
   }, interval)
 }
 
-  
+  // dashboard onChange event functions
+  changeProfileName(e) {
+    this.setState({ editProfileName: e.target.value });
+  }
+
+  changeProfileEmail(e) {
+    this.setState({ editProfileEmail: e.target.value });
+  }
+
+  changeProfilePassword(e) {
+    this.setState({ editProfilePassword: e.target.value });
+  }
+
+  submitProfileChanges() {
+    // send post request with the edited data
+    console.log(this.state.editProfileEmail, this.state.editProfileName, this.state.editProfilePassword);
+  }
 
   render() {
     return (
@@ -39,12 +65,19 @@ flash(message, interval){
         <NavBar />
           <Route path="/" exact component={ Landing } />
           <Route 
-            path="/boards"
-            render={props => <Dashboard {...props} boards={this.state.boards} />}
+            path="/dashboard"
+            render={props => 
+              <Dashboard {...props} boards={this.state.boards}
+              changeProfileName={this.changeProfileName}
+              changeProfileEmail={this.changeProfileEmail}
+              changeProfilePassword={this.changeProfilePassword}
+              submitProfileChanges={this.submitProfileChanges}
+            />}
+            
            />
           <Route path="/profile" component={ Profile } />
           <Route path="/table" component={ Table } />
-          <Dashboard boards={this.state.boards} />
+          {/* <Dashboard boards={this.state.boards} /> */}
         </Router>
       </>
     );
