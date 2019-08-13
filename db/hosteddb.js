@@ -43,7 +43,12 @@ const deleteUser = async (id) => {
     const deletedUser = await pgClient.query(`DELETE FROM users WHERE id = ${id};`);
     return deletedUser;
 }
+
+const updateUser = async ({name, hashedPassword, email, id, imageURL}) => {
+    const updateUser = await pgClient.query(`UPDATE users SET name = '${name}', hashedPassword = '${hashedPassword}', email = '${email}' WHERE id = ${id};`)
+    const updateProfile = await pgClient.query(`UPDATE users INNER JOIN profiles SET profiles.name = '${name}', profiles.imageURL = '${imageURL}' ON users.id = ${id} AND users.profileID = profiles.id;`)
+}
 // getUserInfoByEmail('ddd@aaa.com')
 // pgClient.query(`INSERT INTO Users VALUES (default, 'DUCKDUCKGO', 123, '123@123')`)
 
-module.exports = { db, getUserInfoByEmail, createNewUser };
+module.exports = pgClient;
