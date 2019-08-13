@@ -1,6 +1,6 @@
 import axios from 'axios';
 import global from '../../utils/global';
-import auth from '../../services/auth'
+import auth from '../auth.js'
 
 const tryAxios = async function(endpoint, method, payload){
     try {
