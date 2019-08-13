@@ -65,7 +65,6 @@ from
     join labels l on cl.label_id = l.id
 group by c.id; 
 
--- ********************************************************************************************************************************
 -- last working query
 select 
     json_build_object(
@@ -97,7 +96,7 @@ from
     join labels l on cl.label_id = l.id
 group by c.id; 
 
--- *************************************************************************************************
+-- ********************************************************************************************************************************
 
 select 
     c.id as card_id,
@@ -128,7 +127,7 @@ from
 group by c.id; 
 
 
-
+-- *************************************************************************************************
 
 
 select 
@@ -275,3 +274,28 @@ from dex_tables t
     join labels l on cl.label_id = l.id;
 
 
+-- get decks by tableid %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+-- select 
+--     d.id as deck_id,
+--     d.title as deck_title,
+--     c.title as card_title,
+--     array_agg(
+--         json_build_object(
+--             'member_id', cast(u.id as varchar),
+--             'member_name', u.name
+--         )
+--     ) as cards_members,
+--     array_agg(
+--         json_build_object(
+--             'label_name', l.label_name,
+--             'color', l.color
+--         )
+--     ) as card_labels
+-- from
+--     cards c 
+--     join cards_members cm on c.id = cm.card_id
+--     join users u on cm.user_id = u.id
+--     join cards_labels cl on c.id = cl.card_id
+--     join labels l on cl.label_id = l.id
+-- group by c.id; 
