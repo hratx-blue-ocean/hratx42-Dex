@@ -41,7 +41,7 @@ export default function Login(props) {
                 // send get request for user information to render dashboard
               }}
             >
-              log in
+              Log In
             </Button>
           </Form>
         </Navbar.Collapse>
