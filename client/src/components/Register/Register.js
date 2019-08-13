@@ -1,13 +1,25 @@
 import React, { useState } from 'react';
-
+import { Button } from 'react-bootstrap';
 //services
+<<<<<<< HEAD
 import http from '../../../services/http/__mocks__/http';
 
+=======
+import http from '../../../services/http/http.js';
+import auth from '../../../services/auth.js';
+>>>>>>> 852cb0997c5e8d1a0d4ac98e488d1bbafbfe6d41
 //utils
 import global from '../../../utils/global';
+import App from '../../App.js';
 
+<<<<<<< HEAD
 export default function Register() {
+=======
+export default function Register(props) {
+>>>>>>> 852cb0997c5e8d1a0d4ac98e488d1bbafbfe6d41
   const [email, setEmail] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [password1, setPassword1] = useState('');
   const [password2, setPassword2] = useState('');
 
@@ -15,10 +27,30 @@ export default function Register() {
     event.preventDefault();
     //verify passwords match
     if(password1 !== password2){
-      global.flash("Passwords should match", 2000)
+      global.flash("Passwords should match", "danger", 2000)
     } else {
       //@TODO: verify email/password input
+<<<<<<< HEAD
       http.postUser(email, password1)
+=======
+      let name = firstName + ' ' + lastName;
+      http.users.post(name, email, password1)
+      .then((data) => {
+        if(data) {
+          http.auth.post(email, password1)
+          .then((loggedIn) => {
+            if(loggedIn) {
+              props.login();
+            }
+          })
+          .catch((error) => {
+            console.log('error creating user and signing in', error);
+          })
+        }
+      }).catch((err) => {
+        console.log(err);
+      })
+>>>>>>> 852cb0997c5e8d1a0d4ac98e488d1bbafbfe6d41
     }
   };
 
@@ -34,13 +66,32 @@ export default function Register() {
           placeholder={'Email'}
           onChange={(event) => {setEmail(event.target.value)}}
         />
+<<<<<<< HEAD
+=======
+        <label htmlFor={'register-first-name'}>First Name: </label>
+        <input
+          type="text"
+          id="register-first-name"
+          value={firstName}
+          placeholder={'First Name'}
+          onChange={(event) => {setFirstName(event.target.value)}}
+        />
+        <label htmlFor={'register-last-name'}>Last Name: </label>
+        <input
+          type="text"
+          id="register-last-name"
+          value={lastName}
+          placeholder={'Last Name'}
+          onChange={(event) => {setLastName(event.target.value)}}
+        />
+>>>>>>> 852cb0997c5e8d1a0d4ac98e488d1bbafbfe6d41
         <label htmlFor={'register-password1'}>Password: </label>
         <input type="text" id="register-password1" value={password1} placeholder={'Password'}
         onChange={(event)=>{setPassword1(event.target.value)}}/>
         <label htmlFor={'register-password2'}>Confirm Password: </label>
         <input type="text" id="register-password2" value={password2} placeholder={'Password'}
         onChange={(event)=>{setPassword2(event.target.value)}} />
-        <input type="submit" style={{display: "none"}} />
+        <Button onClick={(e) => handleSubmit(e)}>Sign up</Button>
       </form>
     </div>
   );

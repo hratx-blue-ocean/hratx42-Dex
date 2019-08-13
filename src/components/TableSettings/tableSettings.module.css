@@ -1,0 +1,34 @@
+.tableCreate {
+  width: 650px;
+  height: 600px;
+}
+
+.header {
+  font-size: 30px;
+  text-align: center;
+}
+
+.description {
+  height: 50px;
+}
+
+.xbutton:hover {
+  cursor: pointer;
+}
+
+.space {
+  padding-top: 10px;
+}
+
+.buttonx {
+  border-radius: 50%;
+}
+
+.column {
+  padding-left: 10px;
+}
+
+.plusButton {
+  position: relative;
+  top: -1px;
+}

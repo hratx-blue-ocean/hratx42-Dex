@@ -1,7 +1,11 @@
 import React from 'react';
 
 import global from '../../../utils/global';
+<<<<<<< HEAD
 import http from '../../../services/http/__mocks__/http'
+=======
+import http from '../../../services/http/http'
+>>>>>>> 852cb0997c5e8d1a0d4ac98e488d1bbafbfe6d41
 
 import Register from './Register';
 
@@ -19,7 +23,11 @@ describe("Register component", ()=>{
     beforeAll(()=>{
         global.flash = jest.fn();
         spy = {
+<<<<<<< HEAD
             postUser: sinon.spy(http, 'postUser')
+=======
+            postUser: sinon.spy(http.users, 'post')
+>>>>>>> 852cb0997c5e8d1a0d4ac98e488d1bbafbfe6d41
         }
         form = container.querySelector('form');
         emailInput = getByPlaceholderText(/email/i);

@@ -1,40 +1,64 @@
 var express = require('express')
 var router = express.Router()
-const { db } = require('../../db/hosteddb');
-
-// what data is being fetched from user --query profile table?
-// what data is being updated for user --query profile table?
-
-// require user model, put db object in user model, require db
-
-router.get('/:id', (req, res) => {
-    const id = req.params.id;
-    db.getUserByID(id)
-        .then((data) => res.status(200).send(JSON.stringify(data)))
-        .catch(() => res.status(404).send(`Error getting user ${id}`))
+const db = require('../../db/hosteddb');
+const bcrypt = require('bcrypt');
+const saltRounds = 12;
+const jwtChecker = require('../middleware/jwtChecker.js')
+const auth = require('../middleware/auth.js');
+// const db = require('../../db/hosteddb');
+// router.use(jwtChecker.checkToken);
+router.get('/:id', (req, res)=>{
+    const id = req.params.id
+    res.status(200).send(`User ${id}`)
 })
 
-// router.post('/', (req, res) => {
-//     const user = req.body;
-//     db.addNewUser(user)
-//         .then((user) => res.status(200).send(JSON.stringify(user)))
-//         .catch(() => res.status(404).send('Unable to create new user'));
-// })
+router.post('/', (req, res, next)=>{
 
-router.put('/:id', (req, res) => {
+    const { email, password, name } = req.body;
+    //post user to db if she doesn't already exist
+    console.log(req.body)
+    db.getUserInfoByEmail(email)
+    .then((result) => {  
+        if(result.rowCount === 0) {     //if email does not exist create user
+            bcrypt.hash(password, saltRounds).then((hashedPassword) => {
+                db.createNewUser({name, hashedPassword, email})
+                .then((userCreated) => { 
+                    next();
+                })
+                .catch((err) => {
+                    console.log('Error inserting user @users.js line 28', err);
+                    res.status(403).json({success: false, message: "Unexpected Error Occurred Try Later."})
+                })
+            }).catch((error) => {
+                console.log('error creating hash password', error)
+                res.status(403).json({success: false, message: "Unexpected Error Occurred Try Later."})
+            })
+        } else {    //if email already exists, send message
+            res.status(400).json({success: false, message: "Username already exists"})
+        }
+    })
+    .catch((err) => {
+        console.log('Error getting user info @users.js line 37', err);
+        res.status(404).send("error getting user")
+    })
+}, auth.auth);
+
+router.put('/:id', (req, res)=>{
     const user = req.body;
-    const id = req.params.id;
-    user.id = id;
-    db.updateUser(user)
-        .then(() => res.status(200).send(`User ${id} updated`))
-        .catch(() => res.status(404).send(`Unable to update user ${id}`));
+    const id = req.params.id
+    user.id=id
+    //if req.user
+        //if user exists
+            //update user
+    res.status(200).send(JSON.stringify(user));
 })
 
-router.delete('/:id', (req, res) => {
-    const id = req.params.id;
-    db.deleteUserByID(id)
-        .then(() => res.status(200).send(`Deleted user ${id}`))
-        .catch(() => res.status(404).send(`Error deleting user ${id}`));
+router.delete('/:id', (req, res)=>{
+    const id = req.params.id
+    //if req.user
+        //if user exists
+            //delete user
+    res.status(200).send(`Deleted user ${id}`);
 })
 
 module.exports = router;

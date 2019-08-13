@@ -6,12 +6,13 @@
   "scripts": {
     "test": "nyc mocha",
     "start": "node bin/www &",
-    "start-dev": "node bin/www"
+    "start-dev": "nodemon bin/www"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^3.0.6",
+    "body-parser": "^1.19.0",
     "debug": "^4.1.1",
     "express": "^4.16.4",
     "jsonwebtoken": "^8.5.1",

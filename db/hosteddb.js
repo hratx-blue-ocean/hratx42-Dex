@@ -1,18 +1,20 @@
+const path = require('path');
+require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
 const pg = require('pg');
-require('dotenv').config();
 const pgClient = new pg.Client({
-    host: process.env.DB_HOST,
-    port: 5432,
-    user: process.env.DB_USERNAME,
-    password: process.env.DB_PASSWORD || '',
-    database: 'dexdb'
+  host: process.env.DB_HOST,
+  port: 5432,
+  user: process.env.DB_USERNAME,
+  password: process.env.DB_PASSWORD || '',
+  database: 'dexdb'
 });
 
-pgClient.connect((err) => {
-    if (err) console.log("Could not connect to database:", err);
-    else console.log("Connected to database!");
+pgClient.connect(err => {
+  if (err) console.log('Could not connect to database:', err);
+  else console.log('Connected to database!');
 });
 
+<<<<<<< HEAD
 const getTablesByUser = async (id) => {
     const tables = await pgClient.query(`SELECT name, id FROM table WHERE userID = ${id}`);
     return tables;
@@ -22,12 +24,13 @@ const getUserByID = async (id) => {
     const user = await pgClient.query(`SELECT name, id, etc FROM User where id = ${id};`);
     return user;
 }
+=======
+>>>>>>> 852cb0997c5e8d1a0d4ac98e488d1bbafbfe6d41
 
-const getUserInfoByEmail = async (email) => {
-    const userInfo = await pgClient.query(`SELECT * FROM User where email=${email};`)
-    return userInfo;
-}
+module.exports =  pgClient
 
+
+<<<<<<< HEAD
 const deleteTableByID = async (id) => {
     const deleteFromTable = await pgClient.query(`DELETE FROM tables WHERE id = ${id}`);
     return deleteFromTable;
@@ -67,3 +70,5 @@ const db = {
 module.exports = {  db, deleteCardByID, 
                     deleteUserByID, deleteDeckByID, deleteTableByID, 
                     getTablesByUser, getUserByID, getUserInfoByEmail };
+=======
+>>>>>>> 852cb0997c5e8d1a0d4ac98e488d1bbafbfe6d41
