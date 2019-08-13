@@ -22,10 +22,11 @@ const db = async (id) => {
 }
 
 const getUserInfoByEmail = async (email) => {
-    const userInfo = await pgClient.query(`SELECT * FROM Users where email=${email};`)
+    const userInfo = await pgClient.query(`SELECT * FROM users WHERE email = '${email}';`)
+    console.log(userInfo.rows[0]);
     return userInfo;
 }
-
-pgClient.query('INSERT INTO Users ')
+// getUserInfoByEmail('ddd@aaa.com')
+// pgClient.query(`INSERT INTO Users VALUES (default, 'DJ', 1234, 'ddd@aaa.com')`)
 
 module.exports = { db, getUserInfoByEmail };

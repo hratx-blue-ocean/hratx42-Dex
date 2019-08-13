@@ -3,6 +3,7 @@ const logger = require('morgan');
 const express = require('express');
 const app = express();
 const path = require('path');
+const bodyparser = require('body-parser');
 
 // open up CORS 
 app.use((_, res, next) => {
