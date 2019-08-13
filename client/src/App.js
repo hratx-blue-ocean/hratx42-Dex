@@ -14,7 +14,7 @@ export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userid: 0,
+      userid: '',
       boards: []
   }
 }
@@ -35,7 +35,7 @@ flash(message, interval){
       <>
         <Router>
         <h1>Welcome to Blue Ocean!</h1>
-        <NavBar />
+        <NavBar userid={this.state.userid} />
           <Route path="/" exact component={ Landing } />
           <Route path="/dashboard" component={ Dashboard } />
           <Route path="/profile" component={ Profile } />
