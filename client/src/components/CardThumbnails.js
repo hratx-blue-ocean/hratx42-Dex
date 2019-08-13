@@ -3,7 +3,7 @@ import { Card, Button, Col, Row } from 'react-bootstrap';
 
 export default function CardThumbnails(props) {
   return (
-    <div style = {{maxWidth: '150px', maxHeight: '150px'}}>
+    <div style = {{width: '150px', height: '150px'}}>
       <Card className = 'CardThumbnailsSingleCard'>
         <Row>
           <Col md={1}>
@@ -15,7 +15,7 @@ export default function CardThumbnails(props) {
         </Row>
           <div style = {{fontSize: '10px', paddingLeft: '5px'}}>{props.singleCard.description}</div>
         <div>
-          <Button className = 'CardThumbnails_userIcon float-right' variant='secondary'>GG</Button>
+          <Button className = 'CardThumbnails_userIcon float-right' variant='secondary'>GB</Button>
           <Button className = 'CardThumbnails_userIcon float-right' variant='secondary'>JI</Button>
         </div>
       </Card>

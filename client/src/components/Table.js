@@ -10,7 +10,7 @@ export default class Table extends Component {
     this.state = {
       decks: [],
       cards: [{}],
-      users: [],
+      users: ['Michael', 'Brian', 'Laine', 'Rachel', 'Miles', 'Ibrahim'],
       filterBy: '',
       sortBy: '',
       searchName: ''
@@ -29,6 +29,16 @@ export default class Table extends Component {
 
   newPlayer(playerName) {
     //add user to users Array
+  }
+
+  searchClick(card) {
+
+  }
+
+  changeFilter(e) {
+    if (this.state.filterBy === e.target.innerHTML){
+      this.setState({filterBy: ''});
+    } else {this.setState({filterBy: e.target.innerHTML})}
   }
 
   searchText(text) {
@@ -50,13 +60,24 @@ export default class Table extends Component {
   render() {
     return (
       <div>
-        <Controls searchText = {this.searchText.bind(this)} searchName = {this.state.searchName} cards = {this.state.cards}/>
+        <Controls 
+          searchText = {this.searchText.bind(this)} 
+          searchName = {this.state.searchName} 
+          cards = {this.state.cards}
+          users = {this.state.users}
+          changeFilter = {this.changeFilter.bind(this)}
+          searchClick = {this.searchClick.bind(this)}
+          />
         {/* for each deck, create a deck */}
         {this.state.decks.length > 0 ? (<>
-          {this.state.decks.map((deck) => <Deck key = {deck.id} deck = {deck} />)}
-            <Card style = {{width: '75%', height: '150px'}}>
-              <Button style = {{height: '75px', width: '75px'}} variant='success'>Add New Deck</Button>
-            </Card>
+          {this.state.decks.map((deck) => <>
+              <Deck key = {deck.id} filterBy = {this.state.filterBy} deck = {deck} />
+              <div style = {{paddingBottom: '8px'}}></div>
+            </>)
+          }
+          <Card style = {{width: '75%', height: '150px'}}>
+            <Button style = {{height: '75px', width: '75px'}} variant='success'>Add New Deck</Button>
+          </Card>
         </>) : (<></>)}
         
         {/* chat box??? */}
