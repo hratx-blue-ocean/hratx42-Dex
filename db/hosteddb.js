@@ -24,6 +24,11 @@ const db = async (id) => {
     return product;
 }
 
+const getUserByID = async (id) => {
+    const user = await pgClient.query(`SELECT id FROM users WHERE id = ${id};`);
+    return user;
+}
+
 const getUserInfoByEmail = async (email) => {
     const userInfo = await pgClient.query(`SELECT * FROM users WHERE email = '${email}';`)
     return userInfo;
@@ -32,6 +37,11 @@ const getUserInfoByEmail = async (email) => {
 const createNewUser = async ({name, hashedPassword, email}) => {
     const userInfo = await pgClient.query(`INSERT INTO users VALUES (default, '${name}', '${hashedPassword}', '${email}');`)
     return userInfo
+}
+
+const deleteUser = async (id) => {
+    const deletedUser = await pgClient.query(`DELETE FROM users WHERE id = ${id};`);
+    return deletedUser;
 }
 // getUserInfoByEmail('ddd@aaa.com')
 // pgClient.query(`INSERT INTO Users VALUES (default, 'DUCKDUCKGO', 123, '123@123')`)
