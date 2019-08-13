@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react';
 
 export default function TableThumbnails(props) {
   return (
     <div>
-      thumbnails
+      table thumbnail
     </div>
   )
 }
