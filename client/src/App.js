@@ -39,6 +39,7 @@ flash(message, interval){
           <Route path="/dashboard" component={ Dashboard } />
           <Route path="/profile" component={ Profile } />
           <Route path="/table" component={ Table } />
+          <Dashboard boards={this.state.boards} />
         </Router>
       </>
     );
