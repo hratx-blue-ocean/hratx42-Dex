@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { Button } from 'react-bootstrap';
 //services
-import http from '../../../services/http/http.js'
-
+import http from '../../../services/http/http.js';
+import auth from '../../../services/auth.js';
 //utils
 import global from '../../../utils/global';
+import App from '../../App.js';
 
-export default function Register() {
+export default function Register(props) {
   const [email, setEmail] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -15,16 +16,27 @@ export default function Register() {
 
   const handleSubmit = function(event) {
     event.preventDefault();
-    console.log('asdad')
     //verify passwords match
     if(password1 !== password2){
       global.flash("Passwords should match", "danger", 2000)
     } else {
       //@TODO: verify email/password input
       let name = firstName + ' ' + lastName;
-      http.users.post(name, email, password1).then((response) => {
-        console.log('post response', response)
-        http.auth.post(email, password1)
+      http.users.post(name, email, password1)
+      .then((data) => {
+        if(data) {
+          http.auth.post(email, password1)
+          .then((loggedIn) => {
+            if(loggedIn) {
+              props.login();
+            }
+          })
+          .catch((error) => {
+            console.log('error creating user and signing in', error);
+          })
+        }
+      }).catch((err) => {
+        console.log(err);
       })
     }
   };

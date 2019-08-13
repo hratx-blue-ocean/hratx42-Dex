@@ -1,10 +1,6 @@
 const path = require('path');
 require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
-console.log(
-  require('dotenv').config({ path: path.resolve(__dirname, '../.env') })
-);
 const pg = require('pg');
-require('dotenv').config();
 const pgClient = new pg.Client({
   host: process.env.DB_HOST,
   port: 5432,
@@ -20,4 +16,5 @@ pgClient.connect(err => {
 
 
 module.exports =  pgClient
+
 
