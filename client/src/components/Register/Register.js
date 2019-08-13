@@ -6,7 +6,7 @@ import http from '../../../services/http/http.js'
 //utils
 import global from '../../../utils/global';
 
-export default function Register() {
+export default function Register(props) {
   const [email, setEmail] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -22,8 +22,17 @@ export default function Register() {
     } else {
       //@TODO: verify email/password input
       let name = firstName + ' ' + lastName;
-      http.users.post(name, email, password1).then(() => {
+      http.users.post(name, email, password1)
+      .then(() => {
         http.auth.post(email, password1)
+        .then((loggedIn) => {
+          if(loggedIn) {
+            props.history.push("/dashboard")
+          }
+        })
+        .catch((error) => {
+          console.log('error creating user and signing in', error);
+        })
       })
     }
   };

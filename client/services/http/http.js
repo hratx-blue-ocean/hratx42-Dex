@@ -27,7 +27,7 @@ const http ={
         async post(email, password){
             const jwt = await tryAxios('/api/auth', 'post', {email, password})
             auth.login(jwt.token)
-            window.location = '/dashboard'
+            return auth.userIsLoggedIn();
         },
     },
     tables: {
