@@ -8,3 +8,7 @@ CREATE TABLE IF NOT EXISTS users (
     password text NOT NULL,
     email email NOT NULL
 );
+
+CREATE TABLE IF NOT EXISTS user_profiles (
+    
+)
