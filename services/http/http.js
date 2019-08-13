@@ -17,7 +17,7 @@ const http ={
         return tryAxios('/api/users', 'post', {name, email, password})
         },
         put(id, email, password){
-            return tryAxios(`/api/users/${id}`, 'put', {name, email, password})
+            return tryAxios(`/api/users/${id}`, 'put', {email, password})
         },
         delete(id){
             return tryAxios(`/api/users${id}`)
