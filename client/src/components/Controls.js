@@ -12,9 +12,9 @@ export default function Controls(props) {
         {props.searchName === '' ? (<></>) : (
           <div className = 'ControlsSearchItems row'>
             {cards.map((item) => 
-              <div onClick = {() => props.searchClick(item)} className = 'ControlsSearchItem'>
+              <div key = {item} className = 'ControlsSearchItem'>
                 <div style = {{paddingLeft: '160px'}}></div>
-                <CardThumbnails singleCard = {item} background = 'true'/>
+                <CardThumbnails onClick = {() => props.searchClick(item)} singleCard = {item} background = 'true'/>
               </div>)}
           </div>
         )}
