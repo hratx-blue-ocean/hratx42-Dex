@@ -7,7 +7,7 @@ const tryAxios = async function(endpoint, method, payload){
         const response = await axios[method](endpoint,payload)
         return response.data
       } catch (error) {
-        global.flash(error.message, 2000)
+        global.flash(error.message, 'danger', 2000)
       }
 }
 

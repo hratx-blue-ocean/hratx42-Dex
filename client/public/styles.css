@@ -25,3 +25,12 @@ code {
   width: 35px;
   border-radius: 50%;
 }
+
+.flash-container {
+  position: fixed;
+  z-index: 100;
+  top: 40%;
+  left: 25%;
+  width: 50%;
+  text-align: center;
+}
