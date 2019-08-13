@@ -1,6 +1,6 @@
 import axios from 'axios';
 import global from '../../utils/global';
-import auth from '../../services/auth'
+import auth from '../auth.js'
 
 const tryAxios = async function(endpoint, method, payload){
     try {
@@ -13,8 +13,8 @@ const tryAxios = async function(endpoint, method, payload){
 
 const http ={
     users: {
-        post(email, password){
-        return tryAxios('/api/users', 'post', {email, password})
+        post(name, email, password){
+        return tryAxios('/api/users', 'post', {name, email, password})
         },
         put(id, email, password){
             return tryAxios(`/api/users/${id}`, 'put', {email, password})
@@ -24,9 +24,9 @@ const http ={
         }
     },
     auth: {
-        post(email, password){
-            const jwt = tryAxios('/api/auth', 'post', {email, password})
-            auth.login(jwt)
+        async post(email, password){
+            const jwt = await tryAxios('/api/auth', 'post', {email, password})
+            auth.login(jwt.token)
             window.location = '/dashboard'
         },
     },
