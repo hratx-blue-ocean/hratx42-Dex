@@ -24,6 +24,7 @@ export default class App extends Component {
         message: 'Default flash message for testing',
         variant: 'success'
       },
+
       showTableModal: false
     };
     this.api = `http://localhost:8000/api/example`;
@@ -53,6 +54,7 @@ changeTableModal() {
     return (
       <>
         <Router>
+          <Route path="/" exact component={ Landing } />
         {this.state.userid ===''?<Landing/>:<NavBar showTableModal = {this.state.showTableModal} changeTableModal = {this.changeTableModal.bind(this)} logOut ={this.logOut.bind(this)}/>}
           <Route path="/dashboard" component={ Dashboard } />
           <Route path="/profile" component={ Profile } />
