@@ -18,12 +18,12 @@ export default function TableSettings(props) {
             <span>Table Name:</span>
             <div style = {{paddingTop: '10px'}}></div>
             <div>
-              <input onChange = {(e) => setTableName(e.target.value)} type="text" placeholder = 'Enter table name'/>
+              <input onChange = {(e) => setTableName(e.target.value)} value = {tableName} type="text" placeholder = 'Enter table name'/>
             </div>
             <div style = {{paddingTop: '10px'}}></div>
             <div>Description</div>
             <div style = {{paddingTop: '10px'}}></div>
-            <textarea style = {{height: '50px'}} onChange = {(e) => setDescName(e.target.value)} type="text" placeholder = 'Enter table name'/>
+            <textarea style = {{height: '50px'}} onChange = {(e) => setDescName(e.target.value)} value = {descName} type="text" placeholder = 'Enter table name'/>
             <div style = {{paddingTop: '10px'}}></div>
             <div>Invite Players</div>
             <div style = {{paddingTop: '10px'}}></div>
