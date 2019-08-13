@@ -2,7 +2,8 @@ var express = require('express')
 var router = express.Router()
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const config = require('./config.js');
+// const config = require('./config.js');
+const config = {secret: "supersecuresecret"}
 
 // const db = require('../../db/hosteddb');
 
