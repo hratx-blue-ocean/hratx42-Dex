@@ -1,5 +1,8 @@
 const path = require('path');
 require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
+console.log(
+  require('dotenv').config({ path: path.resolve(__dirname, '../.env') })
+);
 const pg = require('pg');
 
 require('dotenv').config();
@@ -87,7 +90,10 @@ const updateCard = async (
 
 // delete card
 const deleteCard = async cardID => {
-  await pgClient.query(`DELETE FROM cards WHERE id = ${cardID};`);
+  const deletedCard = await pgClient.query(
+    `DELETE FROM cards WHERE id = ${cardID} RETURNING id;`
+  );
+  return deletedCard;
 };
 
 module.exports = {
