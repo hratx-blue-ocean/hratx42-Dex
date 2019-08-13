@@ -1,8 +1,18 @@
+require('dotenv').config();
 const createError = require('http-errors');
 const logger = require('morgan');
 const express = require('express');
 const app = express();
 const path = require('path');
+const bodyParser = require('body-parser')
+
+const port = process.env.PORT || 3000;
+
+const usersRoute  = require('./routes/users');
+const tablesRoute = require('./routes/tables');
+const decksRoute = require('./routes/decks');
+const cardsRoute = require('./routes/cards');
+const authRoute = require('./routes/auth');
 
 // open up CORS 
 app.use((_, res, next) => {
@@ -11,13 +21,18 @@ app.use((_, res, next) => {
     next();
 });
 
+//middleware
 app.use(logger('dev'));
-
-// You can place your routes here, feel free to refactor:
+app.use(bodyParser.json())
 app.use(express.static(path.join(__dirname, '../client/public')));
 
-const { db } = require('./routes');
-app.use('/api/db', db)
+//routes
+app.use('/api/users', usersRoute)
+app.use('/api/tables', tablesRoute)
+app.use('/api/decks', decksRoute)
+app.use('/api/cards', cardsRoute)
+app.use('/api/auth', authRoute);
+
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
     next(createError(404));
@@ -33,5 +48,7 @@ app.use(function (err, req, res, next) {
     res.status(err.status || 500);
     res.json('error');
 });
+
+app.listen(port, () => console.log(`Example app listening on port ${port}!`))
 
 module.exports = app;
