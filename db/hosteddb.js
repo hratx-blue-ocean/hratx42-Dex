@@ -27,7 +27,6 @@ const getUserInfoByEmail = async (email) => {
 }
 
 const createNewUser = async ({name, hashedPassword, email}) => {
-    console.log('password saved to db = ', hashedPassword);
     const userInfo = await pgClient.query(`INSERT INTO users VALUES (default, '${name}', '${hashedPassword}', '${email}');`)
     return userInfo
 }
