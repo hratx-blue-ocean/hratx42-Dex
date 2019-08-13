@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Landing from './components/Landing.js';
 import Dashboard from './components/Dashboard.js';
 import Profile from './components/Profile.js';
-import auth from '../services/auth.js';
+
 import NavBar from './components/NavBar.js'
 import Table from './components/Table.js';
 import Flash from './components/Flash'
@@ -17,7 +17,7 @@ export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userId: '',
+      userid: 'asd',
       boards: [],
       flash: {
         show: false,
@@ -42,12 +42,8 @@ flash(message, variant, interval){
   }, interval)
 }
 
-login() {
-  auth.setUser(this);
-}
-
 logOut(){
-  this.setState({userId:''})
+  this.setState({userid:''})
 }
 
 changeTableModal() {
@@ -58,8 +54,8 @@ changeTableModal() {
     return (
       <>
         <Router>
-        <h1>Welcome to Blue Ocean!</h1>
-        {this.state.userId ===''?<Landing login={this.login.bind(this)}/>:<NavBar logOut ={this.logOut.bind(this)}/>}
+          <Route path="/" exact component={ Landing } />
+        {this.state.userid ===''?<Landing/>:<NavBar showTableModal = {this.state.showTableModal} changeTableModal = {this.changeTableModal.bind(this)} logOut ={this.logOut.bind(this)}/>}
           <Route path="/dashboard" component={ Dashboard } />
           <Route path="/profile" component={ Profile } />
           <Route path="/table" component={ Table } />

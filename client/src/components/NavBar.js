@@ -35,8 +35,8 @@ export default function NavBar(props) {
                 <NavDropdown.Item href="#action/3.3">table 2</NavDropdown.Item>
               <NavDropdown.Item href="#action/3.3">table 3</NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item onClick = {()=>{}} href="#action/3.4">
-                <Link to={"./TableSettings"}>Add a table</Link>
+              <NavDropdown.Item onClick={()=>props.changeTableModal()} href="#action/3.4">
+                Create new table
               </NavDropdown.Item>
             </NavDropdown>
             <NavDropdown title="user name" id="collasible-nav-dropdown" style={{ marginRight: "15px" }}>
