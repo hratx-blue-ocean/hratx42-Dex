@@ -9,6 +9,8 @@ const port = process.env.PORT || 3000;
 
 const usersRoute  = require('./routes/users');
 const tablesRoute = require('./routes/tables');
+const decksRoute = require('./routes/decks');
+const cardsRoute = require('./routes/cards');
 
 // open up CORS 
 app.use((_, res, next) => {
@@ -17,13 +19,16 @@ app.use((_, res, next) => {
     next();
 });
 
+//middleware
 app.use(logger('dev'));
 app.use(bodyParser.json())
 app.use(express.static(path.join(__dirname, '../client/public')));
 
-
+//routes
 app.use('/api/users', usersRoute)
 app.use('/api/tables', tablesRoute)
+app.use('/api/decks', decksRoute)
+app.use('/api/cards', cardsRoute)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

@@ -3,7 +3,7 @@ var router = express.Router()
 // const db = require('../../db/hosteddb');
 
 router.get('/', (req, res)=>{
-    //query string like ?userId=123
+    //query string like ?tableId=123
     const {tableId} = req.query;
     //if req.user && user owns table
         //db.get decks where table_id = tableId
