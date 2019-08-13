@@ -1,5 +1,6 @@
 var express = require('express')
 var router = express.Router()
+
 const decksModel = require('../../db/models/decks');
 const authorization = require('../../db/models/authorization');
 const tryCatch = require('../utils/tryCatch');
@@ -18,6 +19,13 @@ router.get('/', async (req, res)=>{
             res.status(401).send({message: "Unathorized"})
         }
     }, res)
+})
+
+router.get('/:id/cards', (req, res) =>{
+    db.getCardsByDeckId(req.params.id)
+    .then(results => results.rows)
+    .then(rows => res.status(200).json(rows))
+    .catch(err => console.error(err))
 })
 
 router.post('/', (req, res)=>{
