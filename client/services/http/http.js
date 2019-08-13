@@ -25,11 +25,12 @@ const http ={
         post(email, password){
             const jwt = tryAxios('/api/auth', 'post', {email, password})
             //do something with jwt
+            //redirect
         },
     },
     tables: {
         get(userId){
-            return tryAxios(`/api/tables?user=${userId}`, 'get')
+            return tryAxios(`/api/tables?userId=${userId}`, 'get')
         },
         post(table){
             return tryAxios(`/api/tables`, 'post', table)
