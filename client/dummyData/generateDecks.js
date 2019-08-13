@@ -11,7 +11,7 @@ function generateDecks(numberOfTables, decksPerTable) {
         id: deckNumber,
         table_id: tableNumber,
         title: faker.hacker.noun(),
-        cards: generateCards(config.numberOfCards),
+        cards: generateCards(deckNumber, config.numberOfCards),
       };
       decks.push(deck);
     }

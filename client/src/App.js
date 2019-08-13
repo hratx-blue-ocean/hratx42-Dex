@@ -3,9 +3,9 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Landing from './components/Landing.js';
 import Dashboard from './components/Dashboard.js';
 import Profile from './components/Profile.js';
+
 import NavBar from './components/NavBar.js'
 import Table from './components/Table.js';
-import TableSettings from './components/TableSettings/TableSettings.js';
 // import './App.css';
 
 import global from '../utils/global'
@@ -14,10 +14,15 @@ export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userid: 0,
-      boards: []
+      userid: '',
+      boards: [],
+      flash: false,
+    };
+    this.api = `http://localhost:8000/api/example`;
+    this.flash=this.flash.bind(this)
+
   }
-}
+
 
 componentDidMount() {    
   global.flash = this.flash.bind(this)
@@ -35,13 +40,12 @@ flash(message, interval){
       <>
         <Router>
         <h1>Welcome to Blue Ocean!</h1>
-        <NavBar />
+        <NavBar userid={this.state.userid} />
           <Route path="/" exact component={ Landing } />
           <Route path="/dashboard" component={ Dashboard } />
           <Route path="/profile" component={ Profile } />
           <Route path="/table" component={ Table } />
         </Router>
-        <TableSettings />
       </>
     );
   }

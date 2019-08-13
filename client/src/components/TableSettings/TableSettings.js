@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Card, Button, Row, Col, Table, Form } from 'react-bootstrap';
 //import styles from './tableSettings.module.css';
 
-
 export default function TableSettings(props) {
   const [tableName, setTableName] = useState('');
   const [playerName, setPlayerName] = useState('');

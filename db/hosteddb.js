@@ -16,7 +16,7 @@ pgClient.connect((err) => {
 
 const db = async (id) => {
     const product = await pgClient.query(
-        `SELECT * FROM tables`
+        `SELECT * FROM dex_tables`
     );
     return product;
 }
