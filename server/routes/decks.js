@@ -1,15 +1,16 @@
 var express = require('express')
 var router = express.Router()
 const decksModel = require('../../db/models/decks');
-const authorization = require('../../db/models/authorization');
+const authorizationModel = require('../../db/models/authorization');
 const tryCatch = require('../utils/tryCatch');
 
 router.get('/', async (req, res)=>{
     //query string like ?tableId=123
     const {tableId} = req.query;
     const userId = req.user;
+    console.log(userId)
     tryCatch(async()=>{
-        const authorized = await authorization.user.ownsTable(userId, tableId)
+        const authorized = await authorizationModel.user.ownsTable(userId, tableId)
         if(authorized){
             //this is where the monster query goes
             const {rows: decks} = await decksModel.getByTableId(tableId);
@@ -39,7 +40,7 @@ router.put('/:id', async (req, res)=>{
     const tableId = deck.table_id;
     const userId = req.user;
     tryCatch(async()=>{
-        const authorized = await authorization.user.ownsTable(userId, tableId)
+        const authorized = await authorizationModel.user.ownsTable(userId, tableId)
         if(authorized){
             let result = await decksModel.put(deck)
             res.status(200).send(result)
@@ -54,7 +55,7 @@ router.delete('/:id', async (req, res)=>{
     const userId = req.user;
     tryCatch(async ()=>{
         const deck = await decksModel.get(id);
-        const authorized = await authorization.user.ownsTable(userId, deck.table_id)
+        const authorized = await authorizationModel.user.ownsTable(userId, deck.table_id)
         if(authorized){
             const result = await decksModel.delete(id);
             console.log(result)

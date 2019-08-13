@@ -12,3 +12,5 @@ const authorizationModel = {
         }
     }
 }
+
+module.exports = authorizationModel
