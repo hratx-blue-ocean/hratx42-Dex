@@ -1,6 +1,6 @@
 const pg = require('pg');
 require('dotenv').config();
-// console.log(require('dotenv').config());
+console.log(require('dotenv').config());
 const pgClient = new pg.Client({
     host: process.env.DB_HOST,
     port: 5432,
@@ -23,10 +23,15 @@ const db = async (id) => {
 
 const getUserInfoByEmail = async (email) => {
     const userInfo = await pgClient.query(`SELECT * FROM users WHERE email = '${email}';`)
-    console.log(userInfo.rows[0]);
     return userInfo;
 }
-// getUserInfoByEmail('ddd@aaa.com')
-// pgClient.query(`INSERT INTO Users VALUES (default, 'DJ', 1234, 'ddd@aaa.com')`)
 
-module.exports = { db, getUserInfoByEmail };
+const createNewUser = async ({name, hashedPassword, email}) => {
+    console.log('password saved to db = ', hashedPassword);
+    const userInfo = await pgClient.query(`INSERT INTO users VALUES (default, '${name}', '${hashedPassword}', '${email}');`)
+    return userInfo
+}
+// getUserInfoByEmail('ddd@aaa.com')
+// pgClient.query(`INSERT INTO Users VALUES (default, 'DUCKDUCKGO', 123, '123@123')`)
+
+module.exports = { db, getUserInfoByEmail, createNewUser };
