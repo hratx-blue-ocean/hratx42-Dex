@@ -24,6 +24,8 @@ export default class App extends Component {
         message: 'Default flash message for testing',
         variant: 'success'
       },
+
+      showTableModal: false
     };
     this.api = `http://localhost:8000/api/example`;
   }
@@ -46,6 +48,10 @@ login() {
 
 logOut(){
   this.setState({userId:''})
+}
+
+changeTableModal() {
+    this.setState({showTableModal: !this.state.showTableModal});
 }
 
   render() {
