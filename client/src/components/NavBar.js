@@ -1,6 +1,6 @@
-import React from "react";
+import React, {useState} from "react";
 import { Link } from "react-router-dom";
-import TableSettings from './TableSettings'
+import TableSettings from './TableSettings';
 import {
   Navbar,
   Button,
@@ -11,7 +11,6 @@ import {
 export default function NavBar(props) {
   return (
     <div>
-      <>
         <Navbar bg="light" expand="lg" >
           <Navbar.Brand href="#home" >
             <h2 style={{ marginLeft: "15px"  }}>Dex</h2>
@@ -20,8 +19,8 @@ export default function NavBar(props) {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto" />
             <Form style={{ marginRight: "25px" }}>
-              <Button variant="outline-primary" className="mr-sm-2" onClick={()=>TableSettings}>
-                <Link to={"./TableSettings"}><strong>+</strong></Link>
+              <Button variant="outline-primary" className="mr-sm-2" onClick={()=>props.changeTableModal()}>
+               <strong>+</strong>
               </Button>
             </Form>
             <Form style={{ marginRight: "25px" }}>
@@ -36,7 +35,7 @@ export default function NavBar(props) {
                 <NavDropdown.Item href="#action/3.3">table 2</NavDropdown.Item>
               <NavDropdown.Item href="#action/3.3">table 3</NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">
+              <NavDropdown.Item onClick = {()=>{}} href="#action/3.4">
                 <Link to={"./TableSettings"}>Add a table</Link>
               </NavDropdown.Item>
             </NavDropdown>
@@ -51,7 +50,7 @@ export default function NavBar(props) {
             </NavDropdown>
           </Navbar.Collapse>
         </Navbar>
-      </>
+      <TableSettings showModal = {props.showTableModal} changeTableModal = {props.changeTableModal} />
     </div>
   );
 }
