@@ -1,6 +1,6 @@
 var express = require('express')
 var router = express.Router()
-// const db = require('../../db/hosteddb');
+const db = require('../../db/hosteddb');
 
 router.get('/', (req, res)=>{
     //query string like ?userId=123
@@ -8,6 +8,11 @@ router.get('/', (req, res)=>{
     //if req.user
         //db.get tables where user_id = userId
     res.status(200).send(`Tables for user ${userId}`)
+})
+
+router.get('/table-master/:id', async (req, res) => {
+    const tableData = await getMasterTableData(req.query.id);
+    res.status(200).send(JSON.stringify(tableData))
 })
 
 router.post('/', (req, res)=>{
