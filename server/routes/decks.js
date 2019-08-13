@@ -5,9 +5,8 @@ const decksModel = require('../../db/models/decks');
 const authorizationModel = require('../../db/models/authorization');
 const tryCatch = require('../utils/tryCatch');
 
-router.get('/', async (req, res)=>{
-    //query string like ?tableId=123
-    const {tableId} = req.query;
+router.get('/:tableId', async (req, res)=>{
+    const {tableId} = req.params;
     const userId = req.user;
     console.log('userid', userId)
     tryCatch(async()=>{
@@ -25,7 +24,8 @@ router.get('/', async (req, res)=>{
 
 //dev endpoint
 router.get('/dev/:tableId', async (req, res) =>{
-    const decks = await decksModel.getByTableId(req.params.tableId)
+    const {tableId} = req.params;
+    const decks = await decksModel.getByTableId(tableId)
     res.status(200).json(decks) 
 })
 
