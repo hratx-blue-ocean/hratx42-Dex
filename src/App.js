@@ -40,7 +40,7 @@ flash(message, interval){
   }, interval)
 }
 
-  // dashboard onChange event functions
+  // dashboard onChange event and submit functions
   changeProfileName(e) {
     this.setState({ editProfileName: e.target.value });
   }
@@ -55,6 +55,13 @@ flash(message, interval){
 
   submitProfileChanges() {
     http.users.post(this.state.editProfileName, this.state.editProfileEmail, this.state.editProfilePassword)
+      .then(() => 
+        this.setState({ editProfileName: '' }),
+        this.setState({ editProfileEmail: ''}),
+        this.setState({ editProfilePassword: ''})
+      )
+      .catch(err => console.log('Error: ', err));
+
   }
 
   render() {
@@ -67,11 +74,18 @@ flash(message, interval){
           <Route 
             path="/dashboard"
             render={props => 
-              <Dashboard {...props} boards={this.state.boards}
-              changeProfileName={this.changeProfileName}
-              changeProfileEmail={this.changeProfileEmail}
-              changeProfilePassword={this.changeProfilePassword}
-              submitProfileChanges={this.submitProfileChanges}
+              <Dashboard {...props}
+              // state props
+                boards={this.state.boards}
+                editProfileName={this.state.editProfileName}
+                editProfileEmail={this.state.editProfileEmail}
+                editProfilePassword={this.state.editProfilePassword}
+
+              // functions
+                changeProfileName={this.changeProfileName}
+                changeProfileEmail={this.changeProfileEmail}
+                changeProfilePassword={this.changeProfilePassword}
+                submitProfileChanges={this.submitProfileChanges}
             />}
             
            />

@@ -11,17 +11,17 @@ export default function Dashboard(props) {
         <form>
           <div className="dashboardNameInput">
             <h2>name</h2>
-            <input type="text" className="name" placeholder="name" onChange={e => {props.changeProfileName(e)}} />
+            <input type="text" className="name" placeholder="name" onChange={e => {props.changeProfileName(e)}} value={props.editProfileName} />
           </div>
 
           <div className="dashboardEmailInput">
             <h2>email</h2>
-            <input type="email" className="email" placeholder="email" onChange={e => {props.changeProfileEmail(e)}} />
+            <input type="email" className="email" placeholder="email" onChange={e => {props.changeProfileEmail(e)}} value={props.editProfileEmail} />
           </div>
 
           <div className="dashboardPasswordInput">
             <h2>password</h2>
-            <input type="password" className="name" placeholder="password" onChange={e => {props.changeProfilePassword(e)}}/>
+            <input type="password" className="name" placeholder="password" onChange={e => {props.changeProfilePassword(e)}} value={props.editProfilePassword} />
           </div>
           <button type="submit" className="dashboardFormBtn" onClick={() => {props.submitProfileChanges()}}>save changes</button>
         </form>
