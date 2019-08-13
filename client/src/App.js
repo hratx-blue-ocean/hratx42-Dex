@@ -17,16 +17,15 @@ export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userid: 'fdf',
+      userid: 'asd',
       boards: [],
-<<<<<<< HEAD
-=======
       flash: {
         show: false,
         message: 'Default flash message for testing',
         variant: 'success'
       },
->>>>>>> 3633b121d97976159c5ccddcbd4e511c239b06eb
+
+      showTableModal: false
     };
     this.api = `http://localhost:8000/api/example`;
   }
@@ -47,28 +46,20 @@ logOut(){
   this.setState({userid:''})
 }
 
+changeTableModal() {
+    this.setState({showTableModal: !this.state.showTableModal});
+}
+
   render() {
     return (
       <>
         <Router>
-        <h1>Welcome to Blue Ocean!</h1>
-<<<<<<< HEAD
-        <NavBar userid={this.state.userid} />
           <Route path="/" exact component={ Landing } />
-          <Route 
-            path="/boards"
-            render={props => <Dashboard {...props} boards={this.state.boards} />}
-           />
-          <Route path="/profile" component={ Profile } />
-          <Route path="/table" component={ Table } />
-          <Dashboard boards={this.state.boards} />
-=======
-        {this.state.userid ===''?<Landing/>:<NavBar logOut ={this.logOut.bind(this)}/>}
+        {this.state.userid ===''?<Landing/>:<NavBar showTableModal = {this.state.showTableModal} changeTableModal = {this.changeTableModal.bind(this)} logOut ={this.logOut.bind(this)}/>}
           <Route path="/dashboard" component={ Dashboard } />
           <Route path="/profile" component={ Profile } />
           <Route path="/table" component={ Table } />
           <Route path="/TableSettings" component={ TableSettings } />
->>>>>>> 3633b121d97976159c5ccddcbd4e511c239b06eb
         </Router>
         <Flash flashData={this.state.flash}/>
       </>
