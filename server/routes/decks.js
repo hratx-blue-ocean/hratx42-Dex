@@ -21,12 +21,18 @@ router.get('/', async (req, res)=>{
     }, res)
 })
 
-router.get('/:id/cards', (req, res) =>{
-    db.getCardsByDeckId(req.params.id)
-    .then(results => results.rows)
-    .then(rows => res.status(200).json(rows))
-    .catch(err => console.error(err))
+//dev endpoint
+router.get('/dev/:tableId', async (req, res) =>{
+    const decks = await decksModel.getByTableId(req.params.tableId)
+    res.status(200).json(decks) 
 })
+
+// router.get('/:id/cards', (req, res) =>{
+//     db.getCardsByDeckId(req.params.id)
+//     .then(results => results.rows)
+//     .then(rows => res.status(200).json(rows))
+//     .catch(err => console.error(err))
+// })
 
 router.post('/', (req, res)=>{
     const deck = req.body;
