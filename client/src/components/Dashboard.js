@@ -1,5 +1,5 @@
 import React from 'react';
-import '../modules/Dashboard.css';
+import '../dashboardStyles/dashboardStyle.css';
 
 export default function Dashboard(props) {
   return (
@@ -11,19 +11,19 @@ export default function Dashboard(props) {
         <form>
           <div className="dashboardNameInput">
             <h2>name</h2>
-            <input type="text" className="name" placeholder="name" />
+            <input type="text" className="name" placeholder="name" onChange={e => {props.changeProfileName(e)}} value={props.editProfileName} />
           </div>
 
           <div className="dashboardEmailInput">
             <h2>email</h2>
-            <input type="email" className="email" placeholder="email" />
+            <input type="email" className="email" placeholder="email" onChange={e => {props.changeProfileEmail(e)}} value={props.editProfileEmail} />
           </div>
 
           <div className="dashboardPasswordInput">
             <h2>password</h2>
-            <input type="text" className="name" placeholder="password" />
+            <input type="password" className="name" placeholder="password" onChange={e => {props.changeProfilePassword(e)}} value={props.editProfilePassword} />
           </div>
-          <button type="submit" className="dashboardFormBtn">save changes</button>
+          <button type="submit" className="dashboardFormBtn" onClick={() => {props.submitProfileChanges()}}>save changes</button>
         </form>
       </div>
 
