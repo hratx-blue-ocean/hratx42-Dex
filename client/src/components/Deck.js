@@ -1,6 +1,7 @@
 import React from 'react';
-import { Card, Button } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import CardThumbnail from './CardThumbnails'
+import CardModal from './CardModal'
 
 export default function Deck(props) {
   return (
@@ -18,7 +19,7 @@ export default function Deck(props) {
             <div style = {{paddingLeft: '20px'}}></div>
             <CardThumbnail />
             <div style = {{paddingLeft: '20px'}}></div>
-            <Button style = {{height: '75px', width: '75px'}} variant='success'>Add New Card</Button>
+            <CardModal />
           </Card.Body>
         </Card>
       </div>
