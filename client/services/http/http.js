@@ -1,11 +1,6 @@
-<<<<<<< HEAD
-import axios from 'axios'
-import global from '../../utils/global';
-=======
 import axios from 'axios';
 import global from '../../utils/global';
 import auth from '../../services/auth'
->>>>>>> 9a3105968129e6224bc05d52d9a8aa3ad5b87297
 
 const tryAxios = async function(endpoint, method, payload){
     try {
@@ -29,15 +24,9 @@ const http ={
         }
     },
     auth: {
-<<<<<<< HEAD
-        async post(email, password){
-            const jwt = await tryAxios('/api/auth', 'post', {email, password})
-            //do something with jwt
-=======
         post(email, password){
             const jwt = tryAxios('/api/auth', 'post', {email, password})
             auth.login(jwt)
->>>>>>> 9a3105968129e6224bc05d52d9a8aa3ad5b87297
             window.location = '/dashboard'
         },
     },
