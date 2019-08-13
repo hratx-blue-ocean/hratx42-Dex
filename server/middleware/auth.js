@@ -8,8 +8,10 @@ const db = require('../../db/hosteddb.js');
 
 
 const auth = (req, res, next) => {
+  console.log(req.body)
   const { email, password } = req.body;
-  
+  console.log(email);
+  console.log(password);
   //get user email
   db.getUserLoginInfo(email)
   //if user email not found send error message
