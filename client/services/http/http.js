@@ -1,11 +1,12 @@
 import axios from 'axios'
+import global from '../../utils/global';
 
 const tryAxios = async function(endpoint, method, payload){
     try {
         const response = await axios[method](endpoint,payload)
         return response.data
       } catch (error) {
-        console.error(error)
+        global.flash(error.message, 2000)
       }
 }
 
@@ -22,10 +23,10 @@ const http ={
         }
     },
     auth: {
-        post(email, password){
-            const jwt = tryAxios('/api/auth', 'post', {email, password})
+        async post(email, password){
+            const jwt = await tryAxios('/api/auth', 'post', {email, password})
             //do something with jwt
-            //redirect
+            window.location = '/dashboard'
         },
     },
     tables: {
