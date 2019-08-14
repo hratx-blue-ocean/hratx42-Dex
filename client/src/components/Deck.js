@@ -30,11 +30,12 @@ export default function Deck(props) {
             {cards.map((singleCard) => 
               <div key = {Math.random()}>
                 <div style = {{paddingLeft: '160px'}}></div>
-                <CardThumbnail singleCard = {singleCard} />
+                <CardThumbnail singleCard = {singleCard} deckTitle={props.deck.title} 
+                deckNames={props.deckNames}/>
               </div>
              )}
               <div style = {{paddingLeft: '20px'}}></div>
-            <NewCardModal showMe={show}  closeModal={handleClose.bind(this)}/>
+            <NewCardModal showMe={show} deckNames={props.deckNames} closeModal={handleClose.bind(this)}/>
             <Button variant="outline-success" 
             onClick={()=> {
               handleShow()

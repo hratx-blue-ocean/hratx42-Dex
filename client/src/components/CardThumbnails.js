@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import NewCardModal from './NewCardModal'
+import EditCardModal from './EditCardModal'
 import { Card, Button, Col, Row } from 'react-bootstrap';
 
 export default function CardThumbnails(props) {
@@ -8,9 +8,11 @@ export default function CardThumbnails(props) {
   const handleShow = () => setShow(true);
   const handleClose = () => setShow(false)
 
+
   return (
     <div style = {{width: '150px', height: '150px'}}>
-      <NewCardModal showMe={show} card={props.singleCard} closeModal={handleClose.bind(this)}/>
+      
+      <EditCardModal showMe={show} deckNames={props.deckNames} deckTitle={props.deckTitle} card={props.singleCard} closeModal={handleClose.bind(this)}/>
       <Card onClick={()=> {
         setShow(true)
       }}style = {{width: '150px', height: '150px'}} className = 'CardThumbnailsSingleCard'>
