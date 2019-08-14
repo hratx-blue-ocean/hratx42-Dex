@@ -1,7 +1,7 @@
 const path = require('path');
 
 require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
-
+console.log(require('dotenv').config({ path: path.resolve(__dirname, '../.env') }))
 const pg = require('pg');
 
 const pgClient = new pg.Pool({
