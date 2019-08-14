@@ -73,7 +73,7 @@ export default class App extends Component {
   async getTables() {
     const userId = auth.getUser();
     if (userId) {
-      const tables = http.tables.get(userId);
+      const tables = await http.tables.get(userId);
       this.setState({ tables });
     }
   }
