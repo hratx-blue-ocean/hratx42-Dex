@@ -19,14 +19,13 @@ router.get('/:id', (req, res) => {
 })
 
 router.post('/', (req, res, next) => {
-
     const { email, password, name } = req.body;
     //post user to db if she doesn't already exist
-    console.log(req.body)
+    console.log('creating user', req.body)
     db.getUserInfoByEmail(email)
         .then((result) => {
             if (result.rowCount === 0) {     //if email does not exist create user
-                bcrypt.hash(password, saltRounds, (hashedPassword) => {
+                bcrypt.hash(password, saltRounds).then((hashedPassword) => {
                     db.createNewUser({ name, hashedPassword, email })
                         .then((userCreated) => {
                             next();
