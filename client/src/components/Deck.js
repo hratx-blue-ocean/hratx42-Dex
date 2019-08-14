@@ -59,7 +59,11 @@ export default function Deck(props) {
               </div>
              )}
               <div style = {{paddingLeft: '20px'}}></div>
+<<<<<<< HEAD
             <NewCardModal showMe={show}  deckNames={props.deckNames} closeModal={handleClose.bind(this)}/>
+=======
+            <NewCardModal newCardData={props.newCardData} key={Math.random()} showMe={show}  deckNames={props.deckNames} closeModal={handleClose.bind(this)}/>
+>>>>>>> bcfecec224a8965602b1f3b08b46a607a110822f
             <Button variant="outline-success" onClick={()=> handleShow()}>Add New Card</Button>
           </Card.Body>
         </Card>

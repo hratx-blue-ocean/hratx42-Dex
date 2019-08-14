@@ -8,6 +8,7 @@ export default class Table extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      labels: [{}],
       deckNames: [],
       decks: [],
       cards: [],
@@ -20,6 +21,7 @@ export default class Table extends Component {
       }
     };
     this.handleModal = this.handleModal.bind(this);
+    this.newCardDataCollector=this.newCardDataCollector.bind(this)
   }
   componentDidMount() {
     http.decks.get(1)
@@ -45,6 +47,18 @@ export default class Table extends Component {
     //   this.setState({decks: res})
     // })
   }
+
+  newCardDataCollector (eff,imp,title,players,tag,dueDate,deck,desc) {
+    console.log(eff)
+    console.log(imp)
+    console.log(title)
+    console.log(players)
+    console.log(tag)
+    // console.log(dueDate)
+    // console.log(deck)
+    // console.log(desc)
+  }
+  
 
   saveTable(tableName, descName) {
     //create/edit table
@@ -134,12 +148,17 @@ export default class Table extends Component {
         {/* for each deck, create a deck */}
         {this.state.decks.length > 0 ? (<>
           {this.state.decks.map((deck) => <div key = {deck.id}>
+<<<<<<< HEAD
               <Deck 
                 filterBy = {this.state.filterBy} 
                 deck = {deck} 
                 deckNames={this.state.deckNames}
                 deleteDeck = {this.deleteDeck.bind(this)}
                 editDeck = {this.editDeck.bind(this)} />
+=======
+              <Deck filterBy = {this.state.filterBy} deck = {deck} 
+              deckNames={this.state.deckNames} newCardData={this.newCardDataCollector}/>
+>>>>>>> bcfecec224a8965602b1f3b08b46a607a110822f
               <div style = {{paddingBottom: '8px'}}></div>
             </div>)
           }
