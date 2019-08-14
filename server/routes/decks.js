@@ -8,10 +8,8 @@ const tryCatch = require('../utils/tryCatch');
 router.get('/table/:tableId', async (req, res)=>{
     const {tableId} = req.params;
     const userId = req.user;
-    console.log('userid', userId) 
     tryCatch(async()=>{
-        let authorized = await authorizationModel.user.ownsTable(userId, tableId)
-        authorized = true;
+        const authorized = await authorizationModel.user.ownsTable(userId, tableId)
         if(authorized){
             //this is the monster query
             const decks = await decksModel.getCompoundData(tableId);
@@ -41,8 +39,7 @@ router.put('/:id', async (req, res)=>{
     const tableId = deck.table_id;
     const userId = req.user;
     tryCatch(async()=>{
-        let authorized = await authorizationModel.user.ownsTable(userId, tableId);
-        authorized = true;
+        const authorized = await authorizationModel.user.ownsTable(userId, tableId);
         if(authorized){
             let result = await decksModel.put(deck)
             res.status(200).send(result)
@@ -57,8 +54,7 @@ router.delete('/:id', async (req, res)=>{
     const userId = req.user;
     tryCatch(async ()=>{
         const deck = await decksModel.get(id);
-        let authorized = await authorizationModel.user.ownsTable(userId, deck.table_id)
-        authorized = true;
+        const authorized = await authorizationModel.user.ownsTable(userId, deck.table_id)
         if(authorized){
             const result = await decksModel.delete(id);
             console.log(result)

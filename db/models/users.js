@@ -1,6 +1,6 @@
 const pgClient = require('../hosteddb');
 
-const db = {
+const usersModel = {
     getUserByID: async (id) => {
         // update to include querying profiles table with INNER JOIN
         const user = await pgClient.query(`SELECT name, email FROM users WHERE id = ${id};`);
@@ -25,4 +25,4 @@ const db = {
     }
 }
 
-module.exports = db;
+module.exports = usersModel;

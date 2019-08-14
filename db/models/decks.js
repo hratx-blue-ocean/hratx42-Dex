@@ -15,13 +15,10 @@ const decksModel = {
     },
     async getCompoundData(id){
         const {rows: decks} = await decksModel.getByTableId(id)
-
         const decksWithCards = await Promise.all(decks.map(async deck => {
             deck.cards = await cardsModel.getCardsByDeckId(deck.id);
-            console.log('deck from within map', deck);
                 return deck;
             }))
-            console.log("DEcks with cards", decks)
         return decksWithCards;
     },
     async post(deck){
