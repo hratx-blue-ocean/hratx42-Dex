@@ -18,10 +18,8 @@ function getJwt() {
 function userIsLoggedIn() {
   const jwt = localStorage.getItem(tokenKey);
   if (jwt) {
-    console.log("user is logged in", jwt)
     return true;
   } else {
-    console.log("user is not logged in", jwt)
     return false;
   }
 }
