@@ -1,20 +1,19 @@
-import React, {useState} from 'react';
-import { Navbar, Nav, Form, FormControl, Button } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Navbar, Nav, Image, Form, FormControl, Button } from 'react-bootstrap';
 import http from '../../services/http/http.js';
 
 export default function Login(props) {
-
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const handleSubmit = () => {
-    http.auth.post(email, password).then((loggedIn)=> {
+    http.auth.post(email, password).then(loggedIn => {
       console.log('singin data', loggedIn);
-      if(loggedIn) {
+      if (loggedIn) {
         props.login();
       }
-    })
-  }
+    });
+  };
 
   return (
     <div>
@@ -28,7 +27,7 @@ export default function Login(props) {
           <Form
             style={{ marginRight: '10px', marginBottom: '24px' }}
             onChange={e => {
-              setEmail(e.target.value)
+              setEmail(e.target.value);
               // capture email address
             }}
           >
@@ -38,7 +37,7 @@ export default function Login(props) {
           <Form
             style={{ marginRight: '10px' }}
             onChange={e => {
-              setPassword(e.target.value)
+              setPassword(e.target.value);
               // capture password
             }}
           >
@@ -52,7 +51,7 @@ export default function Login(props) {
               className='mr-sm-2'
               onClick={() => {
                 console.log('clicked log in');
-                handleSubmit()
+                handleSubmit();
                 // send get request for user information to render dashboard
               }}
             >
