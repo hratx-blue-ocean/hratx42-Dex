@@ -17,29 +17,38 @@ const auth = (req, res, next) => {
         message: "Unexpected Error occurred please try later"
       });
     })
-    .then(async (result) => {
-      //if user email not found send error message
+    //if user email found, compare password
+    .then((result) => {
       if(result.rowCount === 0) {
         return res.status(404).json({
           success: false,
-          message: "Invalid credentials"
+          message: "Invalid Username"
         });
-      }
-      //if user email found, compare password
-      let user = result.rows[0];
-      const match = await bcrypt.compare(password, user.password);
-      if(match) {
-        let token = jwt.sign({ userId: user.id }, config.secret, { expiresIn: '7 days' });
-        // req.user = token;
-        return res.header("x-access-token", token).status(201).json({
-          success: true, 
-          message: "Authentication Successful", 
-          token
-        })
       } else {
-        return res.status(403).json({
-          success: false,
-          message: "Invalid credentials"
+        let user = result.rows[0];
+        bcrypt.compare(password, user.password)
+        .then((match) => {
+          if(match) {
+            let token = jwt.sign({ userId: user.id }, config.secret, { expiresIn: '7 days' });
+            // req.user = token;
+            res.header("x-access-token", token).status(201).json({
+              success: true, 
+              message: "Authentication Successful", 
+              token
+            })
+          } else {
+            res.status(403).json({
+              success: false,
+              message: "Password is incorrect"
+            })
+          }
+        })
+        .catch((error) => {
+          console.log('error comparing password', error);
+          res.status(403).json({
+            success: false,
+            message: "Unexpected Error occurred please try later"
+          });
         })
       }
     })
