@@ -32,6 +32,22 @@ router.post('/', (req, res) => {
   res.status(200).send(JSON.stringify(table));
 });
 
+router.put('/:id', (req, res)=>{
+    const table = req.body;
+    const id = req.params.id
+    table.id=id
+    //if req.user && user owns table
+        //update table
+    res.status(200).send(JSON.stringify(table));
+})
+
+router.delete('/:id', (req, res) => {
+  const id = req.params.id;
+  //if req.user && user owns table
+  //delete table
+  res.status(200).send(`Deleted table ${id}`);
+});
+
 router.post('/invite', async (req, res) => {
     const userEmail = req.body.email;
     const tableId = req.body.tableId;
@@ -56,21 +72,5 @@ router.post('/kick', async (req, res) => {
     const tableId = req.body.tableId;
     
 })
-
-router.put('/:id', (req, res)=>{
-    const table = req.body;
-    const id = req.params.id
-    table.id=id
-    //if req.user && user owns table
-        //update table
-    res.status(200).send(JSON.stringify(table));
-})
-
-router.delete('/:id', (req, res) => {
-  const id = req.params.id;
-  //if req.user && user owns table
-  //delete table
-  res.status(200).send(`Deleted table ${id}`);
-});
 
 module.exports = router;
