@@ -16,7 +16,6 @@ router.get('/:id', (req, res) => {
     .catch((err) => {
         res.status(402).send("Unexpected error occurred @routes/users.js in getting user")
     });
-
 })
 
 router.post('/', (req, res, next) => {
