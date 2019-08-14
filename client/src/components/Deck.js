@@ -21,7 +21,7 @@ export default function Deck(props) {
             <Card.Header>{props.deck.title}</Card.Header>
             <Card.Body className = 'row'>
             {cards.map((singleCard) => 
-              <div key = {singleCard.id}>
+              <div key = {Math.random()}>
                 <div style = {{paddingLeft: '160px'}}></div>
                 <CardThumbnail singleCard = {singleCard} />
               </div>
