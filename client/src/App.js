@@ -4,12 +4,11 @@ import Landing from './components/Landing.js';
 import Dashboard from './components/Dashboard.js';
 import Profile from './components/Profile.js';
 import auth from '../services/auth.js';
-import NavBar from './components/NavBar.js'
+import NavBar from './components/NavBar.js';
 import Table from './components/Table.js';
-import Flash from './components/Flash'
+import Flash from './components/Flash';
 
-
-import global from '../utils/global'
+import global from '../utils/global';
 import tables from '../dummyData/tables.js';
 import TableSettings from './components/TableSettings.js';
 
@@ -30,45 +29,50 @@ export default class App extends Component {
     this.api = `http://localhost:8000/api/example`;
   }
 
-
-componentDidMount() {    
-  global.flash = this.flash.bind(this)
-  if(localStorage.getItem('token')) {
-    this.login();
+  componentDidMount() {
+    global.flash = this.flash.bind(this);
+    if (localStorage.getItem('token')) {
+      this.login();
+    }
   }
-}
 
-flash(message, variant, interval){
-  this.setState({flash: {show: true, message, variant}});
-  setTimeout(()=>{
-      this.setState({flash:{show: false, message, variant}})
-  }, interval)
-}
+  flash(message, variant, interval) {
+    this.setState({ flash: { show: true, message, variant } });
+    setTimeout(() => {
+      this.setState({ flash: { show: false, message, variant } });
+    }, interval);
+  }
 
-login() {
-  auth.setUser(this);
-}
+  login() {
+    auth.setUser(this);
+  }
 
-logOut(){
-  this.setState({userId:''})
-}
+  logOut() {
+    this.setState({ userId: '' });
+  }
 
-changeTableModal() {
-    this.setState({showTableModal: !this.state.showTableModal});
-}
+  changeTableModal() {
+    this.setState({ showTableModal: !this.state.showTableModal });
+  }
 
   render() {
     return (
       <>
         <Router>
-        <h1>Welcome to Blue Ocean!</h1>
-        {this.state.userId ===''?<Landing login={this.login.bind(this)}/>:<NavBar login={this.login.bind(this)} logOut ={this.logOut.bind(this)}/>}
-          <Route path="/dashboard" component={ Dashboard } />
-          <Route path="/profile" component={ Profile } />
-          <Route path="/table" component={ Table } />
-          <Route path="/TableSettings" component={ TableSettings } />
+          {this.state.userId === '' ? (
+            <Landing login={this.login.bind(this)} />
+          ) : (
+            <NavBar
+              login={this.login.bind(this)}
+              logOut={this.logOut.bind(this)}
+            />
+          )}
+          <Route path='/dashboard' component={Dashboard} />
+          <Route path='/profile' component={Profile} />
+          <Route path='/table' component={Table} />
+          <Route path='/TableSettings' component={TableSettings} />
         </Router>
-        <Flash flashData={this.state.flash}/>
+        <Flash flashData={this.state.flash} />
       </>
     );
   }
