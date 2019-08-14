@@ -10,7 +10,6 @@ const tryCatch = require('../utils/tryCatch');
 router.get('/:id', (req, res) => {
   const cardId = req.params.id;
   const userId = req.user;
-  console.log('get card', userId);
   tryCatch(async () => {
     const authorized = await authorizationModel.user.ownsCard(userId, cardId);
     if (authorized) {
@@ -96,6 +95,31 @@ router.delete('/:cardId/member/:userId', async (req, res) => {
       res
         .status(200)
         .json({ ok: `removed user ${userId} from card ${cardId}` });
+    } else {
+      res.status(404).json({ error: 'not found' });
+    }
+  }, res);
+});
+
+router.post('/:cardId/label', async (req, res) => {
+  tryCatch(async () => {
+    const cardId = req.params.cardId;
+    const labelId = req.body.labelId;
+    const result = await cardsModel.addLabelToCard(cardId, labelId);
+    res.status(200).json({ ok: `added label ${labelId} to card ${cardId}` });
+  }, res);
+});
+
+router.delete('/:cardId/label/:labelId', async (req, res) => {
+  tryCatch(async () => {
+    const cardId = req.params.cardId;
+    const labelId = req.params.labelId;
+    let result = await cardsModel.removeLabelFromCard(cardId, labelId);
+    await console.log(result);
+    if (result) {
+      res
+        .status(200)
+        .json({ ok: `removed label ${labelId} from card ${cardId}` });
     } else {
       res.status(404).json({ error: 'not found' });
     }

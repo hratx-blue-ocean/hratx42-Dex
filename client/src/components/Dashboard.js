@@ -32,9 +32,11 @@ export default function Dashboard(props) {
           {props.tables.map(table =>
             <ul>
                 <li>
+                  <a href={`http://localhost:8000/table`}>
                   <div className="newTable">
-                    {table}
+                    <h4>{table.name}</h4>
                   </div>
+                  </a>
                 </li>
             </ul>
           )}
