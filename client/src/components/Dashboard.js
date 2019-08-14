@@ -1,5 +1,8 @@
 import React from 'react';
+<<<<<<< HEAD
 import '../dashboardStyles/dashboardStyle.css';
+=======
+>>>>>>> 3531f1497f6777657533a4bc7103c58a685fd55f
 
 export default function Dashboard(props) {
   return (

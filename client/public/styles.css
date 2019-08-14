@@ -21,10 +21,39 @@ code {
 }
 
 .CardThumbnails_userIcon {
-  height: 35px;
-  width: 35px;
   border-radius: 50%;
 }
+<<<<<<< HEAD
+=======
+
+.flash-container {
+  position: fixed;
+  z-index: 100;
+  top: 40%;
+  left: 25%;
+  width: 50%;
+  text-align: center;
+  font-size: 2rem;
+}
+
+.ControlsSearchItems {
+  position: absolute;
+  width: 500px;
+  top: 50px;
+  left: 65px;
+  border: 1px solid black;
+  z-index: 1;
+  background-color: #eee;
+}
+
+.ControlsSearchItem:hover {
+  background-color: #CDCDCD;
+}
+
+.CardThumbnailsSingleCard:hover {
+  background-color: #CDCDCD;
+}
+>>>>>>> 3531f1497f6777657533a4bc7103c58a685fd55f
 /* BEGIN DASHBOARD STYLES */
 /* dashboard main container div */
 .dashboardContainer {
