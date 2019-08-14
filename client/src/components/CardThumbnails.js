@@ -24,8 +24,9 @@ export default function CardThumbnails(props) {
         </Row>
           <div style = {{fontSize: '10px', paddingLeft: '5px'}}>{props.singleCard.card_title}</div>
         <div>
-          <Button className = 'CardThumbnails_userIcon float-right' variant='secondary'>GB</Button>
-          <Button className = 'CardThumbnails_userIcon float-right' variant='secondary'>JI</Button>
+          {props.singleCard.cards_members.map((member) => 
+          <Button key = {Math.random()} className = 'CardThumbnails_userIcon float-right' variant='secondary'>{member.member_name.substring(0,2)}</Button>
+          )}
         </div>
       </Card>
     </div>

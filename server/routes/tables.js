@@ -32,17 +32,6 @@ router.post('/', (req, res) => {
   res.status(200).send(JSON.stringify(table));
 });
 
-<<<<<<< HEAD
-router.post('/', async (req, res) => {
-  const userEmail = req.body.email;
-  const { rows: dbResults } = await db.getUserInfoByEmail(userEmail);
-  if (dbResults[0]) {
-    res.status(200).json({ ok: 'found user' });
-  } else {
-    res.status(404).json({ bad: "couldn't find user" });
-  }
-});
-=======
 router.post('/invite', async (req, res) => {
     const userEmail = req.body.email;
     const tableId = req.body.tableId;
@@ -61,7 +50,6 @@ router.post('/invite', async (req, res) => {
         res.status(500).send({message: "Internal server error"})
     }
 })
->>>>>>> b4a06b7ac8d416de5e6ae8e2b7c2537e4e123d87
 
 router.put('/:id', (req, res) => {
   const table = req.body;
