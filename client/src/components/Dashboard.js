@@ -1,40 +1,39 @@
 import React from 'react';
-// import styles from '../modules/dashboard.css';
 
 export default function Dashboard(props) {
   return (
     // test
-    <div className={styles.dashboardContainer}>
+    <div className="dashboardContainer">
       {/* edit profile area */}
-      <div className={styles.dashboardProfileForm} >
+      <div className="dashboardProfileForm" >
         <h2>edit profile</h2>
         <form>
-          <div className={styles.dashboardNameInput}>
+          <div className="dashboardNameInput">
             <h2>name</h2>
-            <input type="text" className="name" placeholder="name" />
+            <input type="text" className="name" placeholder="name" onChange={e => {props.changeProfileName(e)}} value={props.editProfileName} />
           </div>
 
-          <div className={styles.dashboardEmailInput}>
+          <div className="dashboardEmailInput">
             <h2>email</h2>
-            <input type="email" className="email" placeholder="email" />
+            <input type="email" className="email" placeholder="email" onChange={e => {props.changeProfileEmail(e)}} value={props.editProfileEmail} />
           </div>
 
-          <div className={styles.dashboardPasswordInput}>
+          <div className="dashboardPasswordInput">
             <h2>password</h2>
-            <input type="text" className="name" placeholder="password" />
+            <input type="password" className="name" placeholder="password" onChange={e => {props.changeProfilePassword(e)}} value={props.editProfilePassword} />
           </div>
-          <button type="submit" className={styles.dashboardFormBtn}>save changes</button>
+          <button type="submit" className="dashboardFormBtn" onClick={() => {props.submitProfileChanges()}}>save changes</button>
         </form>
       </div>
 
       {/* tables */}
-      <div className={styles.dashboardTables}>
+      <div className="dashboardTables">
         <h2>your tables</h2>
-        <div className={styles.dashboardTablesContainer}>
+        <div className="dashboardTablesContainer">
           {props.boards.map(board =>
             <ul>
                 <li>
-                  <div className={styles.newTable}>
+                  <div className="newTable">
                     {board}
                   </div>
                 </li>
