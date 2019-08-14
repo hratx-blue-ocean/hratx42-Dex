@@ -96,7 +96,7 @@ submitProfileChanges() {
       <>
         <Router>
 
-        {this.state.userId ===''?<Landing login={this.login.bind(this)}/>:<NavBar changeTableModal={this.changeTableModal.bind(this)} logOut ={this.logOut.bind(this)}/>}
+        {this.state.userId ===''?<Landing login={this.login.bind(this)}/>:<NavBar  changeTableModal={this.changeTableModal.bind(this)} logOut ={this.logOut.bind(this)}/>}
         <Route 
             path="/dashboard"
             render={props => 
