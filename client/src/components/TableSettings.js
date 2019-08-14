@@ -7,7 +7,7 @@ export default function TableSettings(props) {
   const [playerName, setPlayerName] = useState('');
   const [descName, setDescName] = useState('');
   return (
-    <Modal style = {{width: '650px',height: '600px'}} className = 'container' show={props.showModal}>
+    <Modal style = {{width: '650px',height: '600px'}} className = 'container' show={props.showTableModal}>
       <div >
         <Card>
           <div>
