@@ -23,7 +23,7 @@ export default class Table extends Component {
     this.handleModal = this.handleModal.bind(this);
   }
   componentDidMount() {
-    axios.get('/api/decks/1')
+    axios.get('/api/decks/table/1')
     .then((response) => {
       console.log(response)
     })

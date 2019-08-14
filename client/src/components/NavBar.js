@@ -1,13 +1,7 @@
-import React, {useState} from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import TableSettings from './TableSettings';
-import {
-  Navbar,
-  Button,
-  NavDropdown,
-  Nav,
-  Form,
-} from "react-bootstrap";
+import { Navbar,Button, NavDropdown, Nav, Form } from "react-bootstrap";
 export default function NavBar(props) {
   return (
     <div>
