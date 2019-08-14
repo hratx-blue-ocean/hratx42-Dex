@@ -26,10 +26,11 @@ router.get('/:id/users', async (req, res) => {
 });
 
 router.post('/', (req, res) => {
-  const table = req.body;
-  //if req.user
-  //post table
-  res.status(200).send(JSON.stringify(table));
+  tryCatch(async () => {
+    const tableName = req.body.name;
+    const table = await tablesModel.create(tableName);
+    res.status(200).json(table);
+  }, res)
 });
 
 router.put('/:id', (req, res)=>{
