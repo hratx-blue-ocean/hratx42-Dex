@@ -1,9 +1,6 @@
-const app = require('./server');
-const http = require('http');
 const path = require('path');
 const pgClient = require('../db/hosteddb.js');
-const express = require('express');
-const server = require('http').createServer(app);
+const server = require('./bin/www');
 const io = require('socket.io')(server);
 
 const sockerDriver = () =>{
@@ -40,4 +37,16 @@ const sockerDriver = () =>{
   await pgClient.query('LISTEN insert_table_member');
   await pgClient.query('LISTEN delete_table_member');
 
+  const socketByTable = io.of('/tableSocket/')
+  socketByTable.on('connection', async socket=>{
+    console.log('socket connected');
+
+    socket.on('table', function(table) {
+      socket.join(table);
+    });
+
+    socket.on('add_card', async data => {
+
+    });
+  })
 }
