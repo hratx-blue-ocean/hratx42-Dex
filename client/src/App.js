@@ -22,7 +22,7 @@ export default class App extends Component {
     super(props);
     this.state = {
       userId: '',
-      boards: [],
+      tables: [],
       // dashboard edit profile form
       profile: {
         editName: '',
@@ -108,7 +108,7 @@ submitProfileChanges() {
             render={props => 
               <Dashboard {...props}
               // state props
-                boards={this.state.boards}
+                tables={this.state.tables}
                 editProfileName={this.state.editProfileName}
                 editProfileEmail={this.state.editProfileEmail}
                 editProfilePassword={this.state.editProfilePassword}
