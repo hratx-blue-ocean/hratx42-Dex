@@ -4,9 +4,8 @@ const usersModel = {
   async getUserByID(id) {
     // update to include querying profiles table with INNER JOIN
     const query = 'SELECT name, email FROM users WHERE id = $1;';
-    const {rows: user} = await pgClient.query(query, [id]);
-    await console.log('got user:', user);
-    return user[0];
+    const {rows: users} = await pgClient.query(query, [id]);
+    return users[0];
   },
   async getUsersByTableId(tableId) {
     try {
