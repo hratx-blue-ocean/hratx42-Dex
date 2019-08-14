@@ -8,6 +8,7 @@ export default class Table extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      deckNames: [],
       decks: [],
       cards: [],
       users: [],
@@ -24,8 +25,17 @@ export default class Table extends Component {
   componentDidMount() {
     axios.get('/api/decks/table/1')
     .then((response) => {
-      console.log(response)
+
       this.setState({decks: response.data})
+      console.log(response)
+    })
+    //populated deckname for tickets
+    .then(() =>{
+      let deckHolder= []
+      this.state.decks.forEach(deck =>{
+        deckHolder.push({id: deck.id, title: deck.title})
+      })
+      this.setState({deckNames: deckHolder})
     })
     // mockHttp.getDecks(0)
     // .then((res) => {
@@ -44,6 +54,7 @@ export default class Table extends Component {
   searchClick(card) {
 
   }
+
 
   changeFilter(e) {
     if (this.state.filterBy === e.target.innerHTML){
@@ -104,7 +115,8 @@ export default class Table extends Component {
         {/* for each deck, create a deck */}
         {this.state.decks.length > 0 ? (<>
           {this.state.decks.map((deck) => <div key = {deck.id}>
-              <Deck filterBy = {this.state.filterBy} deck = {deck} />
+              <Deck filterBy = {this.state.filterBy} deck = {deck} 
+              deckNames={this.state.deckNames} />
               <div style = {{paddingBottom: '8px'}}></div>
             </div>)
           }
