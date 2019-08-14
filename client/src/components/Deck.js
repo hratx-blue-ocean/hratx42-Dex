@@ -35,14 +35,10 @@ export default function Deck(props) {
               </div>
              )}
               <div style = {{paddingLeft: '20px'}}></div>
-            <NewCardModal showMe={show} deckNames={props.deckNames} closeModal={handleClose.bind(this)}/>
-            <Button variant="outline-success" 
-            onClick={()=> {
-              handleShow()
-            }}
-            >Add New Card</Button>
-            </Card.Body>
-          </Card>
+            <NewCardModal showMe={show}  deckNames={props.deckNames} closeModal={handleClose.bind(this)}/>
+            <Button variant="outline-success" deckNames={props.deckNames} onClick={()=> handleShow()}>Add New Card</Button>
+          </Card.Body>
+        </Card>
       </div>
     </div>
   )

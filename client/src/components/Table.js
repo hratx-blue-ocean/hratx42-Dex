@@ -27,6 +27,7 @@ export default class Table extends Component {
     axios.get('/api/decks/table/1')
     .then((response) => {
       this.setState({decks: response.data})
+      console.log(response)
     })
     //populated deckname for tickets
     .then(() =>{
