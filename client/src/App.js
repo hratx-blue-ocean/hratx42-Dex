@@ -43,33 +43,32 @@ export default class App extends Component {
     this.submitProfileChanges = this.submitProfileChanges.bind(this);
   }
 
-
-componentDidMount() {    
-  global.flash = this.flash.bind(this)
-  if(localStorage.getItem('token')) {
-    this.login();
+  componentDidMount() {
+    global.flash = this.flash.bind(this);
+    if (localStorage.getItem('token')) {
+      this.login();
+    }
   }
-}
 
-flash(message, variant, interval){
-  this.setState({flash: {show: true, message, variant}});
-  setTimeout(()=>{
-      this.setState({flash:{show: false, message, variant}})
-  }, interval)
-}
+  flash(message, variant, interval) {
+    this.setState({ flash: { show: true, message, variant } });
+    setTimeout(() => {
+      this.setState({ flash: { show: false, message, variant } });
+    }, interval);
+  }
 
-login() {
-  auth.setUser(this);
-}
+  login() {
+    auth.setUser(this);
+  }
 
 logOut(){
   auth.logout();
   auth.setUser(this);
 }
 
-changeTableModal() {
-    this.setState({showTableModal: !this.state.showTableModal});
-}
+  changeTableModal() {
+    this.setState({ showTableModal: !this.state.showTableModal });
+  }
 
 // dashboard onChange event and submit functions
 changeProfileName(e) {
@@ -117,13 +116,12 @@ submitProfileChanges() {
                 changeProfilePassword={this.changeProfilePassword}
                 submitProfileChanges={this.submitProfileChanges}
             />}
-            
            />
           <Route path="/profile" component={ Profile } />
           <Route path="/table" component={ Table } />
           <Route path="/TableSettings" component={ TableSettings } />
         </Router>
-        <Flash flashData={this.state.flash}/>
+        <Flash flashData={this.state.flash} />
       </>
     );
   }
