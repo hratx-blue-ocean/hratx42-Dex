@@ -21,9 +21,12 @@ export default class App extends Component {
       userId: '',
       boards: [],
       // dashboard edit profile form
-      editProfileName: '',
-      editProfileEmail: '',
-      editProfilePassword: '',
+      profile: {
+        editName: '',
+        editEmail: '',
+        editPassword: ''
+      },
+      
       flash: {
         show: false,
         message: 'Default flash message for testing',
@@ -70,23 +73,23 @@ changeTableModal() {
 
 // dashboard onChange event and submit functions
 changeProfileName(e) {
-  this.setState({ editProfileName: e.target.value });
+  this.setState({ profile: { editName: e.target.value }});
 }
 
 changeProfileEmail(e) {
-  this.setState({ editProfileEmail: e.target.value });
+  this.setState({ profile: { editEmail: e.target.value }});
 }
 
 changeProfilePassword(e) {
-  this.setState({ editProfilePassword: e.target.value });
+  this.setState({ profile: { editPassword: e.target.value }});
 }
 
 submitProfileChanges() {
-  http.users.post(this.state.editProfileName, this.state.editProfileEmail, this.state.editProfilePassword)
+  http.users.post(this.state.profile.editName, this.state.profile.editEmail, this.state.profile.editPassword)
     .then(() => 
-      this.setState({ editProfileName: '' }),
-      this.setState({ editProfileEmail: ''}),
-      this.setState({ editProfilePassword: ''})
+      this.setState({ profile: { editName: '' }}),
+      this.setState({ profile: { editEmail: '' }}),
+      this.setState({ profile: { editPassword: '' }})
     )
     .catch(err => console.log('Error: ', err));
 }
