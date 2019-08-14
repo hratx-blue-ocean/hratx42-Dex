@@ -30,10 +30,10 @@ router.post('/', (req, res, next) => {
                     next();
                 })
             })
-        }else {    //if email already exists, send message
-                res.status(400).json({ success: false, message: "Email already exists" })
-            }
-        })
+        }else {    
+            //if email already exists, send message
+            res.status(400).json({ success: false, message: "Email already exists" })
+        }})
         .catch((err) => {
             console.log('Error getting user info @users.js line 37', err);
             res.status(404).send("error getting user")
@@ -41,7 +41,6 @@ router.post('/', (req, res, next) => {
 }, auth.auth);
 
 router.put('/:id', (req, res)=>{
-
     const { email, password, name, imageURL } = req.body;
     //post user to db if she doesn't already exist
     const id = req.params.id;
