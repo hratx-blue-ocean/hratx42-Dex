@@ -10,12 +10,13 @@ const auth = require('../middleware/auth.js');
 router.get('/:id', (req, res) => {
     const id = req.params.id
     db.getUserByID(id)
-        .then((user) => {
-            res.status(200).send(JSON.stringify(user))
-        })
-        .catch((err) => {
-            res.status(402).send("Unexpected error occurred @routes/users.js in getting user")
-        });
+    .then((user) => {
+        res.status(200).send(JSON.stringify(user))
+    })
+    .catch((err) => {
+        res.status(402).send("Unexpected error occurred @routes/users.js in getting user")
+    });
+
 })
 
 router.post('/', (req, res, next) => {
@@ -23,6 +24,7 @@ router.post('/', (req, res, next) => {
     //post user to db if she doesn't already exist
     console.log('creating user', req.body)
     db.getUserInfoByEmail(email)
+<<<<<<< HEAD
         .then((result) => {
             if (result.rowCount === 0) {     //if email does not exist create user
                 bcrypt.hash(password, saltRounds).then((hashedPassword) => {
@@ -37,18 +39,37 @@ router.post('/', (req, res, next) => {
                 }).catch((error) => {
                     console.log('error creating hash password', error)
                     res.status(403).json({ success: false, message: "Unexpected Error Occurred Try Later." })
+=======
+    .then((result) => {  
+        if(result.rowCount === 0) {     //if email does not exist create user
+            bcrypt.hash(password, saltRounds)
+            .then((hashedPassword) => {
+                db.createNewUser({name, hashedPassword, email})
+                .then((userCreated) => { 
+                    next();
+>>>>>>> feature/signup
                 })
-            } else {    //if email already exists, send message
-                res.status(400).json({ success: false, message: "Username already exists" })
-            }
-        })
-        .catch((err) => {
-            console.log('Error getting user info @users.js line 37', err);
-            res.status(404).send("error getting user")
-        })
-}, auth.auth);
+                .catch((error) => {
+                    console.log('creating new user failed', error);
+                 res.status(403).json({ success: false, message: "Unexpected Error Occurred Try Later." })
+                })
+             })
+             .catch((error) => {
+                 console.log('creating new user password has failed', error);
+                 res.status(403).json({ success: false, message: "Unexpected Error Occurred Try Later." })
+             })
+        } else {    //if email already exists, send message
+            res.status(400).json({ success: false, message: "Username already exists" })
+        }
+    })
+    .catch((err) => {
+        console.log('Error getting user info @users.js line 37', err);
+        res.status(404).send("error getting user")})
+    }
+    , auth.auth);
 
-router.put('/:id', (req, res) => {
+router.put('/:id', (req, res)=>{
+
     const { email, password, name, imageURL } = req.body;
     //post user to db if she doesn't already exist
     const id = req.params.id;
@@ -82,20 +103,21 @@ router.delete('/:id', (req, res) => {
     const id = req.params.id
     db.getUserByID(id)
         .then((result) => {
-            if (result.rowCount > 0) {
+            if (result.rowCount > 0) { 
                 db.deleteUser(id)
-                    .then(() => {
-                        res.status(201).json({ success: true, message: "Account Deleted!" })
-                    })
-                    .catch((err) => {
-                        console.log('Error deleting user @users.js', err);
-                        res.status(403).json({ success: false, message: "Unexpected Error Occurred Try Later." })
-                    })
+                .then(() => {
+                    res.status(201).json({ success: true, message: "Account Deleted!" })
+                })
+                .catch((err) => {
+                    console.log('Error deleting user @users.js', err);
+                    res.status(403).json({ success: false, message: "Unexpected Error Occurred Try Later." })
+                })
+
             } else {
                 res.status(400).json({ success: false, message: "User does not exist" });
             }
         })
-        .catch((err) => {
+        .catch ((err) => {
             console.log('Error getting user @users.js', err);
             res.status(404).json({ success: false, message: "Error getting user" });
         });
