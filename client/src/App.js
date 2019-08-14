@@ -51,6 +51,7 @@ export default class App extends Component {
     global.flash = this.flash.bind(this);
     if (localStorage.getItem('token')) {
       this.login();
+      // axios.defaults.headers.common['x-access-token'] = auth.getJwt() ? auth.getJwt() : undefined;
     }
   }
 
