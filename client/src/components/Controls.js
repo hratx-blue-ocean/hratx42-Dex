@@ -20,7 +20,6 @@ export default function Controls(props) {
         )}
         <Button style = {{height: '30px'}} variant = 'light'></Button>
         <div style = {{width: '50px'}}></div>
-        <Button style = {{width: '120px'}} variant='success'>Sort</Button>
         <div style = {{paddingLeft: '10px'}}></div>
         <DropdownButton id="dropdown-basic-button" variant = 'success' title={`${props.filterBy}`}>
           {props.users.map((user) => 
