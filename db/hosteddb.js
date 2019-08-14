@@ -1,6 +1,9 @@
 const path = require('path');
+
 require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
+
 const pg = require('pg');
+
 const pgClient = new pg.Client({
   host: process.env.DB_HOST,
   port: 5432,
