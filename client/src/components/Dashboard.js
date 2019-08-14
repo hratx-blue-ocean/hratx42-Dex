@@ -2,7 +2,6 @@ import React from 'react';
 
 export default function Dashboard(props) {
   return (
-    // test
     <div className="dashboardContainer">
       {/* edit profile area */}
       <div className="dashboardProfileForm" >
