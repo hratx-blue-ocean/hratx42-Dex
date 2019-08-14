@@ -24,7 +24,7 @@ export default class App extends Component {
       profile: {
         editName: '',
         editEmail: '',
-        editPassword: ''
+        editPasswor: ''
       },
       
       flash: {
