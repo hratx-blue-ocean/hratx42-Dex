@@ -44,6 +44,9 @@ export default class App extends Component {
 
 componentDidMount() {    
   global.flash = this.flash.bind(this)
+  if(localStorage.getItem('token')) {
+    this.login();
+  }
 }
 
 flash(message, variant, interval){
