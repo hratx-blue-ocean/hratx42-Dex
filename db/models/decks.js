@@ -21,6 +21,7 @@ const decksModel = {
             console.log('deck from within map', deck);
                 return deck;
             }))
+            console.log("DEcks with cards", decks)
         return decksWithCards;
     },
     async post(deck){

@@ -11,11 +11,10 @@ router.get('/table/:tableId', async (req, res)=>{
     console.log('userid', userId) 
     tryCatch(async()=>{
         let authorized = await authorizationModel.user.ownsTable(userId, tableId)
-        console.log("Authorized ", authorized);
         authorized = true;
         if(authorized){
             //this is the monster query
-            const {rows: decks} = await decksModel.getCompoundData(tableId);
+            const decks = await decksModel.getCompoundData(tableId);
             res.status(200).send(decks)
         } else {
             res.status(401).send({message: "Unathorized"})
