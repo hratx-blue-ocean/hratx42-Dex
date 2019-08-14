@@ -1,15 +1,20 @@
 var express = require('express')
 var router = express.Router()
-const jwtChecker = require('../middleware/jwtChecker')
-// const db = require('../../db/hosteddb');
-router.use(jwtChecker.checkToken);
-router.get('/', (req, res)=>{
+const tablesModel = require('../../db/models/tables')
+
+// router.use(jwtChecker.checkToken);
+router.get('/', async (req, res)=>{
     //query string like ?userId=123
     const {userId} = req.query;
     //if req.user
-        //db.get tables where user_id = userId
-    res.status(200).send(`Tables for user ${userId}`)
+    try{
+        const tables = await tablesModel.getByUserId(userId);
+        res.status(200).send(JSON.stringify(tables))
+    } catch (error){
+        res.status(500).send({message: "Internal server error"})
+    }
 })
+
 
 router.post('/', (req, res)=>{
     const table = req.body;

@@ -7,7 +7,8 @@ const tryAxios = async function(endpoint, method, payload){
         const response = await axios[method](endpoint,payload)
         return response.data
     } catch (error) {
-        global.flash(error.response.data.message, 'danger', 2000)
+        console.log(error.response)
+        global.flash(error.response.data.message || error.message, 'danger', 2000)
       }
 }
 
@@ -28,7 +29,6 @@ const http ={
     auth: {
         async post(email, password){
             const jwt = await tryAxios('/api/auth', 'post', {email, password})
-            console.log(jwt)
             auth.login(jwt.token)
             return auth.userIsLoggedIn();
         },
@@ -49,7 +49,7 @@ const http ={
     },
     decks: {
         get(tableId){
-            return tryAxios(`/api/decks?tableId=${tableId}`, 'get')
+            return tryAxios(`/api/decks/table/${tableId}`, 'get')
         },
         post(deck){
             return tryAxios(`/api/decks`, 'post', deck)
