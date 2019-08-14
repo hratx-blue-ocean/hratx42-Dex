@@ -122,7 +122,7 @@ const cardsModel = {
     return insertedMemberId;
   },
   async removeUserFromCard(cardId, memberId){
-    const query = `delete from cards_members where card_id = $1 and user_id = $2;`;
+    const query = `delete from cards_members where card_id = $1 and user_id = $2 returning 1;`;
     const {rows: result} = await pgClient.query(query, [cardId, memberId]);
     const deletedMemberId = await result[0];
     return deletedMemberId;
