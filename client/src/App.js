@@ -24,13 +24,8 @@ export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-<<<<<<< HEAD
-      userId: 'ddd',
-      boards: [],
-=======
       userId: '',
       tables: [],
->>>>>>> 4a0d927eca067883990ad3ffd31aba0fc6f5ddf0
       // dashboard edit profile form
       editProfileName: '',
       editProfileEmail: '',
@@ -118,13 +113,8 @@ export default class App extends Component {
     return (
       <>
         <Router>
-<<<<<<< HEAD
-
-        {this.state.userId ===''?<Landing login={this.login.bind(this)}/>:<NavBar  changeTableModal={this.changeTableModal.bind(this)} logOut ={this.logOut.bind(this)}/>}
-        <Route 
-=======
           {auth.userIsLoggedIn() ? (
-            <NavBar logOut={this.logOut.bind(this)} />
+            <NavBar logOut={this.logOut.bind(this)} changeTableModal={this.changeTableModal.bind(this)}/>
           ) : null}
           <Route
             path="/"
@@ -134,7 +124,6 @@ export default class App extends Component {
             )}
           />
           <Route
->>>>>>> 4a0d927eca067883990ad3ffd31aba0fc6f5ddf0
             path="/dashboard"
             render={props => (
               <Dashboard
