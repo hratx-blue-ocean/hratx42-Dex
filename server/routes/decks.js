@@ -22,13 +22,14 @@ router.get('/table/:tableId', async (req, res) => {
 
 router.post('/', (req, res) => {
   const deck = req.body;
-  if (req.user) {
+  const userId = req.user || true;
+  if (userId) {
     tryCatch(async () => {
       const result = await decksModel.post(deck);
       res.status(200).send(result);
     }, res);
   } else {
-    res.status(401).send({ message: 'Unathorized' });
+    res.status(401).send({ message: 'Unauthorized' });
   }
 });
 

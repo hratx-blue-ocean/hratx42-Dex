@@ -1,5 +1,8 @@
 const pgClient = require('../hosteddb');
 
+const getColumnsString = require('../utils/getColumns');
+const getValuesString = require('../utils/getValuesString');
+
 const cardsModel = {
   async getCardsByDeckId(deckId) {
     const query = `
@@ -11,6 +14,8 @@ const cardsModel = {
           c.created_at as card_created,
           c.weight as card_weight,
           c.impact as card_impact,
+          c.table_id,
+          c.deck_id
           array_agg(
             json_build_object(
               'member_id', cast(u.id as varchar),
@@ -77,21 +82,19 @@ const cardsModel = {
   },
 
   // create new card
-  async createNewCard({
-    table_id,
-    deck_id,
-    title,
-    weight,
-    impact,
-    due_date,
-    description,
-    created_at,
-    updated_at,
-  }) {
-    const newCard = await pgClient.query(
-      `INSERT INTO cards VALUES (default, ${table_id}, ${deck_id}, '${title}', ${weight}, ${impact}, ${due_date}, '${description}', ${created_at}, ${updated_at})`
-    );
-    return newCard;
+  async createNewCard(card) {
+    console.log(1);
+    const columnString = getColumnsString(card);
+    console.log(2);
+    const valuesString = getValuesString(card);
+    console.log(3);
+    const values = Object.values(card);
+    console.log(4);
+    let query = `Insert into cards ${columnString} values ${valuesString}`;
+    console.log(query);
+    const result = await pgClient.query(query, values);
+    console.log(result);
+    return result;
   },
 
   // update card
