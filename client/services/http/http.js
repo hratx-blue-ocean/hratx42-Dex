@@ -5,7 +5,6 @@ axios.defaults.headers.common['x-access-token'] = auth.getJwt() ? auth.getJwt() 
 const tryAxios = async function(endpoint, method, payload){
     try {
         const response = await axios[method](endpoint,payload)
-        console.log("RESPONSEEEE", response)
         return response.data
     } catch (error) {
         console.log(error.response)
