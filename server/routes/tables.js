@@ -26,10 +26,27 @@ router.get('/:id/users', async (req, res) => {
 });
 
 router.post('/', (req, res) => {
-  const table = req.body;
-  //if req.user
-  //post table
-  res.status(200).send(JSON.stringify(table));
+  tryCatch(async () => {
+    const tableName = req.body.name;
+    const table = await tablesModel.create(tableName);
+    res.status(200).json(table);
+  }, res)
+});
+
+router.put('/:id', (req, res)=>{
+    const table = req.body;
+    const id = req.params.id
+    table.id=id
+    //if req.user && user owns table
+        //update table
+    res.status(200).send(JSON.stringify(table));
+})
+
+router.delete('/:id', (req, res) => {
+  const id = req.params.id;
+  //if req.user && user owns table
+  //delete table
+  res.status(200).send(`Deleted table ${id}`);
 });
 
 router.post('/invite', async (req, res) => {
@@ -51,20 +68,9 @@ router.post('/invite', async (req, res) => {
   }
 });
 
-router.put('/:id', (req, res) => {
-  const table = req.body;
-  const id = req.params.id;
-  table.id = id;
-  //if req.user && user owns table
-  //update table
-  res.status(200).send(JSON.stringify(table));
-});
-
-router.delete('/:id', (req, res) => {
-  const id = req.params.id;
-  //if req.user && user owns table
-  //delete table
-  res.status(200).send(`Deleted table ${id}`);
-});
+router.post('/kick', async (req, res) => {
+    const userId = req.body.userId;
+    const tableId = req.body.tableId;
+})
 
 module.exports = router;
