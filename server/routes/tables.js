@@ -43,16 +43,17 @@ router.put('/:id', (req, res)=>{
 })
 
 router.delete('/:id', (req, res) => {
-  const id = req.params.id;
-  //if req.user && user owns table
-  //delete table
-  res.status(200).send(`Deleted table ${id}`);
+  tryCatch(async ()=>{
+    const tableId = req.body.tableId;
+    const result = await tablesModel.delete(tableId);
+    res.status(200).json({ ok: 'deleted' });
+  }, res)
 });
 
-router.post('/invite', async (req, res) => {
-  const userEmail = req.body.email;
-  const tableId = req.body.tableId;
-  try {
+router.post(':tableId/member', async (req, res) => {
+  tryCatch(async () =>{
+    const userEmail = req.body.email;
+    const tableId = req.params.tableId;
     const { rows: dbResults } = await db.getUserInfoByEmail(userEmail);
     const user = await dbResults[0];
     if (!user) {
@@ -63,14 +64,16 @@ router.post('/invite', async (req, res) => {
       await console.log('result: ', result);
       res.status(200).json({ ok: `added user ${user.id} to table ${tableId}` });
     }
-  } catch (error) {
-    res.status(500).send({ message: 'Internal server error' });
-  }
+  }, res)
 });
 
-router.post('/kick', async (req, res) => {
-    const userId = req.body.userId;
-    const tableId = req.body.tableId;
+router.delete('/:tableId/member/:userId', async (req, res) => {
+  tryCatch(async ()=>{
+    const tableId = req.params.tableId;
+    const userId = req.params.userId;
+    let result = await tablesModel.removeUserFromTable(tableId, userId)
+    res.status(200).json({ ok: `removed user ${userId} from table ${tableId}` });
+  }, res)
 })
 
 module.exports = router;
