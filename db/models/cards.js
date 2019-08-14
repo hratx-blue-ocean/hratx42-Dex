@@ -124,15 +124,21 @@ const cardsModel = {
   async removeUserFromCard(cardId, memberId){
     const query = `delete from cards_members where card_id = $1 and user_id = $2 returning 1;`;
     const {rows: result} = await pgClient.query(query, [cardId, memberId]);
-    const deletedMemberId = await result[0];
-    return deletedMemberId;
+    const deletedMember = await result[0];
+    return deletedMember;
   },
   async addLabelToCard(cardId, labelId){
     const query = `insert into cards_labels (card_id, label_id)
                    values ($1, $2) returning label_id;`;
-    const {rows: result} = await pgClient.query(query, [cardId, memberId]);
+    const {rows: result} = await pgClient.query(query, [cardId, labelId]);
     const insertedLabelId = await result[0].member_id;
     return insertedLabelId;
+  },
+  async removeLabelFromCard(cardId, labelId){
+    const query = `delete from cards_labels where card_id = $1 and label_id = $2 returning 1;`;
+    const {rows: result} = await pgClient.query(query, [cardId, labelId]);
+    const deletedLabel = await result[0];
+    return deletedLabel;
   },
   // delete card
   async deleteCard(cardID){

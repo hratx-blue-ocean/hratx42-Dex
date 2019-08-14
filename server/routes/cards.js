@@ -98,12 +98,12 @@ router.post('/:cardId/label', async (req, res) => {
   tryCatch(async () =>{
     const cardId = req.params.cardId;
     const labelId = req.body.labelId;
-    const result = await cardsModel.addLabelToCard(cardId, userId);
+    const result = await cardsModel.addLabelToCard(cardId, labelId);
     res.status(200).json({ ok: `added label ${labelId} to card ${cardId}` });
   }, res)
 });
 
-router.delete('/:cardId/label/:userId', async (req, res) => {
+router.delete('/:cardId/label/:labelId', async (req, res) => {
   tryCatch(async ()=>{
     const cardId = req.params.cardId;
     const labelId = req.params.labelId;
