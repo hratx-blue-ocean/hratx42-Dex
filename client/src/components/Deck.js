@@ -1,9 +1,16 @@
-import React from 'react';
-import { Card } from 'react-bootstrap';
+import React, { useState } from "react";
+import { Card, Button } from 'react-bootstrap';
 import CardThumbnail from './CardThumbnails'
-import CardModal from './CardModal'
+import NewCardModal from './NewCardModal'
 
 export default function Deck(props) {
+  const [show, setShow] = useState(false);
+
+  const handleShow = () => setShow(true);
+  const handleClose = () => setShow(false)
+
+
+
   let cards = [];
   if (props.filterBy === ''){
     cards = props.deck.cards.slice(0, 6);
@@ -21,13 +28,18 @@ export default function Deck(props) {
             <Card.Header>{props.deck.title}</Card.Header>
             <Card.Body className = 'row'>
             {cards.map((singleCard) => 
-              <div key = {singleCard.id}>
+              <div key = {Math.random()}>
                 <div style = {{paddingLeft: '160px'}}></div>
                 <CardThumbnail singleCard = {singleCard} />
               </div>
              )}
               <div style = {{paddingLeft: '20px'}}></div>
-              <CardModal />
+            <NewCardModal showMe={show}  closeModal={handleClose.bind(this)}/>
+            <Button variant="outline-success" 
+            onClick={()=> {
+              handleShow()
+            }}
+            >Add New Card</Button>
             </Card.Body>
           </Card>
       </div>
