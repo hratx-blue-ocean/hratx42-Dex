@@ -39,7 +39,6 @@ app.get('/table', (req, res) => {
 // routes
 app.use('/api/users', usersRoute);
 app.use('/api/auth', authRoute);
-
 app.use(jwtChecker.checkToken);
 app.use('/api/tables', tablesRoute)
 app.use('/api/decks', decksRoute)

@@ -50,6 +50,7 @@ export default class App extends Component {
     global.flash = this.flash.bind(this);
     if (localStorage.getItem('token')) {
       this.login();
+      // axios.defaults.headers.common['x-access-token'] = auth.getJwt() ? auth.getJwt() : undefined;
     }
   }
 
@@ -67,10 +68,10 @@ export default class App extends Component {
 
   getTables(){
     const userId = this.state.userId
-    http.tables.get(userId)
-    .then(tables=>{
-      this.setState({tables})
-    })
+    // http.tables.get(userId)
+    // .then(tables=>{
+    //   this.setState({tables})
+    // })
   }
 
 logOut(){

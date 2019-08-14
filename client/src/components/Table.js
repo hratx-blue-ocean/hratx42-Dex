@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { Card, Button, Modal } from 'react-bootstrap';
 import Controls from './Controls';
 import Deck from './Deck';
-import mockHttp from '../../services/http/__mocks__/http';
-import axios from 'axios'
+import http from '../../services/http/http.js';
 
 export default class Table extends Component {
   constructor(props) {
@@ -23,15 +22,11 @@ export default class Table extends Component {
     this.handleModal = this.handleModal.bind(this);
   }
   componentDidMount() {
-    axios.get('/api/decks/table/1')
+    http.decks.get(1)
     .then((response) => {
-      console.log(response.data)
-      this.setState({decks: response.data})
+      console.log('table data', response)
+      this.setState({decks: response})
     })
-    // mockHttp.getDecks(0)
-    // .then((res) => {
-    //   this.setState({decks: res})
-    // })
   }
 
   saveTable(tableName, descName) {
