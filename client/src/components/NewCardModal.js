@@ -43,17 +43,17 @@ export default function CardModal({closeModal, showMe, deckNames, newCardData}) 
         {/* CONTENT FOR Header Container for effort, impact, title, and exit */}
         <Row xs={12} style={styles.headerRow}>
           <Col xs={1} style={styles.effortImpactInput}>
-          <input maxLength="2"  placeholder={5} type="number" onChange={()=> setEffort(event.target.value)} style={styles.effImpInputBox}/>
+          <input  max={21} min={1} placeholder={5} type="number" onBlur={(event)=> setEffort(event.target.value)} style={styles.effImpInputBox}/>
           </Col>
           <Col xs={1} style={styles.effortImpactInput}>
-          <input maxLength="2" placeholder={3} type="number" onChange={()=> setImpact(event.target.value)} style={styles.effImpInputBox}/>
+          <input max={21} min={1} placeholder={3} type="number" onBlur={(event)=> setImpact(event.target.value)} style={styles.effImpInputBox}/>
           </Col>
           {/* title input area */}
           <Col xs={10} style={styles.titleStyle}>
                         <Form style={{width: '100%'}}>
               <Form.Group sm={8} controlId="exampleForm.ControltitleArea">
                 {/* <Form.Label>Description</Form.Label> */}
-                <Form.Control as="textarea" rows="1" onChange={()=> setTitle(event.target.value)} placeholder="title"/>
+                <Form.Control as="textarea" rows="1" onBlur={(event)=> setTitle(event.target.value)} placeholder="title"/>
               </Form.Group>
               </Form>
           </Col>
@@ -75,7 +75,7 @@ export default function CardModal({closeModal, showMe, deckNames, newCardData}) 
             {/* content of players and tags */}
             <Row>
                   <Col style={styles.playersStyle}>
-                    <select onChange={()=> setPlayer(event.target.value) }>
+                    <select onChange={(event)=> setPlayer(event.target.value) }>
                     {/* {card.labels.map(label =>{
                         return (
                             <option>{label}</option>
@@ -89,7 +89,7 @@ export default function CardModal({closeModal, showMe, deckNames, newCardData}) 
                     </select>
                   </Col>
                   <Col style={styles.tagsStyle}>
-                  <select onChange={()=> setTags(event.target.value) }>
+                  <select onChange={(event)=> setTags(event.target.value) }>
                       {/* Map through these */}
                       <option></option>
                       <option value="FrontEnd">FrontEnd</option>
@@ -104,7 +104,7 @@ export default function CardModal({closeModal, showMe, deckNames, newCardData}) 
               <Form style={{width: '100%', paddingTop:10}}>
               <Form.Group sm={8} controlId="exampleForm.ControlTextarea1">
                 {/* <Form.Label>Description</Form.Label> */}
-                <Form.Control as="textarea" rows="8" onChange={()=> setDesc(event.target.value)} placeholder="description"/>
+                <Form.Control as="textarea" rows="8" onBlur={(event)=> setDesc(event.target.value)} placeholder="description"/>
               </Form.Group>
               </Form>
             </Row>
@@ -116,13 +116,13 @@ export default function CardModal({closeModal, showMe, deckNames, newCardData}) 
               <div>Add To Card</div>
             </Row>
             <Row style={styles.addToCardTrait}>
-              <input placeholder="date due" onChange={()=> setDate(event.target.value)} style={{width:'100%'}}/> 
+              <input placeholder="date due" onBlur={(event)=> setDate(event.target.value)} style={{width:'100%'}}/> 
             </Row>
             {/* <Row style={styles.addToCardTrait}>
                 <input placeholder="gitLink" style={{width:'100%'}}/> 
             </Row> */}
             <Row style={styles.addToCardTrait}>
-            <select style={{width:'100%'}}  onChange={()=> setDeck(event.target.value) }>
+            <select style={{width:'100%'}}  onChange={(event)=> setDeck(event.target.value)}>
             {deckNames.map(name =>{
                 return (
                     <option>{name.title}</option>
@@ -136,7 +136,7 @@ export default function CardModal({closeModal, showMe, deckNames, newCardData}) 
 
         {/* Button to Submit */}
         <Row style={styles.submitButton}>
-            <Button onClick={()=> {
+            <Button onClick={(event)=> {
                 newCardData(effort, impact, title, player, tags, dueDate, deck, desc)
             }} variant="primary">Submit</Button>
         </Row>
