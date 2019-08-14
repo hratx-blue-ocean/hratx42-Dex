@@ -24,22 +24,6 @@ router.post('/', (req, res, next) => {
     //post user to db if she doesn't already exist
     console.log('creating user', req.body)
     db.getUserInfoByEmail(email)
-<<<<<<< HEAD
-        .then((result) => {
-            if (result.rowCount === 0) {     //if email does not exist create user
-                bcrypt.hash(password, saltRounds).then((hashedPassword) => {
-                    db.createNewUser({ name, hashedPassword, email })
-                        .then((userCreated) => {
-                            next();
-                        })
-                        .catch((err) => {
-                            console.log('Error inserting user @users.js line 28', err);
-                            res.status(403).json({ success: false, message: "Unexpected Error Occurred Try Later." })
-                        })
-                }).catch((error) => {
-                    console.log('error creating hash password', error)
-                    res.status(403).json({ success: false, message: "Unexpected Error Occurred Try Later." })
-=======
     .then((result) => {  
         if(result.rowCount === 0) {     //if email does not exist create user
             bcrypt.hash(password, saltRounds)
@@ -47,7 +31,6 @@ router.post('/', (req, res, next) => {
                 db.createNewUser({name, hashedPassword, email})
                 .then((userCreated) => { 
                     next();
->>>>>>> feature/signup
                 })
                 .catch((error) => {
                     console.log('creating new user failed', error);

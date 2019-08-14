@@ -4,11 +4,7 @@ const jwt = require('jsonwebtoken');
 const config = {secret: "supersecuresecret"}
 
 //connect to db later
-<<<<<<< HEAD
-const db = require('../../db/models/users.js')
-=======
 const db = require('../../db/models/users.js');
->>>>>>> feature/signup
 
 const auth = (req, res, next) => {
   if(req.method === 'GET') {
@@ -34,12 +30,8 @@ const auth = (req, res, next) => {
         });
       } else {
         let user = result.rows[0];
-<<<<<<< HEAD
         bcrypt.compare(password, user.password)
         .then((match) => {
-=======
-        bcrypt.compare(password, user.password).then((match) => {
->>>>>>> feature/signup
           if(match) {
             let token = jwt.sign({ userId: user.id }, config.secret, { expiresIn: '7 days' });
             // req.user = token;
