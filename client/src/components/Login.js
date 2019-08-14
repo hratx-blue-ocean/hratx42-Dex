@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Navbar, Nav, Image, Form, FormControl, Button } from 'react-bootstrap';
+import { Navbar, Nav, Form, FormControl, Button } from 'react-bootstrap';
 import http from '../../services/http/http.js';
 
 export default function Login(props) {
@@ -17,9 +17,9 @@ export default function Login(props) {
 
   return (
     <div>
-      <Navbar bg='light' expand='lg'>
+      <Navbar className='login' bg='light' expand='lg'>
         <Navbar.Brand href='#home' style={{ marginBottom: '22px' }}>
-          <h2>Dex</h2>
+          <h2>/Dex</h2>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls='basic-navbar-nav' />
         <Navbar.Collapse id='basic-navbar-nav'>
@@ -47,8 +47,9 @@ export default function Login(props) {
           </Form>
           <Form style={{ marginRight: '25px' }}>
             <Button
+              className='signup'
               variant='success'
-              className='mr-sm-2'
+              // className='mr-sm-2'
               onClick={() => {
                 console.log('clicked log in');
                 handleSubmit();

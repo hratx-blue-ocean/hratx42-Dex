@@ -47,7 +47,7 @@ export default function Register(props) {
   return (
     <div id='register'>
       <h1>Dex lets you win at planning projects.</h1>
-      <h3>Sign up - It's free and easy</h3>
+      <h4>Sign up - It's free and easy</h4>
       <Form onSubmit={event => handleSubmit(event)}>
         <Form.Group controlId='formBasicEmail'>
           <Form.Label htmlFor={'register-email'}>Email: </Form.Label>
@@ -74,7 +74,7 @@ export default function Register(props) {
           />
         </Form.Group>
         <Form.Group controlId='formBasicLastName'>
-          <label htmlFor={'register-last-name'}>Last Name: </label>
+          <Form.Label htmlFor={'register-last-name'}>Last Name: </Form.Label>
           <Form.Control
             type='text'
             id='register-last-name'
@@ -86,7 +86,7 @@ export default function Register(props) {
           />
         </Form.Group>
         <Form.Group controlId='formBasicPassword'>
-          <label htmlFor={'register-password1'}>Password: </label>
+          <Form.Label htmlFor={'register-password1'}>Password: </Form.Label>
           <Form.Control
             type='text'
             id='register-password1'
@@ -98,7 +98,9 @@ export default function Register(props) {
           />
         </Form.Group>
         <Form.Group controlId='formBasicConfirmPassword'>
-          <label htmlFor={'register-password2'}>Confirm Password: </label>
+          <Form.Label htmlFor={'register-password2'}>
+            Confirm Password:{' '}
+          </Form.Label>
           <Form.Control
             type='text'
             id='register-password2'
@@ -110,7 +112,13 @@ export default function Register(props) {
           />
         </Form.Group>
 
-        <Button onClick={e => handleSubmit(e)}>Sign up</Button>
+        <Button
+          className='signup'
+          variant='success'
+          onClick={e => handleSubmit(e)}
+        >
+          Sign Up - It's Free!
+        </Button>
       </Form>
     </div>
   );
