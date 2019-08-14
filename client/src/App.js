@@ -102,8 +102,8 @@ export default class App extends Component {
 
   submitProfileChanges() {
     http.users
-      .post(
-        this.state.profile.editName,
+      .put(
+        this.state.userId,
         this.state.profile.editEmail,
         this.state.profile.editPassword,
       )
