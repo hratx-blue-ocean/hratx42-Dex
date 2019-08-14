@@ -9,8 +9,6 @@ export default function Deck(props) {
   const handleShow = () => setShow(true);
   const handleClose = () => setShow(false)
 
-
-
   let cards = [];
   if (props.filterBy === ''){
     cards = props.deck.cards.slice(0, 6);
