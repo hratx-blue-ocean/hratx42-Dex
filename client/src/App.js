@@ -24,15 +24,17 @@ export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userId: '',
+      userId: '', //NB userId should be deprecated in favor of user, which contains id
+      user: {},
       tables: [],
+      showenTable: null,
       // dashboard edit profile form
       profile: {
         editName: '',
         editEmail: '',
-        editPassword: ''
+        editPassword: '',
       },
-      
+
       flash: {
         show: false,
         message: 'Default flash message for testing',
@@ -53,7 +55,6 @@ export default class App extends Component {
     global.flash = this.flash.bind(this);
     if (localStorage.getItem('token')) {
       this.login();
-      // axios.defaults.headers.common['x-access-token'] = auth.getJwt() ? auth.getJwt() : undefined;
     }
   }
 
@@ -67,14 +68,22 @@ export default class App extends Component {
   login() {
     auth.setUser(this);
     this.getTables();
+    this.getUser();
   }
 
-  getTables() {
+  async getTables() {
     const userId = auth.getUser();
     if (userId) {
-      http.tables.get(userId).then(tables => {
-        this.setState({ tables });
-      });
+      const tables = await http.tables.get(userId);
+      this.setState({ tables });
+    }
+  }
+
+  async getUser() {
+    const userId = auth.getUser();
+    if (userId) {
+      const user = await http.users.get(userId);
+      this.setState({ user });
     }
   }
 
@@ -89,15 +98,15 @@ export default class App extends Component {
 
   // dashboard onChange event and submit functions
   changeProfileName(e) {
-    this.setState({ profile: { editName: e.target.value }});
+    this.setState({ profile: { editName: e.target.value } });
   }
 
   changeProfileEmail(e) {
-    this.setState({ profile: { editEmail: e.target.value }});
+    this.setState({ profile: { editEmail: e.target.value } });
   }
 
   changeProfilePassword(e) {
-    this.setState({ profile: { editPassword: e.target.value }});
+    this.setState({ profile: { editPassword: e.target.value } });
   }
 
   submitProfileChanges() {
@@ -105,22 +114,24 @@ export default class App extends Component {
       .put(
         this.state.userId,
         this.state.profile.editEmail,
-        this.state.profile.editPassword,
+        this.state.profile.editPassword
       )
       .then(
-        () => this.setState({ profile: { editName: '' }}),
-        this.setState({ profile: { editEmail: '' }}),
-        this.setState({ profile: { editPassword: '' }})
+        () => this.setState({ profile: { editName: '' } }),
+        this.setState({ profile: { editEmail: '' } }),
+        this.setState({ profile: { editPassword: '' } })
       )
       .catch(err => console.log('Error: ', err));
   }
-
+  changeTable(id){
+    this.setState({showenTable:id})
+  }
   render() {
     return (
       <>
         <Router>
           {auth.userIsLoggedIn() ? (
-            <NavBar logOut={this.logOut.bind(this)} />
+            <NavBar logOut={this.logOut.bind(this)} showTableModal={this.state.showTableModal} changeTableModal={this.changeTableModal.bind(this)} tables={this.state.tables} showenTable={this.state.showenTable}/>
           ) : null}
           <Route
             path="/"

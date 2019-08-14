@@ -64,6 +64,7 @@ export default function CardModal({closeModal, showMe, card, deckTitle, deckName
             <Row>
                   <Col style={styles.playersStyle}>
                     <select>
+                      <option></option>
                       <option>Miles</option>
                       <option>Michael</option>
                       <option>DJ</option>
@@ -123,7 +124,7 @@ export default function CardModal({closeModal, showMe, card, deckTitle, deckName
             </Row>
             <Row style={styles.addToCardTrait}>
             <select style={{width:'100%'}}>
-              <option>{deckTitle}</option>
+              <option>`${deckTitle}`</option>
               {deckNames.map(name =>{
                     if (name.title !== deckTitle) {
                         return (
@@ -131,7 +132,6 @@ export default function CardModal({closeModal, showMe, card, deckTitle, deckName
                         )
                     }
                 })}
-
             </select>
             </Row>
             {/* <Row style={styles.addToCardTrait}>Completed</Row> */}

@@ -50,11 +50,11 @@ router.delete('/:id', (req, res) => {
   }, res)
 });
 
-router.post(':tableId/member', async (req, res) => {
+router.post('/:tableId/member', async (req, res) => {
   tryCatch(async () =>{
     const userEmail = req.body.email;
     const tableId = req.params.tableId;
-    const { rows: dbResults } = await db.getUserInfoByEmail(userEmail);
+    const { rows: dbResults } = await usersModel.getUserInfoByEmail(userEmail);
     const user = await dbResults[0];
     if (!user) {
       res.status(404).json({ error: 'not found' });
@@ -72,8 +72,12 @@ router.delete('/:tableId/member/:userId', async (req, res) => {
     const tableId = req.params.tableId;
     const userId = req.params.userId;
     let result = await tablesModel.removeUserFromTable(tableId, userId)
-    res.status(200).json({ ok: `removed user ${userId} from table ${tableId}` });
+    if (result){
+      res.status(200).json({ ok: `removed user ${userId} from card ${cardId}` });
+    }else {
+      res.status(404).json({ error: 'not found' });
+    }
   }, res)
-})
+});
 
 module.exports = router;
