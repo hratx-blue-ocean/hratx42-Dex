@@ -30,12 +30,12 @@ const cardsModel = {
           join cards_labels cl on c.id = cl.card_id
           join labels l on cl.label_id = l.id
         where c.deck_id = $1 
-        group by c.id;`
-    const {rows: cards} = await pgClient.query(query, [deckId])
+        group by c.id;`;
+    const { rows: cards } = await pgClient.query(query, [deckId]);
     return cards;
   },
-  async getCardByID(id){
-      const query = `
+  async getCardByID(id) {
+    const query = `
         select 
           c.id as card_id,
           c.title as card_title,
@@ -65,18 +65,18 @@ const cardsModel = {
         where c.id = $1 
         group by c.id;
       `;
-      const {rows: cards} = pgClient.query(query, id);
-      return cards[0];
+    const { rows: cards } = await pgClient.query(query, [id]);
+    return cards[0];
   },
 
-  async delete(id){
+  async delete(id) {
     const query = 'delete from cards where id = $1';
-    const values = [id]
-    const result = await pgClient.query(query, values)
+    const values = [id];
+    const result = await pgClient.query(query, values);
     return result;
   },
 
-// create new card
+  // create new card
   async createNewCard({
     table_id,
     deck_id,
@@ -86,16 +86,16 @@ const cardsModel = {
     due_date,
     description,
     created_at,
-    updated_at
-  }){
+    updated_at,
+  }) {
     const newCard = await pgClient.query(
       `INSERT INTO cards VALUES (default, ${table_id}, ${deck_id}, '${title}', ${weight}, ${impact}, ${due_date}, '${description}', ${created_at}, ${updated_at})`
     );
     return newCard;
   },
-  
+
   // update card
-  async updateCard (
+  async updateCard(
     {
       table_id,
       deck_id,
@@ -105,48 +105,48 @@ const cardsModel = {
       due_date,
       description,
       created_at,
-      updated_at
+      updated_at,
     },
     id
-  ){
+  ) {
     const updatedCard = await pgClient.query(
       `UPDATE cards SET deck_id = ${deck_id}, title = '${title}', weight = ${weight}, impact = ${impact}, due_date = ${due_date}, description = '${description}', created_at = ${created_at}, updated_at = ${updated_at} WHERE id = ${id}`
     );
     return updatedCard;
   },
-  async addUserToCard(cardId, memberId){
+  async addUserToCard(cardId, memberId) {
     const query = `insert into cards_members (card_id, user_id)
                    values ($1, $2) returning user_id;`;
-    const {rows: result} = await pgClient.query(query, [cardId, memberId]);
+    const { rows: result } = await pgClient.query(query, [cardId, memberId]);
     const insertedMemberId = await result[0].member_id;
     return insertedMemberId;
   },
-  async removeUserFromCard(cardId, memberId){
+  async removeUserFromCard(cardId, memberId) {
     const query = `delete from cards_members where card_id = $1 and user_id = $2 returning 1;`;
-    const {rows: result} = await pgClient.query(query, [cardId, memberId]);
+    const { rows: result } = await pgClient.query(query, [cardId, memberId]);
     const deletedMember = await result[0];
     return deletedMember;
   },
-  async addLabelToCard(cardId, labelId){
+  async addLabelToCard(cardId, labelId) {
     const query = `insert into cards_labels (card_id, label_id)
                    values ($1, $2) returning label_id;`;
-    const {rows: result} = await pgClient.query(query, [cardId, labelId]);
+    const { rows: result } = await pgClient.query(query, [cardId, labelId]);
     const insertedLabelId = await result[0].member_id;
     return insertedLabelId;
   },
-  async removeLabelFromCard(cardId, labelId){
+  async removeLabelFromCard(cardId, labelId) {
     const query = `delete from cards_labels where card_id = $1 and label_id = $2 returning 1;`;
-    const {rows: result} = await pgClient.query(query, [cardId, labelId]);
+    const { rows: result } = await pgClient.query(query, [cardId, labelId]);
     const deletedLabel = await result[0];
     return deletedLabel;
   },
   // delete card
-  async deleteCard(cardID){
+  async deleteCard(cardID) {
     const deletedCard = await pgClient.query(
       `DELETE FROM cards WHERE id = ${cardID} RETURNING id;`
     );
     return deletedCard;
-  }
-}
+  },
+};
 
 module.exports = cardsModel;
