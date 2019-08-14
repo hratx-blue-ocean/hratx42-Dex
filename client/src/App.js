@@ -26,6 +26,7 @@ export default class App extends Component {
     this.state = {
       userId: '',
       tables: [],
+      showenTable: null,
       // dashboard edit profile form
       editProfileName: '',
       editProfileEmail: '',
@@ -108,13 +109,16 @@ export default class App extends Component {
       )
       .catch(err => console.log('Error: ', err));
   }
-
+  changeTable(id){
+    this.setState({showenTable:id})
+  }
   render() {
     return (
       <>
         <Router>
+        <NavBar logOut={this.logOut.bind(this)} changeTableModal={this.changeTableModal.bind(this)} tables={this.state.tables} showenTable={this.state.showenTable} changeTable={this.changeTable.bind(this)}/>
           {auth.userIsLoggedIn() ? (
-            <NavBar logOut={this.logOut.bind(this)} changeTableModal={this.changeTableModal.bind(this)}/>
+            <NavBar logOut={this.logOut.bind(this)} changeTableModal={this.changeTableModal.bind(this)} tables={this.state.tables} showenTable={this.state.showenTable}/>
           ) : null}
           <Route
             path="/"

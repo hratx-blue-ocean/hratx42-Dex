@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import TableSettings from './TableSettings';
 import { Navbar,Button, NavDropdown, Nav, Form } from "react-bootstrap";
 export default function NavBar(props) {
+  let allTables = props.tables.map((item)=><NavDropdown.Item href="#action/3.3" onClick={()=>props.changeTable(item.id)}>{item.name}</NavDropdown.Item>)
   return (
     <div>
         <Navbar bg="light" expand="lg" >
@@ -23,11 +24,7 @@ export default function NavBar(props) {
               </Button>
             </Form>
             <NavDropdown title="Tables" id="collasible-nav-dropdown">
-              <NavDropdown.Item href="#action/3.2">
-                <Link to={"/table"} style={{color: 'black'}}>Table 1</Link>
-                </NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.3">table 2</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">table 3</NavDropdown.Item>
+              {allTables}
               <NavDropdown.Divider />
               <NavDropdown.Item onClick={()=>props.changeTableModal()} href="#action/3.4">
                 Create new table
@@ -36,7 +33,7 @@ export default function NavBar(props) {
             <NavDropdown title="user name" id="collasible-nav-dropdown" style={{ marginRight: "15px" }}>
               <NavDropdown.Divider />
               <NavDropdown.Item href="#action/3.4">
-                <Link style={{color: 'black'}} to={"/"} onClick={()=>props.logOut()}>logout</Link>
+              <NavDropdown.Item href="#logout" onClick={()=>props.logOut()}>logout</NavDropdown.Item>
               </NavDropdown.Item>
             </NavDropdown>
           </Navbar.Collapse>
