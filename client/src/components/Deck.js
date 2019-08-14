@@ -9,8 +9,6 @@ export default function Deck(props) {
   const handleShow = () => setShow(true);
   const handleClose = () => setShow(false)
 
-
-
   let cards = [];
   if (props.filterBy === ''){
     cards = props.deck.cards.slice(0, 6);
@@ -30,18 +28,15 @@ export default function Deck(props) {
             {cards.map((singleCard) => 
               <div key = {Math.random()}>
                 <div style = {{paddingLeft: '160px'}}></div>
-                <CardThumbnail singleCard = {singleCard} />
+                <CardThumbnail singleCard = {singleCard} deckTitle={props.deck.title} 
+                deckNames={props.deckNames}/>
               </div>
              )}
               <div style = {{paddingLeft: '20px'}}></div>
-            <NewCardModal showMe={show}  closeModal={handleClose.bind(this)}/>
-            <Button variant="outline-success" 
-            onClick={()=> {
-              handleShow()
-            }}
-            >Add New Card</Button>
-            </Card.Body>
-          </Card>
+            <NewCardModal showMe={show}  deckNames={props.deckNames} closeModal={handleClose.bind(this)}/>
+            <Button variant="outline-success" deckNames={props.deckNames} onClick={()=> handleShow()}>Add New Card</Button>
+          </Card.Body>
+        </Card>
       </div>
     </div>
   )

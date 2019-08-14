@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import { Card, Button, Modal } from 'react-bootstrap';
+import { Button, Modal } from 'react-bootstrap';
 import Controls from './Controls';
 import Deck from './Deck';
-import mockHttp from '../../services/http/__mocks__/http';
 import axios from 'axios'
 
 export default class Table extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      deckNames: [],
       decks: [],
       cards: [],
       users: [],
@@ -25,8 +25,17 @@ export default class Table extends Component {
   componentDidMount() {
     axios.get('/api/decks/table/1')
     .then((response) => {
-      console.log(response.data)
+
       this.setState({decks: response.data})
+      console.log(response)
+    })
+    //populated deckname for tickets
+    .then(() =>{
+      let deckHolder= []
+      this.state.decks.forEach(deck =>{
+        deckHolder.push({id: deck.id, title: deck.title})
+      })
+      this.setState({deckNames: deckHolder})
     })
     // mockHttp.getDecks(0)
     // .then((res) => {
@@ -45,6 +54,7 @@ export default class Table extends Component {
   searchClick(card) {
 
   }
+
 
   changeFilter(e) {
     if (this.state.filterBy === e.target.innerHTML){
@@ -80,6 +90,14 @@ export default class Table extends Component {
 
   submitNewDeck() {
     //submit new deck with this.state.newDeck.newDecktitle and table ID
+    axios.post('/api/decks/', {table_id: 1, title: this.state.newDeck.newDeckTitle})
+    .then((res) => console.log(res))
+  }
+
+  handleTextChange(e) {
+    let { newDeck } = this.state;
+    newDeck.newDeckTitle = e.target.value;
+    this.setState({newDeck})
   }
 
   render() {
@@ -92,32 +110,30 @@ export default class Table extends Component {
           users = {this.state.users}
           changeFilter = {this.changeFilter.bind(this)}
           searchClick = {this.searchClick.bind(this)}
+          handleModal = {this.handleModal.bind(this)}
           />
         {/* for each deck, create a deck */}
         {this.state.decks.length > 0 ? (<>
           {this.state.decks.map((deck) => <div key = {deck.id}>
-              <Deck filterBy = {this.state.filterBy} deck = {deck} />
+              <Deck filterBy = {this.state.filterBy} deck = {deck} 
+              deckNames={this.state.deckNames} />
               <div style = {{paddingBottom: '8px'}}></div>
             </div>)
           }
-          <Card style = {{width: '75%', height: '150px'}}>
-            <Button onClick = {()=>this.handleModal()} style = {{height: '75px', width: '75px'}} variant='success'>Add New Deck</Button>
-            <Modal show = {this.state.newDeck.newDeckModal}>
-              <Modal.Header>
-                <Modal.Title>New Deck</Modal.Title>
-                <Modal.Body>
-                  <p>Input Deck Title</p>
-                  <input type="text"/>
-                </Modal.Body>
-                <Modal.Footer>
-                  <Button variant='success' onClick={()=> this.submitNewDeck()}>Save Deck</Button>
-                  <Button variant='Danger' onClick={()=>this.handleModal()}>Cancel</Button>
-                </Modal.Footer>
-              </Modal.Header>
-            </Modal>
-          </Card>
         </>) : (<></>)}
-        
+        <Modal show = {this.state.newDeck.newDeckModal}>
+          <Modal.Header>
+            <Modal.Title>New Deck</Modal.Title>
+            <Modal.Body>
+              <p>Input Deck Title</p>
+              <input onChange = {(e) => this.handleTextChange(e)} value = {this.state.newDeck.newDeckTitle} type="text"/>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant='success' onClick={()=> this.submitNewDeck()}>Save Deck</Button>
+              <Button variant='danger' onClick={()=>this.handleModal()}>Cancel</Button>
+            </Modal.Footer>
+          </Modal.Header>
+        </Modal>
         {/* chat box??? */}
       </div>
     )

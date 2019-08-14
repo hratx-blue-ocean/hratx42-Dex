@@ -1,6 +1,7 @@
 import axios from 'axios';
 import global from '../../utils/global';
 import auth from '../auth.js'
+axios.defaults.headers.common = {'x-access-token': auth.getJwt()}
 
 const tryAxios = async function(endpoint, method, payload){
     try {
@@ -16,8 +17,10 @@ const http ={
     users: {
         async post(name, email, password){
         let result = await tryAxios('/api/users', 'post', {name, email, password})
-        console.log('result', result);
         return result
+        },
+        getByTableId(tableId){
+            return tryAxios(`/api/tables/${tableId}/users`, 'get');
         },
         put(id, email, password){
             return tryAxios(`/api/users/${id}`, 'put', {email, password})

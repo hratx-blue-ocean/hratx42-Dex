@@ -25,10 +25,6 @@ app.use((_, res, next) => {
 // middleware
 app.use(logger('dev'));
 app.use(bodyParser.json())
-// app.use((req, res, next) => {
-//     req.user = { userId: 11 }
-//     next()
-// })
 app.use(express.static(path.join(__dirname, '../client/public')));
 app.get('/dashboard', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/public/index.html'))
@@ -41,9 +37,10 @@ app.get('/table', (req, res) => {
 });
 
 // routes
-app.use('/api/auth', authRoute);
 app.use('/api/users', usersRoute);
-// app.use(jwtChecker.checkToken);
+app.use('/api/auth', authRoute);
+
+app.use(jwtChecker.checkToken);
 app.use('/api/tables', tablesRoute)
 app.use('/api/decks', decksRoute)
 app.use('/api/cards', cardsRoute)
@@ -64,6 +61,6 @@ app.use(function (err, req, res, next) {
     res.json('error');
 });
 
-// app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+app.listen(port, () => console.log(`Example app listening on port ${port}!`))
 
 module.exports = app;

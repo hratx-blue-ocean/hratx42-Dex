@@ -2,17 +2,18 @@ import React, { useState } from "react";
 import { Button, Modal, Container, Row, Col, Form} from 'react-bootstrap';
 
 
-export default function CardModal({closeModal, showMe, card}) {
+export default function CardModal({closeModal, showMe, card, deckTitle, deckNames}) {
   const [show, setShow] = useState(false);
   const handleClose = () => closeModal()
   const handleShow = () => setShow(true);
 
-  console.log(card)
 
   return (
   <>
   <Modal size="lg" show={showMe} onHide={handleClose}>
     <Container>
+    {/* {console.log(card)} */}
+
         {/* TITLES FOR Header Container for effort, impact, title, and exit */}
         <Row xs={12} style={styles.headerRow}>
           <Col xs={1} style={styles.effortImpactTitle}>
@@ -31,16 +32,16 @@ export default function CardModal({closeModal, showMe, card}) {
         {/* CONTENT FOR Header Container for effort, impact, title, and exit */}
         <Row xs={12} style={styles.headerRow}>
           <Col xs={1} style={styles.effortImpactInput}>
-          <input maxLength="2" value={card.weight} type="number" style={styles.effImpInputBox}/>
+          <input maxLength="2" value={card.card_weight} type="number" style={styles.effImpInputBox}/>
           </Col>
           <Col xs={1} style={styles.effortImpactInput}>
-          <input maxLength="2" value={card.impact} type="number" style={styles.effImpInputBox}/>
+          <input maxLength="2" value={card.card_impact} type="number" style={styles.effImpInputBox}/>
           </Col>
           {/* title input area */}
           <Col xs={10} style={styles.titleStyle}>
             <Form style={{width: '100%'}}>
               <Form.Group sm={8} controlId="exampleForm.ControltitleArea">
-                <Form.Control as="textarea" value={card.impact} rows="1" placeholder="title"/>
+                <Form.Control as="textarea" value={card.card_title} rows="1" placeholder="title"/>
               </Form.Group>
             </Form>
           </Col>
@@ -59,7 +60,7 @@ export default function CardModal({closeModal, showMe, card}) {
                   <div style={{fontWeight: 800}}>Tags</div>
                 </Col>
             </Row>
-            {/* content of players and tags */}
+            {/* LIST OF ALL POSSIBLE players and tags */}
             <Row>
                   <Col style={styles.playersStyle}>
                     <select>
@@ -70,31 +71,31 @@ export default function CardModal({closeModal, showMe, card}) {
                   </Col>
                   <Col style={styles.tagsStyle}>
                     <select>
-                    {card.labels.map(label =>{
+
+                    {/* {card.labels.map(label =>{
                         return (
-                            <option>{label}</option>
+                            <optio n>{label}</option>
                         )
-                    })}
+                    })} */}
                     </select>
                   </Col>
             </Row>
             {/* Return list of names and labels */}
             <Row>
                   <Col style={styles.playersStyle}>
-                      {/* MAP through names */}
-                    <select>
-                      <option>Miles</option>
-                      <option>Michael</option>
-                      <option>DJ</option>
-                    </select>
+                    {card.cards_members.map(name =>{
+                    return (
+                        <div>{name.member_name}</div>
+                    )
+                     })}
                   </Col>
                   <Col style={styles.tagsStyle}>
 
-                    {card.labels.map(label =>{
-                        return (
-                            <div>{label}</div>
-                        )
-                    })}
+                  {card.card_labels.map(label =>{
+                    return (
+                        <div style={{color: `${label.color}`}}>{label.label_name}</div>
+                    )
+                     })}
 
                   </Col>
             </Row>
@@ -103,7 +104,7 @@ export default function CardModal({closeModal, showMe, card}) {
               <Form style={{width: '100%', paddingTop:10}}>
               <Form.Group sm={8} controlId="exampleForm.ControlTextarea1">
                 {/* <Form.Label>Description</Form.Label> */}
-                <Form.Control as="textarea" rows="8" value={card.description} placeholder="description"/>
+                <Form.Control as="textarea" rows="8" value={card.card_description} placeholder="description"/>
               </Form.Group>
               </Form>
             </Row>
@@ -115,17 +116,22 @@ export default function CardModal({closeModal, showMe, card}) {
               <div>Add To Card</div>
             </Row>
             <Row style={styles.addToCardTrait}>
-              <input placeholder="date due" value={card.dueDate} style={{width:'100%'}}/> 
+              <input placeholder="date due" value={card.card_created} style={{width:'100%'}}/> 
             </Row>
             <Row style={styles.addToCardTrait}>
                 <input placeholder="gitLink"  value={card.gitLink}style={{width:'100%'}}/> 
             </Row>
             <Row style={styles.addToCardTrait}>
             <select style={{width:'100%'}}>
-              <option>BackLog</option>
-              <option>In Progress</option>
-              <option>Ready For Review</option>
-              <option>Completed</option>
+              <option>{deckTitle}</option>
+              {deckNames.map(name =>{
+                    if (name.title !== deckTitle) {
+                        return (
+                            <option>{name.title}</option>
+                        )
+                    }
+                })}
+
             </select>
             </Row>
             {/* <Row style={styles.addToCardTrait}>Completed</Row> */}
