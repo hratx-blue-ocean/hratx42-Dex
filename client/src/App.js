@@ -4,7 +4,7 @@ import Landing from './components/Landing.js';
 import Dashboard from './components/Dashboard.js';
 import Profile from './components/Profile.js';
 import auth from '../services/auth.js';
-import NavBar from './components/NavBar.js'
+import NavBar from './components/NavBar.js';
 import Table from './components/Table.js';
 <<<<<<< HEAD
 import http from '../services/http/http.js';
@@ -61,22 +61,30 @@ export default class App extends Component {
     this.submitProfileChanges = this.submitProfileChanges.bind(this);
   }
 
+<<<<<<< HEAD
 >>>>>>> 3531f1497f6777657533a4bc7103c58a685fd55f
 
 componentDidMount() {    
   global.flash = this.flash.bind(this)
   if(localStorage.getItem('token')) {
     this.login();
+=======
+  componentDidMount() {
+    global.flash = this.flash.bind(this);
+    if (localStorage.getItem('token')) {
+      this.login();
+    }
+>>>>>>> ac47602c4098202ebe1164fe014c64f155c72e59
   }
-}
 
-flash(message, variant, interval){
-  this.setState({flash: {show: true, message, variant}});
-  setTimeout(()=>{
-      this.setState({flash:{show: false, message, variant}})
-  }, interval)
-}
+  flash(message, variant, interval) {
+    this.setState({ flash: { show: true, message, variant } });
+    setTimeout(() => {
+      this.setState({ flash: { show: false, message, variant } });
+    }, interval);
+  }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
   // dashboard onChange event and submit functions
   changeProfileName(e) {
@@ -105,15 +113,20 @@ flash(message, variant, interval){
 login() {
   auth.setUser(this);
 }
+=======
+  login() {
+    auth.setUser(this);
+  }
+>>>>>>> ac47602c4098202ebe1164fe014c64f155c72e59
 
 logOut(){
   auth.logout();
   auth.setUser(this);
 }
 
-changeTableModal() {
-    this.setState({showTableModal: !this.state.showTableModal});
-}
+  changeTableModal() {
+    this.setState({ showTableModal: !this.state.showTableModal });
+  }
 
 // dashboard onChange event and submit functions
 changeProfileName(e) {
@@ -144,11 +157,15 @@ submitProfileChanges() {
       <>
         <Router>
 <<<<<<< HEAD
+<<<<<<< HEAD
         <h1>Welcome to Blue Ocean!</h1>
         <NavBar />
           <Route path="/" exact component={ Landing } />
           <Route 
 =======
+=======
+
+>>>>>>> ac47602c4098202ebe1164fe014c64f155c72e59
         {this.state.userId ===''?<Landing login={this.login.bind(this)}/>:<NavBar logOut ={this.logOut.bind(this)}/>}
         <Route 
 >>>>>>> 3531f1497f6777657533a4bc7103c58a685fd55f
@@ -177,7 +194,7 @@ submitProfileChanges() {
           <Route path="/TableSettings" component={ TableSettings } />
 >>>>>>> 3531f1497f6777657533a4bc7103c58a685fd55f
         </Router>
-        <Flash flashData={this.state.flash}/>
+        <Flash flashData={this.state.flash} />
       </>
     );
   }
