@@ -3,10 +3,10 @@ const pgClient = require('../hosteddb');
 const usersModel = {
   getUserByID: async id => {
     // update to include querying profiles table with INNER JOIN
-    const user = await pgClient.query(
+    const { rows: users } = await pgClient.query(
       `SELECT name, email FROM users WHERE id = ${id};`
     );
-    return user;
+    return users[0];
   },
   async getUsersByTableId(tableId) {
     try {

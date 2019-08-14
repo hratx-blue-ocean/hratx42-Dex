@@ -51,7 +51,6 @@ export default class App extends Component {
   }
 
   componentDidMount() {
-    console.log('I exist');
     global.flash = this.flash.bind(this);
     if (localStorage.getItem('token')) {
       this.login();
@@ -83,7 +82,6 @@ export default class App extends Component {
     const userId = auth.getUser();
     if (userId) {
       const user = await http.users.get(userId);
-      console.log('the user', user);
       this.setState({ user });
     }
   }
