@@ -8,7 +8,6 @@ import NavBar from './components/NavBar.js'
 import Table from './components/Table.js';
 import Flash from './components/Flash';
 import http from '../services/http/http.js';
-import './dashboardStyles/dashboardStyle.css';
 
 
 import global from '../utils/global'
