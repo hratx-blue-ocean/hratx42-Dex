@@ -20,7 +20,7 @@ export default function NavBar(props) {
             </Form>
             <Form style={{ marginRight: "25px" }}>
               <Button variant="outline-primary" className="mr-sm-2">
-              <Link to={"/dashboard"}>Dashboard</Link>
+              {/* <Link to={"/dashboard"}>Dashboard</Link> */}
               </Button>
             </Form>
             <NavDropdown title="Tables" id="collasible-nav-dropdown">

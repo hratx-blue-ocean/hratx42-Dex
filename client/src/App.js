@@ -119,7 +119,6 @@ export default class App extends Component {
     return (
       <>
         <Router>
-        <NavBar logOut={this.logOut.bind(this)} changeTableModal={this.changeTableModal.bind(this)} tables={this.state.tables} showenTable={this.state.showenTable} changeTable={this.changeTable.bind(this)}/>
           {auth.userIsLoggedIn() ? (
             <NavBar logOut={this.logOut.bind(this)} changeTableModal={this.changeTableModal.bind(this)} tables={this.state.tables} showenTable={this.state.showenTable}/>
           ) : null}
