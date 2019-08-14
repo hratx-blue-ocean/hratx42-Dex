@@ -45,11 +45,12 @@ export default function Register(props) {
       <form onSubmit={(event)=>handleSubmit(event)}>
         <label htmlFor={'register-email'}>Email: </label>
         <input
-          type="text"
+          type="email"
           id="register-email"
           value={email}
           placeholder={'Email'}
           onChange={(event) => {setEmail(event.target.value)}}
+          required
         />
         <label htmlFor={'register-first-name'}>First Name: </label>
         <input
@@ -58,6 +59,7 @@ export default function Register(props) {
           value={firstName}
           placeholder={'First Name'}
           onChange={(event) => {setFirstName(event.target.value)}}
+          required
         />
         <label htmlFor={'register-last-name'}>Last Name: </label>
         <input
@@ -66,12 +68,13 @@ export default function Register(props) {
           value={lastName}
           placeholder={'Last Name'}
           onChange={(event) => {setLastName(event.target.value)}}
+          required
         />
         <label htmlFor={'register-password1'}>Password: </label>
-        <input type="text" id="register-password1" value={password1} placeholder={'Password'}
+        <input type="password" id="register-password1" value={password1} placeholder={'Password'}
         onChange={(event)=>{setPassword1(event.target.value)}}/>
         <label htmlFor={'register-password2'}>Confirm Password: </label>
-        <input type="text" id="register-password2" value={password2} placeholder={'Password'}
+        <input type="password" id="register-password2" value={password2} placeholder={'Password'}
         onChange={(event)=>{setPassword2(event.target.value)}} />
         <Button onClick={(e) => handleSubmit(e)}>Sign up</Button>
       </form>
