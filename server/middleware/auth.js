@@ -28,22 +28,23 @@ const auth = (req, res, next) => {
           success: false,
           message: "Email not found "
         });
-      }
-      let user = result.rows[0];
-      const match = await bcrypt.compare(password, user.password);
-      if(match) {
-        let token = jwt.sign({ userId: user.id }, config.secret, { expiresIn: '7 days' });
-        // req.user = token;
-        res.header("x-access-token", token).status(201).json({
-          success: true, 
-          message: "Authentication Successful", 
-          token
-        })
       } else {
-        res.status(403).json({
-          success: false,
-          message: "Password is incorrect"
-        })
+        let user = result.rows[0];
+        const match = await bcrypt.compare(password, user.password);
+        if(match) {
+          let token = jwt.sign({ userId: user.id }, config.secret, { expiresIn: '7 days' });
+          // req.user = token;
+          res.header("x-access-token", token).status(201).json({
+            success: true, 
+            message: "Authentication Successful", 
+            token
+          })
+        } else {
+          res.status(403).json({
+            success: false,
+            message: "Password is incorrect"
+          })
+        }
       }
     })
   }
