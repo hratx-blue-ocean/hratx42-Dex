@@ -177,4 +177,7 @@ code {
   border-radius: 5px;
 }
 
+.CardThumbnailsMove:hover {
+  cursor: pointer;
+}
 /* END DASHBOARD STYLES */
