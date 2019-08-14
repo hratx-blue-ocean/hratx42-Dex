@@ -6,13 +6,13 @@ import {
   Button,
   NavDropdown,
   Nav,
-  Form,
+  Form
 } from "react-bootstrap";
 export default function NavBar(props) {
   return (
     <div>
         <Navbar bg="light" expand="lg" >
-          <Navbar.Brand href="#home" >
+          <Navbar.Brand href="#home" style={{ marginBottom: '22px' }}>
             <h2 style={{ marginLeft: "15px"  }}>Dex</h2>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -30,7 +30,7 @@ export default function NavBar(props) {
             </Form>
             <NavDropdown title="Tables" id="collasible-nav-dropdown">
               <NavDropdown.Item href="#action/3.2">
-                <Link to={"/table"}>Table 1</Link>
+                <Link to={"/table"} style={{color: 'black'}}>Table 1</Link>
                 </NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.3">table 2</NavDropdown.Item>
               <NavDropdown.Item href="#action/3.3">table 3</NavDropdown.Item>
@@ -40,12 +40,9 @@ export default function NavBar(props) {
               </NavDropdown.Item>
             </NavDropdown>
             <NavDropdown title="user name" id="collasible-nav-dropdown" style={{ marginRight: "15px" }}>
-            <NavDropdown.Item href="#action/3.1">
-                <Link to={"./dashboard"}>Dashboard</Link>
-              </NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item href="#action/3.4">
-                <Link to={"/"} onClick={()=>props.logOut()}>logout</Link>
+                <Link style={{color: 'black'}} to={"/"} onClick={()=>props.logOut()}>logout</Link>
               </NavDropdown.Item>
             </NavDropdown>
           </Navbar.Collapse>
