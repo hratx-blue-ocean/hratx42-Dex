@@ -2,7 +2,11 @@ import React from 'react';
 import Register from './Register/Register.js';
 import Login from './Login';
 import { Container, Row, Col, Image } from 'react-bootstrap';
+import auth from '../../services/auth.js';
 export default function Landing(props) {
+  if(auth.userIsLoggedIn()) {
+    props.history.push('/dashboard')
+  }
   return (
     <div style={{ backgroundColor: '#C3D1D1' }}>
       <Login login={props.login} />
