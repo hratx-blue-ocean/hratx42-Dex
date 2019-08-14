@@ -102,14 +102,14 @@ export default class App extends Component {
   submitProfileChanges() {
     http.users
       .post(
-        this.state.editProfileName,
-        this.state.editProfileEmail,
-        this.state.editProfilePassword
+        this.state.profile.editName,
+        this.state.profile.editEmail,
+        this.state.profile.editPassword,
       )
       .then(
-        () => this.setState({ editProfileName: '' }),
-        this.setState({ editProfileEmail: '' }),
-        this.setState({ editProfilePassword: '' })
+        () => this.setState({ profile: { editName: '' }}),
+        this.setState({ profile: { editEmail: '' }}),
+        this.setState({ profile: { editPassword: '' }})
       )
       .catch(err => console.log('Error: ', err));
   }
