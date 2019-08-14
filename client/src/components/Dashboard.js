@@ -1,4 +1,5 @@
 import React from 'react';
+import { userInfo } from 'os';
 
 export default function Dashboard(props) {
   return (
@@ -9,12 +10,12 @@ export default function Dashboard(props) {
         <form>
           <div className="dashboardNameInput">
             <h2>name</h2>
-            <input type="text" className="name" placeholder="name" onChange={e => {props.changeProfileName(e)}} value={props.editProfileName} />
+            <input type="text" className="name" placeholder={props.user.name} onChange={e => {props.changeProfileName(e)}} value={props.editProfileName} />
           </div>
 
           <div className="dashboardEmailInput">
             <h2>email</h2>
-            <input type="email" className="email" placeholder="email" onChange={e => {props.changeProfileEmail(e)}} value={props.editProfileEmail} />
+            <input type="email" className="email" placeholder={props.user.email} onChange={e => {props.changeProfileEmail(e)}} value={props.editProfileEmail} />
           </div>
 
           <div className="dashboardPasswordInput">

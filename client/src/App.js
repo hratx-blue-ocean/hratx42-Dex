@@ -146,6 +146,7 @@ export default class App extends Component {
               <Dashboard
                 {...props}
                 // state props
+                user={this.state.user}
                 tables={this.state.tables}
                 editProfileName={this.state.profile.editName}
                 editProfileEmail={this.state.profile.editEmail}
