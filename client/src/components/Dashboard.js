@@ -2,7 +2,6 @@ import React from 'react';
 
 export default function Dashboard(props) {
   return (
-    // test
     <div className="dashboardContainer">
       {/* edit profile area */}
       <div className="dashboardProfileForm" >
@@ -30,11 +29,11 @@ export default function Dashboard(props) {
       <div className="dashboardTables">
         <h2>your tables</h2>
         <div className="dashboardTablesContainer">
-          {props.boards.map(board =>
+          {props.tables.map(table =>
             <ul>
                 <li>
                   <div className="newTable">
-                    {board}
+                    {table}
                   </div>
                 </li>
             </ul>
