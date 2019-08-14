@@ -67,10 +67,12 @@ export default class App extends Component {
   }
 
   getTables() {
-    const userId = this.state.userId;
-    http.tables.get(userId).then(tables => {
-      this.setState({ tables });
-    });
+    const userId = auth.getUser();
+    if (userId) {
+      http.tables.get(userId).then(tables => {
+        this.setState({ tables });
+      });
+    }
   }
 
   logOut() {
