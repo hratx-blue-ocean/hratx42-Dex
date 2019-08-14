@@ -2,6 +2,8 @@ var express = require('express')
 var router = express.Router()
 const jwtChecker = require('../middleware/jwtChecker')
 const db = require('../../db/hosteddb');
+const tablesModel = require('../../db/models/tables')
+
 // router.use(jwtChecker.checkToken);
 router.get('/', (req, res)=>{
     //query string like ?userId=123
@@ -23,6 +25,12 @@ router.get('/', (req, res)=>{
 //     tableData.name = '';
 //     res.status(200).send(JSON.stringify(tableDataRows))
 // })
+
+//dev route
+router.get('/dev/:tableId', async (req, res) => {
+    const data = await tablesModel.getCompoundData(req.params.tableId)
+    res.status(200).json(data);
+})
 
 router.post('/', (req, res)=>{
     const table = req.body;
