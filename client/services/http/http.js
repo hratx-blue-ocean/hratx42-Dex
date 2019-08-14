@@ -51,6 +51,11 @@ const http = {
     post(table) {
       return tryAxios(`/api/tables`, 'post', table);
     },
+    postUser(tableId, userEmail) {
+      return tryAxios(`/api/tables/${tableId}/member`, 'put', {
+        email: userEmail,
+      });
+    },
     put(table) {
       return tryAxios(`/api/tables/${table.id}`, 'put', table);
     },
