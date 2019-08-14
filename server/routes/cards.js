@@ -24,16 +24,17 @@ router.get('/:id', (req, res) => {
 //create new card
 router.post('/', (req, res) => {
   const card = req.body;
-  //if req.user
-  //post card
-  cardsModel
-    .createNewCard(card)
-    .then(response => {
-      res.status(200).json(response);
-    })
-    .catch(err => {
-      res.status(404);
-    });
+  //@TODO: change this line
+  console.log('The card', card);
+  const userId = req.user || true;
+  tryCatch(async () => {
+    if (userId) {
+      let newCard = await cardsModel.createNewCard(card);
+      res.status(200).send(newCard);
+    } else {
+      res.status(401).send({ message: 'Unauthorized' });
+    }
+  });
 });
 
 //update card
