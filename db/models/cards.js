@@ -83,18 +83,12 @@ const cardsModel = {
 
   // create new card
   async createNewCard(card) {
-    console.log(1);
     const columnString = getColumnsString(card);
-    console.log(2);
     const valuesString = getValuesString(card);
-    console.log(3);
     const values = Object.values(card);
-    console.log(4);
-    let query = `Insert into cards ${columnString} values ${valuesString}`;
-    console.log(query);
-    const result = await pgClient.query(query, values);
-    console.log(result);
-    return result;
+    let query = `Insert into cards ${columnString} values ${valuesString} returning *`;
+    const { rows: cards } = await pgClient.query(query, values);
+    return cards[0];
   },
 
   // update card

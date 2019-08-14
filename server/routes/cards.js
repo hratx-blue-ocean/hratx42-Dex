@@ -29,8 +29,8 @@ router.post('/', (req, res) => {
   const userId = req.user || true;
   tryCatch(async () => {
     if (userId) {
-      await cardsModel.createNewCard(card);
-      res.status(200).send('YAY');
+      let newCard = await cardsModel.createNewCard(card);
+      res.status(200).send(newCard);
     } else {
       res.status(401).send({ message: 'Unauthorized' });
     }
