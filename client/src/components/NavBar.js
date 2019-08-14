@@ -30,7 +30,7 @@ export default function NavBar(props) {
             </NavDropdown>
           </Navbar.Collapse>
         </Navbar>
-      <TableSettings showModal = {props.showTableModal} changeTableModal = {props.changeTableModal} />
+      <TableSettings showTableModal = {props.showTableModal} changeTableModal = {props.changeTableModal} />
     </div>
   );
 }
