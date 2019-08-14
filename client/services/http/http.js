@@ -9,13 +9,15 @@ const tryAxios = async function(endpoint, method, payload) {
     const response = await axios[method](endpoint, payload);
     return response.data;
   } catch (error) {
-    console.log(error.response);
     global.flash(error.response.data.message || error.message, 'danger', 2000);
   }
 };
 
 const http = {
   users: {
+    get(userId) {
+      return tryAxios(`/api/users/${userId}`, 'get');
+    },
     async post(name, email, password) {
       let result = await tryAxios('/api/users', 'post', {
         name,
