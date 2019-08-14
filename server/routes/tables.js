@@ -1,6 +1,7 @@
 var express = require('express')
 var router = express.Router()
 const tablesModel = require('../../db/models/tables')
+const db = require('../../db/models/users')
 
 // router.use(jwtChecker.checkToken);
 router.get('/', async (req, res)=>{
@@ -15,12 +16,21 @@ router.get('/', async (req, res)=>{
     }
 })
 
-
 router.post('/', (req, res)=>{
     const table = req.body;
     //if req.user
         //post table
     res.status(200).send(JSON.stringify(table))
+})
+
+router.post('/', async (req, res) => {
+    const userEmail = req.body.email;
+    const {rows: dbResults} = await db.getUserInfoByEmail(userEmail);
+    if (dbResults[0]){
+        res.status(200).json({ok: 'found user'})
+    }else {
+        res.status(404).json({bad: 'couldn\'t find user'})
+    }
 })
 
 router.put('/:id', (req, res)=>{
