@@ -24,7 +24,6 @@ export default class Table extends Component {
   componentDidMount() {
     axios.get('/api/decks/table/1')
     .then((response) => {
-      console.log(response.data)
       this.setState({decks: response.data})
     })
     // mockHttp.getDecks(0)
