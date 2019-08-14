@@ -6,14 +6,9 @@ import Profile from './components/Profile.js';
 import auth from '../services/auth.js';
 import NavBar from './components/NavBar.js';
 import Table from './components/Table.js';
-<<<<<<< HEAD
-import http from '../services/http/http.js';
-// import './App.css';
-=======
 import Flash from './components/Flash';
 import http from '../services/http/http.js';
 
->>>>>>> 3531f1497f6777657533a4bc7103c58a685fd55f
 
 import global from '../utils/global'
 // import tables from '../dummyData/tables.js';
@@ -23,11 +18,7 @@ export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-<<<<<<< HEAD
-      userid: 0,
-=======
       userId: '',
->>>>>>> 3531f1497f6777657533a4bc7103c58a685fd55f
       boards: [],
       // dashboard edit profile form
       editProfileName: '',

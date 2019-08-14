@@ -24,12 +24,6 @@
   },
   "homepage": "https://github.com/selder18/blue-ocean-rewrite#readme",
   "dependencies": {
-<<<<<<< HEAD
-    "bcrypt": "^3.0.6",
-    "dotenv": "^8.0.0",
-    "lodash": "^4.17.13",
-    "pg": "^7.12.1"
-=======
     "@babel/runtime": "^7.4.4",
     "axios": "^0.18.1",
     "body-parser": "^1.19.0",
@@ -46,7 +40,6 @@
     "react-bootstrap": "^1.0.0-beta.11",
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.1"
->>>>>>> 3531f1497f6777657533a4bc7103c58a685fd55f
   },
   "devDependencies": {
     "babel-eslint": "^10.0.1",
@@ -59,11 +52,6 @@
     "eslint-plugin-node": "^8.0.1",
     "eslint-plugin-promise": "^4.1.1",
     "eslint-plugin-react": "^7.12.4",
-<<<<<<< HEAD
-    "eslint-plugin-react-hooks": "^1.5.0",
-    "eslint-plugin-standard": "^4.0.0",
-    "faker": "^4.1.0"
-=======
     "file-loader": "^3.0.1",
     "jest": "^24.7.1",
     "jest-dom": "^3.1.4",
@@ -74,6 +62,5 @@
     "webpack": "^4.30.0",
     "webpack-cli": "^3.3.6",
     "webpack-dev-server": "^3.3.1"
->>>>>>> 3531f1497f6777657533a4bc7103c58a685fd55f
-  }
+zz  }
 }
