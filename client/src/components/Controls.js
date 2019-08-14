@@ -29,22 +29,13 @@ export default function Controls(props) {
             ))}
           </div>
         )}
-        <Button style={{ height: '30px' }} variant='light' />
-        <div style={{ width: '50px' }} />
-        <div style={{ paddingLeft: '10px' }} />
-        <DropdownButton
-          id='dropdown-basic-button'
-          variant='success'
-          title={`${props.filterBy}`}
-        >
-          {props.users.map(user => (
-            <Dropdown.Item
-              key={Math.random()}
-              onClick={e => props.changeFilter(e)}
-            >
-              {user.name}
-            </Dropdown.Item>
-          ))}
+        <Button style = {{height: '30px'}} variant = 'light'></Button>
+        <div style = {{width: '50px'}}></div>
+        <div style = {{paddingLeft: '10px'}}></div>
+        <DropdownButton id="dropdown-basic-button" variant = 'success' title={`${props.filterBy}`}>
+          {props.users.map((user) => 
+            <Dropdown.Item key = {Math.random()} onClick = {(e) => props.changeFilter(e)}>{user.name}</Dropdown.Item>)
+          }
         </DropdownButton>
         <div style={{ position: 'relative', left: '30%' }}>
           <Button
