@@ -1,3 +1,6 @@
+import "core-js/stable";
+import "regenerator-runtime/runtime";
+
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
@@ -22,7 +25,7 @@ export default class App extends Component {
     super(props);
     this.state = {
       userId: '',
-      boards: [],
+      tables: [],
       // dashboard edit profile form
       editProfileName: '',
       editProfileEmail: '',
@@ -59,6 +62,15 @@ export default class App extends Component {
 
   login() {
     auth.setUser(this);
+    this.getTables();
+  }
+
+  getTables(){
+    const userId = this.state.userId
+    http.tables.get(userId)
+    .then(tables=>{
+      this.setState({tables})
+    })
   }
 
 logOut(){
