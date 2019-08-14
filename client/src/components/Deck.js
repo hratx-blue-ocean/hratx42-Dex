@@ -23,7 +23,12 @@ export default function Deck(props) {
     <div style = {{width: '75%'}}>
       <div>
         <Card style = {{backgroundColor: '#eee'}}>
-          <Card.Header>{props.deck.title}</Card.Header>
+          <Card.Header>
+              <span>
+                <span style = {{paddingRight: '30px'}}>{props.deck.title}</span>
+                <Button variant="outline-success" onClick={()=> {}}>Edit/Delete Deck</Button>
+              </span>
+            </Card.Header>
           <Card.Body className = 'row'>
           {cards.map((singleCard) => 
             <div key = {Math.random()}>
@@ -33,11 +38,7 @@ export default function Deck(props) {
             )}
             <div style = {{paddingLeft: '20px'}}></div>
           <NewCardModal showMe={show}  closeModal={handleClose.bind(this)}/>
-          <Button variant="outline-success" 
-          onClick={()=> {
-            handleShow()
-          }}
-          >Add New Card</Button>
+          <Button variant="outline-success" onClick={()=> handleShow()}>Add New Card</Button>
           </Card.Body>
         </Card>
       </div>
