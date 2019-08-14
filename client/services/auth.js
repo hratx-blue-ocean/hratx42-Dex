@@ -1,6 +1,6 @@
-import jwtDecode from "jwt-decode";
+import jwtDecode from 'jwt-decode';
 
-const tokenKey = "token";
+const tokenKey = 'token';
 
 function login(value) {
   localStorage.setItem(tokenKey, value);
@@ -8,7 +8,7 @@ function login(value) {
 
 function logout() {
   localStorage.removeItem(tokenKey);
-  window.location = "/";
+  window.location = '/';
 }
 
 function getJwt() {
@@ -21,6 +21,16 @@ function userIsLoggedIn() {
     return true;
   } else {
     return false;
+  }
+}
+
+function getUser() {
+  const jwt = localStorage.getItem(tokenKey);
+  if (jwt) {
+    const { userId } = jwtDecode(jwt);
+    return userId;
+  } else {
+    return null;
   }
 }
 
@@ -39,5 +49,6 @@ export default {
   logout,
   getJwt,
   userIsLoggedIn,
-  setUser
+  getUser,
+  setUser,
 };
