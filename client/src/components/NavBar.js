@@ -21,17 +21,12 @@ export default function NavBar(props) {
             <NavDropdown title="Tables" id="collasible-nav-dropdown">
               {allTables}
               <NavDropdown.Divider />
-              <NavDropdown.Item onClick={()=>props.changeTableModal()} href="#action/3.4">
-                Create new table
-              </NavDropdown.Item>
+              <NavDropdown.Item onClick={()=>props.changeTableModal()} href="#action/3.4">Create new table</NavDropdown.Item>
             </NavDropdown>
             <NavDropdown title="user name" id="collasible-nav-dropdown" style={{ marginRight: "15px" }}>
             <NavDropdown.Item><Link to={"/dashboard"}>Dashboard</Link></NavDropdown.Item>
-            
               <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">
               <NavDropdown.Item href="#logout" onClick={()=>props.logOut()}>logout</NavDropdown.Item>
-              </NavDropdown.Item>
             </NavDropdown>
           </Navbar.Collapse>
         </Navbar>
