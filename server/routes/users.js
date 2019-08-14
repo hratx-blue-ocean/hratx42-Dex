@@ -27,11 +27,20 @@ router.post('/', (req, res, next) => {
     db.getUserInfoByEmail(email)
     .then((result) => {  
         if(result.rowCount === 0) {     //if email does not exist create user
-            bcrypt.hash(password, saltRounds, (hashedPassword) => {
+            bcrypt.hash(password, saltRounds)
+            .then((hashedPassword) => {
                 db.createNewUser({name, hashedPassword, email})
                 .then((userCreated) => { 
                     next();
                 })
+                .catch((error) => {
+                    console.log('creating new user failed', error);
+                 res.status(403).json({ success: false, message: "Unexpected Error Occurred Try Later." })
+                })
+             })
+             .catch((error) => {
+                 console.log('creating new user password has failed', error);
+                 res.status(403).json({ success: false, message: "Unexpected Error Occurred Try Later." })
              })
         } else {    //if email already exists, send message
             res.status(400).json({ success: false, message: "Username already exists" })
