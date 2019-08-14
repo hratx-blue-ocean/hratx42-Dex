@@ -38,6 +38,7 @@ router.post('/', (req, res, next) => {
             console.log('Error getting user info @users.js line 37', err);
             res.status(404).send("error getting user")
         })
+
 }, auth.auth);
 
 router.put('/:id', (req, res)=>{
