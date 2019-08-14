@@ -10,8 +10,8 @@ export default class Table extends Component {
     super(props);
     this.state = {
       decks: [],
-      cards: [{}],
-      users: ['Michael', 'Brian', 'Laine', 'Rachel', 'Miles', 'Ibrahim'],
+      cards: [],
+      users: [],
       filterBy: '',
       sortBy: '',
       searchName: '',
@@ -25,12 +25,13 @@ export default class Table extends Component {
   componentDidMount() {
     axios.get('/api/decks/table/1')
     .then((response) => {
-      console.log(response)
+      console.log(response.data)
+      this.setState({decks: response.data})
     })
-    mockHttp.getDecks(0)
-    .then((res) => {
-      this.setState({decks: res})
-    })
+    // mockHttp.getDecks(0)
+    // .then((res) => {
+    //   this.setState({decks: res})
+    // })
   }
 
   saveTable(tableName, descName) {
@@ -56,7 +57,7 @@ export default class Table extends Component {
     let cards = [];
     for (let i = 0; i < decks.length; i++){
       for(let j = 0; j < decks[i].cards.length; j++){
-        if (decks[i].cards[j].description.includes(text)){
+        if (decks[i].cards[j].card_title.includes(text)){
           cards.push(decks[i].cards[j])
           // if (decks[i].cards[j].description.length > 50){
           //   cards[cards.length - 1] = cards[cards.length - 1].substring(0, 47) + '...';
@@ -94,10 +95,10 @@ export default class Table extends Component {
           />
         {/* for each deck, create a deck */}
         {this.state.decks.length > 0 ? (<>
-          {this.state.decks.map((deck) => <>
-              <Deck key = {deck.id} filterBy = {this.state.filterBy} deck = {deck} />
+          {this.state.decks.map((deck) => <div key = {deck.id}>
+              <Deck filterBy = {this.state.filterBy} deck = {deck} />
               <div style = {{paddingBottom: '8px'}}></div>
-            </>)
+            </div>)
           }
           <Card style = {{width: '75%', height: '150px'}}>
             <Button onClick = {()=>this.handleModal()} style = {{height: '75px', width: '75px'}} variant='success'>Add New Deck</Button>

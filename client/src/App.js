@@ -18,7 +18,7 @@ export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userId: '1',
+      userId: '',
       boards: [],
       // dashboard edit profile form
       editProfileName: '',
