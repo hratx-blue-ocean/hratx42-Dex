@@ -16,11 +16,9 @@ router.get('/:id', (req, res) => {
     .catch((err) => {
         res.status(402).send("Unexpected error occurred @routes/users.js in getting user")
     });
-
 })
 
 router.post('/', (req, res, next) => {
-
     const { email, password, name } = req.body;
     //post user to db if she doesn't already exist
     console.log(req.body)
@@ -32,14 +30,15 @@ router.post('/', (req, res, next) => {
                 .then((userCreated) => { 
                     next();
                 })
-            } else {    //if email already exists, send message
-                res.status(400).json({ success: false, message: "Username already exists" })
-            }
-        })
-        .catch((err) => {
-            console.log('Error getting user info @users.js line 37', err);
-            res.status(404).send("error getting user")
-        })
+            })
+        } else {    //if email already exists, send message
+            res.status(400).json({ success: false, message: "Username already exists" })
+        }
+    })
+    .catch((err) => {
+        console.log('Error getting user info @users.js line 37', err);
+        res.status(404).send("error getting user")
+    })
 }, auth.auth);
 
 router.put('/:id', (req, res)=>{
