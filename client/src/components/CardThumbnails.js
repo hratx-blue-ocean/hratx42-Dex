@@ -1,10 +1,19 @@
-import React from 'react';
+import React, { useState } from "react";
+import NewCardModal from './NewCardModal'
 import { Card, Button, Col, Row } from 'react-bootstrap';
 
 export default function CardThumbnails(props) {
+  const [show, setShow] = useState(false);
+
+  const handleShow = () => setShow(true);
+  const handleClose = () => setShow(false)
+
   return (
     <div style = {{width: '150px', height: '150px'}}>
-      <Card style = {{width: '150px', height: '150px'}} className = 'CardThumbnailsSingleCard'>
+      <NewCardModal showMe={show} card={props.singleCard} closeModal={handleClose.bind(this)}/>
+      <Card onClick={()=> {
+        setShow(true)
+      }}style = {{width: '150px', height: '150px'}} className = 'CardThumbnailsSingleCard'>
         <Row>
           <Col md={1}>
             <div className = 'cardThumbnails_impact'>{props.singleCard.card_weight}/{props.singleCard.card_impact}</div>
