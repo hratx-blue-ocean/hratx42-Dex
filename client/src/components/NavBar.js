@@ -18,11 +18,6 @@ export default function NavBar(props) {
                <strong>+</strong>
               </Button>
             </Form>
-            <Form style={{ marginRight: "25px" }}>
-              <Button variant="outline-primary" className="mr-sm-2">
-              {/* <Link to={"/dashboard"}>Dashboard</Link> */}
-              </Button>
-            </Form>
             <NavDropdown title="Tables" id="collasible-nav-dropdown">
               {allTables}
               <NavDropdown.Divider />
@@ -31,6 +26,8 @@ export default function NavBar(props) {
               </NavDropdown.Item>
             </NavDropdown>
             <NavDropdown title="user name" id="collasible-nav-dropdown" style={{ marginRight: "15px" }}>
+            <NavDropdown.Item><Link to={"/dashboard"}>Dashboard</Link></NavDropdown.Item>
+            
               <NavDropdown.Divider />
               <NavDropdown.Item href="#action/3.4">
               <NavDropdown.Item href="#logout" onClick={()=>props.logOut()}>logout</NavDropdown.Item>
