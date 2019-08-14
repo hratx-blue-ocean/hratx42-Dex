@@ -49,7 +49,7 @@ const http ={
     },
     decks: {
         get(tableId){
-            return tryAxios(`/api/decks?tableId=${tableId}`, 'get')
+            return tryAxios(`/api/decks/table/${tableId}`, 'get')
         },
         post(deck){
             return tryAxios(`/api/decks`, 'post', deck)

@@ -32,7 +32,8 @@ router.post('/', (req, res, next) => {
                 .then((userCreated) => { 
                     next();
                 })
-            } else {    //if email already exists, send message
+            })
+        }else {    //if email already exists, send message
                 res.status(400).json({ success: false, message: "Username already exists" })
             }
         })
