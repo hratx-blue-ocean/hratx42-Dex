@@ -4,13 +4,13 @@ const usersModel = {
   async getUserByID(id) {
     // update to include querying profiles table with INNER JOIN
     const query = 'SELECT name, email FROM users WHERE id = $1;';
-    const {rows: users} = await pgClient.query(query, [id]);
+    const { rows: users } = await pgClient.query(query, [id]);
     return users[0];
   },
   async getUsersByTableId(tableId) {
     try {
       const query =
-        'select name from users inner join tables_members on tables_members.table_id = $1 and tables_members.member_id = users.id';
+        'select distinct users.name, users.id from users inner join tables_members on tables_members.table_id = $1 and tables_members.member_id = users.id';
       const { rows: users } = await pgClient.query(query, [tableId]);
       return users;
     } catch (error) {
