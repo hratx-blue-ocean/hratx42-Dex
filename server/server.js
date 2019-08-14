@@ -25,10 +25,6 @@ app.use((_, res, next) => {
 // middleware
 app.use(logger('dev'));
 app.use(bodyParser.json())
-app.use((req, res, next) => {
-    console.log("req headers", req.headers);
-    next();
-})
 app.use(express.static(path.join(__dirname, '../client/public')));
 app.get('/dashboard', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/public/index.html'))
@@ -43,7 +39,7 @@ app.get('/table', (req, res) => {
 // routes
 app.use('/api/auth', authRoute);
 app.use('/api/users', usersRoute);
-app.use(jwtChecker.checkToken);
+// app.use(jwtChecker.checkToken);
 app.use('/api/tables', tablesRoute)
 app.use('/api/decks', decksRoute)
 app.use('/api/cards', cardsRoute)
