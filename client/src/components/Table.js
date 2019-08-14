@@ -148,17 +148,12 @@ export default class Table extends Component {
         {/* for each deck, create a deck */}
         {this.state.decks.length > 0 ? (<>
           {this.state.decks.map((deck) => <div key = {deck.id}>
-<<<<<<< HEAD
               <Deck 
                 filterBy = {this.state.filterBy} 
                 deck = {deck} 
                 deckNames={this.state.deckNames}
                 deleteDeck = {this.deleteDeck.bind(this)}
                 editDeck = {this.editDeck.bind(this)} />
-=======
-              <Deck filterBy = {this.state.filterBy} deck = {deck} 
-              deckNames={this.state.deckNames} newCardData={this.newCardDataCollector}/>
->>>>>>> bcfecec224a8965602b1f3b08b46a607a110822f
               <div style = {{paddingBottom: '8px'}}></div>
             </div>)
           }
