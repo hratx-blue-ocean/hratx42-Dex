@@ -33,23 +33,23 @@ router.post('/', (req, res) => {
 });
 
 router.post('/invite', async (req, res) => {
-    const userEmail = req.body.email;
-    const tableId = req.body.tableId;
-    try{
-        const {rows: dbResults} = await db.getUserInfoByEmail(userEmail);
-        const user = await dbResults[0];
-        if (!user){
-            res.status(404).json({error: 'not found'})
-            return;
-        }else {
-            const result = await tablesModel.addUserToTable(tableId, user.id);
-            await console.log('result: ', result)
-            res.status(200).json({ok: `added user ${user.id} to table ${tableId}`});
-        }
-    } catch (error){
-        res.status(500).send({message: "Internal server error"})
+  const userEmail = req.body.email;
+  const tableId = req.body.tableId;
+  try {
+    const { rows: dbResults } = await db.getUserInfoByEmail(userEmail);
+    const user = await dbResults[0];
+    if (!user) {
+      res.status(404).json({ error: 'not found' });
+      return;
+    } else {
+      const result = await tablesModel.addUserToTable(tableId, user.id);
+      await console.log('result: ', result);
+      res.status(200).json({ ok: `added user ${user.id} to table ${tableId}` });
     }
-})
+  } catch (error) {
+    res.status(500).send({ message: 'Internal server error' });
+  }
+});
 
 router.put('/:id', (req, res) => {
   const table = req.body;
