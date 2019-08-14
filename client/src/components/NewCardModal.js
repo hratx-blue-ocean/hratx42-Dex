@@ -3,10 +3,21 @@ import React, { useState } from "react";
 import { Button, Modal, Container, Row, Col, Form} from 'react-bootstrap';
 
 
-export default function CardModal({closeModal, showMe}) {
+export default function CardModal({closeModal, showMe, deckNames, newCardData}) {
   const [show, setShow] = useState(false);
+
+  const [effort, setEffort] = useState(5);
+  const [impact, setImpact] = useState(3);
+  const [title, setTitle] = useState();
+  const [player, setPlayer] = useState();
+  const [tags, setTags] = useState();
+  const [dueDate, setDate] = useState();
+  const [deck, setDeck] = useState();
+  const [desc, setDesc] = useState();
+
+
   const handleClose = () => closeModal()
-  const handleShow = () => setShow(true);
+//   const handleShow = () => setShow(true);
 
   // console.log(card.weight)
 
@@ -32,17 +43,17 @@ export default function CardModal({closeModal, showMe}) {
         {/* CONTENT FOR Header Container for effort, impact, title, and exit */}
         <Row xs={12} style={styles.headerRow}>
           <Col xs={1} style={styles.effortImpactInput}>
-          <input maxLength="2" value={5} type="number" style={styles.effImpInputBox}/>
+          <input maxLength="2"  placeholder={5} type="number" onChange={()=> setEffort(event.target.value)} style={styles.effImpInputBox}/>
           </Col>
           <Col xs={1} style={styles.effortImpactInput}>
-          <input maxLength="2" value={3} type="number" style={styles.effImpInputBox}/>
+          <input maxLength="2" placeholder={3} type="number" onChange={()=> setImpact(event.target.value)} style={styles.effImpInputBox}/>
           </Col>
           {/* title input area */}
           <Col xs={10} style={styles.titleStyle}>
                         <Form style={{width: '100%'}}>
               <Form.Group sm={8} controlId="exampleForm.ControltitleArea">
                 {/* <Form.Label>Description</Form.Label> */}
-                <Form.Control as="textarea" rows="1" placeholder="title"/>
+                <Form.Control as="textarea" rows="1" onChange={()=> setTitle(event.target.value)} placeholder="title"/>
               </Form.Group>
               </Form>
           </Col>
@@ -64,24 +75,26 @@ export default function CardModal({closeModal, showMe}) {
             {/* content of players and tags */}
             <Row>
                   <Col style={styles.playersStyle}>
-                    <select>
+                    <select onChange={()=> setPlayer(event.target.value) }>
                     {/* {card.labels.map(label =>{
                         return (
                             <option>{label}</option>
                         )
                     })} */}
                       {/* Map through these */}
-                      <option>Miles</option>
-                      <option>Michael</option>
-                      <option>DJ</option>
+                      <option></option>
+                      <option value="Miles">Miles</option>
+                      <option value="Michael">Michael</option>
+                      <option value="DJ">DJ</option>
                     </select>
                   </Col>
                   <Col style={styles.tagsStyle}>
-                    <select>
+                  <select onChange={()=> setTags(event.target.value) }>
                       {/* Map through these */}
-                      <option>FrontEnd</option>
-                      <option>BackEnd</option>
-                      <option>Git</option>
+                      <option></option>
+                      <option value="FrontEnd">FrontEnd</option>
+                      <option value="BackEnd">BackEnd</option>
+                      <option value="Git">Git</option>
                     </select>
                   </Col>
             </Row>
@@ -91,7 +104,7 @@ export default function CardModal({closeModal, showMe}) {
               <Form style={{width: '100%', paddingTop:10}}>
               <Form.Group sm={8} controlId="exampleForm.ControlTextarea1">
                 {/* <Form.Label>Description</Form.Label> */}
-                <Form.Control as="textarea" rows="8" placeholder="description"/>
+                <Form.Control as="textarea" rows="8" onChange={()=> setDesc(event.target.value)} placeholder="description"/>
               </Form.Group>
               </Form>
             </Row>
@@ -103,17 +116,18 @@ export default function CardModal({closeModal, showMe}) {
               <div>Add To Card</div>
             </Row>
             <Row style={styles.addToCardTrait}>
-              <input placeholder="date due" style={{width:'100%'}}/> 
+              <input placeholder="date due" onChange={()=> setDate(event.target.value)} style={{width:'100%'}}/> 
             </Row>
-            <Row style={styles.addToCardTrait}>
+            {/* <Row style={styles.addToCardTrait}>
                 <input placeholder="gitLink" style={{width:'100%'}}/> 
-            </Row>
+            </Row> */}
             <Row style={styles.addToCardTrait}>
-            <select style={{width:'100%'}}>
-              <option>BackLog</option>
-              <option>In Progress</option>
-              <option>Ready For Review</option>
-              <option>Completed</option>
+            <select style={{width:'100%'}}  onChange={()=> setDeck(event.target.value) }>
+            {deckNames.map(name =>{
+                return (
+                    <option>{name.title}</option>
+                )
+            })}
             </select>
             </Row>
             {/* <Row style={styles.addToCardTrait}>Completed</Row> */}
@@ -122,7 +136,9 @@ export default function CardModal({closeModal, showMe}) {
 
         {/* Button to Submit */}
         <Row style={styles.submitButton}>
-            <Button variant="primary">Submit</Button>
+            <Button onClick={()=> {
+                newCardData(effort, impact, title, player, tags, dueDate, deck, desc)
+            }} variant="primary">Submit</Button>
         </Row>
 
     </Container>
