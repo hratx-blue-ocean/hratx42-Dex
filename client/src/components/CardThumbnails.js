@@ -12,7 +12,7 @@ export default function CardThumbnails(props) {
   return (
     <div style = {{width: '150px', height: '150px'}}>
       
-      <EditCardModal key={Math.random()} showMe={show} deckNames={props.deckNames} deckTitle={props.deckTitle} card={props.singleCard} closeModal={handleClose.bind(this)}/>
+      <EditCardModal editCard={props.editCard} key={Math.random()} showMe={show} deckNames={props.deckNames} deckTitle={props.deckTitle} card={props.singleCard} closeModal={handleClose.bind(this)}/>
       <Card onClick={()=> {
         setShow(true)
       }}style = {{width: '150px', height: '150px'}} className = 'CardThumbnailsSingleCard'>

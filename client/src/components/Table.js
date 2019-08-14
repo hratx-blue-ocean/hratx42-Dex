@@ -22,6 +22,8 @@ export default class Table extends Component {
     };
     this.handleModal = this.handleModal.bind(this);
     this.newCardDataCollector=this.newCardDataCollector.bind(this)
+    this.editCardDataCollector=this.newCardDataCollector.bind(this)
+
   }
   componentDidMount() {
     http.decks.get(1)
@@ -54,9 +56,22 @@ export default class Table extends Component {
     console.log(title)
     console.log(players)
     console.log(tag)
-    // console.log(dueDate)
-    // console.log(deck)
-    // console.log(desc)
+    console.log(dueDate)
+    console.log(deck)
+    console.log(desc)
+  }
+
+  editCardDataCollector (id,deckId,eff,imp,title,players,tag,dueDate,deck,desc) {
+    console.log(id)
+    console.log(deckId)
+    console.log(eff)
+    console.log(imp)
+    console.log(title)
+    console.log(players)
+    console.log(tag)
+    console.log(dueDate)
+    console.log(deck)
+    console.log(desc)
   }
   
 
@@ -172,8 +187,9 @@ export default class Table extends Component {
                 deckNames={this.state.deckNames}
                 deckIndex = {deckIndex}
                 deleteDeck = {this.deleteDeck.bind(this)}
-                editDeck = {this.editDeck.bind(this)}
-                moveCard = {this.moveCard.bind(this)} />
+                newCardData={this.newCardDataCollector}
+                editCard={this.editCardDataCollector}
+                editDeck = {this.editDeck.bind(this)} />
               <div style = {{paddingBottom: '8px'}}></div>
             </div>)
           }
