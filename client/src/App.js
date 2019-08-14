@@ -46,13 +46,11 @@ export default class App extends Component {
     this.submitProfileChanges = this.submitProfileChanges.bind(this);
   }
 
-  async componentDidMount() {
+  componentDidMount() {
     global.flash = this.flash.bind(this);
     if (localStorage.getItem('token')) {
       this.login();
     }
-    let users = await http.users.getByTableId(1);
-    console.log('USERS GOTT', users);
   }
 
   flash(message, variant, interval) {
