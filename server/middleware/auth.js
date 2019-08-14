@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 const config = {secret: "supersecuresecret"}
 
 //connect to db later
-const db = require('../../db/hosteddb.js');
+const db = require('../../db/models/users.js');
 
 const auth = (req, res, next) => {
   if(req.method === 'GET') {

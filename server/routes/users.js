@@ -32,15 +32,16 @@ router.post('/', (req, res, next) => {
                 .then((userCreated) => { 
                     next();
                 })
-            } else {    //if email already exists, send message
-                res.status(400).json({ success: false, message: "Username already exists" })
-            }
-        })
-        .catch((err) => {
-            console.log('Error getting user info @users.js line 37', err);
-            res.status(404).send("error getting user")
-        })
-}, auth.auth);
+             })
+        } else {    //if email already exists, send message
+            res.status(400).json({ success: false, message: "Username already exists" })
+        }
+    })
+    .catch((err) => {
+        console.log('Error getting user info @users.js line 37', err);
+        res.status(404).send("error getting user")})
+    }
+    , auth.auth);
 
 router.put('/:id', (req, res)=>{
 
