@@ -36,7 +36,7 @@ const tablesModel = {
         return insertedMemberId;
     },
     async removeUserFromTable(tableId, memberId){
-        const query = `delete from tables_members where table_id = $1 and member_id = $2;`;
+        const query = `delete from tables_members where table_id = $1 and member_id = $2 returning 1;`;
         const {rows: result} = await pgClient.query(query, [tableId, memberId]);
         const deletedMemberId = await result[0];
         return deletedMemberId;

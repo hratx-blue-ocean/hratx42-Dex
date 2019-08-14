@@ -114,19 +114,19 @@ const cardsModel = {
     );
     return updatedCard;
   },
-  // async addUserToTable(tableId, memberId){
-  //   const query = `insert into tables_members (table_id, member_id)
-  //                  values ($1, $2) returning member_id;`;
-  //   const {rows: result} = await pgClient.query(query, [tableId, memberId]);
-  //   const insertedMemberId = await result[0].member_id;
-  //   return insertedMemberId;
-  // },
-  // async removeUserFromTable(tableId, memberId){
-  //   const query = `delete from tables_members where table_id = $1 and member_id = $2;`;
-  //   const {rows: result} = await pgClient.query(query, [tableId, memberId]);
-  //   const deletedMemberId = await result[0];
-  //   return deletedMemberId;
-  // },
+  async addUserToCard(cardId, memberId){
+    const query = `insert into cards_members (card_id, user_id)
+                   values ($1, $2) returning user_id;`;
+    const {rows: result} = await pgClient.query(query, [cardId, memberId]);
+    const insertedMemberId = await result[0].member_id;
+    return insertedMemberId;
+  },
+  async removeUserFromCard(cardId, memberId){
+    const query = `delete from cards_members where card_id = $1 and user_id = $2 returning 1;`;
+    const {rows: result} = await pgClient.query(query, [cardId, memberId]);
+    const deletedMemberId = await result[0];
+    return deletedMemberId;
+  },
   // delete card
   async deleteCard(cardID){
     const deletedCard = await pgClient.query(
