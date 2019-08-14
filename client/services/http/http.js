@@ -1,6 +1,7 @@
 import axios from 'axios';
 import global from '../../utils/global';
 import auth from '../auth.js'
+axios.defaults.headers.common = {'x-access-token': auth.getJwt()}
 
 const tryAxios = async function(endpoint, method, payload){
     try {
