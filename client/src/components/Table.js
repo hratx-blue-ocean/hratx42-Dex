@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import Controls from './Controls';
 import Deck from './Deck';
-import axios from 'axios';
 import http from '../../services/http/http.js';
 
 export default class Table extends Component {
@@ -23,11 +22,10 @@ export default class Table extends Component {
     this.handleModal = this.handleModal.bind(this);
   }
   componentDidMount() {
-    axios.get('/api/decks/table/1')
+    http.decks.get(1)
     .then((response) => {
-
-      this.setState({decks: response.data})
-      console.log(response)
+      console.log('table data', response)
+      this.setState({decks: response})
     })
     //populated deckname for tickets
     .then(() =>{
@@ -95,7 +93,7 @@ export default class Table extends Component {
 
   submitNewDeck() {
     //submit new deck with this.state.newDeck.newDecktitle and table ID
-    axios.post('/api/decks/', {table_id: 1, title: this.state.newDeck.newDeckTitle})
+    http.decks.post({table_id: 1, title: this.state.newDeck.newDeckTitle})
     .then((res) => console.log(res))
   }
 
