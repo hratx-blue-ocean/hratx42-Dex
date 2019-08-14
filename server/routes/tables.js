@@ -11,7 +11,7 @@ router.get('/', async (req, res) => {
   //if req.user
   try {
     const tables = await tablesModel.getByUserId(userId);
-    res.status(200).send(JSON.stringify(tables));
+    res.status(200).send(tables);
   } catch (error) {
     res.status(500).send({ message: 'Internal server error' });
   }
