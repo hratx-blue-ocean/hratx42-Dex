@@ -27,6 +27,7 @@ export default class App extends Component {
       userId: '', //NB userId should be deprecated in favor of user, which contains id
       user: {},
       tables: [],
+      showenTable: null,
       // dashboard edit profile form
       profile: {
         editName: '',
@@ -122,13 +123,15 @@ export default class App extends Component {
       )
       .catch(err => console.log('Error: ', err));
   }
-
+  changeTable(id){
+    this.setState({showenTable:id})
+  }
   render() {
     return (
       <>
         <Router>
           {auth.userIsLoggedIn() ? (
-            <NavBar logOut={this.logOut.bind(this)} />
+            <NavBar logOut={this.logOut.bind(this)} showTableModal={this.state.showTableModal} changeTableModal={this.changeTableModal.bind(this)} tables={this.state.tables} showenTable={this.state.showenTable}/>
           ) : null}
           <Route
             path="/"
