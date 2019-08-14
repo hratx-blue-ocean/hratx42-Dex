@@ -17,7 +17,7 @@ export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userId: '',
+      userId: '1',
       boards: [],
       flash: {
         show: false,

@@ -3,6 +3,7 @@ import { Card, Button, Modal } from 'react-bootstrap';
 import Controls from './Controls';
 import Deck from './Deck';
 import mockHttp from '../../services/http/__mocks__/http';
+import axios from 'axios'
 
 export default class Table extends Component {
   constructor(props) {
@@ -22,6 +23,10 @@ export default class Table extends Component {
     this.handleModal = this.handleModal.bind(this);
   }
   componentDidMount() {
+    axios.get('/api/decks/1')
+    .then((response) => {
+      console.log(response)
+    })
     mockHttp.getDecks(0)
     .then((res) => {
       this.setState({decks: res})
