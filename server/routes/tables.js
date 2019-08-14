@@ -13,25 +13,6 @@ router.get('/', (req, res)=>{
     res.status(200).send(`Tables for user ${userId}`)
 })
 
-// router.get('/table-master/:id', async (req, res) => {
-//     console.log(req.params.id);
-//     // console.log(req.id);
-//     const tableDataRows = await db.getMasterTableData(req.params.id).rows;
-//     // tableData = tableData.
-//     const tableData = {
-// 
-//     };
-//     tableData.id = tableDataRows[0].table_id;
-//     tableData.name = '';
-//     res.status(200).send(JSON.stringify(tableDataRows))
-// })
-
-//dev route
-router.get('/dev/:tableId', async (req, res) => {
-    const data = await tablesModel.getCompoundData(req.params.tableId)
-    res.status(200).json(data);
-})
-
 router.post('/', (req, res)=>{
     const table = req.body;
     //if req.user
