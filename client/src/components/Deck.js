@@ -31,7 +31,7 @@ export default function Deck(props) {
               <div key = {Math.random()}>
                 <div style = {{paddingLeft: '160px'}}></div>
                 <CardThumbnail singleCard = {singleCard} deckTitle={props.deck.title} 
-                deckNames={props.deckNames}/>
+                deckNames={props.deckNames} editCard={props.editCard}/>
               </div>
              )}
               <div style = {{paddingLeft: '20px'}}></div>
