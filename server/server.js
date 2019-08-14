@@ -25,6 +25,10 @@ app.use((_, res, next) => {
 // middleware
 app.use(logger('dev'));
 app.use(bodyParser.json())
+// app.use((req, res, next) => {
+//     req.user = { userId: 11 }
+//     next()
+// })
 app.use(express.static(path.join(__dirname, '../client/public')));
 app.get('/dashboard', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/public/index.html'))
