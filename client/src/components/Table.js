@@ -85,7 +85,7 @@ export default class Table extends Component {
 
   submitNewDeck() {
     //submit new deck with this.state.newDeck.newDecktitle and table ID
-    axios.post('/api/decks/', {table_id: 1, title: this.state.newDeck.newDeckTitle})
+    http.decks.post({table_id: 1, title: this.state.newDeck.newDeckTitle})
     .then((res) => console.log(res))
   }
 
