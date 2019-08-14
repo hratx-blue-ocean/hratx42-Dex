@@ -14,28 +14,14 @@ router.get('/table/:tableId', async (req, res)=>{
         console.log("Authorized ", authorized);
         authorized = true;
         if(authorized){
-            //this is where the monster query goes
-            const {rows: decks} = await decksModel.getByTableId(tableId);
+            //this is the monster query
+            const {rows: decks} = await decksModel.getCompoundData(tableId);
             res.status(200).send(decks)
         } else {
             res.status(401).send({message: "Unathorized"})
         }
     }, res)
 })
-
-//dev endpoint
-router.get('/dev/:tableId', async (req, res) =>{
-    const {tableId} = req.params;
-    const decks = await decksModel.getByTableId(tableId)
-    res.status(200).json(decks) 
-})
-
-// router.get('/:id/cards', (req, res) =>{
-//     db.getCardsByDeckId(req.params.id)
-//     .then(results => results.rows)
-//     .then(rows => res.status(200).json(rows))
-//     .catch(err => console.error(err))
-// })
 
 router.post('/', (req, res)=>{
     const deck = req.body;

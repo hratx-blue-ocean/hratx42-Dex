@@ -15,11 +15,6 @@ router.get('/', async (req, res)=>{
     }
 })
 
-//dev route
-router.get('/dev/:tableId', async (req, res) => {
-    const data = await tablesModel.getCompoundData(req.params.tableId)
-    res.status(200).json(data);
-})
 
 router.post('/', (req, res)=>{
     const table = req.body;
