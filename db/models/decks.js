@@ -2,17 +2,16 @@ const pgClient = require('../hosteddb');
 const cardsModel = require('./cards.js');
 
 const decksModel = {
-    async getByTableId(tableId){
-        //@TODO: Here goes the monster query
-        const query = `select * from decks where table_id = $1`
-        const values = [tableId]
-        const decks = await pgClient.query(query, values);
-        return decks;
-    },
     async get(id){
         const query = 'select * from decks where id = $1'
         const {rows: decks} = pgClient.query(query, id);
         return decks[0];
+    },
+    async getByTableId(tableId){
+        const query = `select * from decks where table_id = $1`
+        const values = [tableId]
+        const decks = await pgClient.query(query, values);
+        return decks;
     },
     async getCompoundData(id){
         const {rows: decks} = await decksModel.getByTableId(id)
