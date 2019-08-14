@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import Controls from './Controls';
 import Deck from './Deck';
-import axios from 'axios'
+import axios from 'axios';
+import http from '../../services/http/http.js';
 
 export default class Table extends Component {
   constructor(props) {
@@ -11,8 +12,7 @@ export default class Table extends Component {
       decks: [],
       cards: [],
       users: [],
-      filterBy: '',
-      sortBy: '',
+      filterBy: 'Filter',
       searchName: '',
       newDeck: {
         newDeckModal: false,
@@ -26,6 +26,11 @@ export default class Table extends Component {
     .then((response) => {
       console.log(response)
       this.setState({decks: response.data})
+    })
+    http.users.getByTableId(1)
+    .then((res)=> {
+      console.log(res)
+      this.setState({users: res})
     })
     // mockHttp.getDecks(0)
     // .then((res) => {
@@ -47,7 +52,7 @@ export default class Table extends Component {
 
   changeFilter(e) {
     if (this.state.filterBy === e.target.innerHTML){
-      this.setState({filterBy: ''});
+      this.setState({filterBy: 'Filter'});
     } else {this.setState({filterBy: e.target.innerHTML})}
   }
 
@@ -100,6 +105,7 @@ export default class Table extends Component {
           changeFilter = {this.changeFilter.bind(this)}
           searchClick = {this.searchClick.bind(this)}
           handleModal = {this.handleModal.bind(this)}
+          filterBy = {this.state.filterBy}
           />
         {/* for each deck, create a deck */}
         {this.state.decks.length > 0 ? (<>

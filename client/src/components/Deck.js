@@ -10,13 +10,15 @@ export default function Deck(props) {
   const handleClose = () => setShow(false)
 
   let cards = [];
-  if (props.filterBy === ''){
+  if (props.filterBy === 'Filter'){
     cards = props.deck.cards.slice(0, 6);
   } else {
     props.deck.cards.forEach((card) => {
-      if (card.users.includes(props.filterBy)){
-        cards.push(card);
-      }
+      card.cards_members.forEach((member) => {
+        if (member.member_name.includes(props.filterBy)) {
+          cards.push(card);
+        }
+      })
     })
   }
   return (
