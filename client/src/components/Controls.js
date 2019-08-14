@@ -28,6 +28,7 @@ export default function Controls(props) {
           }
         </DropdownButton>
         <div style = {{position: 'relative', left: '30%'}}>
+        <Button onClick = {()=>props.handleModal()} style = {{height: '75px', width: '75px'}} variant='success'>New Deck</Button>
           {/* for each user, create button */}
           <Button style = {{borderRadius: '50%'}} variant='secondary'>US</Button>
           <Button style = {{borderRadius: '50%'}} variant='secondary'>ME</Button>
