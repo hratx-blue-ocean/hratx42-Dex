@@ -5,7 +5,7 @@ import { Container, Row, Col, Card, Image } from 'react-bootstrap';
 export default function Landing(props) {
   return (
     <div>
-      <Login />
+      <Login login = {props.login} />
       <Container>
         <Row>
           <Col>

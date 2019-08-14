@@ -45,7 +45,7 @@ router.post('/', (req, res, next)=>{
     })
     .catch((err) => {
         console.log('Error getting user info @users.js line 37', err);
-        res.status(404).json({user, message: "Unexpected error occured try later"})
+        res.status(404).send("error getting user")
     })
 }, auth.auth);
 
