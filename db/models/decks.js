@@ -8,7 +8,7 @@ const decksModel = {
     return users[0];
   },
   async getByTableId(tableId) {
-    const query = `select * from decks where table_id = $1`;
+    const query = `select * from decks where table_id = $1 order by id;`;
     const values = [tableId];
     const decks = await pgClient.query(query, values);
     return decks;
