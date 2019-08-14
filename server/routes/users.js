@@ -20,30 +20,39 @@ router.get('/:id', (req, res) => {
 
 router.post('/', (req, res, next) => {
     const { email, password, name } = req.body;
-    //post user to db if she doesn't already exist
+    //post user to usersModel if she doesn't already exist
+    // console.log('creating user', req.body)
     usersModel.getUserInfoByEmail(email)
     .then((result) => {  
         if(result.rowCount === 0) {     //if email does not exist create user
-            bcrypt.hash(password, saltRounds, (err, hashedPassword) => {
-                usersModel.createNewUser(name, hashedPassword, email)
-                .then((result) => { 
+            bcrypt.hash(password, saltRounds)
+            .then((hashedPassword) => {
+                usersModel.createNewUser({name, hashedPassword, email})
+                .then((userCreated) => { 
                     next();
                 })
-            })
-        }else {    
-            //if email already exists, send message
-            res.status(400).json({ success: false, message: "Email already exists" })
-        }})
-        .catch((err) => {
-            console.log('Error getting user info @users.js line 37', err);
-            res.status(404).send("error getting user")
-        })
-
-}, auth.auth);
+                .catch((error) => {
+                    console.log('creating new user failed', error);
+                 res.status(403).json({ success: false, message: "Unexpected Error Occurred Try Later." })
+                })
+             })
+             .catch((error) => {
+                 console.log('creating new user password has failed', error);
+                 res.status(403).json({ success: false, message: "Unexpected Error Occurred Try Later." })
+             })
+        } else {    //if email already exists, send message
+            res.status(400).json({ success: false, message: "Username already exists" })
+        }
+    })
+    .catch((err) => {
+        console.log('Error getting user info @users.js line 37', err);
+        res.status(404).send("error getting user")})
+    }
+    , auth.auth);
 
 router.put('/:id', (req, res)=>{
     const { email, password, name, imageURL } = req.body;
-    //post user to db if she doesn't already exist
+    //post user to usersModel if she doesn't already exist
     const id = req.params.id;
     usersModel.getUserByID(id)
         .then((result) => {
