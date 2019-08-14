@@ -50,7 +50,8 @@ login() {
 }
 
 logOut(){
-  this.setState({userId:''})
+  auth.logout();
+  auth.setUser(this);
 }
 
 changeTableModal() {
