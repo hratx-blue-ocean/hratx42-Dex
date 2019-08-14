@@ -22,9 +22,9 @@ export default function Controls(props) {
         <div style = {{width: '50px'}}></div>
         <Button style = {{width: '120px'}} variant='success'>Sort</Button>
         <div style = {{paddingLeft: '10px'}}></div>
-        <DropdownButton id="dropdown-basic-button" variant = 'success' title="Filter">
+        <DropdownButton id="dropdown-basic-button" variant = 'success' title={`${props.filterBy}`}>
           {props.users.map((user) => 
-            <Dropdown.Item key = {user} onClick = {(e) => props.changeFilter(e)} href={user}>{user}</Dropdown.Item>)
+            <Dropdown.Item key = {Math.random()} onClick = {(e) => props.changeFilter(e)}>{user.name}</Dropdown.Item>)
           }
         </DropdownButton>
         <div style = {{position: 'relative', left: '30%'}}>

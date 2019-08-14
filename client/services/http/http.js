@@ -1,8 +1,7 @@
 import axios from 'axios';
 import global from '../../utils/global';
 import auth from '../auth.js'
-axios.defaults.headers.common = {'x-access-token': auth.getJwt()}
-
+axios.defaults.headers.common['x-access-token'] = auth.getJwt() ? auth.getJwt() : undefined;
 const tryAxios = async function(endpoint, method, payload){
     try {
         const response = await axios[method](endpoint,payload)
@@ -33,6 +32,7 @@ const http ={
         async post(email, password){
             const jwt = await tryAxios('/api/auth', 'post', {email, password})
             auth.login(jwt.token)
+            axios.defaults.headers.common['x-access-token'] = auth.getJwt() ? auth.getJwt() : undefined;
             return auth.userIsLoggedIn();
         },
     },

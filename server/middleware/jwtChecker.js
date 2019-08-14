@@ -3,7 +3,6 @@ const jwt = require('jsonwebtoken');
 const config = {secret: "supersecuresecret"};
 
 const checkToken = (req, res, next) => {
-
   let token = req.headers['x-access-token'] || req.headers['authorization']; // Express headers are auto converted to lowercase
   // console.log('TOKEN', token)
   if (token) {
