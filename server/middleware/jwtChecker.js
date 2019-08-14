@@ -5,7 +5,7 @@ const config = {secret: "supersecuresecret"};
 const checkToken = (req, res, next) => {
 
   let token = req.headers['x-access-token'] || req.headers['authorization']; // Express headers are auto converted to lowercase
-
+  // console.log('TOKEN', token)
   if (token) {
     jwt.verify(token, config.secret, (err, decoded) => {
       if (err) {
@@ -15,7 +15,7 @@ const checkToken = (req, res, next) => {
           message: 'Token is not valid'
         });
       } else {
-        req.user = decoded;
+        req.user = decoded.userId;
         next();
       }
     });
