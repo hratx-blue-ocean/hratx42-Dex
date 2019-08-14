@@ -31,6 +31,14 @@ const tablesModel = {
         const insertedMemberId = await result[0].member_id;
         return insertedMemberId;
     },
+    async removeUserFromTable(tableId, memberId){
+        console.log('add user method got', tableId, memberId);
+        const query = `insert into tables_members (table_id, member_id)
+                       values ($1, $2) returning member_id;`;
+        const {rows: result} = await pgClient.query(query, [tableId, memberId]);
+        const insertedMemberId = await result[0].member_id;
+        return insertedMemberId;
+    },
     async delete(id){
         const query = 'delete from dex_tables where id = $1';
         const values = [id]

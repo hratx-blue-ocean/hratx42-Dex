@@ -42,6 +42,12 @@ router.post('/invite', async (req, res) => {
     }
 })
 
+router.post('/kick', async (req, res) => {
+    const userId = req.body.userId;
+    const tableId = req.body.tableId;
+    
+})
+
 router.put('/:id', (req, res)=>{
     const table = req.body;
     const id = req.params.id
