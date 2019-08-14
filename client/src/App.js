@@ -58,7 +58,6 @@ changeTableModal() {
     return (
       <>
         <Router>
-        <h1>Welcome to Blue Ocean!</h1>
         {this.state.userId ===''?<Landing login={this.login.bind(this)}/>:<NavBar logOut ={this.logOut.bind(this)}/>}
           <Route path="/dashboard" component={ Dashboard } />
           <Route path="/profile" component={ Profile } />
