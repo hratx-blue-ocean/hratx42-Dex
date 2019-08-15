@@ -9,16 +9,16 @@ export default class Table extends Component {
     super(props);
     this.state = {
       labels: [
-        { name: 'FrontEnd', color: '#60BE4E' },
-        { name: 'BackEnd', color: '#FF9E1A' },
-        { name: 'GitHub', color: '#C377E0' },
-        { name: 'Bug', color: '#FF77CC' },
-        { name: 'Review', color: '#50E897' },
-        { name: 'Research', color: '#00C2E2' },
-        { name: 'Styling', color: '#0079C0' },
-        { name: 'Implementation', color: '#EA5946' },
-        { name: 'Planning', color: '#4D4D4D' },
-        { name: 'User Stories', color: '#F1D600' },
+        { label_name: 'FrontEnd', color: '#60BE4E' },
+        { label_name: 'BackEnd', color: '#FF9E1A' },
+        { label_name: 'GitHub', color: '#C377E0' },
+        { label_name: 'Bug', color: '#FF77CC' },
+        { label_name: 'Review', color: '#50E897' },
+        { label_name: 'Research', color: '#00C2E2' },
+        { label_name: 'Styling', color: '#0079C0' },
+        { label_name: 'Implementation', color: '#EA5946' },
+        { label_name: 'Planning', color: '#4D4D4D' },
+        { label_name: 'User Stories', color: '#F1D600' },
       ],
       deckNames: [],
       decks: [],
@@ -45,60 +45,45 @@ export default class Table extends Component {
       //populated deckname for tickets
       .then(() => {
         let deckHolder = [];
-        this.state.decks
-          .forEach(deck => {
-            deckHolder.push({ id: deck.id, title: deck.title });
-          })
-          //populated deckname for tickets
-          .then(() => {
-            let deckHolder = [];
-            this.state.decks.forEach(deck => {
-              deckHolder.push({ id: deck.id, title: deck.title });
-            });
-            this.setState({ deckNames: deckHolder });
-          });
+        this.state.decks.forEach(deck => {
+          deckHolder.push({ id: deck.id, title: deck.title });
+        })
+        //populated deckname for tickets
+        this.setState({ deckNames: deckHolder });
         http.users.getByTableId(1).then(res => {
-          console.log(res);
           this.setState({ users: res });
         });
       });
   }
 
-  newCardDataCollector(eff, imp, title, players, tag, dueDate, deck, desc) {
-    // H.H. I did not delete these b/c they weren't empty
-    console.log(eff);
-    console.log(imp);
-    console.log(title);
+
+  newCardDataCollector(
+    players,
+    tags,
+    deck,
+    cardInfo
+  ) {
+    {
     console.log(players);
-    console.log(tag);
-    console.log(dueDate);
+    console.log(tags);
     console.log(deck);
-    console.log(desc);
+    console.log(cardInfo);
+  }
   }
 
   editCardDataCollector(
-    id,
-    deckId,
-    eff,
-    imp,
-    title,
     players,
-    tag,
-    dueDate,
+    tags,
     deck,
-    desc
+    cardInfo
   ) {
-    console.log(id);
-    console.log(deckId);
-    console.log(eff);
-    console.log(imp);
-    console.log(title);
     console.log(players);
-    console.log(tag);
-    console.log(dueDate);
+    console.log(tags);
     console.log(deck);
-    console.log(desc);
+    console.log(cardInfo);
   }
+
+  //
 
   changeFilter(e) {
     if (this.state.filterBy === e.target.innerHTML) {
@@ -190,7 +175,10 @@ export default class Table extends Component {
           changeFilter={this.changeFilter.bind(this)}
           handleModal={this.handleModal.bind(this)}
           filterBy={this.state.filterBy}
+          deckNames={this.state.deckNames}
           tableId={this.props.tableId}
+          tableName={this.props.tableName}
+          labels={this.state.labels}
         />
         {/* for each deck, create a deck */}
         {this.state.decks.length > 0 ? (
@@ -215,10 +203,11 @@ export default class Table extends Component {
             ))}
           </>
         ) : (
+
           <></>
         )}
-        <Modal show={this.state.newDeck.newDeckModal}>
-          <Modal.Header closeButton onClick={() => this.handleModal()}>
+        <Modal show={this.state.newDeck.newDeckModal} onHide = {() =>this.handleModal()}>
+          <Modal.Header closeButton onClick={() => this.handleModal()} onHide = {() => this.handleModal()}>
             <Modal.Title>Add Deck</Modal.Title>
           </Modal.Header>
           <Modal.Body>

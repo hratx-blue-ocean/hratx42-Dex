@@ -33,7 +33,7 @@ export default function Controls(props) {
   return (
     <div>
       <Navbar bg="dark" variant="dark">
-        <Navbar.Brand>Table Name</Navbar.Brand>
+        <Navbar.Brand>{props.tableName}</Navbar.Brand>
         <input
           onChange={e => props.searchText(e.target.value)}
           type="text"
@@ -47,9 +47,11 @@ export default function Controls(props) {
               <div key={Math.random()} className="ControlsSearchItem">
                 <div style={{ paddingLeft: '160px' }} />
                 <CardThumbnails
-                  onClick={() => props.searchClick(item)}
                   singleCard={item}
-                  background="true"
+                  deckNames = {props.deckNames}
+                  users = {props.users}
+                  labels = {props.labels}
+                  background='true'
                 />
               </div>
             ))}
