@@ -35,7 +35,7 @@ app.get('/dashboard', (req, res) => {
 app.get('/profile', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/public/index.html'));
 });
-app.get('/table', (req, res) => {
+app.get('/table/:tableName', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/public/index.html'));
 });
 
