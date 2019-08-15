@@ -37,12 +37,6 @@ export default class Table extends Component {
       this.state.decks.forEach(deck =>{
         deckHolder.push({id: deck.id, title: deck.title})
       })
-      //populated deckname for tickets
-      .then(() => {
-        let deckHolder = [];
-        this.state.decks.forEach(deck => {
-          deckHolder.push({ id: deck.id, title: deck.title });
-        });
         this.setState({ deckNames: deckHolder });
       });
     http.users.getByTableId(1).then(res => {
@@ -54,7 +48,6 @@ export default class Table extends Component {
     //   this.setState({decks: res})
     // })
   }
-    )}
 
 
   newCardDataCollector (eff,imp,title,players,tag,dueDate,deck,desc) {
