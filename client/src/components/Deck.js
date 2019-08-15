@@ -23,39 +23,30 @@ export default function Deck(props) {
     })
   }
   return (
-    <div style = {{width: '75%'}}>
       <div>
+        <div style = {{width: '100%'}}>
           <Card style = {{backgroundColor: '#eee'}}>
           <Card.Header>
               <span>
                 <span style = {{paddingRight: '30px'}}>{props.deck.title}</span>
                 <Button variant="outline-success" onClick={()=> setShowEditDeck(true)}>Edit/Delete Deck</Button>
-                <Modal show = {showEditDeck}>
-                  <Modal.Header>
-                    <Modal.Title>Delete/Edit Deck</Modal.Title>
-                    <Modal.Body>
-                      <p>Change Deck Title</p>
-                      <input onChange = {(e) => setTitle(e.target.value)} value = {title} type="text"/>
-                    </Modal.Body>
-                    <Modal.Footer>
-                      <Button variant='success' onClick={()=> {
-                        setShowEditDeck(false)
-                        props.editDeck(props.deck.id, title)}
-                        }>Save Deck</Button>
-                      <Button variant='danger' onClick={()=> {
-                        setShowEditDeck(false)
-                        props.deleteDeck(props.deck.id)}}>Delete Deck</Button>
-                    </Modal.Footer>
-                  </Modal.Header>
-                </Modal>
               </span>
             </Card.Header>
             <Card.Body className = 'row'>
-            {cards.map((singleCard) => 
+            {cards.map((singleCard, cardIndex) => 
               <div key = {Math.random()}>
                 <div style = {{paddingLeft: '160px'}}></div>
+<<<<<<< HEAD
                 <CardThumbnail singleCard = {singleCard} deckTitle={props.deck.title} 
                 deckNames={props.deckNames} editCard={props.editCard} users={props.users} />
+=======
+                <CardThumbnail deckIndex = {props.deckIndex}
+                              cardIndex = {cardIndex}
+                              singleCard = {singleCard} 
+                              deckTitle={props.deck.title} 
+                              deckNames={props.deckNames} 
+                              moveCard = {props.moveCard} />
+>>>>>>> 755b128dd01f39e27aa99f9242d6f1d9b4427877
               </div>
              )}
               <div style = {{paddingLeft: '20px'}}></div>
@@ -63,6 +54,28 @@ export default function Deck(props) {
             <Button variant="outline-success" onClick={()=> handleShow()}>Add New Card</Button>
           </Card.Body>
         </Card>
+      </div>
+      <div>
+      <Modal size = 'lg' show = {showEditDeck} onHide = {()=>setShowEditDeck(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>
+            <div>Delete/Edit Deck</div>
+          </Modal.Title>
+          <Modal.Body>
+            <p>Change Deck Title</p>
+            <input onChange = {(e) => setTitle(e.target.value)} value = {title} type="text"/>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant='success' onClick={()=> {
+              setShowEditDeck(false)
+              props.editDeck(props.deck.id, title, props.deckIndex)}
+              }>Save Deck</Button>
+            <Button variant='danger' onClick={()=> {
+              setShowEditDeck(false)
+              props.deleteDeck(props.deck.id, props.deckIndex)}}>Delete Deck</Button>
+          </Modal.Footer>
+        </Modal.Header>
+      </Modal>
       </div>
     </div>
   )
