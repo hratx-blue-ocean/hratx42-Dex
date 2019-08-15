@@ -26,12 +26,13 @@ export default function CardThumbnails(props) {
         </Row>
           <div style = {{fontSize: '10px', paddingLeft: '5px'}}>{props.singleCard.card_title}</div>
         <div>
-          <div style = {{position: 'relative', top: '100%'}}>
-            <img className = 'CardThumbnailsMove' height = '15' src="./assets/downButton.png" onClick = {() => props.moveCard(props.singleCard, props.cardIndex, props.deckIndex, 1)}/>
-            <img className = 'CardThumbnailsMove' height = '15' src="./assets/upButton.png" onClick = {() => props.moveCard(props.singleCard, props.cardIndex, props.deckIndex, -1)}/>
+          <div style = {{position: 'absolute', top: '80%'}}>
+            <img className = 'CardThumbnailsMove' height = '15' src="/assets/downButton.png" onClick = {() => props.moveCard(props.singleCard, props.cardIndex, props.deckIndex, 1)}/>
+            <img className = 'CardThumbnailsMove' height = '15' src="/assets/upButton.png" onClick = {() => props.moveCard(props.singleCard, props.cardIndex, props.deckIndex, -1)}/>
           </div>
-          {props.singleCard.cards_members.map((member) => 
-          <Button key = {Math.random()} className = 'CardThumbnails_userIcon float-right' variant='secondary'>{member.member_name.substring(0,2)}</Button>
+          {props.singleCard.cards_members.map((member) => <>
+            {member.member_name === null ? (<></>) : (<Button key = {Math.random()} className = 'CardThumbnails_userIcon float-right' variant='secondary'>{member.member_name.substring(0,2)}</Button>)} 
+          </>
           )}
         </div>
       </Card>
