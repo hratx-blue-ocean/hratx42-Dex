@@ -178,10 +178,9 @@ code {
   overflow: scroll;
 }
 
-#deckTitle {
-  width: 100%;
-  display: flex;
-  margin-right: -15px;
+.deckTitle {
+  width: 100% !important;
+  margin-right: -20px;
   margin-left: -15px;
 }
 

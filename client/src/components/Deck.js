@@ -30,8 +30,8 @@ export default function Deck(props) {
   }
   return (
     <div id="deckWrapper">
-      <div id="deckContent" >
-        <Card.Header id="deckTitle">{props.deck.title}
+      <div id="deckContent" style={{ width: '100%' }} >
+        <Card.Header className="deckTitle">{props.deck.title}
           <Button
             variant='outline-success'
             onClick={() => setShowEditDeck(true)}
@@ -67,8 +67,8 @@ export default function Deck(props) {
               users={props.users}
               labels={props.labels} />
 
-            <Button variant='outline-success' onClick={() => handleShow()}>
-              Add New Card
+            <Button className='row' variant='outline-success' onClick={() => handleShow()}>
+              Add Card
             </Button>
           </Card.Body>
         </div>
