@@ -4,7 +4,7 @@ import auth from '../auth.js';
 axios.defaults.headers.common['x-access-token'] = auth.getJwt()
   ? auth.getJwt()
   : undefined;
-const tryAxios = async function(endpoint, method, payload) {
+const tryAxios = async function (endpoint, method, payload) {
   try {
     const response = await axios[method](endpoint, payload);
     return response.data;
@@ -89,6 +89,9 @@ const http = {
     delete(id) {
       return tryAxios(`/api/cards/${id}`, 'delete');
     },
+    addUser(cardId, userId) {
+      return tryAxios(`/api/cards/${cardId}/members/${userId}`, 'post')
+    }
   },
 };
 

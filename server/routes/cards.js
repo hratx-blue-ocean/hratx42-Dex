@@ -25,12 +25,12 @@ router.get('/:id', (req, res) => {
 router.post('/', (req, res) => {
   const card = req.body;
   //@TODO: change this line
-  console.log('The card', card);
   const userId = req.user || true;
   tryCatch(async () => {
     if (userId) {
       let newCard = await cardsModel.createNewCard(card);
-      res.status(200).send(newCard);
+      let newPopulatedCard = await cardsModel.getCardByID(newCard.id)
+      res.status(200).send(newPopulatedCard);
     } else {
       res.status(401).send({ message: 'Unauthorized' });
     }
@@ -41,7 +41,7 @@ router.post('/', (req, res) => {
 router.put('/:id', async (req, res) => {
   const card = req.body;
   const userId = req.user;
-  if (!card.card_id) {
+  if (!card.id) {
     res.status(400).send({
       message: 'You need to send a card object with an id key and value',
     });
@@ -50,7 +50,8 @@ router.put('/:id', async (req, res) => {
   tryCatch(async () => {
     const authorized = await authorizationModel.user.ownsCard(userId, card.id);
     if (authorized) {
-      const updatedCard = await cardsModel.updateCard(card);
+      await cardsModel.updateCard(card);
+      const updatedCard = await cardsModel.getCardByID(card.id)
       res.status(200).send(updatedCard);
     } else {
       res.status(401).send({ message: 'Unauthorized' });
@@ -73,17 +74,19 @@ router.delete('/:id', (req, res) => {
   });
 });
 
-router.post('/:cardId/member', async (req, res) => {
+router.post('/:cardId/member/:userId', async (req, res) => {
   tryCatch(async () => {
     const cardId = req.params.cardId;
-    const userId = req.body.userId;
+    const userId = req.params.userId;
+    console.log(cardId, userId)
     const user = await usersModel.getUserByID(userId);
     if (!user) {
-      res.status(400).json({ error: 'not found' });
+      res.status(404).json({ error: 'not found' });
       return;
     } else {
       await cardsModel.addUserToCard(cardId, userId);
-      res.status(200).json({ ok: `added user ${userId} to card ${cardId}` });
+      const updatedCard = await cardsModel.getCardByID(cardId)
+      res.status(200).send(updatedCard);
     }
   }, res);
 });
@@ -94,9 +97,10 @@ router.delete('/:cardId/member/:userId', async (req, res) => {
     const userId = req.params.userId;
     let result = await cardsModel.removeUserFromCard(cardId, userId);
     if (result) {
+      const updatedCard = await cardsModel.getCardByID(cardId)
       res
         .status(200)
-        .json({ ok: `removed user ${userId} from card ${cardId}` });
+        .send(updatedCard);
     } else {
       res.status(404).json({ error: 'not found' });
     }
