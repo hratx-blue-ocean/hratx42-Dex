@@ -32,9 +32,9 @@ export default class Table extends Component {
       this.setState({decks: response, tableName: this.props.tableName})
     })
     //populated deckname for tickets
-    .then(() =>{
+    .then(() => {
       let deckHolder= []
-      this.state.decks.forEach(deck =>{
+      this.state.decks.forEach(deck => {
         deckHolder.push({id: deck.id, title: deck.title})
       })
       //populated deckname for tickets
@@ -58,6 +58,7 @@ export default class Table extends Component {
 
 
   newCardDataCollector (eff,imp,title,players,tag,dueDate,deck,desc) {
+    // H.H. I did not delete these b/c they weren't empty
     console.log(eff)
     console.log(imp)
     console.log(title)
@@ -80,16 +81,6 @@ export default class Table extends Component {
     console.log(deck)
     console.log(desc)
   }
-
-  saveTable(tableName, descName) {
-    //create/edit table
-  }
-
-  newPlayer(playerName) {
-    //add user to users Array
-  }
-
-  searchClick(card) {}
 
   changeFilter(e) {
     if (this.state.filterBy === e.target.innerHTML) {
