@@ -8,7 +8,18 @@ export default class Table extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      labels: [{}],
+      labels: [
+        {name:'FrontEnd', color:"#60BE4E"},
+        {name:'BackEnd', color:"#FF9E1A"},
+        {name:'GitHub', color:"#C377E0"},
+        {name:'Bug', color:"#FF77CC"},
+        {name:'Review', color:"#50E897"},
+        {name:'Research', color:"#00C2E2"},
+        {name:'Styling', color:"#0079C0"},
+        {name:'Implementation', color:"#EA5946"},
+        {name:'Planning', color:"#4D4D4D"},
+        {name:'User Stories', color:"#F1D600"},
+    ],
       deckNames: [],
       decks: [],
       cards: [],
@@ -32,12 +43,11 @@ export default class Table extends Component {
       this.setState({decks: response, tableName: this.props.tableName})
     })
     //populated deckname for tickets
-    .then(() =>{
+    .then(() => {
       let deckHolder= []
-      this.state.decks.forEach(deck =>{
+      this.state.decks.forEach(deck => {
         deckHolder.push({id: deck.id, title: deck.title})
       })
-      //populated deckname for tickets
         this.setState({ deckNames: deckHolder });
       });
     http.users.getByTableId(1)
@@ -53,6 +63,7 @@ export default class Table extends Component {
 
 
   newCardDataCollector (eff,imp,title,players,tag,dueDate,deck,desc) {
+    // H.H. I did not delete these b/c they weren't empty
     console.log(eff)
     console.log(imp)
     console.log(title)
@@ -74,14 +85,6 @@ export default class Table extends Component {
     console.log(dueDate)
     console.log(deck)
     console.log(desc)
-  }
-
-  saveTable(tableName, descName) {
-    //create/edit table
-  }
-
-  newPlayer(playerName) {
-    //add user to users Array
   }
 
   changeFilter(e) {
@@ -165,6 +168,7 @@ export default class Table extends Component {
   }
 
   render() {
+
     return (
       <div>
         <Controls
@@ -173,7 +177,6 @@ export default class Table extends Component {
           cards={this.state.cards}
           users={this.state.users}
           changeFilter={this.changeFilter.bind(this)}
-          searchClick={this.searchClick.bind(this)}
           handleModal={this.handleModal.bind(this)}
           filterBy={this.state.filterBy}
           deckNames={this.state.deckNames}
@@ -184,13 +187,16 @@ export default class Table extends Component {
               <Deck 
                 filterBy = {this.state.filterBy} 
                 deck = {deck} 
+                users={this.state.users}
                 deckNames={this.state.deckNames}
                 deckIndex = {deckIndex}
                 deleteDeck = {this.deleteDeck.bind(this)}
                 newCardData={this.newCardDataCollector}
                 editCard={this.editCardDataCollector}
                 editDeck = {this.editDeck.bind(this)}
-                moveCard = {this.moveCard.bind(this)} />
+                moveCard = {this.moveCard.bind(this)} 
+                labels = {this.state.labels}
+                />
               <div style = {{paddingBottom: '8px'}}></div>
             </div>)
           }
