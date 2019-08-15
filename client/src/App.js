@@ -56,7 +56,6 @@ export default class App extends Component {
     if (localStorage.getItem('token')) {
       this.login();
     }
-    this.addTable('Funky new table', ['123@123', '2@2']);
   }
 
   flash(message, variant, interval) {
