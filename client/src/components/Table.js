@@ -98,7 +98,7 @@ export default class Table extends Component {
     let cards = [];
     for (let i = 0; i < decks.length; i++) {
       for (let j = 0; j < decks[i].cards.length; j++) {
-        if (decks[i].cards[j].card_title.includes(text)) {
+        if (decks[i].cards[j] && decks[i].cards[j].title.includes(text)) {
           cards.push(decks[i].cards[j]);
           // if (decks[i].cards[j].description.length > 50){
           //   cards[cards.length - 1] = cards[cards.length - 1].substring(0, 47) + '...';
