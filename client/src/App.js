@@ -143,14 +143,12 @@ export default class App extends Component {
   addPlayerToTable(playerName) {
     thePlayers.push(playerName);
     this.setState({newPLayer: thePlayers})
-    console.log(this.state.newPLayer)
   }
 
   removePlayerToTable(playerName) {
     let index = thePlayers.indexOf(playerName)
     thePlayers.splice(index, 1)
     this.setState({newPLayer: thePlayers})
-    console.log(this.state.newPLayer)
   }
   render() {
     return (

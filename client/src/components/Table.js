@@ -54,7 +54,7 @@ export default class Table extends Component {
           console.log(res);
           this.setState({ users: res });
         });
-      })
+      });
   }
 
 
