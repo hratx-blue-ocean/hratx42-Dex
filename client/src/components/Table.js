@@ -45,23 +45,15 @@ export default class Table extends Component {
       //populated deckname for tickets
       .then(() => {
         let deckHolder = [];
-        this.state.decks
-          .forEach(deck => {
-            deckHolder.push({ id: deck.id, title: deck.title });
-          })
-          //populated deckname for tickets
-          .then(() => {
-            let deckHolder = [];
-            this.state.decks.forEach(deck => {
-              deckHolder.push({ id: deck.id, title: deck.title });
-            });
-            this.setState({ deckNames: deckHolder });
-          });
+        this.state.decks.forEach(deck => {
+          deckHolder.push({ id: deck.id, title: deck.title });
+        });
+        this.setState({ deckNames: deckHolder });
+       });
         http.users.getByTableId(1).then(res => {
           console.log(res);
           this.setState({ users: res });
         });
-      });
   }
 
   newCardDataCollector(eff, imp, title, players, tag, dueDate, deck, desc) {
