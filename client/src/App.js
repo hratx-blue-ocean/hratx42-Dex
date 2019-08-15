@@ -24,7 +24,8 @@ export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userId: '',
+      userId: '', //NB userId should be deprecated in favor of user, which contains id
+      user: {},
       tables: [],
       showenTable: null,
       newPLayer:[],
@@ -32,9 +33,9 @@ export default class App extends Component {
       profile: {
         editName: '',
         editEmail: '',
-        editPassword: ''
+        editPassword: '',
       },
-      
+
       flash: {
         show: false,
         message: 'Default flash message for testing',
@@ -55,7 +56,6 @@ export default class App extends Component {
     global.flash = this.flash.bind(this);
     if (localStorage.getItem('token')) {
       this.login();
-      // axios.defaults.headers.common['x-access-token'] = auth.getJwt() ? auth.getJwt() : undefined;
     }
   }
 
@@ -69,14 +69,33 @@ export default class App extends Component {
   login() {
     auth.setUser(this);
     this.getTables();
+    this.getUser();
   }
 
-  getTables() {
+  async getTables() {
     const userId = auth.getUser();
     if (userId) {
-      http.tables.get(userId).then(tables => {
-        this.setState({ tables });
-      });
+      const tables = await http.tables.get(userId);
+      this.setState({ tables });
+    }
+  }
+
+  async getUser() {
+    const userId = auth.getUser();
+    if (userId) {
+      const user = await http.users.get(userId);
+      this.setState({ user });
+    }
+  }
+
+  async addTable(name, emails) {
+    const newTable = await http.tables.post({ name });
+    const tableId = newTable.id;
+    const tables = [...this.state.tables];
+    tables.push(newTable);
+    this.setState({ tables });
+    for (let email of emails) {
+      http.tables.postUser(tableId, email);
     }
   }
 
@@ -91,28 +110,28 @@ export default class App extends Component {
 
   // dashboard onChange event and submit functions
   changeProfileName(e) {
-    this.setState({ profile: { editName: e.target.value }});
+    this.setState({ profile: { editName: e.target.value } });
   }
 
   changeProfileEmail(e) {
-    this.setState({ profile: { editEmail: e.target.value }});
+    this.setState({ profile: { editEmail: e.target.value } });
   }
 
   changeProfilePassword(e) {
-    this.setState({ profile: { editPassword: e.target.value }});
+    this.setState({ profile: { editPassword: e.target.value } });
   }
 
   submitProfileChanges() {
     http.users
-      .post(
-        this.state.profile.editName,
+      .put(
+        this.state.userId,
         this.state.profile.editEmail,
-        this.state.profile.editPassword,
+        this.state.profile.editPassword
       )
       .then(
-        () => this.setState({ profile: { editName: '' }}),
-        this.setState({ profile: { editEmail: '' }}),
-        this.setState({ profile: { editPassword: '' }})
+        () => this.setState({ profile: { editName: '' } }),
+        this.setState({ profile: { editEmail: '' } }),
+        this.setState({ profile: { editPassword: '' } })
       )
       .catch(err => console.log('Error: ', err));
   }
@@ -151,6 +170,7 @@ export default class App extends Component {
               <Dashboard
                 {...props}
                 // state props
+                user={this.state.user}
                 tables={this.state.tables}
                 editProfileName={this.state.profile.editName}
                 editProfileEmail={this.state.profile.editEmail}
@@ -164,7 +184,10 @@ export default class App extends Component {
             )}
           />
           <Route path="/profile" component={Profile} />
-          <Route path="/table" component={Table} />
+          {this.state.tables.map( table => 
+            <Route path={`/table/${table.id}`} render={() => <Table tableId={table.id} tableName={table.name} />} />
+          )}
+          
           <Route path="/TableSettings" component={TableSettings} />
         </Router>
         <Flash flashData={this.state.flash} />
