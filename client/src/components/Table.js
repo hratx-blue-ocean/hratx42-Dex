@@ -189,7 +189,8 @@ export default class Table extends Component {
                 deleteDeck = {this.deleteDeck.bind(this)}
                 newCardData={this.newCardDataCollector}
                 editCard={this.editCardDataCollector}
-                editDeck = {this.editDeck.bind(this)} />
+                editDeck = {this.editDeck.bind(this)}
+                moveCard = {this.moveCard.bind(this)} />
               <div style = {{paddingBottom: '8px'}}></div>
             </div>)
           }
