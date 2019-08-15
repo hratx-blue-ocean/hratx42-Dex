@@ -16,7 +16,7 @@ export default function CardModal({closeModal, showMe, card, deckTitle, deckName
   const [desc, setDesc] = useState(card.card_description);
 
   
-// console.log(card)
+console.log(desc)
 // console.log(players)
 
   return (
@@ -81,7 +81,6 @@ export default function CardModal({closeModal, showMe, card, deckTitle, deckName
                         let targetPlayer ={member_id: null, member_name: selectPlayer}
                         playerHolder.push(targetPlayer)
                         setPlayers(playerHolder)
-                        console.log(players)
                     }}>
                       <option></option>
                       {users.map(user =>{
@@ -99,7 +98,6 @@ export default function CardModal({closeModal, showMe, card, deckTitle, deckName
                         let targetLabel ={color: null, label_name: selectLabel}
                         labelHolder.push(targetLabel)
                         setTags(labelHolder)
-                        console.log(tags)
                     }}>
                       <option></option>
                       {labels.map(label =>{
@@ -170,7 +168,8 @@ export default function CardModal({closeModal, showMe, card, deckTitle, deckName
         {/* Button to Submit */}
         <Row style={styles.submitButton}>
         <Button onClick={(event)=> {
-            editCard(card.card_id, deckNames.id, effort, impact, title, players, tags, dueDate, deck, desc)
+            
+            editCard(card.card_id, deckTitle, effort, impact, title, players, tags, dueDate, deck, desc)
         }} variant="primary">Submit</Button>
         </Row>
 

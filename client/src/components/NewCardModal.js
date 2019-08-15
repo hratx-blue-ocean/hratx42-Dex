@@ -3,14 +3,14 @@ import React, { useState } from "react";
 import { Button, Modal, Container, Row, Col, Form} from 'react-bootstrap';
 
 
-export default function CardModal({closeModal, showMe, deckNames, newCardData, users}) {
+export default function CardModal({closeModal, showMe, deckNames, newCardData, users, labels}) {
   const [show, setShow] = useState(false);
 
   const [effort, setEffort] = useState(5);
   const [impact, setImpact] = useState(3);
   const [title, setTitle] = useState();
   const [players, setPlayers] = useState([]);
-  const [tags, setTags] = useState();
+  const [tags, setTags] = useState([]);
   const [dueDate, setDate] = useState();
   const [deck, setDeck] = useState();
   const [desc, setDesc] = useState();
@@ -18,8 +18,6 @@ export default function CardModal({closeModal, showMe, deckNames, newCardData, u
 
   const handleClose = () => closeModal()
 //   const handleShow = () => setShow(true);
-
-//   console.log(users)
 
   return (
   <>
@@ -53,7 +51,7 @@ export default function CardModal({closeModal, showMe, deckNames, newCardData, u
                         <Form style={{width: '100%'}}>
               <Form.Group sm={8} controlId="exampleForm.ControltitleArea">
                 {/* <Form.Label>Description</Form.Label> */}
-                <Form.Control as="textarea" rows="1" onBlur={(event)=> setTitle(event.target.value)} placeholder="title"/>
+                <Form.Control as="textarea" rows="1" onBlur={(event)=> setTitle(event.target.value)} placeholder="title" />
               </Form.Group>
               </Form>
           </Col>
@@ -74,22 +72,60 @@ export default function CardModal({closeModal, showMe, deckNames, newCardData, u
             </Row>
             {/* content of players and tags */}
             <Row>
-            <Col style={styles.playersStyle}>
-                    <select onChange={(event)=> {
-                        let playerHolder = players
-                        let selectPlayer = event.target.value  
-                        let targetPlayer ={member_id: null, member_name: selectPlayer}
-                        playerHolder.push(targetPlayer)
-                    }}>
-                      <option></option>
-                      {users.map(user =>{
-                            return (
-                            <option>{user.name}</option>
-                            )
-                        })}
-                    </select>
-                  </Col>
+                {/* ADD PLAYERS */}
+                <Col style={styles.playersStyle}>
+                        <select onChange={(event)=> {
+                            let playerHolder = players
+                            let selectPlayer = event.target.value  
+                            let targetPlayer ={member_id: null, member_name: selectPlayer}
+                            playerHolder.push(targetPlayer)
+                            setPlayers(playerHolder)
+                            console.log(players)
+                        }}>
+                            <option></option>
+                            {users.map(user =>{
+                                return (
+                                <option>{user.name}</option>
+                                )
+                            })}
+                        </select>
+                </Col>
+                {/* ADD TAGS/LABELS */}
+                <Col style={styles.playersStyle}>
+                        <select onChange={(event)=> {
+                            let labelsHolder = tags
+                            let selectLabel = event.target.value  
+                            let targetLabel ={color: null, name: selectLabel}
+                            labelsHolder.push(targetLabel)
+                            setTags(labelsHolder)
+                            console.log(tags)
+                        }}>
+                            <option></option>
+                            {labels.map(label =>{
+                                return (
+                                <option>{label.name}</option>
+                                )
+                            })}
+                        </select>
+                </Col>        
             </Row>
+            {/* Return ALL PLAYERS and LABELS/TAGS */}
+            <Row>
+                  <Col style={styles.playersStyle}>
+                    {players.map(player =>{
+                    return (
+                        <div>{player.member_name}</div>
+                    )
+                     })}
+                  </Col>
+                  <Col style={styles.tagsStyle}>
+                  {tags.map(tag =>{
+                    return (
+                        <div>{tag.name}</div>
+                    )
+                     })}
+                  </Col>
+            </Row>       
             
             {/* Text Input Area */}
             <Row>
@@ -129,7 +165,8 @@ export default function CardModal({closeModal, showMe, deckNames, newCardData, u
         {/* Button to Submit */}
         <Row style={styles.submitButton}>
             <Button onClick={(event)=> {
-                newCardData(effort, impact, title, player, tags, dueDate, deck, desc)
+                newCardData(effort, impact, title, players, tags, dueDate, deck, desc)
+                handleClose()
             }} variant="primary">Submit</Button>
         </Row>
 
