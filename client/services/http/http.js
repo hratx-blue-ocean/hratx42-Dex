@@ -91,6 +91,12 @@ const http = {
     },
     addUser(cardId, userId) {
       return tryAxios(`/api/cards/${cardId}/members/${userId}`, 'post')
+    },
+    addLabel(cardId, labelId) {
+      return tryAxios(`/api/cards/${cardId}/label/${labelId}`, 'post')
+    },
+    removeLabel(cardId, labelId) {
+      return tryAxios(`/api/cards/${cardId}/label/${labelId}`, 'delete')
     }
   },
 };
