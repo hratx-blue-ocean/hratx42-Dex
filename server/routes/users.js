@@ -29,8 +29,8 @@ router.post(
     //post user to usersModel if she doesn't already exist
     usersModel
       .getUserInfoByEmail(email)
-      .then(result => {
-        if (result.rowCount === 0) {
+      .then(user => {
+        if (!user) {
           //if email does not exist create user
           bcrypt
             .hash(password, saltRounds)
@@ -42,22 +42,18 @@ router.post(
                 })
                 .catch(error => {
                   console.log('creating new user failed', error);
-                  res
-                    .status(403)
-                    .json({
-                      success: false,
-                      message: 'Unexpected Error Occurred Try Later.',
-                    });
+                  res.status(403).json({
+                    success: false,
+                    message: 'Unexpected Error Occurred Try Later.',
+                  });
                 });
             })
             .catch(error => {
               console.log('creating new user password has failed', error);
-              res
-                .status(403)
-                .json({
-                  success: false,
-                  message: 'Unexpected Error Occurred Try Later.',
-                });
+              res.status(403).json({
+                success: false,
+                message: 'Unexpected Error Occurred Try Later.',
+              });
             });
         } else {
           //if email already exists, send message
@@ -95,22 +91,18 @@ router.put('/:id', (req, res) => {
               })
               .catch(err => {
                 console.log('Error updating user @users.js', err);
-                res
-                  .status(403)
-                  .json({
-                    success: false,
-                    message: 'Unexpected Error Occurred Try Later.',
-                  });
+                res.status(403).json({
+                  success: false,
+                  message: 'Unexpected Error Occurred Try Later.',
+                });
               });
           })
           .catch(error => {
             console.log('error creating hash password', error);
-            res
-              .status(403)
-              .json({
-                success: false,
-                message: 'Unexpected Error Occurred Try Later.',
-              });
+            res.status(403).json({
+              success: false,
+              message: 'Unexpected Error Occurred Try Later.',
+            });
           });
       } else {
         //if user does not exist, send message
@@ -140,12 +132,10 @@ router.delete('/:id', (req, res) => {
           })
           .catch(err => {
             console.log('Error deleting user @users.js', err);
-            res
-              .status(403)
-              .json({
-                success: false,
-                message: 'Unexpected Error Occurred Try Later.',
-              });
+            res.status(403).json({
+              success: false,
+              message: 'Unexpected Error Occurred Try Later.',
+            });
           });
       } else {
         res
