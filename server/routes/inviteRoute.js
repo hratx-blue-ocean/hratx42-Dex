@@ -24,8 +24,14 @@ router.post('/:email', async (req, res) => {
     const mailOptions = {
       from: 'dexteamhr@gmail.com', // sender address
       to: `${email}`, // list of receivers
-      subject: 'Hi DJ! this is dex tema', // Subject line
-      html: '<button>Yes</button>'// plain text body
+      subject: 'Hi! this is dex team', // Subject line
+      html: '<button>Yes</button>', // plain text body
+      headers: {
+        'x-invitation': [
+          1,
+          'DUCKDUCK GO'
+        ]
+      }
     };
     // send mail with defined transport object
     transporter.sendMail(mailOptions, function (err, info) {
