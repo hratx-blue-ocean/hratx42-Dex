@@ -57,6 +57,7 @@ export default class Table extends Component {
       });
   }
 
+
   newCardDataCollector(eff, imp, title, players, tag, dueDate, deck, desc) {
     // H.H. I did not delete these b/c they weren't empty
     console.log(eff);
@@ -173,6 +174,7 @@ export default class Table extends Component {
   }
 
   render() {
+    console.log(this.state.users)
     return (
       <div>
         <Controls
@@ -183,7 +185,10 @@ export default class Table extends Component {
           changeFilter={this.changeFilter.bind(this)}
           handleModal={this.handleModal.bind(this)}
           filterBy={this.state.filterBy}
+          deckNames={this.state.deckNames}
           tableId={this.props.tableId}
+          labels={this.state.labels}
+
         />
         {/* for each deck, create a deck */}
         {this.state.decks.length > 0 ? (
@@ -210,8 +215,8 @@ export default class Table extends Component {
         ) : (
           <></>
         )}
-        <Modal show={this.state.newDeck.newDeckModal}>
-          <Modal.Header closeButton onClick={() => this.handleModal()}>
+        <Modal show={this.state.newDeck.newDeckModal} onHide = {() =>this.handleModal()}>
+          <Modal.Header closeButton onClick={() => this.handleModal()} onHide = {() => this.handleModal()}>
             <Modal.Title>Add Deck</Modal.Title>
           </Modal.Header>
           <Modal.Body>
