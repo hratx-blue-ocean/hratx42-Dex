@@ -97,6 +97,7 @@ export default class App extends Component {
     for (let email of emails) {
       http.tables.postUser(tableId, email);
     }
+    this.changeTableModal()
   }
 
   logOut() {

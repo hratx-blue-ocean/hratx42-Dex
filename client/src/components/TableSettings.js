@@ -19,7 +19,6 @@ export default function TableSettings(props) {
   </tr>)})
   const [tableName, setTableName] = useState('');
   const [playerName, setPlayerName] = useState('');
-  const [descName, setDescName] = useState('');
   return (
     <Modal show={props.showTableModal} centered>
       <Modal.Header
