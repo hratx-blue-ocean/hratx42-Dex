@@ -86,7 +86,7 @@ export default function Deck(props) {
                               deckNames={props.deckNames} 
                               moveCard = {props.moveCard} />
               </div>
-            ))}
+            )}
             <div style={{ paddingLeft: '20px' }} />
             <NewCardModal
               newCardData={props.newCardData}

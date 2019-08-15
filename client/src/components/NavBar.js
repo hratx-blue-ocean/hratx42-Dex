@@ -7,7 +7,7 @@ function NavBar(props) {
   let allTables = props.tables.map((item)=><NavDropdown.Item onClick={() => history.push(`/table/${item.id}`)}>{item.name}</NavDropdown.Item>)
   return (
     <div>
-        <Navbar>
+        <Navbar bg="light" className='dexNavBar' expand="lg" >
           <Navbar.Brand  style={{ marginBottom: '22px' }}>
             <h2 style={{ marginLeft: "15px"  }}>/Dex</h2>
           </Navbar.Brand>
@@ -27,7 +27,7 @@ function NavBar(props) {
           <NavDropdown title={props.userName} id="collasible-nav-dropdown" style={{ marginRight: "15px" }}>
             <NavDropdown.Item onClick = {()=><Link to={"/dashboard"}></Link>}>Dashboard</NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item href="#logout" onClick={()=>props.logOut()}>Log Out</NavDropdown.Item>
+              <NavDropdown.Item onClick={()=>props.logOut()}>Log Out</NavDropdown.Item>
             </NavDropdown>
           </Navbar.Collapse>
         </Navbar>
