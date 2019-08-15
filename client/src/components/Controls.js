@@ -43,9 +43,11 @@ export default function Controls(props) {
               <div key={Math.random()} className="ControlsSearchItem">
                 <div style={{ paddingLeft: '160px' }} />
                 <CardThumbnails
-                  onClick={() => props.searchClick(item)}
                   singleCard={item}
-                  background="true"
+                  deckNames = {props.deckNames}
+                  users = {props.users}
+                  labels = {props.labels}
+                  background='true'
                 />
               </div>
             ))}
@@ -69,10 +71,6 @@ export default function Controls(props) {
           ))}
         </DropdownButton>
         <div style={{ position: 'relative', left: '30%' }}>
-          <Button onClick={() => props.handleModal()} variant="success">
-            New Deck
-          </Button>
-         
           {props.users.map(user => 
             <>
               <OverlayTrigger
@@ -85,11 +83,15 @@ export default function Controls(props) {
                 }
               >
                 <Button style = {{textAlign: "center"}}className="tableControlsUserNameCircles" variant="secondary">
-                  {user.name.split(" ").map(char => char[0]).join("").toUpperCase()}
+                  {(user.name.split(" ").map(char => char[0]).join("")).toUpperCase()}
                 </Button>
               </OverlayTrigger>
             </>
           )}
+          <Button onClick={() => props.handleModal()} variant="success">
+            New Deck
+          </Button>
+         
          
           {/* 
           <Button className="tableControlsUserNameCircles" variant="secondary">
