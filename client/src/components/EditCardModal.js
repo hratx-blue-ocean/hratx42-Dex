@@ -6,15 +6,16 @@ export default function CardModal({closeModal, showMe, card, deckTitle, deckName
   const [show, setShow] = useState(false);
   const handleClose = () => closeModal()
 
-  const [effort, setEffort] = useState(card.card_weight);
-  const [impact, setImpact] = useState(card.card_impact);
-  const [title, setTitle] = useState(card.card_title);
+  const [effort, setEffort] = useState(card.weight);
+  const [impact, setImpact] = useState(card.impact);
+  const [title, setTitle] = useState(card.title);
   const [players, setPlayers] = useState(card.cards_members);
   const [tags, setTags] = useState(card.card_labels);
   const [dueDate, setDate] = useState(new Date());
   const [deck, setDeck] = useState(deckTitle);
-  const [desc, setDesc] = useState(card.card_description);
+  const [desc, setDesc] = useState(card.description);
 
+  console.log
 
 
   return (
@@ -41,16 +42,16 @@ export default function CardModal({closeModal, showMe, card, deckTitle, deckName
         {/* CONTENT FOR Header Container for effort, impact, title, and exit */}
         <Row xs={12} style={styles.headerRow}>
           <Col xs={1} style={styles.effortImpactInput}>
-          <input max={21} min={1} placeholder={card.card_weight} onBlur={(event)=> setEffort(event.target.value)}  type="number" style={styles.effImpInputBox}/>
+          <input max={21} min={1} placeholder={card.weight} onBlur={(event)=> setEffort(event.target.value)}  type="number" style={styles.effImpInputBox}/>
           </Col>
           <Col xs={1} style={styles.effortImpactInput}>
-          <input max={21} min={1} placeholder={card.card_impact} onBlur={(event)=> setImpact(event.target.value)} type="number" style={styles.effImpInputBox}/>
+          <input max={21} min={1} placeholder={card.impact} onBlur={(event)=> setImpact(event.target.value)} type="number" style={styles.effImpInputBox}/>
           </Col>
           {/* title input area */}
           <Col xs={10} style={styles.titleStyle}>
             <Form style={{width: '100%'}}>
               <Form.Group sm={8} controlId="exampleForm.ControltitleArea">
-                <Form.Control as="textarea" placeholder={card.card_title} onBlur={(event)=> setTitle(event.target.value)} rows="1"/>
+                <Form.Control as="textarea" placeholder={card.title} onBlur={(event)=> setTitle(event.target.value)} rows="1"/>
               </Form.Group>
             </Form>
           </Col>
@@ -129,7 +130,7 @@ export default function CardModal({closeModal, showMe, card, deckTitle, deckName
               <Form style={{width: '100%', paddingTop:10}}>
               <Form.Group sm={8} controlId="exampleForm.ControlTextarea1">
                 {/* <Form.Label>Description</Form.Label> */}
-                <Form.Control as="textarea" rows="8" placeholder={card.card_description} onBlur={(event)=> setDesc(event.target.value)}/>
+                <Form.Control as="textarea" rows="8" placeholder={card.description} onBlur={(event)=> setDesc(event.target.value)}/>
               </Form.Group>
               </Form>
             </Row>
@@ -148,7 +149,7 @@ export default function CardModal({closeModal, showMe, card, deckTitle, deckName
             </Row> */}
             <Row style={styles.addToCardTrait}>
             <select style={{width:'100%'}} onChange={(event)=> setDeck(event.target.value)}>
-              <option>`${deckTitle}`</option>
+              <option>{deckTitle}</option>
               {deckNames.map(name =>{
                 if (name.title !== deckTitle) {
                   return (
@@ -165,7 +166,7 @@ export default function CardModal({closeModal, showMe, card, deckTitle, deckName
         {/* Button to Submit */}
         <Row style={styles.submitButton}>
         <Button onClick={(event)=> {
-            let cardInfo={id: card.card_id, eff:effort, imp:impact, titl:title, description:desc, due: dueDate}
+            let cardInfo={id: card.id, eff:effort, imp:impact, titl:title, description:desc, due: dueDate}
             editCard(players, tags, deck, cardInfo)
         }} variant="primary">Submit</Button>
         </Row>
