@@ -30,10 +30,21 @@ export default function CardThumbnails(props) {
             <img className = 'CardThumbnailsMove' height = '15' src="/assets/downButton.png" onClick = {() => props.moveCard(props.singleCard, props.cardIndex, props.deckIndex, 1)}/>
             <img className = 'CardThumbnailsMove' height = '15' src="/assets/upButton.png" onClick = {() => props.moveCard(props.singleCard, props.cardIndex, props.deckIndex, -1)}/>
           </div>
-          {props.singleCard.cards_members.map((member) => <>
-            {member.member_name === null ? (<></>) : (<Button key = {Math.random()} className = 'CardThumbnails_userIcon float-right' variant='secondary'>{member.member_name.substring(0,2)}</Button>)} 
+          <>
+            {/* more users button leads to edit form to view all users */}
+            <Button
+              key={Math.random()}
+              className='CardThumbnails_userIcon float-right'
+              variant='secondary'
+              onClick={() => {
+                setShow(true)
+              }}
+            >...</Button>
+            {props.singleCard.cards_members.map((member, i) => <>
+              {member.member_name === null ? (<></>) : i < 3 ? (<Button key={Math.random()} className='CardThumbnails_userIcon float-right' variant='secondary'>{member.member_name.substring(0, 2)}</Button>) : (<></>)}
+            </>
+            )}
           </>
-          )}
         </div>
       </Card>
     </div>
