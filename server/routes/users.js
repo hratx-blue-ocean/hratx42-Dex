@@ -29,8 +29,8 @@ router.post(
     //post user to usersModel if she doesn't already exist
     usersModel
       .getUserInfoByEmail(email)
-      .then(result => {
-        if (result.rowCount === 0) {
+      .then(user => {
+        if (!user) {
           //if email does not exist create user
           bcrypt
             .hash(password, saltRounds)
@@ -42,22 +42,18 @@ router.post(
                 })
                 .catch(error => {
                   console.log('creating new user failed', error);
-                  res
-                    .status(403)
-                    .json({
-                      success: false,
-                      message: 'Unexpected Error Occurred Try Later.',
-                    });
+                  res.status(403).json({
+                    success: false,
+                    message: 'Unexpected Error Occurred Try Later.',
+                  });
                 });
             })
             .catch(error => {
               console.log('creating new user password has failed', error);
-              res
-                .status(403)
-                .json({
-                  success: false,
-                  message: 'Unexpected Error Occurred Try Later.',
-                });
+              res.status(403).json({
+                success: false,
+                message: 'Unexpected Error Occurred Try Later.',
+              });
             });
         } else {
           //if email already exists, send message
@@ -75,48 +71,48 @@ router.post(
 );
 
 router.put('/:id', (req, res) => {
-  const { email, password, name, imageURL } = req.body;
-  //post user to usersModel if she doesn't already exist
+  const userObj = req.body;
+  const userId = req.user;
   const id = req.params.id;
+  //@TODO: turn this back on
+  // if (userId !== id) {
+  //   return res.status(401).send({ message: 'Unauthorized' });
+  // }
   usersModel
     .getUserByID(id)
-    .then(result => {
-      if (result.rowCount > 0) {
+    .then(user => {
+      if (!user) {
+        //if user does not exist, send message
+        res
+          .status(400)
+          .json({ success: false, message: 'Invalid credentials' });
+      } else {
         //if user exists, update user
         bcrypt
-          .hash(password, saltRounds)
+          .hash(userObj.password, saltRounds)
           .then(hashedPassword => {
+            userObj.password = hashedPassword;
             usersModel
-              .updateUser({ name, hashedPassword, email, id, imageURL })
-              .then(userUpdated => {
-                res
-                  .status(201)
-                  .json({ success: true, message: 'Account Updated!' });
+              .updateUser(userObj)
+              .then(updatedUser => {
+                updatedUser.password = '';
+                res.status(201).send(updatedUser);
               })
               .catch(err => {
                 console.log('Error updating user @users.js', err);
-                res
-                  .status(403)
-                  .json({
-                    success: false,
-                    message: 'Unexpected Error Occurred Try Later.',
-                  });
+                res.status(403).json({
+                  success: false,
+                  message: 'Unexpected Error Occurred Try Later.',
+                });
               });
           })
           .catch(error => {
             console.log('error creating hash password', error);
-            res
-              .status(403)
-              .json({
-                success: false,
-                message: 'Unexpected Error Occurred Try Later.',
-              });
+            res.status(403).json({
+              success: false,
+              message: 'Unexpected Error Occurred Try Later.',
+            });
           });
-      } else {
-        //if user does not exist, send message
-        res
-          .status(400)
-          .json({ success: false, message: 'User does not exist' });
       }
     })
     .catch(err => {
@@ -127,10 +123,15 @@ router.put('/:id', (req, res) => {
 
 router.delete('/:id', (req, res) => {
   const id = req.params.id;
+  const userId = req.user;
+  //@TODO: turn this back on
+  // if (userId !== id) {
+  //   return res.status(401).send({ message: 'Unauthorized' });
+  // }
   usersModel
     .getUserByID(id)
-    .then(result => {
-      if (result.rowCount > 0) {
+    .then(user => {
+      if (user) {
         usersModel
           .deleteUser(id)
           .then(() => {
@@ -140,12 +141,10 @@ router.delete('/:id', (req, res) => {
           })
           .catch(err => {
             console.log('Error deleting user @users.js', err);
-            res
-              .status(403)
-              .json({
-                success: false,
-                message: 'Unexpected Error Occurred Try Later.',
-              });
+            res.status(403).json({
+              success: false,
+              message: 'Unexpected Error Occurred Try Later.',
+            });
           });
       } else {
         res

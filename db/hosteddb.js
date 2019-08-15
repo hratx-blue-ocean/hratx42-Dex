@@ -1,7 +1,7 @@
 const path = require('path');
 
 require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
-console.log(require('dotenv').config({ path: path.resolve(__dirname, '../.env') }))
+require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
 const pg = require('pg');
 
 const pgClient = new pg.Pool({
@@ -9,7 +9,7 @@ const pgClient = new pg.Pool({
   port: 5432,
   user: process.env.DB_USERNAME,
   password: process.env.DB_PASSWORD || '',
-  database: 'dexdb'
+  database: 'dexdb',
 });
 
 pgClient.connect(err => {
