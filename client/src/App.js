@@ -44,16 +44,11 @@ export default class App extends Component {
 
       showTableModal: false,
     };
-
-    // dashboard onChange event functions
-    this.changeProfileName = this.changeProfileName.bind(this);
-    this.changeProfileEmail = this.changeProfileEmail.bind(this);
-    this.changeProfilePassword = this.changeProfilePassword.bind(this);
-    this.submitProfileChanges = this.submitProfileChanges.bind(this);
   }
 
   componentDidMount() {
     global.flash = this.flash.bind(this);
+    global.setState = this.setState.bind(this);
     if (localStorage.getItem('token')) {
       this.login();
     }
@@ -91,12 +86,14 @@ export default class App extends Component {
   async addTable(name, emails) {
     const newTable = await http.tables.post({ name });
     const tableId = newTable.id;
+    http.tables.postUser(tableId, this.state.user.email)
     const tables = [...this.state.tables];
     tables.push(newTable);
     this.setState({ tables });
     for (let email of emails) {
       http.tables.postUser(tableId, email);
     }
+    this.changeTableModal()
   }
 
   logOut() {
@@ -110,36 +107,10 @@ export default class App extends Component {
 
   }
 
-  // dashboard onChange event and submit functions
-  changeProfileName(e) {
-    this.setState({ profile: { editName: e.target.value } });
-  }
+  changeTable(id){
+    this.setState({showenTable:id})
+  }  
 
-  changeProfileEmail(e) {
-    this.setState({ profile: { editEmail: e.target.value } });
-  }
-
-  changeProfilePassword(e) {
-    this.setState({ profile: { editPassword: e.target.value } });
-  }
-
-  submitProfileChanges() {
-    http.users
-      .put(
-        this.state.userId,
-        this.state.profile.editEmail,
-        this.state.profile.editPassword
-      )
-      .then(
-        () => this.setState({ profile: { editName: '' } }),
-        this.setState({ profile: { editEmail: '' } }),
-        this.setState({ profile: { editPassword: '' } })
-      )
-      .catch(err => console.log('Error: ', err));
-  }
-  changeTable(id) {
-    this.setState({ showenTable: id })
-  }
   addPlayerToTable(playerName) {
     thePlayers.push(playerName);
     this.setState({ newPLayer: thePlayers })

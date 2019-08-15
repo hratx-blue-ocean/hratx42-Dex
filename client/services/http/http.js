@@ -29,8 +29,8 @@ const http = {
     getByTableId(tableId) {
       return tryAxios(`/api/tables/${tableId}/users`, 'get');
     },
-    put(id, email, password) {
-      return tryAxios(`/api/users/${id}`, 'put', { email, password });
+    put(id, name, email, password) {
+      return tryAxios(`/api/users/${id}`, 'put', { name, email, password });
     },
     delete(id) {
       return tryAxios(`/api/users${id}`);
