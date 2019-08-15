@@ -3,13 +3,16 @@ import { Card, Button, Modal } from 'react-bootstrap';
 import CardThumbnail from './CardThumbnails';
 import NewCardModal from './NewCardModal';
 
+
 export default function Deck(props) {
   const [show, setShow] = useState(false);
   const [showEditDeck, setShowEditDeck] = useState(false);
   const [title, setTitle] = useState(props.deck.title);
 
   const handleShow = () => setShow(true);
+
   const handleClose = () => setShow(false);
+
   let cards = [];
   if (props.filterBy === 'Filter') {
     cards = props.deck.cards.slice(0, 6);
@@ -79,12 +82,16 @@ export default function Deck(props) {
             {cards.map((singleCard, cardIndex) => 
               <div key = {Math.random()}>
                 <div style = {{paddingLeft: '160px'}}></div>
+
                 <CardThumbnail deckIndex = {props.deckIndex}
                               cardIndex = {cardIndex}
                               singleCard = {singleCard} 
                               deckTitle={props.deck.title} 
                               deckNames={props.deckNames} 
-                              moveCard = {props.moveCard} />
+                              moveCard = {props.moveCard} 
+                              editCard={props.editCard}
+                              users={props.users} 
+                              labels={props.labels}/>
               </div>
             )}
             <div style={{ paddingLeft: '20px' }} />

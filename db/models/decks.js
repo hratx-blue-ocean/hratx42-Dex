@@ -3,7 +3,7 @@ const cardsModel = require('./cards.js');
 
 const decksModel = {
   async get(id) {
-    const query = 'select * from decks where id = $1';
+    const query = 'select * from decks where id = $1;';
     const { rows: users } = await pgClient.query(query, [id]);
     return users[0];
   },
@@ -15,12 +15,13 @@ const decksModel = {
   },
   async getCompoundData(id) {
     const { rows: decks } = await decksModel.getByTableId(id);
+    
     const decksWithCards = await Promise.all(
       decks.map(async deck => {
         deck.cards = await cardsModel.getCardsByDeckId(deck.id);
         return deck;
       })
-    );
+      );
     return decksWithCards;
   },
   async post(deck) {

@@ -3,14 +3,14 @@ import React, { useState } from "react";
 import { Button, Modal, Container, Row, Col, Form} from 'react-bootstrap';
 
 
-export default function CardModal({closeModal, showMe, deckNames, newCardData}) {
+export default function CardModal({closeModal, showMe, deckNames, newCardData, users, labels}) {
   const [show, setShow] = useState(false);
 
   const [effort, setEffort] = useState(5);
   const [impact, setImpact] = useState(3);
   const [title, setTitle] = useState();
-  const [player, setPlayer] = useState();
-  const [tags, setTags] = useState();
+  const [players, setPlayers] = useState([]);
+  const [tags, setTags] = useState([]);
   const [dueDate, setDate] = useState();
   const [deck, setDeck] = useState();
   const [desc, setDesc] = useState();
@@ -19,7 +19,9 @@ export default function CardModal({closeModal, showMe, deckNames, newCardData}) 
   const handleClose = () => closeModal()
 //   const handleShow = () => setShow(true);
 
-  // console.log(card.weight)
+function removePlayer() {
+    
+}
 
   return (
   <>
@@ -53,7 +55,7 @@ export default function CardModal({closeModal, showMe, deckNames, newCardData}) 
                         <Form style={{width: '100%'}}>
               <Form.Group sm={8} controlId="exampleForm.ControltitleArea">
                 {/* <Form.Label>Description</Form.Label> */}
-                <Form.Control as="textarea" rows="1" onBlur={(event)=> setTitle(event.target.value)} placeholder="title"/>
+                <Form.Control as="textarea" rows="1" onBlur={(event)=> setTitle(event.target.value)} placeholder="title" />
               </Form.Group>
               </Form>
           </Col>
@@ -62,45 +64,85 @@ export default function CardModal({closeModal, showMe, deckNames, newCardData}) 
         {/* Main Area*/}
             {/* Conent Page*/}
         <Row>
-          <Col xs={8} style={styles.mainContent}>
-            <Row>
+          <Col style={styles.mainContent}>
+            <Row xs={8}>
               {/* titles of Players and Tags */}
-                <Col style={styles.playersTagsTitles}>
+                <Col xs={8}style={styles.playersTagsTitles}>
                   <div style={{fontWeight: 800}}>Players</div>
                 </Col>
-                <Col style={styles.playersTagsTitles}>
+
+                <Col xs={4} style={styles.playersTagsTitles}>
                   <div style={{fontWeight: 800}}>Tags</div>
                 </Col>
-            </Row>
+
+        </Row>
             {/* content of players and tags */}
-            <Row>
+        <Row>
+                {/* ADD PLAYERS */}
+                <Col xs={8} style={styles.playersStyle}>
+                        <select onChange={(event)=> {
+                            let playerHolder = players
+                            let selectPlayer = event.target.value  
+                            let targetPlayer ={member_id: null, member_name: selectPlayer}
+                            playerHolder.push(targetPlayer)
+                            setPlayers(playerHolder)
+                        }}>
+                            <option></option>
+                            {users.map(user =>{
+                                return (
+                                <option>{user.name}</option> 
+                                )
+                            })}
+                        </select>
+                </Col>
+
+            {/* ADD TAGS/LABELS */}
+                <Col xs={4} style={styles.playersStyle}>
+                        <select onChange={(event)=> {
+                            let labelsHolder = tags
+                            let selectLabel = event.target.value  
+                            let targetLabel ={color: null, name: selectLabel}
+                            console.log(JSON.stringify(event.target.value))
+                            labelsHolder.push(targetLabel)
+                            // setTags(labelsHolder)
+                        }}>
+                            <option></option>
+                            {labels.map(label =>{
+                                return (
+                                <option >{label.name}</option>
+                                )
+                            })}
+                        </select>
+                </Col> 
+        </Row>
+            {/* Return ALL PLAYERS and LABELS/TAGS */}
+        <Row>
                   <Col style={styles.playersStyle}>
-                    <select onChange={(event)=> setPlayer(event.target.value) }>
-                    {/* {card.labels.map(label =>{
-                        return (
-                            <option>{label}</option>
-                        )
-                    })} */}
-                      {/* Map through these */}
-                      <option></option>
-                      <option value="Miles">Miles</option>
-                      <option value="Michael">Michael</option>
-                      <option value="DJ">DJ</option>
-                    </select>
+                    {players.map(player =>{
+                    return (
+                        <div onClick={()=>{
+                            let curTags = tags
+                            console.log(tags)
+                            console.log(players)
+                        }}>{player.member_name}</div>
+                    )
+                     })}
                   </Col>
                   <Col style={styles.tagsStyle}>
-                  <select onChange={(event)=> setTags(event.target.value) }>
-                      {/* Map through these */}
-                      <option></option>
-                      <option value="FrontEnd">FrontEnd</option>
-                      <option value="BackEnd">BackEnd</option>
-                      <option value="Git">Git</option>
-                    </select>
+                  {tags.map(tag =>{
+                    return (
+                        <div onClick={()=>{
+                            let curTags = tags
+                            console.log(tags)
+                            console.log(labels)
+                        }}>{tag.name}</div>
+                    )
+                     })}
                   </Col>
-            </Row>
+        </Row>       
             
             {/* Text Input Area */}
-            <Row>
+        <Row>
               <Form style={{width: '100%', paddingTop:10}}>
               <Form.Group sm={8} controlId="exampleForm.ControlTextarea1">
                 {/* <Form.Label>Description</Form.Label> */}
@@ -137,7 +179,8 @@ export default function CardModal({closeModal, showMe, deckNames, newCardData}) 
         {/* Button to Submit */}
         <Row style={styles.submitButton}>
             <Button onClick={(event)=> {
-                newCardData(effort, impact, title, player, tags, dueDate, deck, desc)
+                newCardData(effort, impact, title, players, tags, dueDate, deck, desc)
+                handleClose()
             }} variant="primary">Submit</Button>
         </Row>
 
@@ -185,13 +228,14 @@ const styles = {
 
   //Content Column Row
   mainContent: {
-    // "border": "1px solid black"
+    "border": "1px solid black"
   },
   playersTagsTitles: {
-    // "border": "1px solid black"
+    "border": "1px solid black",
+    width:'100%'
   },
   playersStyle: {
-    // "border": "1px solid black"
+    "border": "1px solid black"
   },
   tagsStyle: {
     // "border": "1px solid black"
