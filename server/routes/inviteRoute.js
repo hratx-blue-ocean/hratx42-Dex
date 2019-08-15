@@ -6,12 +6,10 @@ const nodemailer = require('nodemailer');
 router.post('/:email', async (req, res) => {
   console.log('hi');
   const {email} = req.params;
+  const {tableId} = req.body;
   console.log(email);
+  console.log(tableId);
   async function main(){
-
-    // Generate test SMTP service account from ethereal.email
-    // Only needed if you don't have a real mail account for testing
-    let testAccount = await nodemailer.createTestAccount();
   
     // create reusable transporter object using the default SMTP transport
     var transporter = nodemailer.createTransport({
@@ -25,7 +23,7 @@ router.post('/:email', async (req, res) => {
       from: 'dexteamhr@gmail.com', // sender address
       to: `${email}`, // list of receivers
       subject: 'Hi DJ! this is dex tema', // Subject line
-      html: '<button>Yes</button>'// plain text body
+      html: '\nhttp:\/\/' + req.headers.host + '\/confirmation\/' + token.token + '.\n'
     };
     // send mail with defined transport object
     transporter.sendMail(mailOptions, function (err, info) {
@@ -36,7 +34,7 @@ router.post('/:email', async (req, res) => {
    });
   }
   
-  main().catch(console.error);
+  // main().catch(console.error);
 });
 
 module.exports = router;
