@@ -42,6 +42,8 @@ export default function Controls(props) {
                 <CardThumbnails
                   singleCard={item}
                   deckNames = {props.deckNames}
+                  users = {props.users}
+                  labels = {props.labels}
                   background='true'
                 />
               </div>
