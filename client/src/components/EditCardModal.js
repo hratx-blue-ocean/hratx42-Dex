@@ -10,20 +10,18 @@ export default function CardModal({closeModal, showMe, card, deckTitle, deckName
   const [impact, setImpact] = useState(card.card_impact);
   const [title, setTitle] = useState(card.card_title);
   const [players, setPlayers] = useState(card.cards_members);
-  const [tags, setTags] = useState(card.card_tags);
-  const [dueDate, setDate] = useState(card.labels);
+  const [tags, setTags] = useState(card.card_labels);
+  const [dueDate, setDate] = useState(new Date());
   const [deck, setDeck] = useState(deckTitle);
   const [desc, setDesc] = useState(card.card_description);
 
 
-// console.log(players)
 
   return (
 
   <>
   <Modal size="lg" show={showMe} onHide={handleClose}>
     <Container>
-    {/* {console.log(card)} */}
 
         {/* TITLES FOR Header Container for effort, impact, title, and exit */}
         <Row xs={12} style={styles.headerRow}>
@@ -92,16 +90,16 @@ export default function CardModal({closeModal, showMe, card, deckTitle, deckName
                   {/* LABEL CHOOSE */}
                   <Col style={styles.playersStyle}>
                   <select onChange={(event)=> {
-                        let labelHolder = labels
+                        let labelsHolder = tags
                         let selectLabel = event.target.value  
                         let targetLabel ={color: null, label_name: selectLabel}
-                        labelHolder.push(targetLabel)
-                        setTags(labelHolder)
+                        labelsHolder.push(targetLabel)
+                        setTags(labelsHolder)
                     }}>
-                      <option></option>
-                      {labels.map(label =>{
+                        <option></option>
+                        {labels.map(label =>{
                             return (
-                            <option>{label.name}</option>
+                            <option >{label.label_name}</option>
                             )
                         })}
                     </select>
@@ -109,21 +107,21 @@ export default function CardModal({closeModal, showMe, card, deckTitle, deckName
             </Row>
             {/* Return list of names and labels */}
             <Row>
-                  <Col style={styles.playersStyle}>
+                  <Col xs={8} style={styles.playersStyle}>
                     {players.map(player =>{
                     return (
                         <div>{player.member_name}</div>
                     )
                      })}
                   </Col>
-                  <Col style={styles.tagsStyle}>
-
-                  {card.card_labels.map(label =>{
-                    return (
-                        <div>{label.label_name}</div>
-                    )
-                     })}
-
+                  <Col xs={4} style={styles.tagsStyle}>
+                    {tags.map(tag =>{
+                      return (
+                          <div onClick={()=>{
+                              let curTags = tags
+                          }}>{tag.label_name}</div>
+                      )
+                      })}
                   </Col>
             </Row>
             {/* Text Input Area */}
@@ -143,7 +141,7 @@ export default function CardModal({closeModal, showMe, card, deckTitle, deckName
               <div>Add To Card</div>
             </Row>
             <Row style={styles.addToCardTrait}>
-              <input placeholder="date due" placeholder={card.card_created} onBlur={(event)=> setDate(event.target.value)} style={{width:'100%'}}/> 
+              <input placeholder="date due" placeholder='Due Date' onBlur={(event)=> setDate(event.target.value)} style={{width:'100%'}}/> 
             </Row>
             {/* <Row style={styles.addToCardTrait}>
                 <input placeholder="gitLink"  value={card.gitLink}style={{width:'100%'}}/> 
@@ -167,8 +165,8 @@ export default function CardModal({closeModal, showMe, card, deckTitle, deckName
         {/* Button to Submit */}
         <Row style={styles.submitButton}>
         <Button onClick={(event)=> {
-            
-            editCard(card.card_id, deckTitle, effort, impact, title, players, tags, dueDate, deck, desc)
+            let cardInfo={id: card.card_id, eff:effort, imp:impact, titl:title, description:desc, due: dueDate}
+            editCard(players, tags, deck, cardInfo)
         }} variant="primary">Submit</Button>
         </Row>
 
