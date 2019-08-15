@@ -19,10 +19,10 @@ const usersModel = {
   },
 
   getUserInfoByEmail: async email => {
-    const userInfo = await pgClient.query(
-      `SELECT * FROM users WHERE email = '${email}';`
+    const { rows: users } = await pgClient.query(
+      `SELECT id, name, email FROM users WHERE email = '${email}';`
     );
-    return userInfo;
+    return users[0];
   },
   createNewUser: async ({ name, hashedPassword, email }) => {
     const userInfo = await pgClient.query(

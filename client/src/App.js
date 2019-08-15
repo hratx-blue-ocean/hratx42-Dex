@@ -87,6 +87,17 @@ export default class App extends Component {
     }
   }
 
+  async addTable(name, emails) {
+    const newTable = await http.tables.post({ name });
+    const tableId = newTable.id;
+    const tables = [...this.state.tables];
+    tables.push(newTable);
+    this.setState({ tables });
+    for (let email of emails) {
+      http.tables.postUser(tableId, email);
+    }
+  }
+
   logOut() {
     auth.logout();
     auth.setUser(this);
@@ -123,8 +134,8 @@ export default class App extends Component {
       )
       .catch(err => console.log('Error: ', err));
   }
-  changeTable(id){
-    this.setState({showenTable:id})
+  changeTable(id) {
+    this.setState({ showenTable: id });
   }
   render() {
     return (
