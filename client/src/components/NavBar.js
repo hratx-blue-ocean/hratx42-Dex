@@ -23,7 +23,7 @@ export default function NavBar(props) {
               <NavDropdown.Divider />
               <NavDropdown.Item onClick={()=>props.changeTableModal()} href="#action/3.4">Create new table</NavDropdown.Item>
             </NavDropdown>
-            <NavDropdown title="user name" id="collasible-nav-dropdown" style={{ marginRight: "15px" }}>
+          <NavDropdown title={props.name ? props.name.split(" ").map(char => char[0]) : ''} id="collasible-nav-dropdown" style={{ marginRight: "15px" }}>
             <NavDropdown.Item onClick = {()=><Link to={"/dashboard"}></Link>}>Dashboard</NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item href="#logout" onClick={()=>props.logOut()}>logout</NavDropdown.Item>
