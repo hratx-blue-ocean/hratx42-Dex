@@ -13,7 +13,7 @@ export default function NavBar(props) {
   ));
   return (
     <div>
-        <Navbar bg="light" className='dexNavBar expand="lg" >
+        <Navbar bg="light" className='dexNavBar' expand="lg" >
           <Navbar.Brand href="#home" style={{ marginBottom: '22px' }}>
             <h2 style={{ marginLeft: "15px"  }}>/Dex</h2>
           </Navbar.Brand>
