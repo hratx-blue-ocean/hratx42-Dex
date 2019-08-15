@@ -177,6 +177,7 @@ export default class Table extends Component {
           searchClick = {this.searchClick.bind(this)}
           handleModal = {this.handleModal.bind(this)}
           filterBy = {this.state.filterBy}
+          tableId = {this.props.tableId}
           />
         {/* for each deck, create a deck */}
         {this.state.decks.length > 0 ? (<>

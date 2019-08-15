@@ -49,7 +49,7 @@ code {
 }
 
 .CardThumbnailsSingleCard:hover {
-    background-color: #CDCDCD;
+  background-color: #cdcdcd;
 }
 
 /* BEGIN LOGIN/SIGNUP/LANDING STYLES */
@@ -129,7 +129,7 @@ code {
   width: 300px;
   height: 30px;
   font-size: 1.2rem;
-  padding-left: .5rem;
+  padding-left: 0.5rem;
 }
 
 .dashboardNameInput,
@@ -185,4 +185,13 @@ code {
 .CardThumbnailsMove:hover {
   cursor: pointer;
 }
+
+.controls__modal {
+  margin: 0;
+}
+
+.controls__modal button {
+  margin: 0 20px;
+}
+
 /* END DASHBOARD STYLES */
