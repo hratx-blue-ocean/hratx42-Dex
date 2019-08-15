@@ -149,7 +149,7 @@ export default function CardModal({closeModal, showMe, card, deckTitle, deckName
             </Row> */}
             <Row style={styles.addToCardTrait}>
             <select style={{width:'100%'}} onChange={(event)=> setDeck(event.target.value)}>
-              <option>`${deckTitle}`</option>
+              <option>{deckTitle}</option>
               {deckNames.map(name =>{
                 if (name.title !== deckTitle) {
                   return (
