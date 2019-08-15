@@ -15,7 +15,7 @@ const cardsModel = {
           c.weight as card_weight,
           c.impact as card_impact,
           c.table_id,
-          c.deck_id
+          c.deck_id,
           array_agg(
             json_build_object(
               'member_id', cast(u.id as varchar),
@@ -92,20 +92,7 @@ const cardsModel = {
   },
 
   // update card
-  async updateCard(
-    {
-      table_id,
-      deck_id,
-      title,
-      weight,
-      impact,
-      due_date,
-      description,
-      created_at,
-      updated_at,
-    },
-    id
-  ) {
+  async updateCard(card) {
     const updatedCard = await pgClient.query(
       `UPDATE cards SET deck_id = ${deck_id}, title = '${title}', weight = ${weight}, impact = ${impact}, due_date = ${due_date}, description = '${description}', created_at = ${created_at}, updated_at = ${updated_at} WHERE id = ${id}`
     );
