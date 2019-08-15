@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import EditCardModal from './EditCardModal'
-import { Card, Button, Col, Row } from 'react-bootstrap';
+import { OverlayTrigger, Tooltip, Card, Button, Col, Row } from 'react-bootstrap';
 
 export default function CardThumbnails(props) {
   const [show, setShow] = useState(false);
@@ -30,8 +30,16 @@ export default function CardThumbnails(props) {
             <img className = 'CardThumbnailsMove' height = '15' src="/assets/downButton.png" onClick = {() => props.moveCard(props.singleCard, props.cardIndex, props.deckIndex, 1)}/>
             <img className = 'CardThumbnailsMove' height = '15' src="/assets/upButton.png" onClick = {() => props.moveCard(props.singleCard, props.cardIndex, props.deckIndex, -1)}/>
           </div>
-          <>
             {/* more users button leads to edit form to view all users */}
+          <OverlayTrigger
+            key={'bottom'}
+            placement={'bottom'}
+            overlay={
+              <Tooltip id={`tooltip-bottom`}>
+                Add/View More
+              </Tooltip>
+            }
+          >
             <Button
               key={Math.random()}
               className='CardThumbnails_userIcon float-right'
@@ -39,12 +47,24 @@ export default function CardThumbnails(props) {
               onClick={() => {
                 setShow(true)
               }}
-            >...</Button>
-            {props.singleCard.cards_members.map((member, i) => <>
-              {member.member_name === null ? (<></>) : i < 3 ? (<Button key={Math.random()} className='CardThumbnails_userIcon float-right' variant='secondary'>{member.member_name.substring(0, 2)}</Button>) : (<></>)}
+            ><strong>+</strong>
+            </Button>
+          </OverlayTrigger>
+          {props.singleCard.cards_members.map((member, i) => 
+            <>
+              <OverlayTrigger
+                key={'bottom'}
+                placement={'bottom'}
+                overlay={
+                  <Tooltip id={`tooltip-bottom`}>
+                    {member.member_name}
+                  </Tooltip>
+                }
+              >
+                  {member.member_name === null ? (<></>) : i < 3 ? (<Button key={Math.random()} className='CardThumbnails_userIcon float-right' variant='secondary'>{member.member_name.split(" ").map(char => char[0]).join("").toUpperCase()}</Button>) : ''}
+              </OverlayTrigger>
             </>
-            )}
-          </>
+          )}
         </div>
       </Card>
     </div>

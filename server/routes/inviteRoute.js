@@ -25,7 +25,29 @@ router.post('/:email', async (req, res) => {
       from: 'dexteamhr@gmail.com', // sender address
       to: `${email}`, // list of receivers
       subject: 'Hi DJ! this is dex tema', // Subject line
-      html: '<button>Yes</button>'// plain text body
+      html: `<h2>user has invited you to join table name</h2>
+      <div>
+          <button 
+              style="
+                  height: 40px; 
+                  width: 80px;
+                  border: 1px solid grey;
+                  margin: .5rem;
+                  background: #00da00;
+              ">
+                  yes
+          </button>
+          <button 
+              style="
+                  height: 40px; 
+                  width: 80px;
+                  border: 1px solid grey;
+                  margin: .5rem;
+                  background: #ff4949;
+              ">
+                  no
+          </button>
+      </div>`// plain text body
     };
     // send mail with defined transport object
     transporter.sendMail(mailOptions, function (err, info) {

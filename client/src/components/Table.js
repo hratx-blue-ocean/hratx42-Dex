@@ -45,24 +45,17 @@ export default class Table extends Component {
       //populated deckname for tickets
       .then(() => {
         let deckHolder = [];
-        this.state.decks
-          .forEach(deck => {
-            deckHolder.push({ id: deck.id, title: deck.title });
-          })
+        this.state.decks.forEach(deck => {
+          deckHolder.push({ id: deck.id, title: deck.title });
+        })
           //populated deckname for tickets
-          .then(() => {
-            let deckHolder = [];
-            this.state.decks.forEach(deck => {
-              deckHolder.push({ id: deck.id, title: deck.title });
-            });
-            this.setState({ deckNames: deckHolder });
-          });
+        this.setState({ deckNames: deckHolder });
         http.users.getByTableId(1).then(res => {
-          console.log(res);
           this.setState({ users: res });
         });
       });
   }
+
 
   newCardDataCollector(eff, imp, title, players, tag, dueDate, deck, desc) {
     // H.H. I did not delete these b/c they weren't empty
@@ -180,6 +173,7 @@ export default class Table extends Component {
   }
 
   render() {
+    console.log(this.state.users)
     return (
       <div>
         <Controls
@@ -190,7 +184,10 @@ export default class Table extends Component {
           changeFilter={this.changeFilter.bind(this)}
           handleModal={this.handleModal.bind(this)}
           filterBy={this.state.filterBy}
+          deckNames={this.state.deckNames}
           tableId={this.props.tableId}
+          labels={this.state.labels}
+
         />
         {/* for each deck, create a deck */}
         {this.state.decks.length > 0 ? (
@@ -217,8 +214,8 @@ export default class Table extends Component {
         ) : (
           <></>
         )}
-        <Modal show={this.state.newDeck.newDeckModal}>
-          <Modal.Header closeButton onClick={() => this.handleModal()}>
+        <Modal show={this.state.newDeck.newDeckModal} onHide = {() =>this.handleModal()}>
+          <Modal.Header closeButton onClick={() => this.handleModal()} onHide = {() => this.handleModal()}>
             <Modal.Title>Add Deck</Modal.Title>
           </Modal.Header>
           <Modal.Body>
