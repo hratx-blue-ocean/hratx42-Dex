@@ -29,21 +29,11 @@ app.use((_, res, next) => {
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '../client/public')));
-// app.get('/dashboard', (req, res) => {
-//   res.sendFile(path.join(__dirname, '../client/public/index.html'));
-// });
-// app.get('/profile', (req, res) => {
-//   res.sendFile(path.join(__dirname, '../client/public/index.html'));
-// });
-// app.get('/table/:tableName', (req, res) => {
-//   res.sendFile(path.join(__dirname, '../client/public/index.html'));
-// });
 
 // routes
 app.use('/api/users', usersRoute);
 app.use('/api/auth', authRoute);
 // app.use(jwtChecker.checkToken);
-console.log('I am here');
 app.use('/api/tables', tablesRoute);
 app.use('/api/decks', decksRoute);
 app.use('/api/cards', cardsRoute);
