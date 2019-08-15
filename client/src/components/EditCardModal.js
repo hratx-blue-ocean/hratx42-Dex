@@ -2,19 +2,22 @@ import React, { useState } from "react";
 import { Button, Modal, Container, Row, Col, Form} from 'react-bootstrap';
 
 
-export default function CardModal({closeModal, showMe, card, deckTitle, deckNames, editCard, users}) {
+export default function CardModal({closeModal, showMe, card, deckTitle, deckNames, editCard, users, labels}) {
   const [show, setShow] = useState(false);
   const handleClose = () => closeModal()
 
   const [effort, setEffort] = useState(card.card_weight);
   const [impact, setImpact] = useState(card.card_impact);
   const [title, setTitle] = useState(card.card_title);
-  const [players, setPlayer] = useState(card.cards_members);
-  const [tags, setTags] = useState();
-  const [dueDate, setDate] = useState(card.card_created);
+  const [players, setPlayers] = useState(card.cards_members);
+  const [tags, setTags] = useState(card.card_tags);
+  const [dueDate, setDate] = useState(card.labels);
   const [deck, setDeck] = useState(deckTitle);
   const [desc, setDesc] = useState(card.card_description);
 
+  
+// console.log(card)
+// console.log(players)
 
   return (
 
@@ -74,24 +77,36 @@ export default function CardModal({closeModal, showMe, card, deckTitle, deckName
                   <Col style={styles.playersStyle}>
                     <select onChange={(event)=> {
                         let playerHolder = players
-                        // players.push(event.target.value)
-                        // setPlayer(players) 
-                        console.log(users)
+                        let selectPlayer = event.target.value  
+                        let targetPlayer ={member_id: null, member_name: selectPlayer}
+                        playerHolder.push(targetPlayer)
+                        setPlayers(playerHolder)
+                        console.log(players)
                     }}>
                       <option></option>
                       {users.map(user =>{
                             return (
-                            <option value={user}>{user.name}</option>
+                            <option>{user.name}</option>
                             )
                         })}
                     </select>
                   </Col>
-                  <Col style={styles.tagsStyle}>
-                  <select onChange={(event)=> setTags(event.target.value) }>
+                  {/* LABEL CHOOSE */}
+                  <Col style={styles.playersStyle}>
+                  <select onChange={(event)=> {
+                        let labelHolder = labels
+                        let selectLabel = event.target.value  
+                        let targetLabel ={color: null, label_name: selectLabel}
+                        labelHolder.push(targetLabel)
+                        setTags(labelHolder)
+                        console.log(tags)
+                    }}>
                       <option></option>
-                      <option value="Git">Git</option>
-                      <option value="FrontEnd">FrontEnd</option>
-                      <option value="BackEnd">BackEnd</option>
+                      {labels.map(label =>{
+                            return (
+                            <option>{label.name}</option>
+                            )
+                        })}
                     </select>
                   </Col>
             </Row>
@@ -108,7 +123,7 @@ export default function CardModal({closeModal, showMe, card, deckTitle, deckName
 
                   {card.card_labels.map(label =>{
                     return (
-                        <div style={{color: `${label.color}`}}>{label.label_name}</div>
+                        <div>{label.label_name}</div>
                     )
                      })}
 

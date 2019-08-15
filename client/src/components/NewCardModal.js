@@ -3,13 +3,13 @@ import React, { useState } from "react";
 import { Button, Modal, Container, Row, Col, Form} from 'react-bootstrap';
 
 
-export default function CardModal({closeModal, showMe, deckNames, newCardData}) {
+export default function CardModal({closeModal, showMe, deckNames, newCardData, users}) {
   const [show, setShow] = useState(false);
 
   const [effort, setEffort] = useState(5);
   const [impact, setImpact] = useState(3);
   const [title, setTitle] = useState();
-  const [player, setPlayer] = useState();
+  const [players, setPlayers] = useState([]);
   const [tags, setTags] = useState();
   const [dueDate, setDate] = useState();
   const [deck, setDeck] = useState();
@@ -19,7 +19,7 @@ export default function CardModal({closeModal, showMe, deckNames, newCardData}) 
   const handleClose = () => closeModal()
 //   const handleShow = () => setShow(true);
 
-  // console.log(card.weight)
+//   console.log(users)
 
   return (
   <>
@@ -74,27 +74,19 @@ export default function CardModal({closeModal, showMe, deckNames, newCardData}) 
             </Row>
             {/* content of players and tags */}
             <Row>
-                  <Col style={styles.playersStyle}>
-                    <select onChange={(event)=> setPlayer(event.target.value) }>
-                    {/* {card.labels.map(label =>{
-                        return (
-                            <option>{label}</option>
-                        )
-                    })} */}
-                      {/* Map through these */}
+            <Col style={styles.playersStyle}>
+                    <select onChange={(event)=> {
+                        let playerHolder = players
+                        let selectPlayer = event.target.value  
+                        let targetPlayer ={member_id: null, member_name: selectPlayer}
+                        playerHolder.push(targetPlayer)
+                    }}>
                       <option></option>
-                      <option value="Miles">Miles</option>
-                      <option value="Michael">Michael</option>
-                      <option value="DJ">DJ</option>
-                    </select>
-                  </Col>
-                  <Col style={styles.tagsStyle}>
-                  <select onChange={(event)=> setTags(event.target.value) }>
-                      {/* Map through these */}
-                      <option></option>
-                      <option value="FrontEnd">FrontEnd</option>
-                      <option value="BackEnd">BackEnd</option>
-                      <option value="Git">Git</option>
+                      {users.map(user =>{
+                            return (
+                            <option>{user.name}</option>
+                            )
+                        })}
                     </select>
                   </Col>
             </Row>

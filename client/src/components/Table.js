@@ -8,7 +8,18 @@ export default class Table extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      labels: [{}],
+      labels: [
+        {name:'FrontEnd', color:"#60BE4E"},
+        {name:'BackEnd', color:"#FF9E1A"},
+        {name:'GitHub', color:"#C377E0"},
+        {name:'Bug', color:"#FF77CC"},
+        {name:'Review', color:"#50E897"},
+        {name:'Research', color:"#00C2E2"},
+        {name:'Styling', color:"#0079C0"},
+        {name:'Implementation', color:"#EA5946"},
+        {name:'Planning', color:"#4D4D4D"},
+        {name:'User Stories', color:"#F1D600"},
+    ],
       deckNames: [],
       decks: [],
       cards: [],
@@ -166,6 +177,7 @@ export default class Table extends Component {
   }
 
   render() {
+
     return (
       <div>
         <Controls 
@@ -191,7 +203,9 @@ export default class Table extends Component {
                 newCardData={this.newCardDataCollector}
                 editCard={this.editCardDataCollector}
                 editDeck = {this.editDeck.bind(this)}
-                moveCard = {this.moveCard.bind(this)} />
+                moveCard = {this.moveCard.bind(this)} 
+                labels = {this.state.labels}
+                />
               <div style = {{paddingBottom: '8px'}}></div>
             </div>)
           }

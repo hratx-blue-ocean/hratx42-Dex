@@ -3,6 +3,7 @@ import { Card, Button, Modal } from 'react-bootstrap';
 import CardThumbnail from './CardThumbnails'
 import NewCardModal from './NewCardModal'
 
+
 export default function Deck(props) {
   const [show, setShow] = useState(false);
   const [showEditDeck, setShowEditDeck] = useState(false);
@@ -10,6 +11,8 @@ export default function Deck(props) {
 
   const handleShow = () => setShow(true);
   const handleClose = () => setShow(false)
+
+
   let cards = [];
   if (props.filterBy === 'Filter'){
     cards = props.deck.cards.slice(0, 6);
@@ -36,21 +39,20 @@ export default function Deck(props) {
             {cards.map((singleCard, cardIndex) => 
               <div key = {Math.random()}>
                 <div style = {{paddingLeft: '160px'}}></div>
-<<<<<<< HEAD
-                <CardThumbnail singleCard = {singleCard} deckTitle={props.deck.title} 
-                deckNames={props.deckNames} editCard={props.editCard} users={props.users} />
-=======
+
                 <CardThumbnail deckIndex = {props.deckIndex}
                               cardIndex = {cardIndex}
                               singleCard = {singleCard} 
                               deckTitle={props.deck.title} 
                               deckNames={props.deckNames} 
-                              moveCard = {props.moveCard} />
->>>>>>> 755b128dd01f39e27aa99f9242d6f1d9b4427877
+                              moveCard = {props.moveCard} 
+                              editCard={props.editCard}
+                              users={props.users} 
+                              labels={props.labels}/>
               </div>
              )}
               <div style = {{paddingLeft: '20px'}}></div>
-            <NewCardModal users={props.users} newCardData={props.newCardData} key={Math.random()} showMe={show}  deckNames={props.deckNames} closeModal={handleClose.bind(this)}/>
+            <NewCardModal  users={props.users} labels={props.labels} newCardData={props.newCardData} key={Math.random()} showMe={show}  deckNames={props.deckNames} closeModal={handleClose.bind(this)}/>
             <Button variant="outline-success" onClick={()=> handleShow()}>Add New Card</Button>
           </Card.Body>
         </Card>
