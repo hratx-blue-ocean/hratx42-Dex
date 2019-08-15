@@ -5,6 +5,8 @@ import {
   DropdownButton,
   Dropdown,
   Alert,
+  Modal,
+  Form
 } from 'react-bootstrap';
 import CardThumbnails from './CardThumbnails';
 
@@ -12,8 +14,13 @@ import http from '../../services/http/http';
 
 export default function Controls(props) {
   const [showModal, setShowModal] = useState(false);
-
+  const [showInvite, showInviteToggler] = useState(false);
+  const [invitationEmail, setInvitationEmail] = useState('');
   const cards = props.cards.slice(0, 10);
+  const sendInvite = async () => {
+    console.log(invitationEmail);
+    return await http.invite.post(invitationEmail);
+  }
   const handleDelete = async function(sure) {
     setShowModal(false);
     if (sure) {
@@ -82,12 +89,38 @@ export default function Controls(props) {
           <Button
             style={{ width: '150px' }}
             variant="success"
-            onClick={() => {
-              console.log('clicked on invite a player to a table');
-            }}
+            onClick={showInviteToggler}
           >
             Invite
           </Button>
+          <Modal show={showInvite} onHide={showInviteToggler}>
+            <Modal.Header closeButton>
+              <Modal.Title>Send Invitation</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+            <Form>
+              <Form.Group controlId="formBasicEmail">
+                <Form.Label>Email address</Form.Label>
+                <Form.Control 
+                  type="email" 
+                  placeholder="Enter email" 
+                  onBlur={(e) => {
+                   setInvitationEmail(e.target.value)
+                   }} 
+                />
+                <Form.Text className="text-muted">
+                  Enter the email you wish to invite!
+                </Form.Text>
+              </Form.Group>
+              <Button variant="secondary" onClick={showInviteToggler}>
+                Close
+              </Button>
+              <Button variant="primary" onClick={sendInvite}>
+                Send
+              </Button>
+            </Form>
+            </Modal.Body>
+          </Modal>
           <Button
             variant="danger"
             onClick={() => {

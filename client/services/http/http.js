@@ -90,6 +90,11 @@ const http = {
       return tryAxios(`/api/cards/${id}`, 'delete');
     },
   },
+  invite: {
+    post(email) {
+      return tryAxios(`/api/invite/${email}`, 'post')
+    }
+  },
 };
 
 export default http;
