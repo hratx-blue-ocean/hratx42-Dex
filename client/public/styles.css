@@ -53,12 +53,11 @@ code {
 }
 
 /* BEGIN LOGIN/SIGNUP/LANDING STYLES */
-/* Login Component */
+/* Login Component & Login Button */
 .login {
   background: #f1f0f0 !important;
 }
 
-/* Log In Button */
 .loginBtn {
   border-radius: var(--border-button-border-radius, 4px) !important;
   font-size: var(--font-button-font-size, 16px) !important;
@@ -129,19 +128,38 @@ code {
 }
 /* END LOGIN/SIGNUP/LANDING STYLES */
 
-/* BEGIN DEX NAV HEADER STYLES */
+/* BEGIN DEX NAVBAR STYLES */
 .dexNavBar {
   background-color: #f1f0f0 !important;
 }
-
-/* END DEX NAV HEADER STYLES */
+/* END DEX NAVBAR STYLES */
 
 /* BEGIN CREATE/EDIT TABLE MODAL STYLES */
-
-.tableSettingsAddPlayerBtn {
-  text-align: right;
-}
 /* END CREATE/EDIT TABLE MODAL STYLES */
+
+/* BEGIN TABLE CONTROL BAR STYLES */
+.tableControlsUserNameCircles {
+  align-items: center;
+  background-color: #dfe1e6;
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border: 0;
+  border-radius: 100%;
+  box-sizing: border-box;
+  color: #172b4d;
+  display: inline-flex;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans,
+    Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  justify-content: center;
+  line-height: 28px;
+  opacity: 1;
+  height: 40px;
+  width: 40px;
+}
+/* END TABLE CONTROL BAR STYLES */
 
 /* BEGIN DASHBOARD STYLES */
 /* dashboard main container div */
