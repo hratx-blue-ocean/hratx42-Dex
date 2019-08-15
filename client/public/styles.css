@@ -178,10 +178,9 @@ code {
 }
 
 .dashboardTables .newTable {
-  display: grid;
-  place-items: center;
-  width: 120px;
-  height: 120px;
+  padding: .5rem;
+  width: 150px;
+  height: 100px;
   border: 1px solid grey;
   border-radius: 5px;
   background: #ff5a5f;
