@@ -68,7 +68,6 @@ export default function Deck(props) {
               users={props.users} 
               labels={props.labels}/>
               
-            
             <Button variant='outline-success' onClick={() => handleShow()}>
               Add New Card
             </Button>
