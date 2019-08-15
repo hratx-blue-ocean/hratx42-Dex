@@ -102,13 +102,14 @@ function removePlayer() {
                             let labelsHolder = tags
                             let selectLabel = event.target.value  
                             let targetLabel ={color: null, name: selectLabel}
+                            console.log(JSON.stringify(event.target.value))
                             labelsHolder.push(targetLabel)
-                            setTags(labelsHolder)
+                            // setTags(labelsHolder)
                         }}>
                             <option></option>
                             {labels.map(label =>{
                                 return (
-                                <option>{label.name}</option>
+                                <option >{label.name}</option>
                                 )
                             })}
                         </select>
@@ -122,7 +123,7 @@ function removePlayer() {
                         <div onClick={()=>{
                             let curTags = tags
                             console.log(tags)
-                            console.log(label)
+                            console.log(players)
                         }}>{player.member_name}</div>
                     )
                      })}
@@ -133,7 +134,7 @@ function removePlayer() {
                         <div onClick={()=>{
                             let curTags = tags
                             console.log(tags)
-                            console.log(label)
+                            console.log(labels)
                         }}>{tag.name}</div>
                     )
                      })}

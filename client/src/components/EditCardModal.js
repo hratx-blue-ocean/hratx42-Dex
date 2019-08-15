@@ -16,7 +16,7 @@ export default function CardModal({closeModal, showMe, card, deckTitle, deckName
   const [desc, setDesc] = useState(card.card_description);
 
   
-console.log(desc)
+
 // console.log(players)
 
   return (
