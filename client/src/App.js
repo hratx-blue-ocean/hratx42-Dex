@@ -86,12 +86,14 @@ export default class App extends Component {
   async addTable(name, emails) {
     const newTable = await http.tables.post({ name });
     const tableId = newTable.id;
+    http.tables.postUser(tableId, this.state.user.email)
     const tables = [...this.state.tables];
     tables.push(newTable);
     this.setState({ tables });
     for (let email of emails) {
       http.tables.postUser(tableId, email);
     }
+    this.changeTableModal()
   }
 
   logOut() {

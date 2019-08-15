@@ -20,6 +20,7 @@ export default function Controls(props) {
     setShowModal(false);
     if (sure) {
       const response = await http.tables.delete(props.tableId);
+      console.log(response)
       if (response) {
         window.location = '/';
       }
