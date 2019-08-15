@@ -87,6 +87,17 @@ export default class App extends Component {
     }
   }
 
+  async addTable(name, emails) {
+    const newTable = await http.tables.post({ name });
+    const tableId = newTable.id;
+    const tables = [...this.state.tables];
+    tables.push(newTable);
+    this.setState({ tables });
+    for (let email of emails) {
+      http.tables.postUser(tableId, email);
+    }
+  }
+
   logOut() {
     auth.logout();
     auth.setUser(this);
@@ -123,15 +134,15 @@ export default class App extends Component {
       )
       .catch(err => console.log('Error: ', err));
   }
-  changeTable(id){
-    this.setState({showenTable:id})
+  changeTable(id) {
+    this.setState({ showenTable: id });
   }
   render() {
     return (
       <>
         <Router>
           {auth.userIsLoggedIn() ? (
-            <NavBar logOut={this.logOut.bind(this)} showTableModal={this.state.showTableModal} changeTableModal={this.changeTableModal.bind(this)} tables={this.state.tables} showenTable={this.state.showenTable}/>
+            <NavBar name={this.state.user.name} logOut={this.logOut.bind(this)} showTableModal={this.state.showTableModal} changeTableModal={this.changeTableModal.bind(this)} tables={this.state.tables} showenTable={this.state.showenTable}/>
           ) : null}
           <Route
             path="/"
@@ -146,6 +157,7 @@ export default class App extends Component {
               <Dashboard
                 {...props}
                 // state props
+                user={this.state.user}
                 tables={this.state.tables}
                 editProfileName={this.state.profile.editName}
                 editProfileEmail={this.state.profile.editEmail}
@@ -159,7 +171,10 @@ export default class App extends Component {
             )}
           />
           <Route path="/profile" component={Profile} />
-          <Route path="/table" component={Table} />
+          {this.state.tables.map( table => 
+            <Route path={`/table/${table.id}`} render={() => <Table tableId={table.id} tableName={table.name} />} />
+          )}
+          
           <Route path="/TableSettings" component={TableSettings} />
         </Router>
         <Flash flashData={this.state.flash} />

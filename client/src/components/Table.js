@@ -21,14 +21,21 @@ export default class Table extends Component {
       }
     };
     this.handleModal = this.handleModal.bind(this);
-    this.newCardDataCollector = this.newCardDataCollector.bind(this);
+    this.newCardDataCollector=this.newCardDataCollector.bind(this)
+    this.editCardDataCollector=this.newCardDataCollector.bind(this)
+
   }
   componentDidMount() {
-    http.decks
-      .get(1)
-      .then(response => {
-        console.log('table data', response);
-        this.setState({ decks: response });
+    http.decks.get(this.props.tableId)
+    .then((response) => {
+      console.log('table data', response)
+      this.setState({decks: response, tableName: this.props.tableName})
+    })
+    //populated deckname for tickets
+    .then(() =>{
+      let deckHolder= []
+      this.state.decks.forEach(deck =>{
+        deckHolder.push({id: deck.id, title: deck.title})
       })
       //populated deckname for tickets
       .then(() => {
@@ -48,15 +55,29 @@ export default class Table extends Component {
     // })
   }
 
-  newCardDataCollector(eff, imp, title, players, tag, dueDate, deck, desc) {
-    console.log(eff);
-    console.log(imp);
-    console.log(title);
-    console.log(players);
-    console.log(tag);
-    // console.log(dueDate)
-    // console.log(deck)
-    // console.log(desc)
+
+  newCardDataCollector (eff,imp,title,players,tag,dueDate,deck,desc) {
+    console.log(eff)
+    console.log(imp)
+    console.log(title)
+    console.log(players)
+    console.log(tag)
+    console.log(dueDate)
+    console.log(deck)
+    console.log(desc)
+  }
+
+  editCardDataCollector (id,deckId,eff,imp,title,players,tag,dueDate,deck,desc) {
+    console.log(id)
+    console.log(deckId)
+    console.log(eff)
+    console.log(imp)
+    console.log(title)
+    console.log(players)
+    console.log(tag)
+    console.log(dueDate)
+    console.log(deck)
+    console.log(desc)
   }
 
   saveTable(tableName, descName) {
@@ -106,13 +127,15 @@ export default class Table extends Component {
 
   submitNewDeck() {
     //submit new deck with this.state.newDeck.newDecktitle and table ID
-    http.decks
-      .post({ table_id: 1, title: this.state.newDeck.newDeckTitle })
-      .then(res => {
-        let { newDeck } = this.state;
-        newDeck.newDeckModal = false;
-        this.setState({ newDeck });
-      });
+
+    let { decks } = this.state;
+    http.decks.post({table_id: 1, title: this.state.newDeck.newDeckTitle})
+    .then((res) => {
+      let { newDeck } = this.state;
+      decks.push({table_id: 1, title: this.state.newDeck.newDeckTitle})
+      newDeck.newDeckModal = false
+      this.setState({newDeck, decks})
+    })
   }
 
   handleTextChange(e) {
@@ -120,14 +143,31 @@ export default class Table extends Component {
     newDeck.newDeckTitle = e.target.value;
     this.setState({ newDeck });
   }
-
-  deleteDeck(id) {
-    console.log(id);
-    http.decks.delete(id).then(res => console.log(res));
+  deleteDeck(id, deckIndex) {
+    let { decks } = this.state;
+    http.decks.delete(id)
+    .then((res) => {
+      decks.splice(deckIndex, 1);
+      this.setState({decks})
+    })
   }
 
-  editDeck(id, title) {
-    http.decks.put({ id, title }).then(res => console.log(res));
+  editDeck(id, title, deckIndex) {
+    let { decks } = this.state;
+    http.decks.put({id, title})
+    .then((res) => {
+      decks[deckIndex].title = title;
+      this.setState({decks})
+    })
+  }
+
+  moveCard(card, cardIndex, deckIndex, direction) {
+    let { decks } = this.state;
+    if (decks[deckIndex + direction]){
+      decks[deckIndex + direction].cards.push(card);
+      decks[deckIndex].cards.splice(cardIndex, 1);
+    }
+    this.setState({decks})
   }
 
   render() {
@@ -143,38 +183,32 @@ export default class Table extends Component {
           handleModal={this.handleModal.bind(this)}
           filterBy={this.state.filterBy}
         />
-        {/* for each deck, create a deck */}
-        {this.state.decks.length > 0 ? (
-          <>
-            {this.state.decks.map(deck => (
-              <div key={deck.id}>
-                <Deck
-                  filterBy={this.state.filterBy}
-                  deck={deck}
-                  deckNames={this.state.deckNames}
-                  deleteDeck={this.deleteDeck.bind(this)}
-                  editDeck={this.editDeck.bind(this)}
-                />
-                <div style={{ paddingBottom: '8px' }} />
-              </div>
-            ))}
-          </>
-        ) : (
-          <></>
-        )}
-        <Modal show={this.state.newDeck.newDeckModal}>
-          <Modal.Header closeButton onClick={() => this.handleModal()}>
-            <Modal.Title>Add Deck</Modal.Title>
+        {/* for each deck, create a deck */}        
+        {this.state.decks.length > 0 ? (<>
+          {this.state.decks.map((deck, deckIndex) => <div key = {deck.id}>
+              <Deck 
+                filterBy = {this.state.filterBy} 
+                deck = {deck} 
+                deckNames={this.state.deckNames}
+                deckIndex = {deckIndex}
+                deleteDeck = {this.deleteDeck.bind(this)}
+                newCardData={this.newCardDataCollector}
+                editCard={this.editCardDataCollector}
+                editDeck = {this.editDeck.bind(this)}
+                moveCard = {this.moveCard.bind(this)} />
+              <div style = {{paddingBottom: '8px'}}></div>
+            </div>)
+          }
+        </>) : (<></>)}
+        <Modal show = {this.state.newDeck.newDeckModal}>
+        <Modal.Header closeButton onClick={() => this.handleModal()}>
+        <Modal.Title>Add Deck</Modal.Title>
           </Modal.Header>
-          <Modal.Body>
-            <p>Enter Deck Title</p>
-            <input
-              onChange={e => this.handleTextChange(e)}
-              value={this.state.newDeck.newDeckTitle}
-              type='text'
-            />
-          </Modal.Body>
-          <Modal.Footer>
+            <Modal.Body>
+              <p>Enter Deck Title</p>
+              <input onChange = {(e) => this.handleTextChange(e)} value = {this.state.newDeck.newDeckTitle} type="text"/>
+            </Modal.Body>
+            <Modal.Footer>
             <Button variant='danger' onClick={() => this.handleModal()}>
               Cancel
             </Button>

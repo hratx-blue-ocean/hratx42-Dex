@@ -13,51 +13,31 @@ export default function NavBar(props) {
   ));
   return (
     <div>
-      <Navbar className='dexNavBar' bg='light' expand='lg'>
-        <Navbar.Brand href='#home' style={{ marginBottom: '22px' }}>
-          <h2 style={{ marginLeft: '15px' }}>/Dex</h2>
-        </Navbar.Brand>
-        <Navbar.Toggle aria-controls='basic-navbar-nav' />
-        <Navbar.Collapse id='basic-navbar-nav'>
-          <Nav className='mr-auto' />
-          <Form style={{ marginRight: '25px' }}>
-            <Button
-              variant='outline-primary'
-              className='mr-sm-2'
-              onClick={() => props.changeTableModal()}
-            >
-              <strong>+</strong>
-            </Button>
-          </Form>
-          <NavDropdown title='Tables' id='collasible-nav-dropdown'>
-            {allTables}
-            <NavDropdown.Divider />
-            <NavDropdown.Item
-              onClick={() => props.changeTableModal()}
-              href='#action/3.4'
-            >
-              Create Table
-            </NavDropdown.Item>
-          </NavDropdown>
-          <NavDropdown
-            title='User Name'
-            id='collasible-nav-dropdown'
-            style={{ marginRight: '15px' }}
-          >
-            <NavDropdown.Item onClick={() => <Link to={'/dashboard'} />}>
-              Dashboard
-            </NavDropdown.Item>
-            <NavDropdown.Divider />
-            <NavDropdown.Item href='#logout' onClick={() => props.logOut()}>
-              Log Out
-            </NavDropdown.Item>
-          </NavDropdown>
-        </Navbar.Collapse>
-      </Navbar>
-      <TableSettings
-        showTableModal={props.showTableModal}
-        changeTableModal={props.changeTableModal}
-      />
+        <Navbar bg="light" className='dexNavBar expand="lg" >
+          <Navbar.Brand href="#home" style={{ marginBottom: '22px' }}>
+            <h2 style={{ marginLeft: "15px"  }}>/Dex</h2>
+          </Navbar.Brand>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="mr-auto" />
+            <Form style={{ marginRight: "25px" }}>
+              <Button variant="outline-primary" className="mr-sm-2" onClick={()=>props.changeTableModal()}>
+               <strong>+</strong>
+              </Button>
+            </Form>
+            <NavDropdown title="Tables" id="collasible-nav-dropdown">
+              {allTables}
+              <NavDropdown.Divider />
+              <NavDropdown.Item onClick={()=>props.changeTableModal()} href="#action/3.4">Create Table</NavDropdown.Item>
+            </NavDropdown>
+          <NavDropdown title={props.name ? props.name.split(" ").map(char => char[0]) : ''} id="collasible-nav-dropdown" style={{ marginRight: "15px" }}>
+            <NavDropdown.Item onClick = {()=><Link to={"/dashboard"}></Link>}>Dashboard</NavDropdown.Item>
+              <NavDropdown.Divider />
+              <NavDropdown.Item href="#logout" onClick={()=>props.logOut()}>Log Out</NavDropdown.Item>
+            </NavDropdown>
+          </Navbar.Collapse>
+        </Navbar>
+      <TableSettings showTableModal = {props.showTableModal} changeTableModal = {props.changeTableModal} />
     </div>
   );
 }

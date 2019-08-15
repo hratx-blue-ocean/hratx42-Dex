@@ -75,15 +75,16 @@ export default function Deck(props) {
               </Modal>
             </span>
           </Card.Header>
-          <Card.Body className='row'>
-            {cards.map(singleCard => (
-              <div key={Math.random()}>
-                <div style={{ paddingLeft: '160px' }} />
-                <CardThumbnail
-                  singleCard={singleCard}
-                  deckTitle={props.deck.title}
-                  deckNames={props.deckNames}
-                />
+            <Card.Body className = 'row'>
+            {cards.map((singleCard, cardIndex) => 
+              <div key = {Math.random()}>
+                <div style = {{paddingLeft: '160px'}}></div>
+                <CardThumbnail deckIndex = {props.deckIndex}
+                              cardIndex = {cardIndex}
+                              singleCard = {singleCard} 
+                              deckTitle={props.deck.title} 
+                              deckNames={props.deckNames} 
+                              moveCard = {props.moveCard} />
               </div>
             ))}
             <div style={{ paddingLeft: '20px' }} />
@@ -99,6 +100,28 @@ export default function Deck(props) {
             </Button>
           </Card.Body>
         </Card>
+      </div>
+      <div>
+      <Modal size = 'lg' show = {showEditDeck} onHide = {()=>setShowEditDeck(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>
+            <div>Delete/Edit Deck</div>
+          </Modal.Title>
+          <Modal.Body>
+            <p>Change Deck Title</p>
+            <input onChange = {(e) => setTitle(e.target.value)} value = {title} type="text"/>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant='success' onClick={()=> {
+              setShowEditDeck(false)
+              props.editDeck(props.deck.id, title, props.deckIndex)}
+              }>Save Deck</Button>
+            <Button variant='danger' onClick={()=> {
+              setShowEditDeck(false)
+              props.deleteDeck(props.deck.id, props.deckIndex)}}>Delete Deck</Button>
+          </Modal.Footer>
+        </Modal.Header>
+      </Modal>
       </div>
     </div>
   );

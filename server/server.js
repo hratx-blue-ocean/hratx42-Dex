@@ -29,15 +29,6 @@ app.use((_, res, next) => {
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '../client/public')));
-app.get('/dashboard', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/public/index.html'));
-});
-app.get('/profile', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/public/index.html'));
-});
-app.get('/table', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/public/index.html'));
-});
 
 // routes
 app.use('/api/users', usersRoute);
@@ -47,6 +38,7 @@ app.use('/api/tables', tablesRoute);
 app.use('/api/decks', decksRoute);
 app.use('/api/cards', cardsRoute);
 
+app.use('/*', express.static(path.join(__dirname, '../client/public')));
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

@@ -165,8 +165,10 @@ code {
 /* dashboard main container div */
 .dashboardContainer {
   display: flex;
-  padding: 0 15rem 0 15rem;
+  padding: 5rem 15rem 0 15rem;
   justify-content: space-between;
+  background: rgb(195, 209, 209);
+  height: 100vh;
 }
 
 /* dashboard form */
@@ -175,6 +177,7 @@ code {
   display: flex;
   flex-direction: column;
   border: 1px solid;
+  background: #f1f0f0;
 }
 
 .dashboardProfileForm form h2 {
@@ -199,8 +202,10 @@ code {
   width: 150px;
   height: 30px;
   border: none;
-  border-radius: 50px;
+  border-radius: 5px;
   font-size: 1.1rem;
+  background: rgb(255, 90, 95);
+  color: #fff;
 }
 
 .dashboardFormBtn:hover {
@@ -234,4 +239,7 @@ code {
   border-radius: 5px;
 }
 
+.CardThumbnailsMove:hover {
+  cursor: pointer;
+}
 /* END DASHBOARD STYLES */

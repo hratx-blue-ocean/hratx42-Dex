@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "setup": "npm install && cd ./client && npm install && cd ../server && npm install",
-    "test": "cd ./client && npm test",
+    "test": "cd ./client && npm test && cd ../server && npm test",
     "launch": "cd ./client && npm run-script build && cd ../server && node bin/www &",
     "launch-dev": "cd ./server && nodemon bin/www && cd ../client && npm run build-dev && webpack-dev-server &",
     "start": "cd ./server && node bin/www",
