@@ -8,13 +8,13 @@ const cardsModel = {
   async getCardsByDeckId(deckId) {
     const query = `
         select 
-          c.id as card_id,
-          c.title as card_title,
-          c.description as card_description,
-          c.updated_at as card_updated,
-          c.created_at as card_created,
-          c.weight as card_weight,
-          c.impact as card_impact,
+          c.id,
+          c.title,
+          c.description,
+          c.updated_at,
+          c.created_at,
+          c.weight as,
+          c.impact as,
           c.table_id,
           c.deck_id,
           array_agg(
@@ -44,13 +44,13 @@ const cardsModel = {
   async getCardByID(id) {
     const query = `
         select 
-          c.id as card_id,
-          c.title as card_title,
-          c.description as card_description,
-          c.updated_at as card_updated,
-          c.created_at as card_created,
-          c.weight as card_weight,
-          c.impact as card_impact,
+          c.id,
+          c.title,
+          c.description,
+          c.updated_at,
+          c.created_at,
+          c.weight,
+          c.impact,
           array_agg(
             json_build_object(
               'member_id', cast(u.id as varchar),

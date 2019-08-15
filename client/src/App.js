@@ -19,7 +19,7 @@ import auth from '../services/auth.js';
 
 //utils
 import global from '../utils/global';
-let thePlayers=[];
+let thePlayers = [];
 export default class App extends Component {
   constructor(props) {
     super(props);
@@ -28,7 +28,7 @@ export default class App extends Component {
       user: {},
       tables: [],
       showenTable: null,
-      newPLayer:[],
+      newPLayer: [],
       // dashboard edit profile form
       profile: {
         editName: '',
@@ -102,7 +102,7 @@ export default class App extends Component {
   logOut() {
     auth.logout();
     auth.setUser(this);
-    this.setState({userId:''})
+    this.setState({ userId: '' })
   }
 
   changeTableModal() {
@@ -137,25 +137,25 @@ export default class App extends Component {
       )
       .catch(err => console.log('Error: ', err));
   }
-  changeTable(id){
-    this.setState({showenTable:id})
-  }  
+  changeTable(id) {
+    this.setState({ showenTable: id })
+  }
   addPlayerToTable(playerName) {
     thePlayers.push(playerName);
-    this.setState({newPLayer: thePlayers})
+    this.setState({ newPLayer: thePlayers })
   }
 
   removePlayerToTable(playerName) {
     let index = thePlayers.indexOf(playerName)
     thePlayers.splice(index, 1)
-    this.setState({newPLayer: thePlayers})
+    this.setState({ newPLayer: thePlayers })
   }
   render() {
     return (
       <>
         <Router>
           {auth.userIsLoggedIn() ? (
-            <NavBar addTable={this.addTable.bind(this)} addPlayerToTable={this.addPlayerToTable.bind(this)} removePlayerToTable={this.removePlayerToTable.bind(this)} logOut={this.logOut.bind(this)} showTableModal={this.state.showTableModal} changeTableModal={this.changeTableModal.bind(this)} changeTable={this.changeTable.bind(this)} tables={this.state.tables} showenTable={this.state.showenTable} newPLayer={this.state.newPLayer} userName={this.state.user.name}/>
+            <NavBar addTable={this.addTable.bind(this)} addPlayerToTable={this.addPlayerToTable.bind(this)} removePlayerToTable={this.removePlayerToTable.bind(this)} logOut={this.logOut.bind(this)} showTableModal={this.state.showTableModal} changeTableModal={this.changeTableModal.bind(this)} changeTable={this.changeTable.bind(this)} tables={this.state.tables} showenTable={this.state.showenTable} newPLayer={this.state.newPLayer} userName={this.state.user.name} />
           ) : null}
           <Route
             path="/"
@@ -184,10 +184,10 @@ export default class App extends Component {
             )}
           />
           <Route path="/profile" component={Profile} />
-          {this.state.tables.map( table => 
-            <Route key = {Math.random()} path={`/table/${table.id}`} render={() => <Table tableId={table.id} tableName={table.name} />} />
+          {this.state.tables.map(table =>
+            <Route key={Math.random()} path={`/table/${table.id}`} render={() => <Table tableId={table.id} tableName={table.name} />} />
           )}
-          
+
           <Route path="/TableSettings" component={TableSettings} />
         </Router>
         <Flash flashData={this.state.flash} />
