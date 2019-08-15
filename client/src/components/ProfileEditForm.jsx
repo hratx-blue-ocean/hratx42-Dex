@@ -1,5 +1,6 @@
 import React from 'react'
 import {  Button , Form} from 'react-bootstrap';
+import http from '../../services/http/http.js';
 import global from '../../utils/global';
 
 export default class ProfileEditForm extends React.Component {
@@ -7,7 +8,7 @@ export default class ProfileEditForm extends React.Component {
     console.log('props', props);
     super(props)
     this.state = {
-      id: props.user.id,
+      id: props.userId,
       nameField: props.user.name,
       emailField: props.user.email,
       passwordField: null
@@ -24,9 +25,9 @@ export default class ProfileEditForm extends React.Component {
         this.state.emailField,
         this.state.passwordField
       )
-      .then(user => {
-        global.setState({user})
-      })
+      // .then(user => {
+      //   global.setState({user})
+      // })
       .catch(err => console.log('Error: ', err));
   }
 
@@ -67,7 +68,7 @@ export default class ProfileEditForm extends React.Component {
               onChange={e => {
                 this.setState({passwordField: e.target.value})
               }}
-              value={this.state.passwordField} />
+              value={this.state.passwordField ? this.state.passwordField : ''} />
           </div>
           <button type="submit" className="dashboardFormBtn">
             Save Changes
