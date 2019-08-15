@@ -7,9 +7,9 @@ function NavBar(props) {
   let allTables = props.tables.map((item)=><NavDropdown.Item onClick={() => history.push(`/table/${item.id}`)}>{item.name}</NavDropdown.Item>)
   return (
     <div>
-        <Navbar bg="light" expand="lg" >
-          <Navbar.Brand href="#home" style={{ marginBottom: '22px' }}>
-            <h2 style={{ marginLeft: "15px"  }}>Dex</h2>
+        <Navbar>
+          <Navbar.Brand  style={{ marginBottom: '22px' }}>
+            <h2 style={{ marginLeft: "15px"  }}>/Dex</h2>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
@@ -22,12 +22,12 @@ function NavBar(props) {
             <NavDropdown title="Tables" id="collasible-nav-dropdown">
               {allTables}
               <NavDropdown.Divider />
-              <NavDropdown.Item onClick={()=>props.changeTableModal()} href="#action/3.4">Create new table</NavDropdown.Item>
+              <NavDropdown.Item onClick={()=>props.changeTableModal()}>Create Table</NavDropdown.Item>
             </NavDropdown>
           <NavDropdown title={props.userName} id="collasible-nav-dropdown" style={{ marginRight: "15px" }}>
             <NavDropdown.Item onClick = {()=><Link to={"/dashboard"}></Link>}>Dashboard</NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item href="#logout" onClick={()=>props.logOut()}>logout</NavDropdown.Item>
+              <NavDropdown.Item href="#logout" onClick={()=>props.logOut()}>Log Out</NavDropdown.Item>
             </NavDropdown>
           </Navbar.Collapse>
         </Navbar>

@@ -1,5 +1,13 @@
 import React, { useState } from 'react';
-import { Card, Button, Row, Col, Table, Form, Modal } from 'react-bootstrap';
+import {
+  Container,
+  Button,
+  Row,
+  Col,
+  Table,
+  Form,
+  Modal
+} from 'react-bootstrap';
 //import styles from './tableSettings.module.css';
 
 export default function TableSettings(props) {
@@ -13,13 +21,18 @@ export default function TableSettings(props) {
   const [playerName, setPlayerName] = useState('');
   const [descName, setDescName] = useState('');
   return (
-    <Modal style = {{width: '650px',height: '600px'}} className = 'container' show={props.showTableModal}>
-      <div >
-        <Card>
-          <div>
-            <div style = {{fontSize: '30px',textAlign: 'center'}}>Create/Edit<Button style = {{borderRadius: '50%'}} onClick = {()=> props.changeTableModal()} className = {` float-right`} variant = 'light'>x</Button></div>
-          </div>
-          <hr/>
+    <Modal show={props.showTableModal} centered>
+      <Modal.Header
+        closeButton
+        onClick={() => props.changeTableModal()}
+        className='createTableModalHeader'
+      >
+        <Modal.Title style={{ fontSize: '30px' }}>
+          Create/Edit Table
+        </Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <Container>
           <Row>
             <Col md = {{offset: 1}} style = {{paddingLeft: '10px'}}>
               <span>Table Name:</span>
@@ -59,10 +72,14 @@ export default function TableSettings(props) {
                 </Table>
               </div>
             </Col>
-            <Col md={1}></Col>
           </Row>
-        </Card>
-      </div>
+        </Container>
+      </Modal.Body>
+      <Modal.Footer>
+        <Button onClick={() => props.changeTableModal()} variant='success'>
+          Save
+        </Button>
+      </Modal.Footer>
     </Modal>
-  )
+  );
 }
