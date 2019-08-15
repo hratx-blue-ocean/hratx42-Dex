@@ -12,13 +12,13 @@ export default function Landing(props) {
       <Login login={props.login} />
       <Container>
         <Row>
-          <Col lg={6}>
+          <Col lg={6} style={{ marginTop: 50 }}>
             <Image
               src='https://img.rawpixel.com/s3fs-private/rawpixel_images/website_content/v107-bb-05-cards_1.jpg?auto=format&bg=F4F4F3&con=3&cs=srgb&dpr=1&fm=jpg&ixlib=php-1.1.0&mark=rawpixel-watermark.png&markalpha=90&markpad=13&markscale=10&markx=25&q=75&usm=15&vib=3&w=800&s=da19d499d8e7dff0667b749a3247e71b'
               fluid
             />
           </Col>
-          <Col lg={6}>
+          <Col lg={6} style={{ marginTop: 40 }}>
             <Register login={props.login} />
           </Col>
         </Row>

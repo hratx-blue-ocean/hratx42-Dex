@@ -47,7 +47,7 @@ export default function Login(props) {
           </Form>
           <Form style={{ marginRight: '25px' }}>
             <Button
-              className='signup'
+              className='loginBtn'
               variant='success'
               // className='mr-sm-2'
               onClick={() => {
