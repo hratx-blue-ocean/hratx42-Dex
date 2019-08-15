@@ -1,5 +1,5 @@
-module.exports = function(obj) {
-  let result = 'update cards set ';
+module.exports = function(obj, tableName) {
+  let result = `update ${tableName} set `;
   const keys = Object.keys(obj);
   for (let i = 1; i <= keys.length; i++) {
     result += ` ${keys[i - 1]} = $${i},`;
