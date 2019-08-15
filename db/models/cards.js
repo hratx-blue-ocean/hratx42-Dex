@@ -2,6 +2,7 @@ const pgClient = require('../hosteddb');
 
 const getColumnsString = require('../utils/getColumns');
 const getValuesString = require('../utils/getValuesString');
+const makeUpdateString = require('../utils/makeUpdateString');
 
 const cardsModel = {
   async getCardsByDeckId(deckId) {
@@ -92,24 +93,12 @@ const cardsModel = {
   },
 
   // update card
-  async updateCard(
-    {
-      table_id,
-      deck_id,
-      title,
-      weight,
-      impact,
-      due_date,
-      description,
-      created_at,
-      updated_at,
-    },
-    id
-  ) {
-    const updatedCard = await pgClient.query(
-      `UPDATE cards SET deck_id = ${deck_id}, title = '${title}', weight = ${weight}, impact = ${impact}, due_date = ${due_date}, description = '${description}', created_at = ${created_at}, updated_at = ${updated_at} WHERE id = ${id}`
-    );
-    return updatedCard;
+  async updateCard(card) {
+    const query = makeUpdateString(card);
+    const values = Object.values(card);
+    console.log(query);
+    const { rows: cards } = await pgClient.query(query, values);
+    return cards[0];
   },
   async addUserToCard(cardId, memberId) {
     const query = `insert into cards_members (card_id, user_id)
