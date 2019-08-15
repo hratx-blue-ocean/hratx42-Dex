@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from "react-router-dom";
 import { userInfo } from 'os';
 
 export default function Dashboard(props) {
@@ -32,12 +33,10 @@ export default function Dashboard(props) {
         <div className="dashboardTablesContainer">
           {props.tables.map(table =>
             <ul>
-                <li>
-                  <a href={`http://localhost:8000/table`}>
-                  <div className="newTable">
+                <li >
+                  <div onClick={() => props.history.push(`/table/${table.name}`)} className="newTable">
                     <h5>{table.name}</h5>
                   </div>
-                  </a>
                 </li>
             </ul>
           )}
