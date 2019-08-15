@@ -102,10 +102,12 @@ export default class App extends Component {
   logOut() {
     auth.logout();
     auth.setUser(this);
+    this.setState({userId:''})
   }
 
   changeTableModal() {
     this.setState({ showTableModal: !this.state.showTableModal });
+
   }
 
   // dashboard onChange event and submit functions
@@ -155,7 +157,7 @@ export default class App extends Component {
       <>
         <Router>
           {auth.userIsLoggedIn() ? (
-            <NavBar addTable={this.addTable.bind(this)} addPlayerToTable={this.addPlayerToTable.bind(this)} removePlayerToTable={this.removePlayerToTable.bind(this)} logOut={this.logOut.bind(this)} showTableModal={this.state.showTableModal} changeTableModal={this.changeTableModal.bind(this)} tables={this.state.tables} showenTable={this.state.showenTable} newPLayer={this.state.newPLayer}/>
+            <NavBar addTable={this.addTable.bind(this)} addPlayerToTable={this.addPlayerToTable.bind(this)} removePlayerToTable={this.removePlayerToTable.bind(this)} logOut={this.logOut.bind(this)} showTableModal={this.state.showTableModal} changeTableModal={this.changeTableModal.bind(this)} changeTable={this.changeTable.bind(this)} tables={this.state.tables} showenTable={this.state.showenTable} newPLayer={this.state.newPLayer} userName={this.state.user.name}/>
           ) : null}
           <Route
             path="/"

@@ -54,9 +54,7 @@ export default function TableSettings(props) {
                   </thead>
                   <tbody>
                     {/* map through all players */}
-                    <tr>
                       {newPLayer}
-                    </tr>
                   </tbody>
                 </Table>
               </div>
