@@ -47,14 +47,16 @@ export default class Table extends Component {
         let deckHolder = [];
         this.state.decks.forEach(deck => {
           deckHolder.push({ id: deck.id, title: deck.title });
-        });
+        })
+          //populated deckname for tickets
         this.setState({ deckNames: deckHolder });
-       });
         http.users.getByTableId(1).then(res => {
           console.log(res);
           this.setState({ users: res });
         });
+      })
   }
+
 
   newCardDataCollector(eff, imp, title, players, tag, dueDate, deck, desc) {
     // H.H. I did not delete these b/c they weren't empty
@@ -172,6 +174,7 @@ export default class Table extends Component {
   }
 
   render() {
+    console.log(this.state.users)
     return (
       <div>
         <Controls
@@ -210,7 +213,7 @@ export default class Table extends Component {
         ) : (
           <></>
         )}
-        <Modal show={this.state.newDeck.newDeckModal}>
+        <Modal show={this.state.newDeck.newDeckModal} onHide = {this.handleModal()}>
           <Modal.Header closeButton onClick={() => this.handleModal()} onHide = {() => this.handleModal()}>
             <Modal.Title>Add Deck</Modal.Title>
           </Modal.Header>
