@@ -35,19 +35,21 @@ export default function Controls(props) {
         {props.searchName === '' ? (
           <></>
         ) : (
-            <div className="ControlsSearchItems row">
-              {cards.map(item => (
-                <div key={Math.random()} className="ControlsSearchItem">
-                  <div style={{ paddingLeft: '160px' }} />
-                  <CardThumbnails
-                    onClick={() => props.searchClick(item)}
-                    singleCard={item}
-                    background="true"
-                  />
-                </div>
-              ))}
-            </div>
-          )}
+          <div className="ControlsSearchItems row">
+            {cards.map(item => (
+              <div key={Math.random()} className="ControlsSearchItem">
+                <div style={{ paddingLeft: '160px' }} />
+                <CardThumbnails
+                  singleCard={item}
+                  deckNames = {props.deckNames}
+                  users = {props.users}
+                  labels = {props.labels}
+                  background='true'
+                />
+              </div>
+            ))}
+          </div>
+        )}
         <Button style={{ height: '30px' }} variant="light" />
         <div style={{ width: '50px' }} />
         <div style={{ paddingLeft: '2px' }} />
