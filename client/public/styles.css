@@ -219,13 +219,6 @@ code {
 }
 
 /* tables section */
-<<<<<<< HEAD
-=======
-.dashboardTables {
-  
-}
-
->>>>>>> 0e1d12a8a775665e9d55a32001d70ecb533db46b
 .dashboardTables h2 {
   padding-left: 3rem;
 }
@@ -260,6 +253,7 @@ code {
 .CardThumbnailsMove:hover {
   cursor: pointer;
 }
+<<<<<<< HEAD
 
 .controls__modal {
   margin: 0;
@@ -270,3 +264,6 @@ code {
 }
 
 /* END DASHBOARD STYLES */
+=======
+/* END DASHBOARD STYLES */
+>>>>>>> merge-purgatory
