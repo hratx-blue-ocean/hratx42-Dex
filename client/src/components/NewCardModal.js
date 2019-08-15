@@ -101,15 +101,15 @@ function removePlayer() {
                         <select onChange={(event)=> {
                             let labelsHolder = tags
                             let selectLabel = event.target.value  
-                            let targetLabel ={color: null, name: selectLabel}
+                            let targetLabel ={color: null, label_name: selectLabel}
                             console.log(JSON.stringify(event.target.value))
                             labelsHolder.push(targetLabel)
-                            // setTags(labelsHolder)
+                            setTags(labelsHolder)
                         }}>
                             <option></option>
                             {labels.map(label =>{
                                 return (
-                                <option >{label.name}</option>
+                                <option >{label.label_name}</option>
                                 )
                             })}
                         </select>
@@ -117,25 +117,21 @@ function removePlayer() {
         </Row>
             {/* Return ALL PLAYERS and LABELS/TAGS */}
         <Row>
-                  <Col style={styles.playersStyle}>
+                  <Col xs={8} style={styles.playersStyle}>
                     {players.map(player =>{
                     return (
                         <div onClick={()=>{
                             let curTags = tags
-                            console.log(tags)
-                            console.log(players)
                         }}>{player.member_name}</div>
                     )
                      })}
                   </Col>
-                  <Col style={styles.tagsStyle}>
+                  <Col xs={4} style={styles.tagsStyle}>
                   {tags.map(tag =>{
                     return (
                         <div onClick={()=>{
                             let curTags = tags
-                            console.log(tags)
-                            console.log(labels)
-                        }}>{tag.name}</div>
+                        }}>{tag.label_name}</div>
                     )
                      })}
                   </Col>
@@ -179,7 +175,9 @@ function removePlayer() {
         {/* Button to Submit */}
         <Row style={styles.submitButton}>
             <Button onClick={(event)=> {
-                newCardData(effort, impact, title, players, tags, dueDate, deck, desc)
+                let cardInfo={eff:effort, imp:impact, titl:title, description:desc, due: dueDate}
+                newCardData(players, tags, deck, cardInfo)
+                // newCardData(effort, impact, title, players, tags, dueDate, deck, desc)
                 handleClose()
             }} variant="primary">Submit</Button>
         </Row>
