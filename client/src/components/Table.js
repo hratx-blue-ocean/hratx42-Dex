@@ -26,10 +26,10 @@ export default class Table extends Component {
 
   }
   componentDidMount() {
-    http.decks.get(1)
+    http.decks.get(this.props.tableId)
     .then((response) => {
       console.log('table data', response)
-      this.setState({decks: response})
+      this.setState({decks: response, tableName: this.props.tableName})
     })
     //populated deckname for tickets
     .then(() =>{
