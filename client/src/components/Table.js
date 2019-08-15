@@ -58,13 +58,19 @@ export default class Table extends Component {
 
 
 newCardDataCollector(players,tags,deck,cardInfo) {
-console.log('new card')
-  //   console.log(players);
-  //   console.log(tags);
-  //   console.log(deck);
-  //   console.log(cardInfo);
-  // }
+  let toPost = {
+    description: cardInfo.description,
+    card_labels: this.obtainLabelIds(tags),
+    title: cardInfo.titl,
+    weight: parseInt(cardInfo.eff),
+    impact: parseInt(cardInfo.imp),
+    cards_members: this.obtainPlayersId(players),
+    deck_id: this.obtainDeckID(deck),
+    table_id: this.props.tableId,
+    table_index: this.props.tableId
   }
+  console.log(toPost)
+}
 
   editCardDataCollector(players,tags, deck, cardInfo) {
     let toPost = {
