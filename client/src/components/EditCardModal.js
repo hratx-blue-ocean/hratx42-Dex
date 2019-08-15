@@ -150,11 +150,11 @@ export default function CardModal({closeModal, showMe, card, deckTitle, deckName
             <select style={{width:'100%'}} onChange={(event)=> setDeck(event.target.value)}>
               <option>`${deckTitle}`</option>
               {deckNames.map(name =>{
-                    if (name.title !== deckTitle) {
-                        return (
-                            <option>{name.title}</option>
-                        )
-                    }
+                if (name.title !== deckTitle) {
+                  return (
+                    <option>{name.title}</option>
+                  )
+                }
                 })}
             </select>
             </Row>
