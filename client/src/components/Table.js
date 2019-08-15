@@ -79,6 +79,7 @@ console.log('new card')
       table_id: this.props.tableId,
       table_index: this.props.tableId
     }
+    console.log(toPost)
   }
 
   obtainPlayersId(players) {
