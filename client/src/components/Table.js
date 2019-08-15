@@ -164,7 +164,6 @@ export default class Table extends Component {
           cards={this.state.cards}
           users={this.state.users}
           changeFilter={this.changeFilter.bind(this)}
-          searchClick={this.searchClick.bind(this)}
           handleModal={this.handleModal.bind(this)}
           filterBy={this.state.filterBy}
         />
