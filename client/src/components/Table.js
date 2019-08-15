@@ -49,8 +49,12 @@ export default class Table extends Component {
       console.log(res);
       this.setState({ users: res });
     });
-  })
-}
+    // mockHttp.getDecks(0)
+    // .then((res) => {
+    //   this.setState({decks: res})
+    // })
+  }
+    )}
 
 
   newCardDataCollector (eff,imp,title,players,tag,dueDate,deck,desc) {
