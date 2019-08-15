@@ -107,12 +107,13 @@ router.delete('/:cardId/member/:userId', async (req, res) => {
   }, res);
 });
 
-router.post('/:cardId/label', async (req, res) => {
+router.post('/:cardId/label/:labelId', async (req, res) => {
   tryCatch(async () => {
     const cardId = req.params.cardId;
-    const labelId = req.body.labelId;
-    const result = await cardsModel.addLabelToCard(cardId, labelId);
-    res.status(200).json({ ok: `added label ${labelId} to card ${cardId}` });
+    const labelId = req.params.labelId;
+    await cardsModel.addLabelToCard(cardId, labelId);
+    const updatedCard = await cardsModel.getCardByID(cardId)
+    res.status(200).send(updatedCard);
   }, res);
 });
 
@@ -122,11 +123,10 @@ router.delete('/:cardId/label/:labelId', async (req, res) => {
     const labelId = req.params.labelId;
     let result = await cardsModel.removeLabelFromCard(cardId, labelId);
     if (result) {
-      res
-        .status(200)
-        .json({ ok: `removed label ${labelId} from card ${cardId}` });
+      const updatedCard = await cardsModel.getCardByID(cardId)
+      res.status(200).send(updatedCard);
     } else {
-      res.status(404).json({ error: 'not found' });
+      res.status(404).json({ message: 'card not found' });
     }
   }, res);
 });
