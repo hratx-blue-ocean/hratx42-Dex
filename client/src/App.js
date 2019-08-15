@@ -56,6 +56,7 @@ export default class App extends Component {
     if (localStorage.getItem('token')) {
       this.login();
     }
+    this.addTable('Funky new table', ['123@123', '2@2']);
   }
 
   flash(message, variant, interval) {
@@ -84,6 +85,17 @@ export default class App extends Component {
     if (userId) {
       const user = await http.users.get(userId);
       this.setState({ user });
+    }
+  }
+
+  async addTable(name, emails) {
+    const newTable = await http.tables.post({ name });
+    const tableId = newTable.id;
+    const tables = [...this.state.tables];
+    tables.push(newTable);
+    this.setState({ tables });
+    for (let email of emails) {
+      http.tables.postUser(tableId, email);
     }
   }
 
@@ -123,15 +135,21 @@ export default class App extends Component {
       )
       .catch(err => console.log('Error: ', err));
   }
-  changeTable(id){
-    this.setState({showenTable:id})
+  changeTable(id) {
+    this.setState({ showenTable: id });
   }
   render() {
     return (
       <>
         <Router>
           {auth.userIsLoggedIn() ? (
-            <NavBar logOut={this.logOut.bind(this)} showTableModal={this.state.showTableModal} changeTableModal={this.changeTableModal.bind(this)} tables={this.state.tables} showenTable={this.state.showenTable}/>
+            <NavBar
+              logOut={this.logOut.bind(this)}
+              showTableModal={this.state.showTableModal}
+              changeTableModal={this.changeTableModal.bind(this)}
+              tables={this.state.tables}
+              showenTable={this.state.showenTable}
+            />
           ) : null}
           <Route
             path="/"

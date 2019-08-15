@@ -54,7 +54,7 @@ const http = {
       return tryAxios(`/api/tables`, 'post', table);
     },
     postUser(tableId, userEmail) {
-      return tryAxios(`/api/tables/${tableId}/member`, 'put', {
+      return tryAxios(`/api/tables/${tableId}/member`, 'post', {
         email: userEmail,
       });
     },
