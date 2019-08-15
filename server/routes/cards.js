@@ -38,19 +38,24 @@ router.post('/', (req, res) => {
 });
 
 //update card
-router.put('/:id', (req, res) => {
+router.put('/:id', async (req, res) => {
   const card = req.body;
-  const id = req.params.id;
-  //if req.user && user owns card's table
-  //update table
-  cardsModel
-    .updateCard(card, id)
-    .then(response => {
-      res.status(200).json(response);
-    })
-    .catch(err => {
-      res.status(404);
+  const userId = req.user;
+  //if req.user and user owns card
+  if (!card.id) {
+    res.status(400).send({
+      message: 'You need to send a card object with an id key and value',
     });
+  }
+  tryCatch(async () => {
+    const authorized = await authorizationModel.user.ownsCard(userId, card.id);
+    if (authorized) {
+      const updatedCard = await cardsModel.updateCard(card);
+      res.status(200).send(updatedCard);
+    } else {
+      res.status(401).send({ message: 'Unauthorized' });
+    }
+  });
 });
 
 //delete card by cardID
