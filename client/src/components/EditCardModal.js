@@ -6,14 +6,14 @@ export default function CardModal({closeModal, showMe, card, deckTitle, deckName
   const [show, setShow] = useState(false);
   const handleClose = () => closeModal()
 
-  const [effort, setEffort] = useState(card.card_weight);
-  const [impact, setImpact] = useState(card.card_impact);
-  const [title, setTitle] = useState(card.card_title);
+  const [effort, setEffort] = useState(card.weight);
+  const [impact, setImpact] = useState(card.impact);
+  const [title, setTitle] = useState(card.title);
   const [players, setPlayers] = useState(card.cards_members);
   const [tags, setTags] = useState(card.card_labels);
   const [dueDate, setDate] = useState(new Date());
   const [deck, setDeck] = useState(deckTitle);
-  const [desc, setDesc] = useState(card.card_description);
+  const [desc, setDesc] = useState(card.description);
 
 
 

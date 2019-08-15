@@ -68,15 +68,16 @@ console.log('new card')
 
   editCardDataCollector(players,tags, deck, cardInfo) {
     let toPost = {
-      card_description: cardInfo.description,
-      card_id: cardInfo.id,
+      description: cardInfo.description,
+      id: cardInfo.id,
       card_labels: this.obtainLabelIds(tags),
-      card_title: cardInfo.titl,
-      card_weight: parseInt(cardInfo.eff),
-      card_impact: parseInt(cardInfo.imp),
-      card_members: this.obtainPlayersId(players),
+      title: cardInfo.titl,
+      weight: parseInt(cardInfo.eff),
+      impact: parseInt(cardInfo.imp),
+      cards_members: this.obtainPlayersId(players),
       deck_id: this.obtainDeckID(deck),
-      table_id: this.props.tableId
+      table_id: this.props.tableId,
+      table_index: this.props.tableId
     }
   }
 
