@@ -115,3 +115,7 @@ CREATE TABLE IF NOT EXISTS cards_members (
 
 CREATE TRIGGER before_insert_card_members_trigger BEFORE INSERT ON cards_members FOR EACH ROW EXECUTE PROCEDURE card_members_notify();
 CREATE TRIGGER after_delete_card_members_trigger AFTER DELETE ON cards_members FOR EACH ROW EXECUTE PROCEDURE card_members_notify();
+
+
+-- ALTER TABLE cards_members DROP CONSTRAINT "cards_members_user_id_fkey";
+-- alter table cards_members add constraint cards_members_user_id_fkey foreign key (user_id) references users(id) on delete cascade;
