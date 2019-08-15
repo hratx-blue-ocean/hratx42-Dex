@@ -3,7 +3,7 @@ import { Card, Button, Row, Col, Table, Form, Modal } from 'react-bootstrap';
 //import styles from './tableSettings.module.css';
 
 export default function TableSettings(props) {
-  let addedPlayerToTable = props.addedPlayerToTable.map((item)=>{return(
+  let newPLayer = props.newPLayer.map((item)=>{return(
    
   <tr>
     <th>{item}</th>
@@ -39,7 +39,7 @@ export default function TableSettings(props) {
                 <Button onClick = {() => props.addPlayerToTable(playerName)} style = {{position: 'relative',top: '-1px'}} size = 'sm' variant= 'success'>+</Button>
               </div>
               <div style = {{paddingTop: '10px'}}></div>
-              <Button onClick = {() => props.addTable(tableName ,props.addedPlayerToTable)} variant= 'success'>Save</Button>
+              <Button onClick = {() => props.addTable(tableName ,props.newPLayer)} variant= 'success'>Save</Button>
               <div style = {{paddingTop: '10px'}}></div>
             </Col>
             <Col>
@@ -56,7 +56,7 @@ export default function TableSettings(props) {
                   <tbody>
                     {/* map through all players */}
                     <tr>
-                      {addedPlayerToTable}
+                      {newPLayer}
                     </tr>
                   </tbody>
                 </Table>

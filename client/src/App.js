@@ -19,7 +19,7 @@ import auth from '../services/auth.js';
 
 //utils
 import global from '../utils/global';
-
+let thePlayers=[];
 export default class App extends Component {
   constructor(props) {
     super(props);
@@ -27,6 +27,7 @@ export default class App extends Component {
       userId: '',
       tables: [],
       showenTable: null,
+      newPLayer:[],
       // dashboard edit profile form
       profile: {
         editName: '',
@@ -117,13 +118,25 @@ export default class App extends Component {
   }
   changeTable(id){
     this.setState({showenTable:id})
+  }  
+  addPlayerToTable(playerName) {
+    thePlayers.push(playerName);
+    this.setState({newPLayer: thePlayers})
+    console.log(this.state.newPLayer)
+  }
+
+  removePlayerToTable(playerName) {
+    let index = thePlayers.indexOf(playerName)
+    thePlayers.splice(index, 1)
+    this.setState({newPLayer: thePlayers})
+    console.log(this.state.newPLayer)
   }
   render() {
     return (
       <>
         <Router>
           {auth.userIsLoggedIn() ? (
-            <NavBar logOut={this.logOut.bind(this)} showTableModal={this.state.showTableModal} changeTableModal={this.changeTableModal.bind(this)} tables={this.state.tables} showenTable={this.state.showenTable}/>
+            <NavBar addPlayerToTable={this.addPlayerToTable.bind(this)} removePlayerToTable={this.removePlayerToTable.bind(this)} logOut={this.logOut.bind(this)} showTableModal={this.state.showTableModal} changeTableModal={this.changeTableModal.bind(this)} tables={this.state.tables} showenTable={this.state.showenTable} newPLayer={this.state.newPLayer}/>
           ) : null}
           <Route
             path="/"
