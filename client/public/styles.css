@@ -117,7 +117,9 @@ code {
   display: flex;
   flex-direction: column;
   border: 1px solid;
+  border-radius: 5px;
   background: #f1f0f0;
+  box-shadow: 0 0 20px #808080;
 }
 
 .dashboardProfileForm form h2 {
@@ -130,6 +132,8 @@ code {
   height: 30px;
   font-size: 1.2rem;
   padding-left: .5rem;
+  border: 1px solid #cfcfcf;
+  border-radius: 5px;
 }
 
 .dashboardNameInput,
@@ -144,7 +148,7 @@ code {
   border: none;
   border-radius: 5px;
   font-size: 1.1rem;
-  background: rgb(255, 90, 95);
+  background: #ff5a5f;
   color: #fff;
 }
 
@@ -156,7 +160,7 @@ code {
 
 /* tables section */
 .dashboardTables {
-  /* border: 1px solid #000; */
+  
 }
 
 .dashboardTables h2 {
@@ -176,10 +180,19 @@ code {
 .dashboardTables .newTable {
   display: grid;
   place-items: center;
-  width: 100px;
-  height: 100px;
+  width: 120px;
+  height: 120px;
   border: 1px solid grey;
   border-radius: 5px;
+  background: #ff5a5f;
+}
+
+.dashboardTables .newTable:hover {
+  cursor: pointer;
+}
+
+.dashboardTables .newTable h5 {
+  font-size: 100%;
 }
 
 .CardThumbnailsMove:hover {
