@@ -24,7 +24,7 @@ router.post('/:email', async (req, res) => {
       from: 'dexteamhr@gmail.com', // sender address
       to: `${email}`, // list of receivers
       subject: 'Hi DJ! this is dex tema', // Subject line
-      html: '\nhttp:\/\/' + req.headers.host + '\/confirmation\/' + token.token + '.\n'
+      html: '\nhttp:\/\/' + req.headers.host + '\/confirmation\/' + '.\n'
     };
     // send mail with defined transport object
     transporter.sendMail(mailOptions, function (err, info) {
