@@ -219,6 +219,13 @@ code {
 }
 
 /* tables section */
+<<<<<<< HEAD
+=======
+.dashboardTables {
+  
+}
+
+>>>>>>> 0e1d12a8a775665e9d55a32001d70ecb533db46b
 .dashboardTables h2 {
   padding-left: 3rem;
 }
