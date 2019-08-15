@@ -41,7 +41,6 @@ router.post('/', (req, res) => {
 router.put('/:id', async (req, res) => {
   const card = req.body;
   const userId = req.user;
-  //if req.user and user owns card
   if (!card.card_id) {
     res.status(400).send({
       message: 'You need to send a card object with an id key and value',
