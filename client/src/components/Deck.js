@@ -10,7 +10,7 @@ export default function Deck(props) {
   const [title, setTitle] = useState(props.deck.title);
 
   const handleShow = () => setShow(true);
-  
+
   const handleClose = () => setShow(false);
 
   let cards = [];
@@ -101,6 +101,7 @@ export default function Deck(props) {
               showMe={show}
               deckNames={props.deckNames}
               closeModal={handleClose.bind(this)}
+              
             />
             <Button variant='outline-success' onClick={() => handleShow()}>
               Add New Card
