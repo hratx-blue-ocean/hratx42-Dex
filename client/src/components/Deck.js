@@ -10,22 +10,23 @@ export default function Deck(props) {
   const [title, setTitle] = useState(props.deck.title);
 
   const handleShow = () => setShow(true);
-
   const handleClose = () => setShow(false);
 
   let cards = [];
-  if (props.filterBy === 'Filter') {
-    cards = props.deck.cards.slice(0, 6);
-  } else {
-    props.deck.cards.forEach(card => {
-      card.cards_members.forEach(member => {
-        if (member.member_name){
-        if (member.member_name.includes(props.filterBy)) {
-          cards.push(card);
-        }}
+  if (props.deck.cards) {
+    if (props.filterBy === 'Filter') {
+      cards = props.deck.cards.slice(0, 6);
+    } else {
+      props.deck.cards.forEach(card => {
+        card.cards_members.forEach(member => {
+          if (member.member_name){
+          if (member.member_name.includes(props.filterBy)) {
+            cards.push(card);
+          }}
+        });
       });
-    });
-  }
+    }
+}
   return (
     <div style={{ width: '75%' }}>
       <div>
