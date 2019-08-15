@@ -31,10 +31,10 @@ const cardsModel = {
           ) as card_labels
         from
           cards c 
-          join cards_members cm on c.id = cm.card_id
-          join users u on cm.user_id = u.id
-          join cards_labels cl on c.id = cl.card_id
-          join labels l on cl.label_id = l.id
+          left outer join cards_members cm on c.id = cm.card_id
+          left join users u on cm.user_id = u.id
+          left outer join cards_labels cl on c.id = cl.card_id
+          left join labels l on cl.label_id = l.id
         where c.deck_id = $1 
         group by c.id;`;
     const { rows: cards } = await pgClient.query(query, [deckId]);
