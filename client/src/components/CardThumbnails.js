@@ -26,7 +26,7 @@ export default function CardThumbnails(props) {
         </Row>
           <div style = {{fontSize: '10px', paddingLeft: '5px'}}>{props.singleCard.card_title}</div>
         <div>
-          <div style = {{position: 'relative', top: '95%'}}>
+          <div style = {{position: 'relative', top: '100%'}}>
             <img className = 'CardThumbnailsMove' height = '15' src="./assets/downButton.png" onClick = {() => props.moveCard(props.singleCard, props.cardIndex, props.deckIndex, 1)}/>
             <img className = 'CardThumbnailsMove' height = '15' src="./assets/upButton.png" onClick = {() => props.moveCard(props.singleCard, props.cardIndex, props.deckIndex, -1)}/>
           </div>
