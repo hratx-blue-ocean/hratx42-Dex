@@ -131,7 +131,7 @@ export default class App extends Component {
       <>
         <Router>
           {auth.userIsLoggedIn() ? (
-            <NavBar logOut={this.logOut.bind(this)} showTableModal={this.state.showTableModal} changeTableModal={this.changeTableModal.bind(this)} tables={this.state.tables} showenTable={this.state.showenTable}/>
+            <NavBar name={this.state.user.name} logOut={this.logOut.bind(this)} showTableModal={this.state.showTableModal} changeTableModal={this.changeTableModal.bind(this)} tables={this.state.tables} showenTable={this.state.showenTable}/>
           ) : null}
           <Route
             path="/"
