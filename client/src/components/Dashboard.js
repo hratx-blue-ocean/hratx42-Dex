@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { NavLink } from "react-router-dom";
 import { userInfo } from 'os';
+import ProfileEditForm from './ProfileEditForm.jsx';
 import { Button, Card } from "react-bootstrap";
 
 export default function Dashboard(props) {
@@ -11,27 +12,8 @@ export default function Dashboard(props) {
     <div className="dashboardContainer">
       <div>
         {showProfile ? (
-          <div className="dashboardProfileForm" >
-          <h2>edit profile</h2>
-          <form>
-            <div className="dashboardNameInput">
-              <h4>name</h4>
-              <input type="text" className="name" placeholder={props.user.name} onChange={e => {props.changeProfileName(e)}} value={props.editProfileName} />
-            </div>
-
-            <div className="dashboardEmailInput">
-              <h4>email</h4>
-              <input type="email" className="email" placeholder={props.user.email} onChange={e => {props.changeProfileEmail(e)}} value={props.editProfileEmail} />
-            </div>
-
-            <div className="dashboardPasswordInput">
-              <h4>password</h4>
-              <input type="password" className="name" placeholder="password" onChange={e => {props.changeProfilePassword(e)}} value={props.editProfilePassword} />
-            </div>
-            <Button style = {{width: '150px'}} variant = 'success' onClick={() => {props.submitProfileChanges()}}>save changes</Button>
-            <Button style = {{width: '150px'}} variant = 'primary' onClick = {() => setShowProfile(false)}>Show Dashboard</Button>
-          </form>
-        </div>) : (
+          <ProfileEditForm user={props.user} />
+        ) : (
           <div style = {{width: '350px', height: '450px'}}>
             <Card>
               <div style = {{fontSize: '30px'}}>Welcome back to your dashboard, {props.user.name}</div>
@@ -45,10 +27,7 @@ export default function Dashboard(props) {
             </Card>
           </div>
         )}
-        
-
       </div>
-
       {/* tables */}
       <div className="dashboardTables">
         <Card>
