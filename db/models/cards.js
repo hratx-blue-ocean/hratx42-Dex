@@ -95,7 +95,7 @@ const cardsModel = {
 
   // update card
   async updateCard(card) {
-    const query = makeUpdateString(card);
+    const query = makeUpdateString(card, 'cards');
     const values = Object.values(card);
     console.log(query);
     const { rows: cards } = await pgClient.query(query, values);
