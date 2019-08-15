@@ -34,7 +34,7 @@ export default function Dashboard(props) {
           {props.tables.map(table =>
             <ul>
                 <li >
-                  <div onClick={() => props.history.push(`/table/${table.name}`)} className="newTable">
+                  <div onClick={() => props.history.push(`/table/${table.id}`)} className="newTable">
                     <h5>{table.name}</h5>
                   </div>
                 </li>
