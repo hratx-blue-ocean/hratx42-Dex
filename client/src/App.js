@@ -172,7 +172,7 @@ export default class App extends Component {
           />
           <Route path="/profile" component={Profile} />
           {this.state.tables.map( table => 
-            <Route path={`/table/${table.name}`} render={() => <Table tableId={table.id} tableName={table.name} />} />
+            <Route path={`/table/${table.id}`} render={() => <Table tableId={table.id} tableName={table.name} />} />
           )}
           
           <Route path="/TableSettings" component={TableSettings} />
