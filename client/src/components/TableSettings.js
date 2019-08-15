@@ -11,6 +11,12 @@ import {
 //import styles from './tableSettings.module.css';
 
 export default function TableSettings(props) {
+  let newPLayer = props.newPLayer.map((item)=>{return(
+   
+  <tr>
+    <th>{item}</th>
+    <th onClick={()=>props.removePlayerToTable()} style = {{cursor: 'pointer'}}>x</th>
+  </tr>)})
   const [tableName, setTableName] = useState('');
   const [playerName, setPlayerName] = useState('');
   const [descName, setDescName] = useState('');
@@ -28,71 +34,43 @@ export default function TableSettings(props) {
       <Modal.Body>
         <Container>
           <Row>
-            <Col>
-              <Form>
-                <Form.Group>
-                  <Form.Label>Table Name:</Form.Label>
-                  <Form.Control
-                    onChange={e => setTableName(e.target.value)}
-                    value={tableName}
-                    type='text'
-                    placeholder='Add table name'
-                  />
-                </Form.Group>
-                <Form.Group>
-                  <Form.Label>Description:</Form.Label>
-                  <Form.Control
-                    style={{ height: '50px' }}
-                    onChange={e => setDescName(e.target.value)}
-                    value={descName}
-                    as='textarea'
-                    rows='4'
-                    placeholder='Add table description'
-                  />
-                </Form.Group>
-                <Form.Group>
-                  <Form.Label>Invite Players:</Form.Label>
-                  <Form.Control
-                    onChange={e => setPlayerName(e.target.value)}
-                    type='text'
-                    placeholder='Add player'
-                  />
-                  <Button
-                    onClick={() => props.newPlayer(playerName)}
-                    className='tableSettingsAddPlayerBtn'
-                    size='sm'
-                    variant='success'
-                  >
-                    +
-                  </Button>
-                </Form.Group>
-              </Form>
+            <Col md = {{offset: 1}} style = {{paddingLeft: '10px'}}>
+              <span>Table Name:</span>
+              <div style = {{paddingTop: '10px'}}></div>
+              <div>
+                <input onChange = {(e) => setTableName(e.target.value)} value = {tableName} type="text" placeholder = 'Enter table name'/>
+              </div>
+              <div style = {{paddingTop: '10px'}}></div>
+              <div style = {{paddingTop: '10px'}}></div>
+              <div>Invite Players</div>
+              <div style = {{paddingTop: '10px'}}></div>
+              <div>
+                <form>
+                <input onChange = {(e) => setPlayerName(e.target.value)} style = {{display: 'inline' ,width:'75%', marginRight:'5px'}} type="email" name="emailaddress" placeholder = 'Enter user Email'/>
+                <Button onClick = {() => props.addPlayerToTable(playerName)} style = {{display: 'inline', position: 'relative',top: '-1px'}} size = 'sm' variant= 'success'>+</Button>
+                </form>
+              </div>
+              <div style = {{paddingTop: '10px'}}></div>
+              <Button onClick = {() => props.addTable(tableName ,props.newPLayer)} variant= 'success'>Save</Button>
+              <div style = {{paddingTop: '10px'}}></div>
             </Col>
             <Col>
-              <Form>
-                <Form.Label>Administrator(s):</Form.Label>
-                {/* map through administrators */}
-                <div>Miles, Brian, Zona, DJ, Ibrahim, Hannah</div>
-              </Form>
-              <Table size='sm'>
-                <thead>
-                  <tr>
-                    <th>Players</th>
-                    <th>Edit Admin</th>
-                    <th>Remove</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {/* map through all players */}
-                  <tr>
-                    <td>Brooke</td>
-                    <td>
-                      <Form.Check type='checkbox' />
-                    </td>
-                    <td style={{ cursor: 'pointer' }}>x</td>
-                  </tr>
-                </tbody>
-              </Table>
+              <span>Administrator(s): </span>
+              <div style = {{paddingTop: '10px'}}></div>
+              {/* map through administrators */}
+              <div>{props.userName}</div>
+              <div style = {{paddingTop: '10px'}}></div>
+              <div>
+                <Table size = 'sm'>
+                  <thead>
+
+                  </thead>
+                  <tbody>
+                    {/* map through all players */}
+                      {newPLayer}
+                  </tbody>
+                </Table>
+              </div>
             </Col>
           </Row>
         </Container>
