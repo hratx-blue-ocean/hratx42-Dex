@@ -13,8 +13,8 @@ const cardsModel = {
           c.description,
           c.updated_at,
           c.created_at,
-          c.weight as,
-          c.impact as,
+          c.weight,
+          c.impact,
           c.table_id,
           c.deck_id,
           array_agg(
@@ -25,6 +25,7 @@ const cardsModel = {
           ) as cards_members,
           array_agg(
             json_build_object(
+                'id', l.id,
                 'label_name', l.label_name,
                 'color', l.color
             )
@@ -38,7 +39,6 @@ const cardsModel = {
         where c.deck_id = $1 
         group by c.id;`;
     const { rows: cards } = await pgClient.query(query, [deckId]);
-    console.log(deckId, cards);
     return cards;
   },
   async getCardByID(id) {
@@ -59,6 +59,7 @@ const cardsModel = {
           ) as cards_members,
           array_agg(
             json_build_object(
+                'id', l.id,
                 'label_name', l.label_name,
                 'color', l.color
             )
@@ -118,7 +119,7 @@ const cardsModel = {
     const query = `insert into cards_labels (card_id, label_id)
                    values ($1, $2) returning label_id;`;
     const { rows: result } = await pgClient.query(query, [cardId, labelId]);
-    const insertedLabelId = await result[0].member_id;
+    const insertedLabelId = await result[0].label_id;
     return insertedLabelId;
   },
   async removeLabelFromCard(cardId, labelId) {
