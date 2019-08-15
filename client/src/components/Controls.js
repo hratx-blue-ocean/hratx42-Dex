@@ -40,9 +40,11 @@ export default function Controls(props) {
               <div key={Math.random()} className="ControlsSearchItem">
                 <div style={{ paddingLeft: '160px' }} />
                 <CardThumbnails
-                  onClick={() => props.searchClick(item)}
                   singleCard={item}
-                  background="true"
+                  deckNames = {props.deckNames}
+                  users = {props.users}
+                  labels = {props.labels}
+                  background='true'
                 />
               </div>
             ))}

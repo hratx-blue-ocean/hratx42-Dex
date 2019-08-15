@@ -4,7 +4,7 @@ import TableSettings from './TableSettings';
 import { Navbar,Button, NavDropdown, Nav, Form } from "react-bootstrap";
 function NavBar(props) {
   const { history } = props;
-  let allTables = props.tables.map((item)=><NavDropdown.Item onClick={() => history.push(`/table/${item.id}`)}>{item.name}</NavDropdown.Item>)
+  let allTables = props.tables.map((item)=><NavDropdown.Item key = {Math.random()} onClick={() => history.push(`/table/${item.id}`)}>{item.name}</NavDropdown.Item>)
   return (
     <div>
         <Navbar bg="light" className='dexNavBar' expand="lg" >
