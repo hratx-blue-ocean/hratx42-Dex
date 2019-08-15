@@ -30,54 +30,55 @@ router.post('/', (req, res) => {
     const tableName = req.body.name;
     const table = await tablesModel.create(tableName);
     res.status(200).json(table);
-  }, res)
+  }, res);
 });
 
-router.put('/:id', (req, res)=>{
-    const table = req.body;
-    const id = req.params.id
-    table.id=id
-    //if req.user && user owns table
-        //update table
-    res.status(200).send(JSON.stringify(table));
-})
+router.put('/:id', (req, res) => {
+  const table = req.body;
+  const id = req.params.id;
+  table.id = id;
+  //if req.user && user owns table
+  //update table
+  res.status(200).send(JSON.stringify(table));
+});
 
 router.delete('/:id', (req, res) => {
-  tryCatch(async ()=>{
+  tryCatch(async () => {
     const tableId = req.body.tableId;
     const result = await tablesModel.delete(tableId);
     res.status(200).json({ ok: 'deleted' });
-  }, res)
+  }, res);
 });
 
 router.post('/:tableId/member', async (req, res) => {
-  tryCatch(async () =>{
+  tryCatch(async () => {
+    console.log('Post route');
     const userEmail = req.body.email;
     const tableId = req.params.tableId;
-    const { rows: dbResults } = await usersModel.getUserInfoByEmail(userEmail);
-    const user = await dbResults[0];
+    const user = await usersModel.getUserInfoByEmail(userEmail);
     if (!user) {
-      res.status(404).json({ error: 'not found' });
+      res.status(404).json({ message: `User ${userEmail} not found` });
       return;
     } else {
       const result = await tablesModel.addUserToTable(tableId, user.id);
-      await console.log('result: ', result);
       res.status(200).json({ ok: `added user ${user.id} to table ${tableId}` });
     }
-  }, res)
+  }, res);
 });
 
 router.delete('/:tableId/member/:userId', async (req, res) => {
-  tryCatch(async ()=>{
+  tryCatch(async () => {
     const tableId = req.params.tableId;
     const userId = req.params.userId;
-    let result = await tablesModel.removeUserFromTable(tableId, userId)
-    if (result){
-      res.status(200).json({ ok: `removed user ${userId} from card ${cardId}` });
-    }else {
-      res.status(404).json({ error: 'not found' });
+    let result = await tablesModel.removeUserFromTable(tableId, userId);
+    if (result) {
+      res
+        .status(200)
+        .json({ ok: `removed user ${userId} from card ${tableId}` });
+    } else {
+      res.status(404).json({ message: `User not found` });
     }
-  }, res)
+  }, res);
 });
 
 module.exports = router;

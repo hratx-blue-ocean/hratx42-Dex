@@ -43,6 +43,7 @@ app.use(express.static(path.join(__dirname, '../client/public')));
 app.use('/api/users', usersRoute);
 app.use('/api/auth', authRoute);
 // app.use(jwtChecker.checkToken);
+console.log('I am here');
 app.use('/api/tables', tablesRoute);
 app.use('/api/decks', decksRoute);
 app.use('/api/cards', cardsRoute);
