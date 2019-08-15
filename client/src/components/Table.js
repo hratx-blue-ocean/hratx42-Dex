@@ -48,7 +48,7 @@ export default class Table extends Component {
         this.state.decks.forEach(deck => {
           deckHolder.push({ id: deck.id, title: deck.title });
         })
-          //populated deckname for tickets
+        //populated deckname for tickets
         this.setState({ deckNames: deckHolder });
         http.users.getByTableId(1).then(res => {
           console.log(res);
@@ -186,6 +186,7 @@ export default class Table extends Component {
           handleModal={this.handleModal.bind(this)}
           filterBy={this.state.filterBy}
           tableId={this.props.tableId}
+          tableName={this.props.tableName}
         />
         {/* for each deck, create a deck */}
         {this.state.decks.length > 0 ? (
@@ -210,8 +211,8 @@ export default class Table extends Component {
             ))}
           </>
         ) : (
-          <></>
-        )}
+            <></>
+          )}
         <Modal show={this.state.newDeck.newDeckModal}>
           <Modal.Header closeButton onClick={() => this.handleModal()}>
             <Modal.Title>Add Deck</Modal.Title>

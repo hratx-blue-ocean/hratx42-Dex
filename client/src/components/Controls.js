@@ -14,7 +14,7 @@ export default function Controls(props) {
   const [showModal, setShowModal] = useState(false);
 
   const cards = props.cards.slice(0, 10);
-  const handleDelete = async function(sure) {
+  const handleDelete = async function (sure) {
     setShowModal(false);
     if (sure) {
       const response = await http.tables.delete(props.tableId);
@@ -26,7 +26,7 @@ export default function Controls(props) {
   return (
     <div>
       <Navbar bg="dark" variant="dark">
-        <Navbar.Brand>Table Name</Navbar.Brand>
+        <Navbar.Brand>{props.tableName}</Navbar.Brand>
         <input
           onChange={e => props.searchText(e.target.value)}
           type="text"
@@ -35,19 +35,19 @@ export default function Controls(props) {
         {props.searchName === '' ? (
           <></>
         ) : (
-          <div className="ControlsSearchItems row">
-            {cards.map(item => (
-              <div key={Math.random()} className="ControlsSearchItem">
-                <div style={{ paddingLeft: '160px' }} />
-                <CardThumbnails
-                  onClick={() => props.searchClick(item)}
-                  singleCard={item}
-                  background="true"
-                />
-              </div>
-            ))}
-          </div>
-        )}
+            <div className="ControlsSearchItems row">
+              {cards.map(item => (
+                <div key={Math.random()} className="ControlsSearchItem">
+                  <div style={{ paddingLeft: '160px' }} />
+                  <CardThumbnails
+                    onClick={() => props.searchClick(item)}
+                    singleCard={item}
+                    background="true"
+                  />
+                </div>
+              ))}
+            </div>
+          )}
         <Button style={{ height: '30px' }} variant="light" />
         <div style={{ width: '50px' }} />
         <div style={{ paddingLeft: '2px' }} />
