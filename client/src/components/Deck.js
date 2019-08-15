@@ -10,13 +10,9 @@ export default function Deck(props) {
   const [title, setTitle] = useState(props.deck.title);
 
   const handleShow = () => setShow(true);
-<<<<<<< HEAD
-  const handleClose = () => setShow(false)
 
-
-=======
   const handleClose = () => setShow(false);
->>>>>>> 882e8e02f1fda1fbb04587a55758566a96290178
+
   let cards = [];
   if (props.filterBy === 'Filter') {
     cards = props.deck.cards.slice(0, 6);
