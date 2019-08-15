@@ -11,15 +11,17 @@ import {
 import CardThumbnails from './CardThumbnails';
 
 import http from '../../services/http/http';
-
+import auth from '../../services/auth';
 export default function Controls(props) {
   const [showModal, setShowModal] = useState(false);
   const [showInvite, showInviteToggler] = useState(false);
   const [invitationEmail, setInvitationEmail] = useState('');
   const cards = props.cards.slice(0, 10);
   const sendInvite = async () => {
-    console.log(invitationEmail);
-    return await http.invite.post(invitationEmail);
+    let userId = auth.getUser();
+    let username; 
+    props.users.forEach((user) => user.id === userId ? username = user.name : null)
+    return await http.invite.post(invitationEmail, { tableId: props.tableId, invitedBy: username });
   }
   const handleDelete = async function(sure) {
     setShowModal(false);

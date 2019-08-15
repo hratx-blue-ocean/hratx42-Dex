@@ -91,8 +91,8 @@ const http = {
     },
   },
   invite: {
-    post(email) {
-      return tryAxios(`/api/invite/${email}`, 'post')
+    post(email, tableId) {
+      return tryAxios(`/api/invite/${email}`, 'post', tableId)
     }
   },
 };
