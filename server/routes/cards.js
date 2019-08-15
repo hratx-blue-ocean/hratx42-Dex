@@ -40,6 +40,7 @@ router.post('/', (req, res) => {
 //update card
 router.put('/:id', async (req, res) => {
   const card = req.body;
+  const userId = req.user;
   //if req.user and user owns card
   if (!card.id) {
     res.status(400).send({
@@ -47,8 +48,13 @@ router.put('/:id', async (req, res) => {
     });
   }
   tryCatch(async () => {
-    const updatedCard = await cardsModel.updateCard(card);
-    res.status(200).send(updatedCard);
+    const authorized = await authorizationModel.user.ownsCard(userId, card.id);
+    if (authorized) {
+      const updatedCard = await cardsModel.updateCard(card);
+      res.status(200).send(updatedCard);
+    } else {
+      res.status(401).send({ message: 'Unauthorized' });
+    }
   });
 });
 
