@@ -54,6 +54,7 @@ export default class Table extends Component {
     //   this.setState({decks: res})
     // })
   }
+    )}
 
 
   newCardDataCollector (eff,imp,title,players,tag,dueDate,deck,desc) {
