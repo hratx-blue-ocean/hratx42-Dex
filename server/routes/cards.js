@@ -46,6 +46,7 @@ router.put('/:id', async (req, res) => {
     res.status(400).send({
       message: 'You need to send a card object with an id key and value',
     });
+    return;
   }
   tryCatch(async () => {
     const authorized = await authorizationModel.user.ownsCard(userId, card.id);
@@ -60,17 +61,17 @@ router.put('/:id', async (req, res) => {
 
 //delete card by cardID
 router.delete('/:id', (req, res) => {
-  const id = req.params.id;
-  //if req.user && user owns table of card
-  //delete card
-  cardsModel
-    .deleteCard(id)
-    .then(response => {
-      res.status(200).send(`Deleted card ${id}`);
-    })
-    .catch(err => {
-      res.status(404);
-    });
+  const cardId = req.params.id;
+  const userId = req.user;
+  tryCatch(async () => {
+    const authorized = await authorizationModel.user.ownsCard(userId, cardId);
+    if (authorized) {
+      await cardsModel.delete(cardId);
+      res.status(200).send({ message: 'Card Deleted' });
+    } else {
+      res.status(401).send({ message: 'Unauthorized' });
+    }
+  });
 });
 
 router.post('/:cardId/member', async (req, res) => {
@@ -78,14 +79,11 @@ router.post('/:cardId/member', async (req, res) => {
     const cardId = req.params.cardId;
     const userId = req.body.userId;
     const user = await usersModel.getUserByID(userId);
-    await console.log(user);
-    // const user = await dbResults;
     if (!user) {
-      res.status(404).json({ error: 'not found' });
+      res.status(400).json({ error: 'not found' });
       return;
     } else {
-      const result = await cardsModel.addUserToCard(cardId, userId);
-      await console.log('result: ', result);
+      await cardsModel.addUserToCard(cardId, userId);
       res.status(200).json({ ok: `added user ${userId} to card ${cardId}` });
     }
   }, res);
@@ -96,7 +94,6 @@ router.delete('/:cardId/member/:userId', async (req, res) => {
     const cardId = req.params.cardId;
     const userId = req.params.userId;
     let result = await cardsModel.removeUserFromCard(cardId, userId);
-    await console.log(result);
     if (result) {
       res
         .status(200)
@@ -121,7 +118,6 @@ router.delete('/:cardId/label/:labelId', async (req, res) => {
     const cardId = req.params.cardId;
     const labelId = req.params.labelId;
     let result = await cardsModel.removeLabelFromCard(cardId, labelId);
-    await console.log(result);
     if (result) {
       res
         .status(200)
