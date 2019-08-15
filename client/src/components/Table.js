@@ -3,6 +3,7 @@ import { Button, Modal } from 'react-bootstrap';
 import Controls from './Controls';
 import Deck from './Deck';
 import http from '../../services/http/http.js';
+import table from '../../utils/table';
 
 export default class Table extends Component {
   constructor(props) {
@@ -36,6 +37,7 @@ export default class Table extends Component {
     this.editCardDataCollector = this.newCardDataCollector.bind(this);
   }
   componentDidMount() {
+    table.deleteCardById = this.deleteCardById.bind(this)
     http.decks
       .get(this.props.tableId)
       .then(response => {
@@ -56,6 +58,31 @@ export default class Table extends Component {
       });
   }
 
+  findCardById(id) {
+    let decks = [...this.state.decks];
+    for (let deckIndex = 0; deckIndex < decks.length; deckIndex++) {
+      for (let cardIndex = 0; cardIndex < decks[deckIndex].cards.length; cardIndex++) {
+        let currentCard = decks[deckIndex].cards[cardIndex]
+        if (currentCard.id === id) {
+          return {
+            deckIndex: deckIndex, cardIndex: cardIndex
+          }
+        }
+      }
+    }
+    return false;
+  }
+
+  deleteCardById(id) {
+    const decks = [...this.state.decks]
+    const position = this.findCardById(id);
+    if (position) {
+      const { deckIndex, cardIndex } = position
+      decks[deckIndex].cards.splice(cardIndex, 1)
+      this.setState({ decks })
+      http.cards.delete(id)
+    }
+  }
 
   newCardDataCollector(
     players,
@@ -63,13 +90,12 @@ export default class Table extends Component {
     deck,
     cardInfo
   ) {
-    {
     console.log(players);
     console.log(tags);
     console.log(deck);
     console.log(cardInfo);
   }
-  }
+
 
   editCardDataCollector(
     players,
@@ -82,6 +108,7 @@ export default class Table extends Component {
     console.log(deck);
     console.log(cardInfo);
   }
+
 
   //
 
@@ -98,7 +125,7 @@ export default class Table extends Component {
     let cards = [];
     for (let i = 0; i < decks.length; i++) {
       for (let j = 0; j < decks[i].cards.length; j++) {
-        if (decks[i].cards[j] && decks[i].cards[j].title.includes(text)) {
+        if (decks[i].cards[j].card_title.includes(text)) {
           cards.push(decks[i].cards[j]);
           // if (decks[i].cards[j].description.length > 50){
           //   cards[cards.length - 1] = cards[cards.length - 1].substring(0, 47) + '...';
@@ -204,10 +231,10 @@ export default class Table extends Component {
           </>
         ) : (
 
-          <></>
-        )}
-        <Modal show={this.state.newDeck.newDeckModal} onHide = {() =>this.handleModal()}>
-          <Modal.Header closeButton onClick={() => this.handleModal()} onHide = {() => this.handleModal()}>
+            <></>
+          )}
+        <Modal show={this.state.newDeck.newDeckModal} onHide={() => this.handleModal()}>
+          <Modal.Header closeButton onClick={() => this.handleModal()} onHide={() => this.handleModal()}>
             <Modal.Title>Add Deck</Modal.Title>
           </Modal.Header>
           <Modal.Body>

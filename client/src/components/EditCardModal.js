@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { Button, Modal, Container, Row, Col, Form} from 'react-bootstrap';
+import { Button, Modal, Container, Row, Col, Form } from 'react-bootstrap';
 
+import table from '../../utils/table';
 
-export default function CardModal({closeModal, showMe, card, deckTitle, deckNames, editCard, users, labels}) {
+export default function CardModal({ closeModal, showMe, card, deckTitle, deckNames, editCard, users, labels }) {
   const [show, setShow] = useState(false);
   const handleClose = () => closeModal()
 
@@ -19,160 +20,161 @@ export default function CardModal({closeModal, showMe, card, deckTitle, deckName
 
   return (
 
-  <>
-  <Modal size="lg" show={showMe} onHide={handleClose}>
-    <Container>
+    <>
+      <Modal size="lg" show={showMe} onHide={handleClose}>
+        <Container>
 
-        {/* TITLES FOR Header Container for effort, impact, title, and exit */}
-        <Row xs={12} style={styles.headerRow}>
-          <Col xs={1} style={styles.effortImpactTitle}>
-            <div style={{fontSize:11}}>Effort</div>
-          </Col>
-          <Col xs={1} style={styles.effortImpactTitle}>
-            <div style={{fontSize:11}}>Impact</div>
-          </Col>
-          <Col xs={8} style={styles.titleStyle}>
-            <div style={{width: '100%' , paddingTop:5}}></div>
-          </Col>
-          <Col xs={2} style={{justifyContent:'center'}}>
-                <Modal.Header closeButton>  </Modal.Header>
-          </Col>
-        </Row>
-        {/* CONTENT FOR Header Container for effort, impact, title, and exit */}
-        <Row xs={12} style={styles.headerRow}>
-          <Col xs={1} style={styles.effortImpactInput}>
-          <input max={21} min={1} placeholder={card.card_weight} onBlur={(event)=> setEffort(event.target.value)}  type="number" style={styles.effImpInputBox}/>
-          </Col>
-          <Col xs={1} style={styles.effortImpactInput}>
-          <input max={21} min={1} placeholder={card.card_impact} onBlur={(event)=> setImpact(event.target.value)} type="number" style={styles.effImpInputBox}/>
-          </Col>
-          {/* title input area */}
-          <Col xs={10} style={styles.titleStyle}>
-            <Form style={{width: '100%'}}>
-              <Form.Group sm={8} controlId="exampleForm.ControltitleArea">
-                <Form.Control as="textarea" placeholder={card.card_title} onBlur={(event)=> setTitle(event.target.value)} rows="1"/>
-              </Form.Group>
-            </Form>
-          </Col>
-        </Row>
-
-        {/* Main Area*/}
-            {/* Conent Page*/}
-        <Row>
-          <Col xs={8} style={styles.mainContent}>
-            <Row>
-              {/* titles of Players and Tags */}
-                <Col style={styles.playersTagsTitles}>
-                  <div style={{fontWeight: 800}}>Players</div>
-                </Col>
-                <Col style={styles.playersTagsTitles}>
-                  <div style={{fontWeight: 800}}>Tags</div>
-                </Col>
-            </Row>
-            {/* LIST OF ALL POSSIBLE players and tags */}
-            <Row>
-                  <Col style={styles.playersStyle}>
-                    <select onChange={(event)=> {
-                        let playerHolder = players
-                        let selectPlayer = event.target.value  
-                        let targetPlayer ={member_id: null, member_name: selectPlayer}
-                        playerHolder.push(targetPlayer)
-                        setPlayers(playerHolder)
-                    }}>
-                      <option></option>
-                      {users.map(user =>{
-                            return (
-                            <option>{user.name}</option>
-                            )
-                        })}
-                    </select>
-                  </Col>
-                  {/* LABEL CHOOSE */}
-                  <Col style={styles.playersStyle}>
-                  <select onChange={(event)=> {
-                        let labelsHolder = tags
-                        let selectLabel = event.target.value  
-                        let targetLabel ={color: null, label_name: selectLabel}
-                        labelsHolder.push(targetLabel)
-                        setTags(labelsHolder)
-                    }}>
-                        <option></option>
-                        {labels.map(label =>{
-                            return (
-                            <option >{label.label_name}</option>
-                            )
-                        })}
-                    </select>
-                  </Col>
-            </Row>
-            {/* Return list of names and labels */}
-            <Row>
-                  <Col xs={8} style={styles.playersStyle}>
-                    {players.map(player =>{
-                    return (
-                        <div>{player.member_name}</div>
-                    )
-                     })}
-                  </Col>
-                  <Col xs={4} style={styles.tagsStyle}>
-                    {tags.map(tag =>{
-                      return (
-                          <div onClick={()=>{
-                              let curTags = tags
-                          }}>{tag.label_name}</div>
-                      )
-                      })}
-                  </Col>
-            </Row>
-            {/* Text Input Area */}
-            <Row>
-              <Form style={{width: '100%', paddingTop:10}}>
-              <Form.Group sm={8} controlId="exampleForm.ControlTextarea1">
-                {/* <Form.Label>Description</Form.Label> */}
-                <Form.Control as="textarea" rows="8" placeholder={card.card_description} onBlur={(event)=> setDesc(event.target.value)}/>
-              </Form.Group>
+          {/* TITLES FOR Header Container for effort, impact, title, and exit */}
+          <Row xs={12} style={styles.headerRow}>
+            <Col xs={1} style={styles.effortImpactTitle}>
+              <div style={{ fontSize: 11 }}>Effort</div>
+            </Col>
+            <Col xs={1} style={styles.effortImpactTitle}>
+              <div style={{ fontSize: 11 }}>Impact</div>
+            </Col>
+            <Col xs={8} style={styles.titleStyle}>
+              <div style={{ width: '100%', paddingTop: 5 }}></div>
+            </Col>
+            <Col xs={2} style={{ justifyContent: 'center' }}>
+              <Modal.Header closeButton>  </Modal.Header>
+            </Col>
+          </Row>
+          {/* CONTENT FOR Header Container for effort, impact, title, and exit */}
+          <Row xs={12} style={styles.headerRow}>
+            <Col xs={1} style={styles.effortImpactInput}>
+              <input max={21} min={1} placeholder={card.card_weight} onBlur={(event) => setEffort(event.target.value)} type="number" style={styles.effImpInputBox} />
+            </Col>
+            <Col xs={1} style={styles.effortImpactInput}>
+              <input max={21} min={1} placeholder={card.card_impact} onBlur={(event) => setImpact(event.target.value)} type="number" style={styles.effImpInputBox} />
+            </Col>
+            {/* title input area */}
+            <Col xs={10} style={styles.titleStyle}>
+              <Form style={{ width: '100%' }}>
+                <Form.Group sm={8} controlId="exampleForm.ControltitleArea">
+                  <Form.Control as="textarea" placeholder={card.card_title} onBlur={(event) => setTitle(event.target.value)} rows="1" />
+                </Form.Group>
               </Form>
-            </Row>
-          </Col>
+            </Col>
+          </Row>
 
-        {/* Header Container for effort, impact, title, and exit */}
-          <Col xs={4} style={styles.addToCardCol}>
-            <Row style={styles.addToCardTitle}>
-              <div>Add To Card</div>
-            </Row>
-            <Row style={styles.addToCardTrait}>
-              <input placeholder="date due" placeholder='Due Date' onBlur={(event)=> setDate(event.target.value)} style={{width:'100%'}}/> 
-            </Row>
-            {/* <Row style={styles.addToCardTrait}>
+          {/* Main Area*/}
+          {/* Conent Page*/}
+          <Row>
+            <Col xs={8} style={styles.mainContent}>
+              <Row>
+                {/* titles of Players and Tags */}
+                <Col style={styles.playersTagsTitles}>
+                  <div style={{ fontWeight: 800 }}>Players</div>
+                </Col>
+                <Col style={styles.playersTagsTitles}>
+                  <div style={{ fontWeight: 800 }}>Tags</div>
+                </Col>
+              </Row>
+              {/* LIST OF ALL POSSIBLE players and tags */}
+              <Row>
+                <Col style={styles.playersStyle}>
+                  <select onChange={(event) => {
+                    let playerHolder = players
+                    let selectPlayer = event.target.value
+                    let targetPlayer = { member_id: null, member_name: selectPlayer }
+                    playerHolder.push(targetPlayer)
+                    setPlayers(playerHolder)
+                  }}>
+                    <option></option>
+                    {users.map(user => {
+                      return (
+                        <option>{user.name}</option>
+                      )
+                    })}
+                  </select>
+                </Col>
+                {/* LABEL CHOOSE */}
+                <Col style={styles.playersStyle}>
+                  <select onChange={(event) => {
+                    let labelsHolder = tags
+                    let selectLabel = event.target.value
+                    let targetLabel = { color: null, label_name: selectLabel }
+                    labelsHolder.push(targetLabel)
+                    setTags(labelsHolder)
+                  }}>
+                    <option></option>
+                    {labels.map(label => {
+                      return (
+                        <option >{label.label_name}</option>
+                      )
+                    })}
+                  </select>
+                </Col>
+              </Row>
+              {/* Return list of names and labels */}
+              <Row>
+                <Col xs={8} style={styles.playersStyle}>
+                  {players.map(player => {
+                    return (
+                      <div>{player.member_name}</div>
+                    )
+                  })}
+                </Col>
+                <Col xs={4} style={styles.tagsStyle}>
+                  {tags.map(tag => {
+                    return (
+                      <div onClick={() => {
+                        let curTags = tags
+                      }}>{tag.label_name}</div>
+                    )
+                  })}
+                </Col>
+              </Row>
+              {/* Text Input Area */}
+              <Row>
+                <Form style={{ width: '100%', paddingTop: 10 }}>
+                  <Form.Group sm={8} controlId="exampleForm.ControlTextarea1">
+                    {/* <Form.Label>Description</Form.Label> */}
+                    <Form.Control as="textarea" rows="8" placeholder={card.card_description} onBlur={(event) => setDesc(event.target.value)} />
+                  </Form.Group>
+                </Form>
+              </Row>
+            </Col>
+
+            {/* Header Container for effort, impact, title, and exit */}
+            <Col xs={4} style={styles.addToCardCol}>
+              <Row style={styles.addToCardTitle}>
+                <div>Add To Card</div>
+              </Row>
+              <Row style={styles.addToCardTrait}>
+                <input placeholder="date due" placeholder='Due Date' onBlur={(event) => setDate(event.target.value)} style={{ width: '100%' }} />
+              </Row>
+              {/* <Row style={styles.addToCardTrait}>
                 <input placeholder="gitLink"  value={card.gitLink}style={{width:'100%'}}/> 
             </Row> */}
-            <Row style={styles.addToCardTrait}>
-            <select style={{width:'100%'}} onChange={(event)=> setDeck(event.target.value)}>
-              <option>`${deckTitle}`</option>
-              {deckNames.map(name =>{
-                if (name.title !== deckTitle) {
-                  return (
-                    <option>{name.title}</option>
-                  )
-                }
-                })}
-            </select>
-            </Row>
-            {/* <Row style={styles.addToCardTrait}>Completed</Row> */}
-          </Col>
-        </Row>
+              <Row style={styles.addToCardTrait}>
+                <select style={{ width: '100%' }} onChange={(event) => setDeck(event.target.value)}>
+                  <option>`${deckTitle}`</option>
+                  {deckNames.map(name => {
+                    if (name.title !== deckTitle) {
+                      return (
+                        <option>{name.title}</option>
+                      )
+                    }
+                  })}
+                </select>
+              </Row>
+              {/* <Row style={styles.addToCardTrait}>Completed</Row> */}
+            </Col>
+          </Row>
 
-        {/* Button to Submit */}
-        <Row style={styles.submitButton}>
-        <Button onClick={(event)=> {
-            let cardInfo={id: card.card_id, eff:effort, imp:impact, titl:title, description:desc, due: dueDate}
-            editCard(players, tags, deck, cardInfo)
-        }} variant="primary">Submit</Button>
-        </Row>
+          {/* Button to Submit */}
+          <Row style={styles.submitButton}>
+            <Button onClick={(event) => {
+              let cardInfo = { id: card.card_id, eff: effort, imp: impact, titl: title, description: desc, due: dueDate }
+              editCard(players, tags, deck, cardInfo)
+            }} variant="primary">Submit</Button>
+          </Row>
 
-    </Container>
-  </Modal>
-  </>
+          <Button variant="danger" onClick={() => { table.deleteCardById(card.id) }}>Delete</Button>
+        </Container>
+      </Modal>
+    </>
   )
 }
 
@@ -181,7 +183,7 @@ const styles = {
   //Header Row effort, impact, title, exit
   headerRow: {
     // "border": "1px solid black",
-    height:'auto'
+    height: 'auto'
   },
   effortImpact: {
     // "border": "1px solid black"
@@ -190,21 +192,21 @@ const styles = {
   effortImpactTitle: {
     // border: "1px solid black",
     justifyContent: 'center',
-    paddingTop:35,
+    paddingTop: 35,
   },
   effortImpactInput: {
     // border: "1px solid black",
   },
   effImpInputBox: {
-    width:40,
+    width: 40,
     height: 20,
     // oninput:"this.value=this.value.replace(/[^0-9]/g,'');"
 
   },
   exitButton: {
-    fontWeight:1000,
+    fontWeight: 1000,
     fontSize: 20,
-    paddingLeft:15,
+    paddingLeft: 15,
   },
 
   titleStyle: {
@@ -227,13 +229,13 @@ const styles = {
   },
   textBoxStyle: {
     align: "top",
-    height:'100px',
+    height: '100px',
     placeholder: "description..."
   },
 
 
 
-//add specific content column for card 
+  //add specific content column for card 
   addToCardCol: {
     // border: "1px solid black",
   },
@@ -246,10 +248,9 @@ const styles = {
     paddingTop: 5
   },
 
-//buttonRow
+  //buttonRow
   submitButton: {
     paddingLeft: 10,
     paddingBottom: 10,
   }
 }
-    
