@@ -85,7 +85,7 @@ export default function Register(props) {
         <Form.Group>
           <Form.Label htmlFor={'register-password1'}>Password: </Form.Label>
           <Form.Control
-            type='text'
+            type='password'
             value={password1}
             placeholder={'Password'}
             onChange={event => {
@@ -98,7 +98,7 @@ export default function Register(props) {
             Confirm Password:
           </Form.Label>
           <Form.Control
-            type='text'
+            type='password'
             value={password2}
             placeholder={'Password'}
             onChange={event => {
