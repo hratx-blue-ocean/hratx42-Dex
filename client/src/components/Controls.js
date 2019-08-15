@@ -5,6 +5,8 @@ import {
   DropdownButton,
   Dropdown,
   Alert,
+  OverlayTrigger,
+  Tooltip
 } from 'react-bootstrap';
 import CardThumbnails from './CardThumbnails';
 
@@ -24,6 +26,7 @@ export default function Controls(props) {
       }
     }
   };
+
   return (
     <div>
       <Navbar bg="dark" variant="dark">
@@ -36,21 +39,21 @@ export default function Controls(props) {
         {props.searchName === '' ? (
           <></>
         ) : (
-          <div className="ControlsSearchItems row">
-            {cards.map(item => (
-              <div key={Math.random()} className="ControlsSearchItem">
-                <div style={{ paddingLeft: '160px' }} />
-                <CardThumbnails
-                  singleCard={item}
-                  deckNames = {props.deckNames}
-                  users = {props.users}
-                  labels = {props.labels}
-                  background='true'
-                />
-              </div>
-            ))}
-          </div>
-        )}
+            <div className="ControlsSearchItems row">
+              {cards.map(item => (
+                <div key={Math.random()} className="ControlsSearchItem">
+                  <div style={{ paddingLeft: '160px' }} />
+                  <CardThumbnails
+                    singleCard={item}
+                    deckNames={props.deckNames}
+                    users={props.users}
+                    labels={props.labels}
+                    background='true'
+                  />
+                </div>
+              ))}
+            </div>
+          )}
         <Button style={{ height: '30px' }} variant="light" />
         <div style={{ width: '50px' }} />
         <div style={{ paddingLeft: '2px' }} />
@@ -69,19 +72,35 @@ export default function Controls(props) {
           ))}
         </DropdownButton>
         <div style={{ position: 'relative', left: '30%' }}>
+          {props.users.map(user => 
+            <>
+              <OverlayTrigger
+                key={'bottom'}
+                placement={'bottom'}
+                overlay={
+                  <Tooltip id={`tooltip-bottom`}>
+                    {user.name}
+                  </Tooltip>
+                }
+              >
+                <Button style = {{textAlign: "center"}}className="tableControlsUserNameCircles" variant="secondary">
+                  {(user.name.split(" ").map(char => char[0]).join("")).toUpperCase()}
+                </Button>
+              </OverlayTrigger>
+            </>
+          )}
           <Button onClick={() => props.handleModal()} variant="success">
             New Deck
           </Button>
-          {/* for each user, create button */}
-          <Button className="tableControlsUserNameCircles" variant="secondary">
-            US
-          </Button>
+         
+         
+          {/* 
           <Button className="tableControlsUserNameCircles" variant="secondary">
             ME
           </Button>
           <Button className="tableControlsUserNameCircles" variant="secondary">
             GG
-          </Button>
+          </Button> */}
           <Button
             style={{ width: '150px' }}
             variant="success"
@@ -92,7 +111,7 @@ export default function Controls(props) {
             Invite
           </Button>
           <Button
-            variant="danger"
+            variant="outline-danger"
             onClick={() => {
               setShowModal(true);
             }}
