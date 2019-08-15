@@ -40,10 +40,16 @@ router.post('/', (req, res) => {
 //update card
 router.put('/:id', async (req, res) => {
   const card = req.body;
-  const id = req.params.id;
   //if req.user and user owns card
-  const updatedCard = await cardsModel.updateCard(card);
-  res.status(200).send(updatadeCard);
+  if (!card.id) {
+    res.status(400).send({
+      message: 'You need to send a card object with an id key and value',
+    });
+  }
+  tryCatch(async () => {
+    const updatedCard = await cardsModel.updateCard(card);
+    res.status(200).send(updatedCard);
+  });
 });
 
 //delete card by cardID
