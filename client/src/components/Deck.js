@@ -1,40 +1,87 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import { Card, Button, Modal } from 'react-bootstrap';
-import CardThumbnail from './CardThumbnails'
-import NewCardModal from './NewCardModal'
+import CardThumbnail from './CardThumbnails';
+import NewCardModal from './NewCardModal';
 
 
 export default function Deck(props) {
   const [show, setShow] = useState(false);
   const [showEditDeck, setShowEditDeck] = useState(false);
-  const [title, setTitle] = useState(props.deck.title)
+  const [title, setTitle] = useState(props.deck.title);
 
   const handleShow = () => setShow(true);
+<<<<<<< HEAD
   const handleClose = () => setShow(false)
 
 
+=======
+  const handleClose = () => setShow(false);
+>>>>>>> 882e8e02f1fda1fbb04587a55758566a96290178
   let cards = [];
-  if (props.filterBy === 'Filter'){
+  if (props.filterBy === 'Filter') {
     cards = props.deck.cards.slice(0, 6);
   } else {
-    props.deck.cards.forEach((card) => {
-      card.cards_members.forEach((member) => {
+    props.deck.cards.forEach(card => {
+      card.cards_members.forEach(member => {
         if (member.member_name.includes(props.filterBy)) {
           cards.push(card);
         }
-      })
-    })
+      });
+    });
   }
   return (
+    <div style={{ width: '75%' }}>
       <div>
-        <div style = {{width: '100%'}}>
-          <Card style = {{backgroundColor: '#eee'}}>
+        <Card style={{ backgroundColor: '#eee' }}>
           <Card.Header>
-              <span>
-                <span style = {{paddingRight: '30px'}}>{props.deck.title}</span>
-                <Button variant="outline-success" onClick={()=> setShowEditDeck(true)}>Edit/Delete Deck</Button>
-              </span>
-            </Card.Header>
+            <span>
+              <span style={{ paddingRight: '30px' }}>{props.deck.title}</span>
+              <Button
+                variant='outline-success'
+                onClick={() => setShowEditDeck(true)}
+              >
+                Edit/Delete Deck
+              </Button>
+              <Modal show={showEditDeck}>
+                <Modal.Header
+                  closeButton
+                  onClick={() => {
+                    setShowEditDeck(false);
+                  }}
+                >
+                  <Modal.Title>Edit/Delete Deck</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                  <p>Update Deck Title</p>
+                  <input
+                    onChange={e => setTitle(e.target.value)}
+                    value={title}
+                    type='text'
+                  />
+                </Modal.Body>
+                <Modal.Footer>
+                  <Button
+                    variant='danger'
+                    onClick={() => {
+                      setShowEditDeck(false);
+                      props.deleteDeck(props.deck.id);
+                    }}
+                  >
+                    Delete Deck
+                  </Button>
+                  <Button
+                    variant='success'
+                    onClick={() => {
+                      setShowEditDeck(false);
+                      props.editDeck(props.deck.id, title);
+                    }}
+                  >
+                    Save Deck
+                  </Button>
+                </Modal.Footer>
+              </Modal>
+            </span>
+          </Card.Header>
             <Card.Body className = 'row'>
             {cards.map((singleCard, cardIndex) => 
               <div key = {Math.random()}>
@@ -50,10 +97,18 @@ export default function Deck(props) {
                               users={props.users} 
                               labels={props.labels}/>
               </div>
-             )}
-              <div style = {{paddingLeft: '20px'}}></div>
-            <NewCardModal  users={props.users} labels={props.labels} newCardData={props.newCardData} key={Math.random()} showMe={show}  deckNames={props.deckNames} closeModal={handleClose.bind(this)}/>
-            <Button variant="outline-success" onClick={()=> handleShow()}>Add New Card</Button>
+            )}
+            <div style={{ paddingLeft: '20px' }} />
+            <NewCardModal
+              newCardData={props.newCardData}
+              key={Math.random()}
+              showMe={show}
+              deckNames={props.deckNames}
+              closeModal={handleClose.bind(this)}
+            />
+            <Button variant='outline-success' onClick={() => handleShow()}>
+              Add New Card
+            </Button>
           </Card.Body>
         </Card>
       </div>
@@ -80,5 +135,5 @@ export default function Deck(props) {
       </Modal>
       </div>
     </div>
-  )
+  );
 }
