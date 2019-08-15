@@ -14,7 +14,7 @@ const tablesRoute = require('./routes/tables');
 const decksRoute = require('./routes/decks');
 const cardsRoute = require('./routes/cards');
 const authRoute = require('./routes/auth');
-
+const inviteRoute = require('./routes/inviteRoute');
 // open up CORS
 app.use((_, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
@@ -37,6 +37,7 @@ app.use('/api/auth', authRoute);
 app.use('/api/tables', tablesRoute);
 app.use('/api/decks', decksRoute);
 app.use('/api/cards', cardsRoute);
+app.use('/api/invite', inviteRoute);
 
 app.use('/*', express.static(path.join(__dirname, '../client/public')));
 // catch 404 and forward to error handler
