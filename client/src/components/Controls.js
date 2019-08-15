@@ -26,7 +26,7 @@ export default function Controls(props) {
   return (
     <div>
       <Navbar bg="dark" variant="dark">
-        <Navbar.Brand>Dex</Navbar.Brand>
+        <Navbar.Brand>Table Name</Navbar.Brand>
         <input
           onChange={e => props.searchText(e.target.value)}
           type="text"
@@ -50,7 +50,7 @@ export default function Controls(props) {
         )}
         <Button style={{ height: '30px' }} variant="light" />
         <div style={{ width: '50px' }} />
-        <div style={{ paddingLeft: '10px' }} />
+        <div style={{ paddingLeft: '2px' }} />
         <DropdownButton
           id="dropdown-basic-button"
           variant="success"
@@ -66,21 +66,17 @@ export default function Controls(props) {
           ))}
         </DropdownButton>
         <div style={{ position: 'relative', left: '30%' }}>
-          <Button
-            onClick={() => props.handleModal()}
-            style={{ height: '75px', width: '75px' }}
-            variant="success"
-          >
+          <Button onClick={() => props.handleModal()} variant="success">
             New Deck
           </Button>
           {/* for each user, create button */}
-          <Button style={{ borderRadius: '50%' }} variant="secondary">
+          <Button className="tableControlsUserNameCircles" variant="secondary">
             US
           </Button>
-          <Button style={{ borderRadius: '50%' }} variant="secondary">
+          <Button className="tableControlsUserNameCircles" variant="secondary">
             ME
           </Button>
-          <Button style={{ borderRadius: '50%' }} variant="secondary">
+          <Button className="tableControlsUserNameCircles" variant="secondary">
             GG
           </Button>
           <Button

@@ -53,9 +53,36 @@ code {
 }
 
 /* BEGIN LOGIN/SIGNUP/LANDING STYLES */
-/* Login Component */
+/* Login Component & Login Button */
 .login {
   background: #f1f0f0 !important;
+}
+
+.loginBtn {
+  border-radius: var(--border-button-border-radius, 4px) !important;
+  font-size: var(--font-button-font-size, 16px) !important;
+  line-height: var(--font-button-line-height, 24px) !important;
+  letter-spacing: var(--font-button-letter-spacing, normal) !important;
+  font-family: var(
+    --font-button-font-family,
+    Circular,
+    -apple-system,
+    BlinkMacSystemFont,
+    Roboto,
+    Helvetica Neue,
+    sans-serif
+  ) !important;
+  text-transform: var(--font-button-text-transform, undefined) !important;
+  padding-top: var(--spacing-button-vertical, 6px) !important;
+  padding-bottom: var(--spacing-button-vertical, 6px) !important;
+  font-weight: var(--font-bold-font-weight, 800) !important;
+  border-width: var(--border-button-border-width, 2px) !important;
+  padding-left: var(--spacing-button-horizontal, 22px) !important;
+  padding-right: var(--spacing-button-horizontal, 22px) !important;
+  box-shadow: var(--shadow-button-level0-box-shadow, none) !important;
+  background: var(--color-buttons-primary-color, #ff5a5f) !important;
+  border-color: var(--color-buttons-primary-border, transparent) !important;
+  color: var(--color-buttons-primary-text, #ffffff) !important;
 }
 
 /* Register Component */
@@ -100,6 +127,39 @@ code {
   color: var(--color-buttons-primary-text, #ffffff) !important;
 }
 /* END LOGIN/SIGNUP/LANDING STYLES */
+
+/* BEGIN DEX NAVBAR STYLES */
+.dexNavBar {
+  background-color: #f1f0f0 !important;
+}
+/* END DEX NAVBAR STYLES */
+
+/* BEGIN CREATE/EDIT TABLE MODAL STYLES */
+/* END CREATE/EDIT TABLE MODAL STYLES */
+
+/* BEGIN TABLE CONTROL BAR STYLES */
+.tableControlsUserNameCircles {
+  align-items: center;
+  background-color: #dfe1e6;
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border: 0;
+  border-radius: 100%;
+  box-sizing: border-box;
+  color: #172b4d;
+  display: inline-flex;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans,
+    Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  justify-content: center;
+  line-height: 28px;
+  opacity: 1;
+  height: 40px;
+  width: 40px;
+}
+/* END TABLE CONTROL BAR STYLES */
 
 /* BEGIN DASHBOARD STYLES */
 /* dashboard main container div */
@@ -155,9 +215,6 @@ code {
 }
 
 /* tables section */
-.dashboardTables {
-  /* border: 1px solid #000; */
-}
 
 .dashboardTables h2 {
   padding-left: 3rem;
