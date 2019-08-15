@@ -10,21 +10,23 @@ export default function Deck(props) {
   const [title, setTitle] = useState(props.deck.title);
 
   const handleShow = () => setShow(true);
-
   const handleClose = () => setShow(false);
 
   let cards = [];
-  if (props.filterBy === 'Filter') {
-    cards = props.deck.cards.slice(0, 6);
-  } else {
-    props.deck.cards.forEach(card => {
-      card.cards_members.forEach(member => {
-        if (member.member_name.includes(props.filterBy)) {
-          cards.push(card);
-        }
+  if (props.deck.cards) {
+    if (props.filterBy === 'Filter') {
+      cards = props.deck.cards.slice(0, 6);
+    } else {
+      props.deck.cards.forEach(card => {
+        card.cards_members.forEach(member => {
+          if (member.member_name){
+          if (member.member_name.includes(props.filterBy)) {
+            cards.push(card);
+          }}
+        });
       });
-    });
-  }
+    }
+}
   return (
     <div style={{ width: '75%' }}>
       <div>
@@ -38,44 +40,6 @@ export default function Deck(props) {
               >
                 Edit/Delete Deck
               </Button>
-              <Modal show={showEditDeck}>
-                <Modal.Header
-                  closeButton
-                  onClick={() => {
-                    setShowEditDeck(false);
-                  }}
-                >
-                  <Modal.Title>Edit/Delete Deck</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                  <p>Update Deck Title</p>
-                  <input
-                    onChange={e => setTitle(e.target.value)}
-                    value={title}
-                    type='text'
-                  />
-                </Modal.Body>
-                <Modal.Footer>
-                  <Button
-                    variant='danger'
-                    onClick={() => {
-                      setShowEditDeck(false);
-                      props.deleteDeck(props.deck.id);
-                    }}
-                  >
-                    Delete Deck
-                  </Button>
-                  <Button
-                    variant='success'
-                    onClick={() => {
-                      setShowEditDeck(false);
-                      props.editDeck(props.deck.id, title);
-                    }}
-                  >
-                    Save Deck
-                  </Button>
-                </Modal.Footer>
-              </Modal>
             </span>
           </Card.Header>
             <Card.Body className = 'row'>
@@ -104,8 +68,7 @@ export default function Deck(props) {
               newCardData={props.newCardData}
               users={props.users} 
               labels={props.labels}/>
-              
-            
+
             <Button variant='outline-success' onClick={() => handleShow()}>
               Add New Card
             </Button>
