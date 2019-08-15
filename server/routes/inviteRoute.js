@@ -5,6 +5,8 @@ const nodemailer = require('nodemailer');
 
 router.post('/:email', async (req, res) => {
   console.log('hi');
+  const {email} = req.params;
+  console.log(email);
   async function main(){
 
     // Generate test SMTP service account from ethereal.email
@@ -12,31 +14,26 @@ router.post('/:email', async (req, res) => {
     let testAccount = await nodemailer.createTestAccount();
   
     // create reusable transporter object using the default SMTP transport
-    let transporter = nodemailer.createTransport({
-      host: "smtp.ethereal.email",
-      port: 587,
-      secure: false, // true for 465, false for other ports
+    var transporter = nodemailer.createTransport({
+      service: 'gmail',
       auth: {
-        user: testAccount.user, // generated ethereal user
-        pass: testAccount.pass // generated ethereal password
-      }
-    });
-  
+             user: 'dexteamhr@gmail.com',
+             pass: 'dexteamsupport'
+         }
+     });
+    const mailOptions = {
+      from: 'dexteamhr@gmail.com', // sender address
+      to: `${email}`, // list of receivers
+      subject: 'Hi DJ! this is dex tema', // Subject line
+      html: '<button>Yes</button>'// plain text body
+    };
     // send mail with defined transport object
-    let info = await transporter.sendMail({
-      from: '"Fred Foo 👻" <foo@example.com>', // sender address
-      to: "dexteamhr@gmail.com", // list of receivers
-      subject: "Hello ✔", // Subject line
-      text: "Hello world?", // plain text body
-      html: "<b>Hello world?</b>" // html body
-    });
-  
-    console.log("Message sent: %s", info.messageId);
-    // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
-  
-    // Preview only available when sending through an Ethereal account
-    console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
-    // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
+    transporter.sendMail(mailOptions, function (err, info) {
+      if(err)
+        console.log(err)
+      else
+        console.log(info);
+   });
   }
   
   main().catch(console.error);
