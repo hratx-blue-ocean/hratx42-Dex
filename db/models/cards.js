@@ -15,7 +15,7 @@ const cardsModel = {
           c.weight as card_weight,
           c.impact as card_impact,
           c.table_id,
-          c.deck_id
+          c.deck_id,
           array_agg(
             json_build_object(
               'member_id', cast(u.id as varchar),
