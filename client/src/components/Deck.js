@@ -101,6 +101,9 @@ export default function Deck(props) {
               showMe={show}
               deckNames={props.deckNames}
               closeModal={handleClose.bind(this)}
+              newCardData={props.newCardData}
+              users={props.users} 
+              labels={props.labels}/>
               
             />
             <Button variant='outline-success' onClick={() => handleShow()}>
