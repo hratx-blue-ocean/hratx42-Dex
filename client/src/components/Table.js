@@ -38,14 +38,10 @@ export default class Table extends Component {
         deckHolder.push({id: deck.id, title: deck.title})
       })
       //populated deckname for tickets
-      .then(() => {
-        let deckHolder = [];
-        this.state.decks.forEach(deck => {
-          deckHolder.push({ id: deck.id, title: deck.title });
-        });
         this.setState({ deckNames: deckHolder });
       });
-    http.users.getByTableId(1).then(res => {
+    http.users.getByTableId(1)
+    .then((res) => {
       console.log(res);
       this.setState({ users: res });
     });
@@ -54,7 +50,6 @@ export default class Table extends Component {
     //   this.setState({decks: res})
     // })
   }
-    )}
 
 
   newCardDataCollector (eff,imp,title,players,tag,dueDate,deck,desc) {
@@ -88,8 +83,6 @@ export default class Table extends Component {
   newPlayer(playerName) {
     //add user to users Array
   }
-
-  searchClick(card) {}
 
   changeFilter(e) {
     if (this.state.filterBy === e.target.innerHTML) {
@@ -183,6 +176,7 @@ export default class Table extends Component {
           searchClick={this.searchClick.bind(this)}
           handleModal={this.handleModal.bind(this)}
           filterBy={this.state.filterBy}
+          deckNames={this.state.deckNames}
         />
         {/* for each deck, create a deck */}        
         {this.state.decks.length > 0 ? (<>
@@ -201,7 +195,7 @@ export default class Table extends Component {
             </div>)
           }
         </>) : (<></>)}
-        <Modal show = {this.state.newDeck.newDeckModal}>
+        <Modal show = {this.state.newDeck.newDeckModal} onHide = {() => this.handleModal()}>
         <Modal.Header closeButton onClick={() => this.handleModal()}>
         <Modal.Title>Add Deck</Modal.Title>
           </Modal.Header>
