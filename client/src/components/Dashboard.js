@@ -12,10 +12,7 @@ export default function Dashboard(props) {
     <div className="dashboardContainer">
       <div>
         {showProfile ? (
-          <div className="dashboardProfileForm" >
-            <h2>edit profile</h2>
-            <ProfileEditForm user={props.user} />
-          </div>
+          <ProfileEditForm user={props.user} />
         ) : (
           <div style = {{width: '350px', height: '450px'}}>
             <Card>
