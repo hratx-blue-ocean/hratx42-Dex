@@ -38,6 +38,7 @@ const cardsModel = {
         where c.deck_id = $1 
         group by c.id;`;
     const { rows: cards } = await pgClient.query(query, [deckId]);
+    console.log(deckId, cards);
     return cards;
   },
   async getCardByID(id) {
@@ -94,7 +95,7 @@ const cardsModel = {
 
   // update card
   async updateCard(card) {
-    const query = makeUpdateString(card);
+    const query = makeUpdateString(card, 'cards');
     const values = Object.values(card);
     console.log(query);
     const { rows: cards } = await pgClient.query(query, values);
