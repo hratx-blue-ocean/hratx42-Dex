@@ -55,11 +55,11 @@ export default function Deck(props) {
               <div key = {Math.random()}>
                 <div style = {{paddingLeft: '160px'}}></div>
                 <CardThumbnail singleCard = {singleCard} deckTitle={props.deck.title} 
-                deckNames={props.deckNames} editCard={props.editCard}/>
+                deckNames={props.deckNames} editCard={props.editCard} users={props.users} />
               </div>
              )}
               <div style = {{paddingLeft: '20px'}}></div>
-            <NewCardModal newCardData={props.newCardData} key={Math.random()} showMe={show}  deckNames={props.deckNames} closeModal={handleClose.bind(this)}/>
+            <NewCardModal users={props.users} newCardData={props.newCardData} key={Math.random()} showMe={show}  deckNames={props.deckNames} closeModal={handleClose.bind(this)}/>
             <Button variant="outline-success" onClick={()=> handleShow()}>Add New Card</Button>
           </Card.Body>
         </Card>

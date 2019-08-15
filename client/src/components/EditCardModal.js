@@ -2,22 +2,22 @@ import React, { useState } from "react";
 import { Button, Modal, Container, Row, Col, Form} from 'react-bootstrap';
 
 
-export default function CardModal({closeModal, showMe, card, deckTitle, deckNames, editCard}) {
+export default function CardModal({closeModal, showMe, card, deckTitle, deckNames, editCard, users}) {
   const [show, setShow] = useState(false);
   const handleClose = () => closeModal()
 
   const [effort, setEffort] = useState(card.card_weight);
   const [impact, setImpact] = useState(card.card_impact);
   const [title, setTitle] = useState(card.card_title);
-  const [player, setPlayer] = useState();
+  const [players, setPlayer] = useState(card.cards_members);
   const [tags, setTags] = useState();
   const [dueDate, setDate] = useState(card.card_created);
   const [deck, setDeck] = useState(deckTitle);
   const [desc, setDesc] = useState(card.card_description);
 
 
-  console.log(deckTitle)
   return (
+
   <>
   <Modal size="lg" show={showMe} onHide={handleClose}>
     <Container>
@@ -72,11 +72,18 @@ export default function CardModal({closeModal, showMe, card, deckTitle, deckName
             {/* LIST OF ALL POSSIBLE players and tags */}
             <Row>
                   <Col style={styles.playersStyle}>
-                    <select onChange={()=> setPlayer(event.target.value) }>
+                    <select onChange={(event)=> {
+                        let playerHolder = players
+                        // players.push(event.target.value)
+                        // setPlayer(players) 
+                        console.log(users)
+                    }}>
                       <option></option>
-                      <option value="Miles">Miles</option>
-                      <option value="Michael">Michael</option>
-                      <option value="DJ">DJ</option>
+                      {users.map(user =>{
+                            return (
+                            <option value={user}>{user.name}</option>
+                            )
+                        })}
                     </select>
                   </Col>
                   <Col style={styles.tagsStyle}>
@@ -91,10 +98,9 @@ export default function CardModal({closeModal, showMe, card, deckTitle, deckName
             {/* Return list of names and labels */}
             <Row>
                   <Col style={styles.playersStyle}>
-                    
-                    {card.cards_members.map(name =>{
+                    {players.map(player =>{
                     return (
-                        <div>{name.member_name}</div>
+                        <div>{player.member_name}</div>
                     )
                      })}
                   </Col>
@@ -149,7 +155,7 @@ export default function CardModal({closeModal, showMe, card, deckTitle, deckName
         {/* Button to Submit */}
         <Row style={styles.submitButton}>
         <Button onClick={(event)=> {
-            editCard(card.card_id, deckNames.id, effort, impact, title, player, tags, dueDate, deck, desc)
+            editCard(card.card_id, deckNames.id, effort, impact, title, players, tags, dueDate, deck, desc)
         }} variant="primary">Submit</Button>
         </Row>
 

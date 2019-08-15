@@ -167,6 +167,7 @@ export default class Table extends Component {
               <Deck 
                 filterBy = {this.state.filterBy} 
                 deck = {deck} 
+                users={this.state.users}
                 deckNames={this.state.deckNames}
                 deleteDeck = {this.deleteDeck.bind(this)}
                 newCardData={this.newCardDataCollector}
