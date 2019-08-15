@@ -6,9 +6,10 @@ const nodemailer = require('nodemailer');
 router.post('/:email', async (req, res) => {
   console.log('hi');
   const {email} = req.params;
-  const {tableId} = req.body;
+  const {tableId, invitedBy} = req.body;
   console.log(email);
-  console.log(tableId);
+  console.log(req.hostname);
+  console.log(tableId, invitedBy);
   async function main(){
   
     // create reusable transporter object using the default SMTP transport
