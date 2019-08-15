@@ -19,7 +19,6 @@ export default function TableSettings(props) {
   </tr>)})
   const [tableName, setTableName] = useState('');
   const [playerName, setPlayerName] = useState('');
-  const [descName, setDescName] = useState('');
   return (
     <Modal show={props.showTableModal} centered>
       <Modal.Header
@@ -50,9 +49,6 @@ export default function TableSettings(props) {
                 <Button onClick = {() => props.addPlayerToTable(playerName)} style = {{display: 'inline', position: 'relative',top: '-1px'}} size = 'sm' variant= 'success'>+</Button>
                 </form>
               </div>
-              <div style = {{paddingTop: '10px'}}></div>
-              <Button onClick = {() => props.addTable(tableName ,props.newPLayer)} variant= 'success'>Save</Button>
-              <div style = {{paddingTop: '10px'}}></div>
             </Col>
             <Col>
               <span>Administrator(s): </span>
@@ -76,7 +72,7 @@ export default function TableSettings(props) {
         </Container>
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={() => props.changeTableModal()} variant='success'>
+        <Button onClick = {() => props.addTable(tableName ,props.newPLayer)} variant='success'>
           Save
         </Button>
       </Modal.Footer>

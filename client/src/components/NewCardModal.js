@@ -102,7 +102,6 @@ function removePlayer() {
                             let labelsHolder = tags
                             let selectLabel = event.target.value  
                             let targetLabel ={color: null, label_name: selectLabel}
-                            console.log(JSON.stringify(event.target.value))
                             labelsHolder.push(targetLabel)
                             setTags(labelsHolder)
                         }}>

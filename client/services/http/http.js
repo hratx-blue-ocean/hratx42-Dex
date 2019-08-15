@@ -4,7 +4,7 @@ import auth from '../auth.js';
 axios.defaults.headers.common['x-access-token'] = auth.getJwt()
   ? auth.getJwt()
   : undefined;
-const tryAxios = async function(endpoint, method, payload) {
+const tryAxios = async function (endpoint, method, payload) {
   try {
     const response = await axios[method](endpoint, payload);
     return response.data;
@@ -29,8 +29,8 @@ const http = {
     getByTableId(tableId) {
       return tryAxios(`/api/tables/${tableId}/users`, 'get');
     },
-    put(id, email, password) {
-      return tryAxios(`/api/users/${id}`, 'put', { email, password });
+    put(id, name, email, password) {
+      return tryAxios(`/api/users/${id}`, 'put', { name, email, password });
     },
     delete(id) {
       return tryAxios(`/api/users${id}`);
@@ -89,6 +89,15 @@ const http = {
     delete(id) {
       return tryAxios(`/api/cards/${id}`, 'delete');
     },
+    addUser(cardId, userId) {
+      return tryAxios(`/api/cards/${cardId}/members/${userId}`, 'post')
+    },
+    addLabel(cardId, labelId) {
+      return tryAxios(`/api/cards/${cardId}/label/${labelId}`, 'post')
+    },
+    removeLabel(cardId, labelId) {
+      return tryAxios(`/api/cards/${cardId}/label/${labelId}`, 'delete')
+    }
   },
 };
 

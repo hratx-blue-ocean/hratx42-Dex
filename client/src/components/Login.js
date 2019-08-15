@@ -30,6 +30,10 @@ export default function Login(props) {
               setEmail(e.target.value);
               // capture email address
             }}
+            onSubmit={(e)=>{
+              e.preventDefault()
+              handleSubmit()
+            }}
           >
             Email
             <FormControl type='email' className='mr-sm-2' />
@@ -39,6 +43,10 @@ export default function Login(props) {
             onChange={e => {
               setPassword(e.target.value);
               // capture password
+            }}
+            onSubmit={(e)=>{
+              e.preventDefault()
+              handleSubmit()
             }}
           >
             Password
