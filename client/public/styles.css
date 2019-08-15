@@ -129,6 +129,20 @@ code {
 }
 /* END LOGIN/SIGNUP/LANDING STYLES */
 
+/* BEGIN DEX NAV HEADER STYLES */
+.dexNavBar {
+  background-color: #f1f0f0 !important;
+}
+
+/* END DEX NAV HEADER STYLES */
+
+/* BEGIN CREATE/EDIT TABLE MODAL STYLES */
+
+.tableSettingsAddPlayerBtn {
+  text-align: right;
+}
+/* END CREATE/EDIT TABLE MODAL STYLES */
+
 /* BEGIN DASHBOARD STYLES */
 /* dashboard main container div */
 .dashboardContainer {
@@ -178,9 +192,6 @@ code {
 }
 
 /* tables section */
-.dashboardTables {
-  /* border: 1px solid #000; */
-}
 
 .dashboardTables h2 {
   padding-left: 3rem;
