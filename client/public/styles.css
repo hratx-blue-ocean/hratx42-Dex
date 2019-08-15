@@ -253,4 +253,17 @@ code {
 .CardThumbnailsMove:hover {
   cursor: pointer;
 }
+<<<<<<< HEAD
+
+.controls__modal {
+  margin: 0;
+}
+
+.controls__modal button {
+  margin: 0 20px;
+}
+
 /* END DASHBOARD STYLES */
+=======
+/* END DASHBOARD STYLES */
+>>>>>>> merge-purgatory
