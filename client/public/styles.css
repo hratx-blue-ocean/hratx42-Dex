@@ -161,6 +161,37 @@ code {
 }
 /* END TABLE CONTROL BAR STYLES */
 
+/* BEGIN DECKS STYLES */
+#deckWrapper {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+#deckScrollbar {
+  display: flex;
+  flex-wrap: nowrap!important;
+  margin-right: -15px;
+  margin-left: -15px;
+  overflow: scroll;
+}
+
+#deckTitle {
+  width: 100%;
+  display: flex;
+  margin-right: -15px;
+  margin-left: -15px;
+}
+
+.row {
+  display: flex;
+  flex-wrap: nowrap!important;
+  overflow: scroll;
+}
+/* END DECKS STYLES */
+
 /* BEGIN DASHBOARD STYLES */
 /* dashboard main container div */
 .dashboardContainer {
