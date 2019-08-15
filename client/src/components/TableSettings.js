@@ -3,6 +3,12 @@ import { Card, Button, Row, Col, Table, Form, Modal } from 'react-bootstrap';
 //import styles from './tableSettings.module.css';
 
 export default function TableSettings(props) {
+  let addedPlayerToTable = props.addedPlayerToTable.map((item)=>{return(
+   
+  <tr>
+    <th>{item}</th>
+    <th onClick={()=>props.removePlayerToTable()} style = {{cursor: 'pointer'}}>x</th>
+  </tr>)})
   const [tableName, setTableName] = useState('');
   const [playerName, setPlayerName] = useState('');
   const [descName, setDescName] = useState('');
@@ -22,38 +28,35 @@ export default function TableSettings(props) {
                 <input onChange = {(e) => setTableName(e.target.value)} value = {tableName} type="text" placeholder = 'Enter table name'/>
               </div>
               <div style = {{paddingTop: '10px'}}></div>
-
+              <div>Description</div>
+              <div style = {{paddingTop: '10px'}}></div>
+              <textarea style = {{height: '50px'}} onChange = {(e) => setDescName(e.target.value)} value = {descName} type="text" placeholder = 'Enter table name'/>
+              <div style = {{paddingTop: '10px'}}></div>
               <div>Invite Players</div>
               <div style = {{paddingTop: '10px'}}></div>
               <div>
-                <input onChange = {(e) => setPlayerName(e.target.value)} type="text" placeholder = 'Enter table name'/>
-                <Button onClick = {() => props.newPlayer(playerName)} style = {{position: 'relative',top: '-1px'}} size = 'sm' variant= 'success'>+</Button>
+                <input onChange = {(e) => setPlayerName(e.target.value)} type="email" name="emailaddress" placeholder = 'Enter user Email'/>
+                <Button onClick = {() => props.addPlayerToTable(playerName)} style = {{position: 'relative',top: '-1px'}} size = 'sm' variant= 'success'>+</Button>
               </div>
               <div style = {{paddingTop: '10px'}}></div>
-              <Button onClick = {() => props.changeTableModal()} variant= 'success'>Save</Button>
+              <Button onClick = {() => props.addTable(tableName ,props.addedPlayerToTable)} variant= 'success'>Save</Button>
               <div style = {{paddingTop: '10px'}}></div>
             </Col>
             <Col>
               <span>Administrator(s): </span>
               <div style = {{paddingTop: '10px'}}></div>
               {/* map through administrators */}
-              <div>the dude</div>
+              <div>{props.userName}</div>
               <div style = {{paddingTop: '10px'}}></div>
               <div>
                 <Table size = 'sm'>
                   <thead>
-                    <tr>
-                      <th>Players</th>
-                      <th>Edit Admin</th>
-                      <th>Remove</th>
-                    </tr>
+
                   </thead>
                   <tbody>
                     {/* map through all players */}
                     <tr>
-                      <td>brooke</td>
-                      <td><Form.Check  type = 'checkbox'/></td>
-                      <td style = {{cursor: 'pointer'}}>x</td>
+                      {addedPlayerToTable}
                     </tr>
                   </tbody>
                 </Table>
