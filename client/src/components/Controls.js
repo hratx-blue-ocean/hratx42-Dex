@@ -30,7 +30,7 @@ export default function Controls(props) {
 
   return (
     <div>
-      <Navbar bg="dark" variant="dark">
+      <Navbar className="tableControlsNavBar" bg="dark" variant="dark">
         <Navbar.Brand>{props.tableName}</Navbar.Brand>
         <Form.Control
           onChange={e => props.searchText(e.target.value)}
