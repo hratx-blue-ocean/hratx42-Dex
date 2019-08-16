@@ -15,7 +15,6 @@ router.get('/:id', (req, res) => {
   usersModel
     .getUserByID(id)
     .then(user => {
-      console.log('The user', user);
       res.status(200).send(user);
     })
     .catch(err => {
@@ -28,7 +27,6 @@ router.get('/:id', (req, res) => {
 router.post(
   '/',
   (req, res, next) => {
-    console.log('COOOOKIEE', req.cookies)
     let tableId = req.headers.cookie ? req.cookies.tableId ? req.cookies.tableId : null : null;
     const { email, password, name } = req.body;
     //post user to usersModel if she doesn't already exist
