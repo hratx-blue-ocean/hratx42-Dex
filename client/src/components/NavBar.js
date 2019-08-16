@@ -26,7 +26,7 @@ function NavBar(props) {
               <NavDropdown.Item onClick={()=>props.changeTableModal()}>Create Table</NavDropdown.Item>
             </NavDropdown>
           <NavDropdown title={props.userName} id="collasible-nav-dropdown" style={{ marginTop: ".125rem", marginRight: "15px", marginBottom: "0", marginLeft: "- 70px"}}>
-            <NavDropdown.Item> <Link to={"/dashboard"}>Dashboard</Link></NavDropdown.Item>
+            <div style = {{paddingLeft: '20px'}}><Link style = {{color: 'black'}} to={"/dashboard"}>Dashboard</Link></div>
               <NavDropdown.Divider />
               <NavDropdown.Item onClick={()=>props.logOut()}>Log Out</NavDropdown.Item>
             </NavDropdown>

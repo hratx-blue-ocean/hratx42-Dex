@@ -1,13 +1,5 @@
 import React, { useState } from 'react';
-import {
-  Container,
-  Button,
-  Row,
-  Col,
-  Table,
-  Form,
-  Modal
-} from 'react-bootstrap';
+import {Container,Button,Row,Col,Table,Modal} from 'react-bootstrap';
 //import styles from './tableSettings.module.css';
 
 export default function TableSettings(props) {

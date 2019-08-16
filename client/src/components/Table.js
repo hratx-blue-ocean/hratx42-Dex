@@ -123,9 +123,7 @@ newCardDataCollector(players,tags,deck,cardInfo) {
     let decks = this.state.decks
     let result
     decks.forEach((deck,i) =>{
-      console.log(deckName)
-      console.log(deck.title)
-      if (deckName == deck.title) {
+      if (deckName === deck.title) {
         result = deck.id
       }
     })

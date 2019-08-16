@@ -3,7 +3,6 @@ import { Button, Modal, Container, Row, Col, Form} from 'react-bootstrap';
 
 
 export default function CardModal({closeModal, showMe, card, deckTitle, deckNames, editCard, users, labels}) {
-  const [show, setShow] = useState(false);
   const handleClose = () => closeModal()
 
   const [effort, setEffort] = useState(card.weight);
@@ -14,9 +13,6 @@ export default function CardModal({closeModal, showMe, card, deckTitle, deckName
   const [dueDate, setDate] = useState(new Date());
   const [deck, setDeck] = useState(deckTitle);
   const [desc, setDesc] = useState(card.description);
-
-  console.log
-
 
   return (
 
@@ -73,7 +69,7 @@ export default function CardModal({closeModal, showMe, card, deckTitle, deckName
             {/* LIST OF ALL POSSIBLE players and tags */}
             <Row>
                   <Col style={styles.playersStyle}>
-                    <select onChange={(event)=> {
+                    <select onBlur={(event)=> {
                         let playerHolder = players
                         let selectPlayer = event.target.value  
                         let targetPlayer ={member_id: null, member_name: selectPlayer}
@@ -83,14 +79,14 @@ export default function CardModal({closeModal, showMe, card, deckTitle, deckName
                       <option></option>
                       {users.map(user =>{
                             return (
-                            <option>{user.name}</option>
+                            <option key = {Math.random()}>{user.name}</option>
                             )
                         })}
                     </select>
                   </Col>
                   {/* LABEL CHOOSE */}
                   <Col style={styles.playersStyle}>
-                  <select onChange={(event)=> {
+                  <select onBlur={(event)=> {
                         let labelsHolder = tags
                         let selectLabel = event.target.value  
                         let targetLabel ={color: null, label_name: selectLabel}
@@ -100,7 +96,7 @@ export default function CardModal({closeModal, showMe, card, deckTitle, deckName
                         <option></option>
                         {labels.map(label =>{
                             return (
-                            <option >{label.label_name}</option>
+                            <option key = {Math.random}>{label.label_name}</option>
                             )
                         })}
                     </select>
@@ -111,16 +107,14 @@ export default function CardModal({closeModal, showMe, card, deckTitle, deckName
                   <Col xs={8} style={styles.playersStyle}>
                     {players.map(player =>{
                     return (
-                        <div>{player.member_name}</div>
+                        <div key = {Math.random()}>{player.member_name}</div>
                     )
                      })}
                   </Col>
                   <Col xs={4} style={styles.tagsStyle}>
                     {tags.map(tag =>{
                       return (
-                          <div onClick={()=>{
-                              let curTags = tags
-                          }}>{tag.label_name}</div>
+                          <div key = {Math.random()}>{tag.label_name}</div>
                       )
                       })}
                   </Col>
@@ -148,12 +142,12 @@ export default function CardModal({closeModal, showMe, card, deckTitle, deckName
                 <input placeholder="gitLink"  value={card.gitLink}style={{width:'100%'}}/> 
             </Row> */}
             <Row style={styles.addToCardTrait}>
-            <select style={{width:'100%'}} onChange={(event)=> setDeck(event.target.value)}>
+            <select style={{width:'100%'}} onBlur={(event)=> setDeck(event.target.value)}>
               <option>{deckTitle}</option>
               {deckNames.map(name =>{
                 if (name.title !== deckTitle) {
                   return (
-                    <option>{name.title}</option>
+                    <option key = {`EditCardModal${Math.random()}`}>{name.title}</option>
                   )
                 }
                 })}

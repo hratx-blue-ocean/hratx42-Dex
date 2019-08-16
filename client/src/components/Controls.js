@@ -1,20 +1,11 @@
 import React, { useState } from 'react';
-import {
-  Navbar,
-  Button,
-  DropdownButton,
-  Dropdown,
-  Alert,
-  OverlayTrigger,
-  Tooltip
-} from 'react-bootstrap';
+import {Navbar,Button,DropdownButton,Dropdown,Alert,OverlayTrigger,Tooltip} from 'react-bootstrap';
 import CardThumbnails from './CardThumbnails';
 
 import http from '../../services/http/http';
 
 export default function Controls(props) {
   const [showModal, setShowModal] = useState(false);
-
   const cards = props.cards.slice(0, 10);
   const handleDelete = async function (sure) {
     setShowModal(false);
@@ -73,21 +64,19 @@ export default function Controls(props) {
         </DropdownButton>
         <div style={{ position: 'relative', left: '30%' }}>
           {props.users.map(user => 
-            <>
-              <OverlayTrigger
-                key={'bottom'}
-                placement={'bottom'}
-                overlay={
-                  <Tooltip id={`tooltip-bottom`}>
-                    {user.name}
-                  </Tooltip>
-                }
-              >
-                <Button style = {{textAlign: "center"}}className="tableControlsUserNameCircles" variant="secondary">
-                  {(user.name.split(" ").map(char => char[0]).join("")).toUpperCase()}
-                </Button>
-              </OverlayTrigger>
-            </>
+            <OverlayTrigger
+              key={Math.random()}
+              placement={'bottom'}
+              overlay={
+                <Tooltip id={`tooltip-bottom`}>
+                  {user.name}
+                </Tooltip>
+              }
+            >
+              <Button style = {{textAlign: "center"}}className="tableControlsUserNameCircles" variant="secondary">
+                {(user.name.split(" ").map(char => char[0]).join("")).toUpperCase()}
+              </Button>
+            </OverlayTrigger>
           )}
           <Button onClick={() => props.handleModal()} variant="success">
             New Deck

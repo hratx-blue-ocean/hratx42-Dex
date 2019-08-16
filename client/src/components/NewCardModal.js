@@ -4,7 +4,6 @@ import { Button, Modal, Container, Row, Col, Form} from 'react-bootstrap';
 
 
 export default function CardModal({closeModal, showMe, deckNames, newCardData, users, labels}) {
-  const [show, setShow] = useState(false);
 
   const [effort, setEffort] = useState(5);
   const [impact, setImpact] = useState(3);
@@ -16,12 +15,7 @@ export default function CardModal({closeModal, showMe, deckNames, newCardData, u
   const [desc, setDesc] = useState();
 
 
-  const handleClose = () => closeModal()
-//   const handleShow = () => setShow(true);
-
-function removePlayer() {
-    
-}
+  const handleClose = () => closeModal();
 
   return (
   <>
@@ -80,7 +74,7 @@ function removePlayer() {
         <Row>
                 {/* ADD PLAYERS */}
                 <Col xs={8} style={styles.playersStyle}>
-                        <select onChange={(event)=> {
+                        <select onBlur={(event)=> {
                             let playerHolder = players
                             let selectPlayer = event.target.value  
                             let targetPlayer ={member_id: null, member_name: selectPlayer}
@@ -98,7 +92,7 @@ function removePlayer() {
 
             {/* ADD TAGS/LABELS */}
                 <Col xs={4} style={styles.playersStyle}>
-                        <select onChange={(event)=> {
+                        <select onBlur={(event)=> {
                             let labelsHolder = tags
                             let selectLabel = event.target.value  
                             let targetLabel ={color: null, label_name: selectLabel}
@@ -119,18 +113,14 @@ function removePlayer() {
                   <Col xs={8} style={styles.playersStyle}>
                     {players.map(player =>{
                     return (
-                        <div onClick={()=>{
-                            let curTags = tags
-                        }}>{player.member_name}</div>
+                        <div>{player.member_name}</div>
                     )
                      })}
                   </Col>
                   <Col xs={4} style={styles.tagsStyle}>
                   {tags.map(tag =>{
                     return (
-                        <div onClick={()=>{
-                            let curTags = tags
-                        }}>{tag.label_name}</div>
+                        <div>{tag.label_name}</div>
                     )
                      })}
                   </Col>
@@ -159,7 +149,7 @@ function removePlayer() {
                 <input placeholder="gitLink" style={{width:'100%'}}/> 
             </Row> */}
             <Row style={styles.addToCardTrait}>
-            <select style={{width:'100%'}}  onChange={(event)=> setDeck(event.target.value)}>
+            <select style={{width:'100%'}}  onBlur={(event)=> setDeck(event.target.value)}>
             {deckNames.map(name =>{
                 return (
                     <option>{name.title}</option>

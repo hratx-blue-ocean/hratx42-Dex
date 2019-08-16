@@ -47,6 +47,7 @@ const http = {
     },
     async logout() {
       const deleteCookie = await tryAxios('/logout', 'get');
+      console.log(deleteCookie)
     }
   },
   tables: {

@@ -61,7 +61,6 @@ export default function Deck(props) {
             <div style={{ paddingLeft: '20px' }} />
             <NewCardModal
               newCardData={props.newCardData}
-              key={Math.random()}
               showMe={show}
               deckNames={props.deckNames}
               closeModal={handleClose.bind(this)}

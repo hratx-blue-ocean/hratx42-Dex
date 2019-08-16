@@ -1,6 +1,6 @@
 import React from 'react'
-import {  Button , Form} from 'react-bootstrap';
 import global from '../../utils/global';
+import http from '../../services/http/http.js';
 
 export default class ProfileEditForm extends React.Component {
   constructor(props){
@@ -77,9 +77,6 @@ export default class ProfileEditForm extends React.Component {
     )
   }
 }
-
-// 
-// 
 //      dashboard onChange event functions
 //     this.changeProfileName = this.changeProfileName.bind(this);
 //     this.changeProfileEmail = this.changeProfileEmail.bind(this);
