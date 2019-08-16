@@ -118,7 +118,6 @@ export default class App extends Component {
 
   logOut() {
     auth.logout();
-    http.auth.logout();
     auth.setUser(this);
   }
 

@@ -48,9 +48,6 @@ const http = {
         : undefined;
       return auth.userIsLoggedIn();
     },
-    async logout() {
-      return deleteCookie = await tryAxios('/logout', 'get');
-    }
   },
   tables: {
     get(userId) {

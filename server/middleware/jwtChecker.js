@@ -7,17 +7,11 @@ const checkToken = (req, res, next) => {
   const cookies = req.cookies;
   const tokenHeader = req.headers['x-access-token'];
   if (!cookies && !tokenHeader) {
-    return res.status(404).json({
-      success: false,
-      message: 'Please sign in'
-    });
+    return res.status(404).redirect('/');
   }
   let token = req.cookies.token || tokenHeader;
   if (!token) {
-    return res.status(404).json({
-      success: false,
-      message: 'Please sign in'
-    });
+    return res.status(404).redirect('/');
   }
   // console.log("The cookie token ", token)
   if (token) {

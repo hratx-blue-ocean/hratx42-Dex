@@ -41,11 +41,6 @@ app.use('/api/tables', tablesRoute);
 app.use('/api/decks', decksRoute);
 app.use('/api/cards', cardsRoute);
 
-app.get('/logout', (req, res) => {
-  res.clearCookie('token');
-  res.redirect('/');
-});
-
 app.use('/*', express.static(path.join(__dirname, '../client/public')));
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
