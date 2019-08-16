@@ -3,7 +3,6 @@ const jwt = require('jsonwebtoken');
 const config = { secret: "supersecuresecret" };
 
 const checkToken = (req, res, next) => {
-  console.log('headers: ', req.headers);
   const cookies = req.cookies;
   const tokenHeader = req.headers['x-access-token'];
   if (!cookies && !tokenHeader) {
@@ -29,7 +28,6 @@ const checkToken = (req, res, next) => {
           message: 'Token is not valid'
         });
       } else {
-        console.log("Token is valid")
         req.user = decoded.userId;
         next();
       }

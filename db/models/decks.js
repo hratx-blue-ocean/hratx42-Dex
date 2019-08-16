@@ -25,10 +25,10 @@ const decksModel = {
   },
   async post(deck) {
     const query =
-      'Insert into decks (id, table_id, title, table_index) values (default, $1, $2, 1)';
+      'Insert into decks (id, table_id, title) values (default, $1, $2) returning *;';
     const values = [deck.table_id, deck.title];
-    const result = await pgClient.query(query, values);
-    return result;
+    const { rows: result } = await pgClient.query(query, values);
+    return result[0];
   },
   async put(deck) {
     const query = 'update decks set title = $1 where id = $2';
