@@ -43,6 +43,7 @@ export default class App extends Component {
         message: 'Default flash message for testing',
         variant: 'success',
       },
+      loading: false,
       labels: [
         { id: 5, label_name: 'FrontEnd', color: '#60BE4E' },
         { id: 6, label_name: 'BackEnd', color: '#FF9E1A' },

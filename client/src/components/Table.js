@@ -74,6 +74,7 @@ export default class Table extends Component {
 
   //ADD EDIT CARDS TO DB
   newCardDataCollector(players, tags, deck, cardInfo) {
+    console.log("the deck ", deck)
     let toPost = {
       description: cardInfo.description,
       title: cardInfo.titl,
