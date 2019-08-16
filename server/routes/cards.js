@@ -52,15 +52,11 @@ router.delete('/:id', authorization.userOwnsCard, (req, res) => {
 });
 
 router.post('/:cardId/member/:userId', async (req, res) => {
+  tryCatch(async () => {
     const cardId = req.params.cardId;
     const userId = req.params.userId;
-    console.log('got request with <card, user>', cardId, userId);
-  tryCatch(async () => {
-    console.log(cardId, userId)
     const user = await usersModel.getUserByID(userId);
-    console.log('found user:', user);
     if (!user) {
-      console.log('didnt find user with id', userId);
       res.status(404).json({ error: 'not found' });
       return;
     } else {
