@@ -166,6 +166,7 @@ export default function CardModal({ closeModal, showMe, card, deckTitle, deckNam
               let cardInfo = { id: card.id, eff: effort, imp: impact, titl: title, description: desc, due: dueDate }
               editCard(players, tags, deck, cardInfo)
             }} variant="primary">Submit</Button>
+            <Button variant="danger" onClick={() => { table.deleteCardById(card.id) }}>Delete</Button>
           </Row>
 
         </Container>

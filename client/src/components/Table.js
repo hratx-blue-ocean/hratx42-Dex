@@ -4,6 +4,7 @@ import Controls from './Controls';
 import Deck from './Deck';
 import http from '../../services/http/http.js';
 import table from '../../utils/table';
+import global from '../../utils/global'
 
 export default class Table extends Component {
   constructor(props) {
@@ -80,7 +81,7 @@ export default class Table extends Component {
       const { deckIndex, cardIndex } = position
       decks[deckIndex].cards.splice(cardIndex, 1)
       this.setState({ decks })
-      http.cards.delete(id)
+      http.cards.delete(id).then(() => global.flash('Card deleted', "success", 1500))
     }
   }
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button, Form } from 'react-bootstrap';
 import global from '../../utils/global';
-import http from '../../services/http'
+import http from '../../services/http/http'
 
 export default class ProfileEditForm extends React.Component {
   constructor(props) {
