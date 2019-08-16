@@ -76,7 +76,7 @@ const cardsModel = {
     const { rows: cards } = await pgClient.query(query, [id]);
     return cards[0];
   },
-  async getCardsByUserID(UserId) {
+  async getCardsByUserID(userId) {
     const query = `
         select 
           c.id,
@@ -109,7 +109,7 @@ const cardsModel = {
           where cm2.user_id = $1
         group by c.id;
       `;
-    const { rows: cards } = await pgClient.query(query, [id]);
+    const { rows: cards } = await pgClient.query(query, [userId]);
     return cards;
   },
 
