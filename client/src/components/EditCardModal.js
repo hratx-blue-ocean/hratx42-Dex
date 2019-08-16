@@ -5,7 +5,7 @@ import table from '../../utils/table'
 
 
 
-export default function CardModal({closeModal, showMe, card, deckTitle, deckNames, editCard, users, labels}) {
+export default function CardModal({closeModal, showMe, card, deckTitle, deckNames, editCard, users, labels, deckIndex, cardIndex}) {
 
 
   const [show, setShow] = useState(false);
@@ -186,7 +186,7 @@ export default function CardModal({closeModal, showMe, card, deckTitle, deckName
           <Col xs={10}>
             <Button onClick={(event)=> {
                 let cardInfo={id: card.id, eff:effort, imp:impact, titl:title, description:desc, due: dueDate}
-                editCard(players, tags, deck, cardInfo)
+                editCard(players, tags, deck, cardInfo, deckIndex, cardIndex)
                 handleClose()
             }} variant="primary">Submit</Button>
           </Col>

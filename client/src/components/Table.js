@@ -68,6 +68,7 @@ export default class Table extends Component {
         this.setState({ deckNames: deckHolder });
         http.users.getByTableId(table.id).then(res => {
           this.setState({ users: res });
+          console.log(this.state.decks)
         });
       });
   }
@@ -107,7 +108,7 @@ export default class Table extends Component {
       });
   }
 
-  editCardDataCollector(players, tags, deck, cardInfo) {
+  editCardDataCollector(players, tags, deck, cardInfo, deckIndex, cardIndex) {
     let toPost = {
       description: cardInfo.description,
       id: cardInfo.id,
@@ -117,25 +118,49 @@ export default class Table extends Component {
       deck_id: this.obtainDeckID(deck),
       table_id: this.state.table.id,
     };
-    let toMembersPost = { cards_members: this.obtainPlayersId(players) };
-    let toLabelsPost = { card_labels: this.obtainLabelIds(tags) };
-    let editCard;
+    let toMembersPost = this.obtainPlayersId(players);
+    let toLabelsPost = this.obtainLabelIds(tags);
+    let editCard = {};
+    let oldMembers = this.state.decks[deckIndex].cards[cardIndex].cards_members;
+    let oldLabels = this.state.decks[deckIndex].cards[cardIndex].card_labels;
+    
+    toMembersPost.sort();
+    toLabelsPost.sort();
+
+    for (let i = 0; i < toMembersPost.length; i++){
+      if (toMembersPost[i] === toMembersPost[i+1]){
+        toMembersPost.splice(i+1, 1);
+      } 
+      if (oldMembers.includes(toMembersPost[i])){
+        toMembersPost.splice(i, 1);
+      }
+    }
+
+    for (let i = 0; i < toLabelsPost.length; i++){
+      if (toLabelsPost[i] === toLabelsPost[i+1]){
+        toLabelsPost.splice(i+1, 1);
+      }
+      if (oldMembers.includes(toLabelsPost[i])){
+        toLabelsPost.splice(i, 1);
+      }
+    }
+
     http.cards.put(toPost).then(response => {
       console.log(response);
       editCard = response;
       console.log(editCard);
-    });
-    // .then((response)=>{
-    //   toMembersPost.cards_members.forEach(async (player) =>{
-    //     await http.cards.addUser(addedCard.id, player.member_id)
-    //   })
-    //   console.log(response)
-    // })
-    // .then(()=>{
-    //   toLabelsPost.card_labels.forEach(async (label) =>{
-    //     await http.cards.addLabel(addedCard.id,label.id)
-    //   })
-    // })
+    })
+    .then((response)=>{
+      toMembersPost.cards_members.forEach(async (player) =>{
+        await http.cards.addUser(addedCard.id, player.member_id)
+      })
+      console.log(response)
+    })
+    .then(()=>{
+      toLabelsPost.card_labels.forEach(async (label) =>{
+        await http.cards.addLabel(addedCard.id,label.id)
+      })
+    })
   }
 
   obtainPlayersId(players) {
