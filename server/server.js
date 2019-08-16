@@ -43,7 +43,7 @@ app.use('/api/cards', cardsRoute);
 
 app.get('/logout', (req, res) => {
   res.clearCookie('token');
-  res.send("Cookie deleted");
+  res.redirect('/');
 });
 
 app.use('/*', express.static(path.join(__dirname, '../client/public')));
