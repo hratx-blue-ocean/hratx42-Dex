@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Button, Modal, Container, Row, Col, Form, Dropdown } from 'react-bootstrap';
 
 
-export default function CardModal({ closeModal, card, showMe, deckNames, newCardData, users, labels }) {
+export default function CardModal({ closeModal, card, deckTitle, showMe, deckNames, newCardData, users, labels }) {
   const [show, setShow] = useState(false);
 
   const [effort, setEffort] = useState(5);
@@ -10,10 +10,9 @@ export default function CardModal({ closeModal, card, showMe, deckNames, newCard
   const [title, setTitle] = useState();
   const [players, setPlayers] = useState([]);
   const [tags, setTags] = useState([]);
-  const [dueDate, setDate] = useState();
-  const [deck, setDeck] = useState(deck);
+  const [dueDate, setDate] = useState('mm-dd-yyyy');
+  const [deck, setDeck] = useState(deckTitle);
   const [desc, setDesc] = useState();
-
 
   const handleClose = () => closeModal()
   //   const handleShow = () => setShow(true);
