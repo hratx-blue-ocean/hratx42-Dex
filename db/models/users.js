@@ -7,6 +7,7 @@ const usersModel = {
     const { rows: users } = await pgClient.query(query, [id]);
     return users[0];
   },
+  
   async getUsersByTableId(tableId) {
     try {
       const query =
