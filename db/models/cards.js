@@ -114,7 +114,7 @@ const cardsModel = {
   },
   async delete(id) {
     const query = 'delete from cards where id = $1';
-    const values = [userId];
+    const values = [id];
     const result = await pgClient.query(query, values);
     return result;
   },
