@@ -106,7 +106,7 @@ const cardsModel = {
           left outer join cards_labels cl on c.id = cl.card_id
           left join labels l on cl.label_id = l.id
           inner join cards_members cm2 on cm2.card_id = c.id
-          where cm2.user_id = 1
+          where cm2.user_id = $1
         group by c.id;
       `;
     const { rows: cards } = await pgClient.query(query, [id]);
