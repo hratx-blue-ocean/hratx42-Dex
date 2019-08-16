@@ -33,6 +33,7 @@ export default class ProfileEditForm extends React.Component {
     e.preventDefault();
     console.log('i made a change');
     if (this.checkPasswords()){
+      console.log('test');
       http.users
       .put(
         this.state.id,
@@ -49,7 +50,6 @@ export default class ProfileEditForm extends React.Component {
   }
 
   render(){
-    console.log(this.state);
     return (
       <div className="dashboardProfileForm" >
         <h2>edit profile</h2>
