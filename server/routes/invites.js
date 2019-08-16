@@ -51,7 +51,6 @@ router.post('/:email', async (req, res) => {
 
   router.get('/:tableId', (req, res) => {
     let { tableId } = req.params
-    console.log(tableId);
     res.cookie('tableId', tableId).redirect('/');
   })
 

@@ -46,7 +46,6 @@ router.post('/', (req, res) => {
 router.delete('/:id', authorization.userOwnsTable, (req, res) => {
   tryCatch(async () => {
     const tableId = req.params.id;
-    console.log('deleting table', tableId);
     const result = await tablesModel.delete(tableId);
     res.status(200).json({ message: 'deleted' });
   }, res);
@@ -54,7 +53,6 @@ router.delete('/:id', authorization.userOwnsTable, (req, res) => {
 
 router.post('/:tableId/member', async (req, res) => {
   tryCatch(async () => {
-    console.log('Post route');
     const userEmail = req.body.email;
     const tableId = req.params.tableId;
     const user = await usersModel.getUserInfoByEmail(userEmail);
