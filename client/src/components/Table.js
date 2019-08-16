@@ -210,11 +210,14 @@ newCardDataCollector(players,tags,deck,cardInfo) {
 
   moveCard(card, cardIndex, deckIndex, direction) {
     let { decks } = this.state;
+    card.deck_id = decks[deckIndex + direction].id
     if (decks[deckIndex + direction]) {
       decks[deckIndex + direction].cards.push(card);
       decks[deckIndex].cards.splice(cardIndex, 1);
     }
-    this.setState({ decks });
+    this.setState({ decks })
+    http.cards.put(card)
+    .then((res) => {console.log(res)})
   }
 
   render() {

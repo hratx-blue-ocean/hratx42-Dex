@@ -20,6 +20,7 @@ export default function Controls(props) {
   const [showModal, setShowModal] = useState(false);
   const [showInvite, showInviteToggler] = useState(false);
   const [invitationEmail, setInvitationEmail] = useState('');
+
   const cards = props.cards.slice(0, 10);
   const sendInvite = async () => {
     let userId = auth.getUser();
@@ -78,10 +79,7 @@ export default function Controls(props) {
           title={`${props.filterBy}`}
         >
           {props.users.map(user => (
-            <Dropdown.Item
-              key={Math.random()}
-              onClick={e => props.changeFilter(e)}
-            >
+            <Dropdown.Item className = {props.filterBy === user.name ? 'ControlsfilterNames': null} key={Math.random()} onClick={e => props.changeFilter(e)}>
               {user.name}
             </Dropdown.Item>
           ))}
