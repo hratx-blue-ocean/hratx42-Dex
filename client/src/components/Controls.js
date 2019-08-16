@@ -7,7 +7,6 @@ import {
   Dropdown,
   Alert,
   Modal,
-  Form,
   OverlayTrigger,
   Tooltip
 } from 'react-bootstrap';
@@ -24,15 +23,15 @@ export default function Controls(props) {
   const cards = props.cards.slice(0, 10);
   const sendInvite = async () => {
     let userId = auth.getUser();
-    let username; 
+    let username;
     props.users.forEach((user) => user.id === userId ? username = user.name : null)
     let invitation = await http.invite.post(invitationEmail, { tableId: props.tableId, invitedBy: username });
-    let {success, message} = invitation
+    let { success, message } = invitation
     console.log(success);
     console.log(message);
     global.flash(message, 'success', 2000);
   }
-  const handleDelete = async function(sure) {
+  const handleDelete = async function (sure) {
     setShowModal(false);
     if (sure) {
       const response = await http.tables.delete(props.tableId);
@@ -129,27 +128,27 @@ export default function Controls(props) {
               <Modal.Title>Send Invitation</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-            <Form>
-              <Form.Group controlId="formBasicEmail">
-                <Form.Label>Email address</Form.Label>
-                <Form.Control 
-                  type="email" 
-                  placeholder="Enter email" 
-                  onBlur={(e) => {
-                   setInvitationEmail(e.target.value)
-                   }} 
-                />
-                <Form.Text className="text-muted">
-                  Enter the email you wish to invite!
+              <Form>
+                <Form.Group controlId="formBasicEmail">
+                  <Form.Label>Email address</Form.Label>
+                  <Form.Control
+                    type="email"
+                    placeholder="Enter email"
+                    onBlur={(e) => {
+                      setInvitationEmail(e.target.value)
+                    }}
+                  />
+                  <Form.Text className="text-muted">
+                    Enter the email you wish to invite!
                 </Form.Text>
-              </Form.Group>
-              <Button variant="secondary" onClick={showInviteToggler}>
-                Close
+                </Form.Group>
+                <Button variant="secondary" onClick={showInviteToggler}>
+                  Close
               </Button>
-              <Button variant="primary" onClick={sendInvite}>
-                Send
+                <Button variant="primary" onClick={sendInvite}>
+                  Send
               </Button>
-            </Form>
+              </Form>
             </Modal.Body>
           </Modal>
           <Button
