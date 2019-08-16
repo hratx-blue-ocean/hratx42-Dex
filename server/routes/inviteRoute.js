@@ -3,7 +3,7 @@ var router = express.Router();
 const tryCatch = require('../utils/tryCatch');
 const nodemailer = require('nodemailer');
 
-router.post('/:email', async (req, res) => {
+router.post('/:email',  async (req, res) => {
   console.log('hi');
   const {email} = req.params;
   const {tableId, invitedBy} = req.body;

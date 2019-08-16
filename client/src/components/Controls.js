@@ -33,6 +33,7 @@ export default function Controls(props) {
     setShowModal(false);
     if (sure) {
       const response = await http.tables.delete(props.tableId);
+      console.log(response)
       if (response) {
         window.location = '/';
       }
@@ -50,6 +51,7 @@ export default function Controls(props) {
         {props.searchName === '' ? (
           <></>
         ) : (
+<<<<<<< HEAD
           <div className="ControlsSearchItems row">
             {cards.map(item => (
               <div key={Math.random()} className="ControlsSearchItem">
@@ -63,6 +65,23 @@ export default function Controls(props) {
             ))}
           </div>
         )}
+=======
+            <div className="ControlsSearchItems row">
+              {cards.map(item => (
+                <div key={Math.random()} className="ControlsSearchItem">
+                  <div style={{ paddingLeft: '160px' }} />
+                  <CardThumbnails
+                    singleCard={item}
+                    deckNames={props.deckNames}
+                    users={props.users}
+                    labels={props.labels}
+                    background='true'
+                  />
+                </div>
+              ))}
+            </div>
+          )}
+>>>>>>> 0192f838b093fe8a882c29b3194dc8bb2945b159
         <Button style={{ height: '30px' }} variant="light" />
         <div style={{ width: '50px' }} />
         <div style={{ paddingLeft: '2px' }} />
@@ -130,7 +149,7 @@ export default function Controls(props) {
             </Modal.Body>
           </Modal>
           <Button
-            variant="danger"
+            variant="outline-danger"
             onClick={() => {
               setShowModal(true);
             }}

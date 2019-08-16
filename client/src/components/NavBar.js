@@ -6,10 +6,11 @@ function NavBar(props) {
   const { history } = props;
   let allTables = props.tables.map((item)=><NavDropdown.Item key = {Math.random()} onClick={() => history.push(`/table/${item.id}`)}>{item.name}</NavDropdown.Item>)
   return (
+    
     <div>
         <Navbar bg="light" className='dexNavBar' expand="lg" >
           <Navbar.Brand  style={{ marginBottom: '22px' }}>
-            <h2 style={{ marginLeft: "15px"  }}>/Dex</h2>
+          <Link style={{color:'black'}} to={"/dashboard"}><h2 style={{ marginLeft: "15px"  }}>/Dex</h2></Link>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
