@@ -44,8 +44,10 @@ router.put('/:id', (req, res) => {
 
 router.delete('/:id', (req, res) => {
   tryCatch(async () => {
-    const tableId = req.body.tableId;
+    const tableId = req.params.id;
+    console.log("deleting table", tableId)
     const result = await tablesModel.delete(tableId);
+    console.log(result)
     res.status(200).json({ message: 'deleted' });
   }, res);
 });

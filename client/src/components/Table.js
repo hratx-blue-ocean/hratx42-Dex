@@ -9,16 +9,16 @@ export default class Table extends Component {
     super(props);
     this.state = {
       labels: [
-        { label_name: 'FrontEnd', color: '#60BE4E' },
-        { label_name: 'BackEnd', color: '#FF9E1A' },
-        { label_name: 'GitHub', color: '#C377E0' },
-        { label_name: 'Bug', color: '#FF77CC' },
-        { label_name: 'Review', color: '#50E897' },
-        { label_name: 'Research', color: '#00C2E2' },
-        { label_name: 'Styling', color: '#0079C0' },
-        { label_name: 'Implementation', color: '#EA5946' },
-        { label_name: 'Planning', color: '#4D4D4D' },
-        { label_name: 'User Stories', color: '#F1D600' },
+        { id:5, label_name: 'FrontEnd', color: '#60BE4E' },
+        { id:6, label_name: 'BackEnd', color: '#FF9E1A' },
+        { id:7, label_name: 'GitHub', color: '#C377E0' },
+        { id:8, label_name: 'Bug', color: '#FF77CC' },
+        { id:9, label_name: 'Review', color: '#50E897' },
+        { id:10, label_name: 'Research', color: '#00C2E2' },
+        { id:11, label_name: 'Styling', color: '#0079C0' },
+        { id:12, label_name: 'Implementation', color: '#EA5946' },
+        { id:13, label_name: 'Planning', color: '#4D4D4D' },
+        { id:14, label_name: 'User Stories', color: '#F1D600' },
       ],
       deckNames: [],
       decks: [],
@@ -33,7 +33,7 @@ export default class Table extends Component {
     };
     this.handleModal = this.handleModal.bind(this);
     this.newCardDataCollector = this.newCardDataCollector.bind(this);
-    this.editCardDataCollector = this.newCardDataCollector.bind(this);
+    this.editCardDataCollector = this.editCardDataCollector.bind(this);
   }
   componentDidMount() {
     http.decks
@@ -57,31 +57,81 @@ export default class Table extends Component {
   }
 
 
-  newCardDataCollector(
-    players,
-    tags,
-    deck,
-    cardInfo
-  ) {
-    {
-    console.log(players);
-    console.log(tags);
-    console.log(deck);
-    console.log(cardInfo);
+newCardDataCollector(players,tags,deck,cardInfo) {
+  let toPost = {
+    description: cardInfo.description,
+    card_labels: this.obtainLabelIds(tags),
+    title: cardInfo.titl,
+    weight: parseInt(cardInfo.eff),
+    impact: parseInt(cardInfo.imp),
+    cards_members: this.obtainPlayersId(players),
+    deck_id: this.obtainDeckID(deck),
+    table_id: this.props.tableId,
+    table_index: this.props.tableId
   }
+  console.log(toPost)
+}
+
+  editCardDataCollector(players,tags, deck, cardInfo) {
+    let toPost = {
+      description: cardInfo.description,
+      id: cardInfo.id,
+      card_labels: this.obtainLabelIds(tags),
+      title: cardInfo.titl,
+      weight: parseInt(cardInfo.eff),
+      impact: parseInt(cardInfo.imp),
+      cards_members: this.obtainPlayersId(players),
+      deck_id: this.obtainDeckID(deck),
+      table_id: this.props.tableId,
+      table_index: this.props.tableId
+    }
+    console.log(toPost)
   }
 
-  editCardDataCollector(
-    players,
-    tags,
-    deck,
-    cardInfo
-  ) {
-    console.log(players);
-    console.log(tags);
-    console.log(deck);
-    console.log(cardInfo);
+  obtainPlayersId(players) {
+    let users = this.state.users
+    let result = players
+    result.forEach((player) =>{
+      if(!player.member_id) {
+        users.forEach((user)=> {
+          if(player.member_name === user.name) {
+            player.member_id = user.id
+          }
+        })
+      }
+    })
+    return result
   }
+
+  obtainLabelIds(tags) {
+    let labels = this.state.labels
+    let result = tags
+    result.forEach((tag) =>{
+      if(!tag.id) {
+        labels.forEach((label)=> {
+          if(tag.label_name === label.label_name) {
+            tag.color = label.color
+            tag.id = label.id
+          }
+        })
+      }
+    })
+    return result
+  }
+
+  obtainDeckID(deckName) {
+    let decks = this.state.decks
+    let result
+    decks.forEach((deck,i) =>{
+      console.log(deckName)
+      console.log(deck.title)
+      if (deckName == deck.title) {
+        result = deck.id
+      }
+    })
+    return result
+  }
+
 
   //
 
@@ -98,7 +148,7 @@ export default class Table extends Component {
     let cards = [];
     for (let i = 0; i < decks.length; i++) {
       for (let j = 0; j < decks[i].cards.length; j++) {
-        if (decks[i].cards[j].card_title.includes(text)) {
+        if (decks[i].cards[j] && decks[i].cards[j].title.includes(text)) {
           cards.push(decks[i].cards[j]);
           // if (decks[i].cards[j].description.length > 50){
           //   cards[cards.length - 1] = cards[cards.length - 1].substring(0, 47) + '...';
