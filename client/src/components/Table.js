@@ -225,6 +225,7 @@ newCardDataCollector(players,tags,deck,cardInfo) {
       decks[deckIndex + direction].cards.push(card);
       decks[deckIndex].cards.splice(cardIndex, 1);
     }
+    console.log(card)
     this.setState({ decks })
     http.cards.put(card)
     .then((res) => {console.log(res)})
