@@ -33,10 +33,15 @@ app.use(express.static(path.join(__dirname, '../client/public')));
 // routes
 app.use('/api/users', usersRoute);
 app.use('/api/auth', authRoute);
-// app.use(jwtChecker.checkToken);
+app.use(jwtChecker.checkToken);
 app.use('/api/tables', tablesRoute);
 app.use('/api/decks', decksRoute);
 app.use('/api/cards', cardsRoute);
+
+app.get('/logout', (req, res) => {
+  res.clearCookie('token');
+  res.send("Cookie deleted");
+});
 
 app.use('/*', express.static(path.join(__dirname, '../client/public')));
 // catch 404 and forward to error handler
@@ -54,5 +59,6 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.json('error');
 });
+
 
 module.exports = app;
