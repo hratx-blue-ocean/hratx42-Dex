@@ -19,7 +19,7 @@ import auth from '../services/auth.js';
 
 //utils
 import global from '../utils/global';
-let thePlayers=[];
+let thePlayers = [];
 export default class App extends Component {
   constructor(props) {
     super(props);
@@ -28,7 +28,7 @@ export default class App extends Component {
       user: {},
       tables: [],
       showenTable: null,
-      newPLayer:[],
+      newPLayer: [],
       // dashboard edit profile form
       profile: {
         editName: '',
@@ -44,16 +44,11 @@ export default class App extends Component {
 
       showTableModal: false,
     };
-
-    // dashboard onChange event functions
-    this.changeProfileName = this.changeProfileName.bind(this);
-    this.changeProfileEmail = this.changeProfileEmail.bind(this);
-    this.changeProfilePassword = this.changeProfilePassword.bind(this);
-    this.submitProfileChanges = this.submitProfileChanges.bind(this);
   }
 
   componentDidMount() {
     global.flash = this.flash.bind(this);
+    global.setState = this.setState.bind(this);
     if (localStorage.getItem('token')) {
       this.login();
     }
@@ -91,18 +86,20 @@ export default class App extends Component {
   async addTable(name, emails) {
     const newTable = await http.tables.post({ name });
     const tableId = newTable.id;
+    http.tables.postUser(tableId, this.state.user.email)
     const tables = [...this.state.tables];
     tables.push(newTable);
     this.setState({ tables });
     for (let email of emails) {
       http.tables.postUser(tableId, email);
     }
+    this.changeTableModal()
   }
 
   logOut() {
     auth.logout();
     auth.setUser(this);
-    this.setState({userId:''})
+    this.setState({ userId: '' })
   }
 
   changeTableModal() {
@@ -110,52 +107,26 @@ export default class App extends Component {
 
   }
 
-  // dashboard onChange event and submit functions
-  changeProfileName(e) {
-    this.setState({ profile: { editName: e.target.value } });
-  }
-
-  changeProfileEmail(e) {
-    this.setState({ profile: { editEmail: e.target.value } });
-  }
-
-  changeProfilePassword(e) {
-    this.setState({ profile: { editPassword: e.target.value } });
-  }
-
-  submitProfileChanges() {
-    http.users
-      .put(
-        this.state.userId,
-        this.state.profile.editEmail,
-        this.state.profile.editPassword
-      )
-      .then(
-        () => this.setState({ profile: { editName: '' } }),
-        this.setState({ profile: { editEmail: '' } }),
-        this.setState({ profile: { editPassword: '' } })
-      )
-      .catch(err => console.log('Error: ', err));
-  }
   changeTable(id){
     this.setState({showenTable:id})
   }  
+
   addPlayerToTable(playerName) {
     thePlayers.push(playerName);
-    this.setState({newPLayer: thePlayers})
+    this.setState({ newPLayer: thePlayers })
   }
 
   removePlayerToTable(playerName) {
     let index = thePlayers.indexOf(playerName)
     thePlayers.splice(index, 1)
-    this.setState({newPLayer: thePlayers})
+    this.setState({ newPLayer: thePlayers })
   }
   render() {
     return (
       <>
         <Router>
           {auth.userIsLoggedIn() ? (
-            <NavBar addTable={this.addTable.bind(this)} addPlayerToTable={this.addPlayerToTable.bind(this)} removePlayerToTable={this.removePlayerToTable.bind(this)} logOut={this.logOut.bind(this)} showTableModal={this.state.showTableModal} changeTableModal={this.changeTableModal.bind(this)} changeTable={this.changeTable.bind(this)} tables={this.state.tables} showenTable={this.state.showenTable} newPLayer={this.state.newPLayer} userName={this.state.user.name}/>
+            <NavBar addTable={this.addTable.bind(this)} addPlayerToTable={this.addPlayerToTable.bind(this)} removePlayerToTable={this.removePlayerToTable.bind(this)} logOut={this.logOut.bind(this)} showTableModal={this.state.showTableModal} changeTableModal={this.changeTableModal.bind(this)} changeTable={this.changeTable.bind(this)} tables={this.state.tables} showenTable={this.state.showenTable} newPLayer={this.state.newPLayer} userName={this.state.user.name} />
           ) : null}
           <Route
             path="/"
@@ -170,6 +141,7 @@ export default class App extends Component {
               <Dashboard
                 {...props}
                 // state props
+                state = {this.state}
                 user={this.state.user}
                 tables={this.state.tables}
                 editProfileName={this.state.profile.editName}
@@ -184,10 +156,10 @@ export default class App extends Component {
             )}
           />
           <Route path="/profile" component={Profile} />
-          {this.state.tables.map( table => 
-            <Route key = {Math.random()} path={`/table/${table.id}`} render={() => <Table tableId={table.id} tableName={table.name} />} />
+          {this.state.tables.map(table =>
+            <Route key={Math.random()} path={`/table/${table.id}`} render={() => <Table tableId={table.id} tableName={table.name} />} />
           )}
-          
+
           <Route path="/TableSettings" component={TableSettings} />
         </Router>
         <Flash flashData={this.state.flash} />
