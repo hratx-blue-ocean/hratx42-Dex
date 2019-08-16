@@ -411,6 +411,10 @@ code {
   margin: 0;
 }
 
+.hideSearchSuggest {
+  visibility: hidden;
+}
+
 .controls__modal button {
   margin: 0 20px;
 }

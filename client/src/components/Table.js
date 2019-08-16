@@ -145,7 +145,9 @@ newCardDataCollector(players,tags,deck,cardInfo) {
     return result
   }
 
-
+  loseFocusSearch() {
+    //this.setState({searchName: ''})
+  }
   //
 
   changeFilter(e) {
@@ -202,6 +204,7 @@ newCardDataCollector(players,tags,deck,cardInfo) {
     newDeck.newDeckTitle = e.target.value;
     this.setState({ newDeck });
   }
+  
   deleteDeck(id, deckIndex) {
     let { decks } = this.state;
     http.decks.delete(id).then(res => {
@@ -250,6 +253,7 @@ newCardDataCollector(players,tags,deck,cardInfo) {
           tableId={this.props.tableId}
           tableName={this.props.tableName}
           labels={this.state.labels}
+          loseFocusSearch = {this.loseFocusSearch.bind(this)}
         />
         {/* for each deck, create a deck */}
         {this.state.decks.length > 0 ? (
