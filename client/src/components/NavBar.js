@@ -32,7 +32,7 @@ function NavBar(props) {
           </NavDropdown>
         </Navbar.Collapse>
       </Navbar>
-      <TableSettings userName={props.userName} addTable={props.addTable} newPLayer={props.newPLayer} addPlayerToTable={props.addPlayerToTable} removePlayerToTable={props.removePlayerToTable} showTableModal={props.showTableModal} changeTableModal={props.changeTableModal} />
+      <TableSettings userName={props.userName} addTable={props.addTable} newPlayer={props.newPlayer} addPlayerToTable={props.addPlayerToTable} removePlayerToTable={props.removePlayerToTable} showTableModal={props.showTableModal} changeTableModal={props.changeTableModal} />
     </div>
   );
 }

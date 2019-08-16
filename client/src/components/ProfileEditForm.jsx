@@ -1,5 +1,5 @@
 import React from 'react'
-import {  Button , Form} from 'react-bootstrap';
+import { Row, Button, Form } from 'react-bootstrap';
 import http from '../../services/http/http.js';
 import global from '../../utils/global';
 
@@ -101,9 +101,17 @@ export default class ProfileEditForm extends React.Component {
               }}
               value={this.state.confirmPasswordField ? this.state.confirmPasswordField : ''} />
           </div>
-          <button type="submit" className="dashboardFormBtn">
-            Save Changes
-          </button>
+            <Button
+              onClick={this.props.hideProfile}
+              variant="secondary"
+              type="button">
+                Back
+            </Button>
+            <Button
+              variant="primary"
+              type="submit">
+                Save Changes
+            </Button>
         </form>
       </div>
     )

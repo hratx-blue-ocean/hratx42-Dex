@@ -49,7 +49,7 @@ const http = {
       return auth.userIsLoggedIn();
     },
     async logout() {
-      const deleteCookie = await tryAxios('/logout', 'get');
+      return deleteCookie = await tryAxios('/logout', 'get');
     }
   },
   tables: {
