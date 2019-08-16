@@ -78,7 +78,7 @@ export default function Controls(props) {
           title={`${props.filterBy}`}
         >
           {props.users.map(user => (
-            <Dropdown.Item className = {props.filterBy === user.name ? 'ControlsfilterNames': null} key={Math.random()} onClick={e => props.changeFilter(e)}>
+            <Dropdown.Item key = {Math.random()} className = {props.filterBy === user.name ? 'ControlsfilterNames': null} key={Math.random()} onClick={e => props.changeFilter(e)}>
               {user.name}
             </Dropdown.Item>
           ))}
@@ -89,9 +89,8 @@ export default function Controls(props) {
 
         <div style={{ position: 'relative', left: '30%' }}>
           {props.users.map(user =>
-            <>
               <OverlayTrigger
-                key={'bottom'}
+                key={Math.random()}
                 placement={'bottom'}
                 overlay={
                   <Tooltip id={`tooltip-bottom`}>
@@ -103,7 +102,6 @@ export default function Controls(props) {
                   {(user.name.split(" ").map(char => char[0]).join("")).toUpperCase()}
                 </Button>
               </OverlayTrigger>
-            </>
           )}
 
 
