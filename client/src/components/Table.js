@@ -236,16 +236,14 @@ editCardDataCollector(players,tags, deck, cardInfo) {
 
   submitNewDeck() {
     //submit new deck with this.state.newDeck.newDecktitle and table ID
-
-    let { decks } = this.state;
+    let { decks, newDeck } = this.state;
     http.decks
-      .post({ table_id: 1, title: this.state.newDeck.newDeckTitle })
-      .then(res => {
-        let { newDeck } = this.state;
-        decks.push({ table_id: 1, title: this.state.newDeck.newDeckTitle });
-        newDeck.newDeckModal = false;
-        this.setState({ newDeck, decks });
-      });
+    .post({ table_id: 1, title: this.state.newDeck.newDeckTitle })
+    .then(res => {
+      decks.push(res);
+      newDeck.newDeckModal = false;
+      this.setState({ newDeck, decks });
+    });
   }
 
   handleTextChange(e) {
@@ -253,10 +251,11 @@ editCardDataCollector(players,tags, deck, cardInfo) {
     newDeck.newDeckTitle = e.target.value;
     this.setState({ newDeck });
   }
+
   deleteDeck(id, deckIndex) {
     let { decks } = this.state;
+    decks.splice(deckIndex, 1);
     http.decks.delete(id).then(res => {
-      decks.splice(deckIndex, 1);
       this.setState({ decks });
     });
   }
