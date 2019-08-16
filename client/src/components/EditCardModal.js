@@ -1,22 +1,34 @@
 import React, { useState } from "react";
 import { Button, Modal, Container, Row, Col, Form} from 'react-bootstrap';
 
+import table from '../../utils/table'
+
+
 
 export default function CardModal({closeModal, showMe, card, deckTitle, deckNames, editCard, users, labels}) {
+
+
   const [show, setShow] = useState(false);
   const handleClose = () => closeModal()
-
   const [effort, setEffort] = useState(card.weight);
   const [impact, setImpact] = useState(card.impact);
   const [title, setTitle] = useState(card.title);
   const [players, setPlayers] = useState(card.cards_members);
   const [tags, setTags] = useState(card.card_labels);
+  // add DUE DATE!
   const [dueDate, setDate] = useState(new Date());
   const [deck, setDeck] = useState(deckTitle);
   const [desc, setDesc] = useState(card.description);
 
-  console.log
 
+// let d = new Date()
+// let year = d.getFullYear()
+// let month = d.getMonth()
+// let day  = d.getDate()
+// const today = `${year}-${month}-${day}`
+// setDate(today)
+
+// console.log(year)
 
   return (
 
@@ -63,16 +75,16 @@ export default function CardModal({closeModal, showMe, card, deckTitle, deckName
           <Col xs={8} style={styles.mainContent}>
             <Row>
               {/* titles of Players and Tags */}
-                <Col style={styles.playersTagsTitles}>
+                <Col xs={8} style={styles.playersTagsTitles}>
                   <div style={{fontWeight: 800}}>Players</div>
                 </Col>
-                <Col style={styles.playersTagsTitles}>
+                <Col xs={4} style={styles.playersTagsTitles}>
                   <div style={{fontWeight: 800}}>Tags</div>
                 </Col>
             </Row>
             {/* LIST OF ALL POSSIBLE players and tags */}
             <Row>
-                  <Col style={styles.playersStyle}>
+                  <Col xs={8} style={styles.playersStyle}>
                     <select onChange={(event)=> {
                         let playerHolder = players
                         let selectPlayer = event.target.value  
@@ -89,7 +101,7 @@ export default function CardModal({closeModal, showMe, card, deckTitle, deckName
                     </select>
                   </Col>
                   {/* LABEL CHOOSE */}
-                  <Col style={styles.playersStyle}>
+                  <Col xs={4} style={styles.playersStyle}>
                   <select onChange={(event)=> {
                         let labelsHolder = tags
                         let selectLabel = event.target.value  
@@ -142,7 +154,13 @@ export default function CardModal({closeModal, showMe, card, deckTitle, deckName
               <div>Add To Card</div>
             </Row>
             <Row style={styles.addToCardTrait}>
-              <input placeholder="date due" placeholder='Due Date' onBlur={(event)=> setDate(event.target.value)} style={{width:'100%'}}/> 
+              {/* <input placeholder="date due" placeholder='Due Date' onBlur={(event)=> setDate(event.target.value)} style={{width:'100%'}}/>  */}
+              <input type="date" 
+              id="start" 
+              name="due dates"
+              value = {new Date()}
+              onChange={(event)=> setDate(event.target.value)}
+              min={new Date()} />
             </Row>
             {/* <Row style={styles.addToCardTrait}>
                 <input placeholder="gitLink"  value={card.gitLink}style={{width:'100%'}}/> 
@@ -164,11 +182,16 @@ export default function CardModal({closeModal, showMe, card, deckTitle, deckName
         </Row>
 
         {/* Button to Submit */}
-        <Row style={styles.submitButton}>
-        <Button onClick={(event)=> {
-            let cardInfo={id: card.id, eff:effort, imp:impact, titl:title, description:desc, due: dueDate}
-            editCard(players, tags, deck, cardInfo)
-        }} variant="primary">Submit</Button>
+        <Row xs={12} style={styles.submitButton}>
+          <Col xs={10}>
+            <Button onClick={(event)=> {
+                let cardInfo={id: card.id, eff:effort, imp:impact, titl:title, description:desc, due: dueDate}
+                editCard(players, tags, deck, cardInfo)
+            }} variant="primary">Submit</Button>
+          </Col>
+          <Col xs={2}>
+            <Button variant="danger" onClick={() => { table.deleteCardById(card.id) }}>Delete</Button>
+          </Col>
         </Row>
 
     </Container>

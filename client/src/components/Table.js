@@ -3,6 +3,8 @@ import { Button, Modal } from 'react-bootstrap';
 import Controls from './Controls';
 import Deck from './Deck';
 import http from '../../services/http/http.js';
+import table from '../../utils/table'
+import global from '../../utils/global'
 
 export default class Table extends Component {
   constructor(props) {
@@ -34,12 +36,15 @@ export default class Table extends Component {
     this.handleModal = this.handleModal.bind(this);
     this.newCardDataCollector = this.newCardDataCollector.bind(this);
     this.editCardDataCollector = this.editCardDataCollector.bind(this);
+    
   }
   componentDidMount() {
+    table.deleteCardById = this.deleteCardById.bind(this)
     http.decks
       .get(this.props.tableId)
       .then(response => {
         this.setState({ decks: response, tableName: this.props.tableName });
+        
       })
       //populated deckname for tickets
       .then(() => {
@@ -55,7 +60,7 @@ export default class Table extends Component {
       });
   }
 
-
+//ADD EDIT CARDS TO DB 
 newCardDataCollector(players,tags,deck,cardInfo) {
   let toPost = {
     description: cardInfo.description,
@@ -68,7 +73,6 @@ newCardDataCollector(players,tags,deck,cardInfo) {
   let toMembersPost ={cards_members: this.obtainPlayersId(players)}
   let toLabelsPost = {card_labels: this.obtainLabelIds(tags)}
   // console.log(toLabelsPost.card_labels)
-  console.log(toMembersPost.cards_members)
   let addedCard;
     http.cards.post(toPost)
         .then((response)=>{
@@ -143,6 +147,35 @@ newCardDataCollector(players,tags,deck,cardInfo) {
       }
     })
     return result
+  }
+
+//FOR EDIT CARD
+  findCardById(id) {
+    let decks = [...this.state.decks];
+    for (let deckIndex = 0; deckIndex < decks.length; deckIndex++) {
+      for (let cardIndex = 0; cardIndex < decks[deckIndex].cards.length; cardIndex++) {
+        let currentCard = decks[deckIndex].cards[cardIndex]
+        if (currentCard.id === id) {
+          return {
+            deckIndex: deckIndex, cardIndex: cardIndex
+          }
+        }
+      }
+    }
+    return false;
+  }
+  deleteCardById(id) {
+    const decks = [...this.state.decks]
+    const position = this.findCardById(id);
+    if (position) {
+      const { deckIndex, cardIndex } = position
+      decks[deckIndex].cards.splice(cardIndex, 1)
+      this.setState({ decks })
+      console.log("card deleted")
+      http.cards.delete(id).then(() => {
+        console.log("Deleted from db")
+        global.flash('Card deleted', "success", 1500)})
+    }
   }
 
 
@@ -220,11 +253,19 @@ newCardDataCollector(players,tags,deck,cardInfo) {
 
   moveCard(card, cardIndex, deckIndex, direction) {
     let { decks } = this.state;
+    let newCard = { ...card };
+    newCard.deck_id = decks[deckIndex + direction].id
     if (decks[deckIndex + direction]) {
       decks[deckIndex + direction].cards.push(card);
       decks[deckIndex].cards.splice(cardIndex, 1);
     }
-    this.setState({ decks });
+
+    delete newCard['card_labels'];
+    delete newCard['cards_members'];
+    console.log(decks)
+    this.setState({ decks })
+    http.cards.put(newCard)
+    .then((res) => console.log('this is the card move response', res))
   }
 
   render() {

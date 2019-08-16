@@ -48,9 +48,8 @@ export default function CardThumbnails(props) {
             </Button>
           </OverlayTrigger>
           {props.singleCard.cards_members.map((member, i) =>
-            <>
               <OverlayTrigger
-                key={'bottom'}
+                key={Math.random()}
                 placement={'bottom'}
                 overlay={
                   <Tooltip id={`tooltip-bottom`}>
@@ -60,7 +59,6 @@ export default function CardThumbnails(props) {
               >
                 {member.member_name === null ? (<></>) : i < 3 ? (<Button key={Math.random()} className='CardThumbnails_userIcon float-right' variant='secondary'>{member.member_name.split(" ").map(char => char[0]).join("").toUpperCase()}</Button>) : ''}
               </OverlayTrigger>
-            </>
           )}
         </div>
         <div style={{ paddingLeft: '5px', position: 'absolute', top: '80%' }}>

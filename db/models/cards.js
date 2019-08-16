@@ -11,6 +11,7 @@ const cardsModel = {
           c.id,
           c.title,
           c.description,
+          c.due_date,
           c.updated_at,
           c.created_at,
           c.weight,
@@ -47,6 +48,7 @@ const cardsModel = {
           c.id,
           c.title,
           c.description,
+          c.due_date,
           c.updated_at,
           c.created_at,
           c.weight,
@@ -82,6 +84,7 @@ const cardsModel = {
           c.id,
           c.title,
           c.description,
+          c.due_date,
           c.updated_at,
           c.created_at,
           c.weight,
@@ -114,7 +117,7 @@ const cardsModel = {
   },
   async delete(id) {
     const query = 'delete from cards where id = $1';
-    const values = [userId];
+    const values = [id];
     const result = await pgClient.query(query, values);
     return result;
   },
