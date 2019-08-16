@@ -5,6 +5,7 @@ const bcrypt = require('bcrypt');
 const saltRounds = 12;
 const jwtChecker = require('../middleware/jwtChecker.js');
 const auth = require('../middleware/auth.js');
+const cookieparser = require('cookie')
 
 // router.use(jwtChecker.checkToken);
 router.get('/:id', (req, res) => {
@@ -25,6 +26,9 @@ router.get('/:id', (req, res) => {
 router.post(
   '/',
   (req, res, next) => {
+    console.log(req.headers.cookie);
+    let cookie = req.headers.cookie ? req.cookies.tableId ? req.cookies.tableId : null : null;
+    console.log('TABLEID COOKIE', cookie);
     const { email, password, name } = req.body;
     //post user to usersModel if she doesn't already exist
     usersModel

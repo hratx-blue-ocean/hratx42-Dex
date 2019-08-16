@@ -11,6 +11,8 @@ import {
 import CardThumbnails from './CardThumbnails';
 
 import http from '../../services/http/http';
+import auth from '../../services/auth';
+import global from '../../utils/global';
 
 export default function Controls(props) {
   const [showModal, setShowModal] = useState(false);
@@ -18,8 +20,14 @@ export default function Controls(props) {
   const [invitationEmail, setInvitationEmail] = useState('');
   const cards = props.cards.slice(0, 10);
   const sendInvite = async () => {
-    console.log(invitationEmail);
-    return await http.invite.post(invitationEmail);
+    let userId = auth.getUser();
+    let username; 
+    props.users.forEach((user) => user.id === userId ? username = user.name : null)
+    let invitation = await http.invite.post(invitationEmail, { tableId: props.tableId, invitedBy: username });
+    let {success, message} = invitation
+    console.log(success);
+    console.log(message);
+    global.flash(message, 'success', 2000);
   }
   const handleDelete = async function(sure) {
     setShowModal(false);
@@ -33,7 +41,7 @@ export default function Controls(props) {
   return (
     <div>
       <Navbar bg="dark" variant="dark">
-        <Navbar.Brand>Table Name</Navbar.Brand>
+        <Navbar.Brand>{props.tableName}</Navbar.Brand>
         <input
           onChange={e => props.searchText(e.target.value)}
           type="text"
