@@ -16,19 +16,10 @@ export default function CardModal({closeModal, showMe, card, deckTitle, deckName
   const [players, setPlayers] = useState(card.cards_members);
   const [tags, setTags] = useState(card.card_labels);
   // add DUE DATE!
-  const [dueDate, setDate] = useState(new Date());
+  const [dueDate, setDate] = useState('mm-dd-yyyy');
   const [deck, setDeck] = useState(deckTitle);
   const [desc, setDesc] = useState(card.description);
 
-
-// let d = new Date()
-// let year = d.getFullYear()
-// let month = d.getMonth()
-// let day  = d.getDate()
-// const today = `${year}-${month}-${day}`
-// setDate(today)
-
-// console.log(year)
 
   return (
 
@@ -158,7 +149,7 @@ export default function CardModal({closeModal, showMe, card, deckTitle, deckName
               <input type="date" 
               id="start" 
               name="due dates"
-              value = {new Date()}
+              value = {dueDate}
               onChange={(event)=> setDate(event.target.value)}
               min={new Date()} />
             </Row>
@@ -187,13 +178,13 @@ export default function CardModal({closeModal, showMe, card, deckTitle, deckName
             <Button onClick={(event)=> {
                 let cardInfo={id: card.id, eff:effort, imp:impact, titl:title, description:desc, due: dueDate}
                 editCard(players, tags, deck, cardInfo)
+                handleClose()
             }} variant="primary">Submit</Button>
           </Col>
           <Col xs={2}>
             <Button variant="danger" onClick={() => { table.deleteCardById(card.id) }}>Delete</Button>
           </Col>
         </Row>
-
     </Container>
   </Modal>
   </>

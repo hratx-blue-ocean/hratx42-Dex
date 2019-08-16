@@ -4,7 +4,7 @@ import auth from '../auth.js';
 axios.defaults.headers.common['x-access-token'] = auth.getJwt()
   ? auth.getJwt()
   : undefined;
-const tryAxios = async function (endpoint, method, payload) {
+const tryAxios = async function(endpoint, method, payload) {
   try {
     const response = await axios[method](endpoint, payload);
     return response.data;
@@ -35,6 +35,9 @@ const http = {
     delete(id) {
       return tryAxios(`/api/users${id}`);
     },
+    getCardsByUser(userID) {
+      return tryAxios(`/api/users/${userID}/cards`, 'get');
+    },
   },
   auth: {
     async post(email, password) {
@@ -45,11 +48,11 @@ const http = {
         : undefined;
       return auth.userIsLoggedIn();
     },
-    async logout() {
-      const deleteCookie = await tryAxios('/logout', 'get');
-    }
   },
   tables: {
+    getById(tableId) {
+      return tryAxios(`/api/tables/${tableId}`, 'get');
+    },
     get(userId) {
       return tryAxios(`/api/tables?userId=${userId}`, 'get');
     },
@@ -93,19 +96,19 @@ const http = {
       return tryAxios(`/api/cards/${id}`, 'delete');
     },
     addUser(cardId, userId) {
-      return tryAxios(`/api/cards/${cardId}/member/${userId}`, 'post')
+      return tryAxios(`/api/cards/${cardId}/member/${userId}`, 'post');
     },
     addLabel(cardId, labelId) {
-      return tryAxios(`/api/cards/${cardId}/label/${labelId}`, 'post')
+      return tryAxios(`/api/cards/${cardId}/label/${labelId}`, 'post');
     },
     removeLabel(cardId, labelId) {
-      return tryAxios(`/api/cards/${cardId}/label/${labelId}`, 'delete')
-    }
+      return tryAxios(`/api/cards/${cardId}/label/${labelId}`, 'delete');
+    },
   },
   invite: {
     post(email, tableId) {
-      return tryAxios(`/api/invite/${email}`, 'post', tableId)
-    }
+      return tryAxios(`/api/invite/${email}`, 'post', tableId);
+    },
   },
 };
 
