@@ -28,7 +28,7 @@ export default class App extends Component {
       user: {},
       tables: [],
       showenTable: null,
-      newPLayer: [],
+      newPlayer: [],
       // dashboard edit profile form
       profile: {
         editName: '',
@@ -114,20 +114,31 @@ export default class App extends Component {
 
   addPlayerToTable(playerName) {
     thePlayers.push(playerName);
-    this.setState({ newPLayer: thePlayers })
+    this.setState({ newPlayer: thePlayers })
   }
 
   removePlayerToTable(playerName) {
     let index = thePlayers.indexOf(playerName)
     thePlayers.splice(index, 1)
-    this.setState({ newPLayer: thePlayers })
+    this.setState({ newPlayer: thePlayers })
   }
   render() {
     return (
       <>
         <Router>
           {auth.userIsLoggedIn() ? (
-            <NavBar addTable={this.addTable.bind(this)} addPlayerToTable={this.addPlayerToTable.bind(this)} removePlayerToTable={this.removePlayerToTable.bind(this)} logOut={this.logOut.bind(this)} showTableModal={this.state.showTableModal} changeTableModal={this.changeTableModal.bind(this)} changeTable={this.changeTable.bind(this)} tables={this.state.tables} showenTable={this.state.showenTable} newPLayer={this.state.newPLayer} userName={this.state.user.name} />
+            <NavBar
+              addTable={this.addTable.bind(this)}
+              addPlayerToTable={this.addPlayerToTable.bind(this)}
+              removePlayerToTable={this.removePlayerToTable.bind(this)}
+              logOut={this.logOut.bind(this)}
+              showTableModal={this.state.showTableModal}
+              changeTableModal={this.changeTableModal.bind(this)}
+              changeTable={this.changeTable.bind(this)}
+              tables={this.state.tables}
+              showenTable={this.state.showenTable}
+              newPlayer={this.state.newPlayer}
+              userName={this.state.user.name} />
           ) : null}
           <Route
             path="/"
