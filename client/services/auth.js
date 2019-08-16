@@ -40,7 +40,7 @@ function setUser(component) {
     const { userId } = jwtDecode(jwt);
     component.setState({ userId });
   } else {
-    component.setState({ userId: null });
+    component.setState({ userId: '' });
   }
 }
 

@@ -35,6 +35,9 @@ const http = {
     delete(id) {
       return tryAxios(`/api/users${id}`);
     },
+    getCardsByUser(userID) {
+      return tryAxios(`/api/users/${userID}/cards`, 'get');
+    },
   },
   auth: {
     async post(email, password) {
@@ -44,9 +47,6 @@ const http = {
         ? auth.getJwt()
         : undefined;
       return auth.userIsLoggedIn();
-    },
-    async logout() {
-      const deleteCookie = await tryAxios('/logout', 'get');
     },
   },
   tables: {

@@ -30,20 +30,31 @@ export default class App extends Component {
       user: {},
       tables: [],
       showenTable: null,
-      newPLayer: [],
+      newPlayer: [],
       // dashboard edit profile form
       profile: {
         editName: '',
         editEmail: '',
         editPassword: '',
       },
-
+      cards: [],
       flash: {
         show: false,
         message: 'Default flash message for testing',
         variant: 'success',
       },
-
+      labels: [
+        { id:5, label_name: 'FrontEnd', color: '#60BE4E' },
+        { id:6, label_name: 'BackEnd', color: '#FF9E1A' },
+        { id:7, label_name: 'GitHub', color: '#C377E0' },
+        { id:8, label_name: 'Bug', color: '#FF77CC' },
+        { id:9, label_name: 'Review', color: '#50E897' },
+        { id:10, label_name: 'Research', color: '#00C2E2' },
+        { id:11, label_name: 'Styling', color: '#0079C0' },
+        { id:12, label_name: 'Implementation', color: '#EA5946' },
+        { id:13, label_name: 'Planning', color: '#4D4D4D' },
+        { id:14, label_name: 'User Stories', color: '#F1D600' },
+      ],
       showTableModal: false,
     };
   }
@@ -68,6 +79,15 @@ export default class App extends Component {
     auth.setUser(this);
     this.getTables();
     this.getUser();
+    this.getCards();
+  }
+
+  async getCards() {
+    const userID = auth.getUser();
+    if (userID) {
+      const cards = await http.users.getCardsByUser(userID);
+      this.setState({cards})
+    }
   }
 
   async getTables() {
@@ -108,7 +128,10 @@ export default class App extends Component {
     auth.logout();
     http.auth.logout();
     auth.setUser(this);
+<<<<<<< HEAD
     this.setState({ userId: '' });
+=======
+>>>>>>> 67770ded7b97dfea5fdb4e64d7d635eb948c2445
   }
 
   changeTableModal() {
@@ -121,6 +144,7 @@ export default class App extends Component {
 
   addPlayerToTable(playerName) {
     thePlayers.push(playerName);
+<<<<<<< HEAD
     this.setState({ newPLayer: thePlayers });
   }
 
@@ -128,6 +152,15 @@ export default class App extends Component {
     let index = thePlayers.indexOf(playerName);
     thePlayers.splice(index, 1);
     this.setState({ newPLayer: thePlayers });
+=======
+    this.setState({ newPlayer: thePlayers })
+  }
+
+  removePlayerToTable(playerName) {
+    let index = thePlayers.indexOf(playerName)
+    thePlayers.splice(index, 1)
+    this.setState({ newPlayer: thePlayers })
+>>>>>>> 67770ded7b97dfea5fdb4e64d7d635eb948c2445
   }
   render() {
     return (
@@ -144,9 +177,8 @@ export default class App extends Component {
               changeTable={this.changeTable.bind(this)}
               tables={this.state.tables}
               showenTable={this.state.showenTable}
-              newPLayer={this.state.newPLayer}
-              userName={this.state.user.name}
-            />
+              newPlayer={this.state.newPlayer}
+              userName={this.state.user.name} />
           ) : null}
           <Route
             path="/"
@@ -165,10 +197,12 @@ export default class App extends Component {
                 user={this.state.user}
                 userId={this.state.userId}
                 tables={this.state.tables}
+                cards = {this.state.cards}
                 editProfileName={this.state.profile.editName}
                 editProfileEmail={this.state.profile.editEmail}
                 editProfilePassword={this.state.profile.editPassword}
                 // functions
+                labels = {this.state.labels}
                 changeProfileName={this.changeProfileName}
                 changeProfileEmail={this.changeProfileEmail}
                 changeProfilePassword={this.changeProfilePassword}

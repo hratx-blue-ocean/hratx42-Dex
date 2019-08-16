@@ -50,7 +50,7 @@ export default class Table extends Component {
   }
 
   async getAllTheData(tableId) {
-    console.log("Getting the data ", tableId)
+    console.log('Getting the data ', tableId);
     const table = await http.tables.getById(tableId);
     this.setState({ table });
     http.decks
@@ -114,10 +114,27 @@ export default class Table extends Component {
       weight: parseInt(cardInfo.eff),
       impact: parseInt(cardInfo.imp),
       deck_id: this.obtainDeckID(deck),
-      table_id: this.state.table.tableId,
+      table_id: this.state.table.id,
     };
     let toMembersPost = { cards_members: this.obtainPlayersId(players) };
     let toLabelsPost = { card_labels: this.obtainLabelIds(tags) };
+    let editCard;
+    http.cards.put(toPost).then(response => {
+      console.log(response);
+      editCard = response;
+      console.log(editCard);
+    });
+    // .then((response)=>{
+    //   toMembersPost.cards_members.forEach(async (player) =>{
+    //     await http.cards.addUser(addedCard.id, player.member_id)
+    //   })
+    //   console.log(response)
+    // })
+    // .then(()=>{
+    //   toLabelsPost.card_labels.forEach(async (label) =>{
+    //     await http.cards.addLabel(addedCard.id,label.id)
+    //   })
+    // })
   }
 
   obtainPlayersId(players) {
@@ -287,6 +304,10 @@ export default class Table extends Component {
       .then(res => console.log('this is the card move response', res));
   }
 
+  loseFocusSearch() {
+    this.setState({ searchName: '' });
+  }
+
   render() {
     return (
       <div>
@@ -302,6 +323,7 @@ export default class Table extends Component {
           tableId={this.state.table.id}
           tableName={this.state.table.name}
           labels={this.state.labels}
+          loseFocusSearch={this.loseFocusSearch.bind(this)}
         />
         {/* for each deck, create a deck */}
         {this.state.decks.length > 0 ? (
