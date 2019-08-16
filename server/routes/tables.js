@@ -5,7 +5,7 @@ const usersModel = require('../../db/models/users');
 const tryCatch = require('../utils/tryCatch');
 
 //middleware
-const authorization = require("../middleware/authorization")
+const authorization = require('../middleware/authorization');
 
 router.get('/', async (req, res) => {
   //query string like ?userId=123
@@ -16,6 +16,14 @@ router.get('/', async (req, res) => {
   } catch (error) {
     res.status(500).send({ message: 'Internal server error' });
   }
+});
+
+router.get('/:id', async (req, res) => {
+  tryCatch(async () => {
+    const tableId = req.params.id;
+    const table = await tablesModel.get(tableId);
+    res.status(200).send(table);
+  }, res);
 });
 
 router.get('/:id/users', async (req, res) => {
@@ -29,7 +37,7 @@ router.get('/:id/users', async (req, res) => {
 router.post('/', (req, res) => {
   tryCatch(async () => {
     const tableName = req.body.name;
-    const userId = req.user
+    const userId = req.user;
     const table = await tablesModel.create(tableName, userId);
     res.status(200).json(table);
   }, res);
