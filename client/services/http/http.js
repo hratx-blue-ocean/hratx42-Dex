@@ -102,6 +102,11 @@ const http = {
       return tryAxios(`/api/cards/${cardId}/label/${labelId}`, 'delete')
     }
   },
+  invite: {
+    post(email, tableId) {
+      return tryAxios(`/api/invite/${email}`, 'post', tableId)
+    }
+  },
 };
 
 export default http;

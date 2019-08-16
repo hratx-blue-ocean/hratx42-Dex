@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const usersModel = require('../../db/models/users');
+const tablesModel = require('../../db/models/tables.js');
 const bcrypt = require('bcrypt');
 const saltRounds = 12;
 const jwtChecker = require('../middleware/jwtChecker.js');
@@ -8,7 +9,7 @@ const auth = require('../middleware/auth.js');
 
 // router.use(jwtChecker.checkToken);
 router.get('/:id', (req, res) => {
-  const id = req.params.id;
+  const id = req .params.id;
   usersModel
     .getUserByID(id)
     .then(user => {
@@ -25,6 +26,8 @@ router.get('/:id', (req, res) => {
 router.post(
   '/',
   (req, res, next) => {
+    console.log('COOOOKIEE', req.cookies)
+    let tableId = req.headers.cookie ? req.cookies.tableId ? req.cookies.tableId : null : null;
     const { email, password, name } = req.body;
     //post user to usersModel if she doesn't already exist
     usersModel
@@ -38,7 +41,26 @@ router.post(
               usersModel
                 .createNewUser({ name, hashedPassword, email })
                 .then(userCreated => {
-                  next();
+                  if(tableId) {
+                    usersModel.getUserInfoByEmail(email)
+                    .then((newUser) => {
+                      return tablesModel.addUserToTable(tableId, newUser.id)
+                    })
+                    .then((addedTableToNewUser) => {
+                      res.clearCookie('tableId')
+                      next();
+                    })
+                    .catch((err) => {
+                      console.log('error happened during adding invited user to table', err);
+                      res.status(403).json({
+                        success: false,
+                        message: 'Error in adding you to invited table.'
+                      })
+                    })
+                  } else {
+                    console.log('THIS IS NOT GOOD');
+                    next()
+                  }
                 })
                 .catch(error => {
                   console.log('creating new user failed', error);
@@ -71,9 +93,10 @@ router.post(
 );
 
 router.put('/:id', (req, res) => {
-  const userObj = req.body;
   const userId = req.user;
   const id = req.params.id;
+  const userObj = req.body;
+  userObj.id = id;
   //@TODO: turn this back on
   // if (userId !== id) {
   //   return res.status(401).send({ message: 'Unauthorized' });
