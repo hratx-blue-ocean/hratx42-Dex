@@ -93,7 +93,7 @@ const http = {
       return tryAxios(`/api/cards/${id}`, 'delete');
     },
     addUser(cardId, userId) {
-      return tryAxios(`/api/cards/${cardId}/members/${userId}`, 'post')
+      return tryAxios(`/api/cards/${cardId}/member/${userId}`, 'post')
     },
     addLabel(cardId, labelId) {
       return tryAxios(`/api/cards/${cardId}/label/${labelId}`, 'post')

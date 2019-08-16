@@ -415,5 +415,9 @@ code {
   margin: 0 20px;
 }
 
+.ControlsfilterNames {
+  background-color: grey;
+}
+
 /* END DASHBOARD STYLES */
 
