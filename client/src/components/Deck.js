@@ -32,14 +32,15 @@ export default function Deck(props) {
   return (
     <div id="deckWrapper">
       <div id="deckContent" style={{ width: '100%' }} >
-        <Card.Header className="deckTitle">{props.deck.title}
+        <div id="deckHeader" style={{ width: '100%' }}> <span className="deckTitle">{props.deck.title} </span>
           <Button
+            className="deckEditBtn"
             variant='outline-success'
             onClick={() => setShowEditDeck(true)}
           >
             Edit Deck
               </Button>
-        </Card.Header>
+        </div>
         <div id="deckScrollbar" style={{ overflow: 'scroll' }}>
           <Card.Body className='row'>
             {cards.map((singleCard, cardIndex) =>
@@ -71,8 +72,8 @@ export default function Deck(props) {
 
             />
 
-            <Button className='row' variant='outline-success' onClick={() => handleShow()}>
-              Add Card
+            <Button className="deckAddAnotherCardBtn" className='row' variant='outline-success' onClick={() => handleShow()}>
+              Add Another Card
             </Button>
           </Card.Body>
         </div>

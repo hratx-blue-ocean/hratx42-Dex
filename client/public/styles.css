@@ -226,6 +226,14 @@ code {
   height: 40px;
   width: 40px;
 }
+
+.tableControlsFilterBtn {
+  padding-left: 20px;
+}
+
+.tableControlsAddDeckBtn {
+  margin-left: 20px;
+}
 /* END TABLE CONTROL BAR STYLES */
 
 /* BEGIN DECKS STYLES */
@@ -233,8 +241,30 @@ code {
   width: 100%;
   padding-right: 15px;
   padding-left: 15px;
+  margin-bottom: 15px;
+  margin-top: 15px;
   margin-right: auto;
   margin-left: auto;
+}
+
+.card-body {
+  padding: 2rem;
+}
+
+#deckContent {
+  background-color: #dfe1e6;
+  border-radius: 3px;
+  position: relative;
+  background: #f1f0f0 !important;
+  border-radius: 4px !important;
+  padding: 32px !important;
+  padding-bottom: 24px !important;
+  box-shadow: 0 16px 20px rgba(0, 0, 0, 0.25) !important;
+  font-size: 14px !important;
+  line-height: 1.43;
+  margin-block-start: 0.83em;
+  margin-block-end: 0.83em;
+
 }
 
 #deckScrollbar {
@@ -245,10 +275,17 @@ code {
   overflow: scroll;
 }
 
+#deckHeader {
+  background-color: #ffffff;
+}
+
 .deckTitle {
   width: 100% !important;
   margin-right: -20px;
-  margin-left: -15px;
+  margin-left: 35px;
+  font-family: 'Varela Round', sans-serif;
+  font-size: 18px;
+
 }
 
 .row {
@@ -256,6 +293,39 @@ code {
   flex-wrap: nowrap!important;
   overflow: scroll;
 }
+
+.deckAddAnotherCardBtn {
+  font-size: var(--font-button-small-font-size, 14px) !important;
+  margin-left: 50px;
+  line-height: var(--font-button-small-line-height, 22px) !important;
+  letter-spacing: var(--font-button-small-letter-spacing, normal) !important;
+  font-family: var(--font-button-small-font-family, Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif) !important;
+  text-transform: var(--font-button-small-text-transform, undefined) !important;
+  padding-top: var(--spacing-button-small-vertical, 6px) !important;
+  padding-bottom: var(--spacing-button-small-vertical, 6px) !important;
+  font-weight: var(--font-book-font-weight, 600) !important;
+  padding-left: var(--spacing-button-small-horizontal, 15px) !important;
+  padding-right: var(--spacing-button-small-horizontal, 15px) !important;
+  box-shadow: var(--shadow-button-level3-box-shadow, 0 2px 8px rgba(0, 0, 0, 0.16)) !important;
+  color: #484848 !important;
+}
+
+.deckEditBtn {
+  font-size: var(--font-button-small-font-size, 14px) !important;
+  margin-left: 50px;
+  line-height: var(--font-button-small-line-height, 22px) !important;
+  letter-spacing: var(--font-button-small-letter-spacing, normal) !important;
+  font-family: var(--font-button-small-font-family, Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif) !important;
+  text-transform: var(--font-button-small-text-transform, undefined) !important;
+  padding-top: var(--spacing-button-small-vertical, 6px) !important;
+  padding-bottom: var(--spacing-button-small-vertical, 6px) !important;
+  font-weight: var(--font-book-font-weight, 600) !important;
+  padding-left: var(--spacing-button-small-horizontal, 15px) !important;
+  padding-right: var(--spacing-button-small-horizontal, 15px) !important;
+  box-shadow: var(--shadow-button-level3-box-shadow, 0 2px 8px rgba(0, 0, 0, 0.16)) !important;
+  color: #484848 !important;
+}
+
 /* END DECKS STYLES */
 
 /* BEGIN DASHBOARD STYLES */

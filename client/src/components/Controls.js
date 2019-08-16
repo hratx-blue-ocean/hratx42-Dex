@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import {
   Navbar,
   Button,
+  Form,
   DropdownButton,
   Dropdown,
   Alert,
@@ -31,10 +32,11 @@ export default function Controls(props) {
     <div>
       <Navbar bg="dark" variant="dark">
         <Navbar.Brand>{props.tableName}</Navbar.Brand>
-        <input
+        <Form.Control
           onChange={e => props.searchText(e.target.value)}
           type="text"
           placeholder="Search cards"
+          style={{ width: '15%' }}
         />
         {props.searchName === '' ? (
           <></>
@@ -54,10 +56,8 @@ export default function Controls(props) {
               ))}
             </div>
           )}
-        <Button style={{ height: '30px' }} variant="light" />
-        <div style={{ width: '50px' }} />
-        <div style={{ paddingLeft: '2px' }} />
         <DropdownButton
+          className='tableControlsFilterBtn'
           id="dropdown-basic-button"
           variant="success"
           title={`${props.filterBy}`}
@@ -71,8 +71,12 @@ export default function Controls(props) {
             </Dropdown.Item>
           ))}
         </DropdownButton>
+        <Button className="tableControlsAddDeckBtn" onClick={() => props.handleModal()} variant="success">
+          Add Deck
+          </Button>
+
         <div style={{ position: 'relative', left: '30%' }}>
-          {props.users.map(user => 
+          {props.users.map(user =>
             <>
               <OverlayTrigger
                 key={'bottom'}
@@ -83,17 +87,14 @@ export default function Controls(props) {
                   </Tooltip>
                 }
               >
-                <Button style = {{textAlign: "center"}}className="tableControlsUserNameCircles" variant="secondary">
+                <Button style={{ textAlign: "center" }} className="tableControlsUserNameCircles" variant="secondary">
                   {(user.name.split(" ").map(char => char[0]).join("")).toUpperCase()}
-                </Button>
+                </Button>
               </OverlayTrigger>
             </>
           )}
-          <Button onClick={() => props.handleModal()} variant="success">
-            New Deck
-          </Button>
-         
-         
+
+
           {/* 
           <Button className="tableControlsUserNameCircles" variant="secondary">
             ME
