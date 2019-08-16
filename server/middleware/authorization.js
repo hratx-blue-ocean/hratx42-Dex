@@ -17,5 +17,18 @@ module.exports = {
             }
         });
     },
-
+    userOwnsTable(req, res, next) {
+        const tableId = req.params.id;
+        const userId = req.user;
+        console.log("IDS ", tableId, userId)
+        tryCatch(async () => {
+            const authorized = await authorizationModel.user.ownsTable(userId, tableId);
+            if (authorized) {
+                console.log("Authorized")
+                next()
+            } else {
+                res.status(401).send({ message: 'Unauthorized' });
+            }
+        });
+    }
 }
