@@ -93,19 +93,37 @@ newCardDataCollector(players,tags,deck,cardInfo) {
         })
 }
 
-  editCardDataCollector(players,tags, deck, cardInfo) {
-    let toPost = {
-      description: cardInfo.description,
-      id: cardInfo.id,
-      title: cardInfo.titl,
-      weight: parseInt(cardInfo.eff),
-      impact: parseInt(cardInfo.imp),
-      deck_id: this.obtainDeckID(deck),
-      table_id: this.props.tableId,
-    }
-    let toMembersPost ={cards_members: this.obtainPlayersId(players)}
-    let toLabelsPost = {card_labels: this.obtainLabelIds(tags)}
+editCardDataCollector(players,tags, deck, cardInfo) {
+  let toPost = {
+    description: cardInfo.description,
+    id: cardInfo.id,
+    title: cardInfo.titl,
+    weight: parseInt(cardInfo.eff),
+    impact: parseInt(cardInfo.imp),
+    deck_id: this.obtainDeckID(deck),
+    table_id: this.props.tableId,
   }
+  let toMembersPost ={cards_members: this.obtainPlayersId(players)}
+  let toLabelsPost = {card_labels: this.obtainLabelIds(tags)}
+  let addedCard;
+  http.cards.put(toPost)
+      .then((response)=>{
+        console.log(response)
+        editCard=response
+        console.log(editCard)
+      })
+      // .then((response)=>{
+      //   toMembersPost.cards_members.forEach(async (player) =>{
+      //     await http.cards.addUser(addedCard.id, player.member_id)
+      //   })
+      //   console.log(response)
+      // })
+      // .then(()=>{
+      //   toLabelsPost.card_labels.forEach(async (label) =>{
+      //     await http.cards.addLabel(addedCard.id,label.id)
+      //   })
+      // })
+}
 
   obtainPlayersId(players) {
     let users = this.state.users
@@ -268,6 +286,10 @@ newCardDataCollector(players,tags,deck,cardInfo) {
     .then((res) => console.log('this is the card move response', res))
   }
 
+  loseFocusSearch() {
+    this.setState({searchName: ''})
+  }
+
   render() {
     return (
       <div>
@@ -283,14 +305,14 @@ newCardDataCollector(players,tags,deck,cardInfo) {
           tableId={this.props.tableId}
           tableName={this.props.tableName}
           labels={this.state.labels}
+          loseFocusSearch = {this.loseFocusSearch.bind(this)}
         />
         {/* for each deck, create a deck */}
         {this.state.decks.length > 0 ? (
           <>
             {this.state.decks.map((deck, deckIndex) => (
               <div key={deck.id}>
-                <Deck
-                  filterBy={this.state.filterBy}
+                <Deck filterBy={this.state.filterBy}
                   deck={deck}
                   users={this.state.users}
                   deckNames={this.state.deckNames}

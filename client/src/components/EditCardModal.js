@@ -187,13 +187,13 @@ export default function CardModal({closeModal, showMe, card, deckTitle, deckName
             <Button onClick={(event)=> {
                 let cardInfo={id: card.id, eff:effort, imp:impact, titl:title, description:desc, due: dueDate}
                 editCard(players, tags, deck, cardInfo)
+                handleClose()
             }} variant="primary">Submit</Button>
           </Col>
           <Col xs={2}>
             <Button variant="danger" onClick={() => { table.deleteCardById(card.id) }}>Delete</Button>
           </Col>
         </Row>
-
     </Container>
   </Modal>
   </>
