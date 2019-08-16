@@ -19,80 +19,80 @@ export default function CardModal({ closeModal, showMe, card, deckTitle, deckNam
   return (
     
       )
-    
-    
+
+}
 const styles = {
-        //Header Row effort, impact, title, exit
-        headerRow: {
-        // "border": "1px solid black",
-        height: 'auto'
-    },
+  //Header Row effort, impact, title, exit
+  headerRow: {
+    // "border": "1px solid black",
+    height: 'auto'
+  },
   effortImpact: {
-        // "border": "1px solid black"
-        // paddingTop: 20
-      },
+    // "border": "1px solid black"
+    // paddingTop: 20
+  },
   effortImpactTitle: {
-        // border: "1px solid black",
-        justifyContent: 'center',
-      paddingTop: 35,
-    },
+    // border: "1px solid black",
+    justifyContent: 'center',
+    paddingTop: 35,
+  },
   effortImpactInput: {
-        // border: "1px solid black",
-      },
+    // border: "1px solid black",
+  },
   effImpInputBox: {
-        width: 40,
-      height: 20,
-      // oninput:"this.value=this.value.replace(/[^0-9]/g,'');"
-  
-    },
+    width: 40,
+    height: 20,
+    // oninput:"this.value=this.value.replace(/[^0-9]/g,'');"
+
+  },
   exitButton: {
-        fontWeight: 1000,
-      fontSize: 20,
-      paddingLeft: 15,
-    },
-  
+    fontWeight: 1000,
+    fontSize: 20,
+    paddingLeft: 15,
+  },
+
   titleStyle: {
-        // "border": "1px solid black"
-      },
-    
-    
-      //Content Column Row
+    // "border": "1px solid black"
+  },
+
+
+  //Content Column Row
   mainContent: {
-        // "border": "1px solid black"
-      },
+    // "border": "1px solid black"
+  },
   playersTagsTitles: {
-        // "border": "1px solid black"
-      },
+    // "border": "1px solid black"
+  },
   playersStyle: {
-        // "border": "1px solid black"
-      },
+    // "border": "1px solid black"
+  },
   tagsStyle: {
-        // "border": "1px solid black"
-      },
+    // "border": "1px solid black"
+  },
   textBoxStyle: {
-        align: "top",
-      height: '100px',
-      placeholder: "description..."
-    },
-  
-  
-  
-    //add specific content column for card
+    align: "top",
+    height: '100px',
+    placeholder: "description..."
+  },
+
+
+
+  //add specific content column for card
   addToCardCol: {
-        // border: "1px solid black",
-      },
+    // border: "1px solid black",
+  },
   addToCardTitle: {
-        justifyContent: 'center'
-    },
+    justifyContent: 'center'
+  },
   addToCardTrait: {
-        // border: "1px solid black",
-        paddingLeft: 5,
-      paddingTop: 5
-    },
-  
-    //buttonRow
+    // border: "1px solid black",
+    paddingLeft: 5,
+    paddingTop: 5
+  },
+
+  //buttonRow
   submitButton: {
-        paddingLeft: 10,
-      paddingBottom: 10,
-    }
+    paddingLeft: 10,
+    paddingBottom: 10,
   }
+}
