@@ -39,7 +39,7 @@ export default class Table extends Component {
     http.decks
       .get(this.props.tableId)
       .then(response => {
-        console.log('table data', response);
+        // console.log('table data', response);
         this.setState({ decks: response, tableName: this.props.tableName });
       })
       //populated deckname for tickets

@@ -38,6 +38,10 @@ app.use('/api/tables', tablesRoute);
 app.use('/api/decks', decksRoute);
 app.use('/api/cards', cardsRoute);
 
+app.get('/logout', (req, res) => {
+  console.log(req.headers.cookie);
+  res.send("Cookie deleted");
+})
 app.use('/*', express.static(path.join(__dirname, '../client/public')));
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -54,5 +58,6 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.json('error');
 });
+
 
 module.exports = app;
