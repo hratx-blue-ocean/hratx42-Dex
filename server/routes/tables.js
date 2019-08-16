@@ -4,11 +4,14 @@ const tablesModel = require('../../db/models/tables');
 const usersModel = require('../../db/models/users');
 const tryCatch = require('../utils/tryCatch');
 
+//middleware
+const authorization = require("../middleware/authorization")
+
+//jwtChecker returns response if user is not logged in
 // router.use(jwtChecker.checkToken);
 router.get('/', async (req, res) => {
   //query string like ?userId=123
   const { userId } = req.query;
-  //if req.user
   try {
     const tables = await tablesModel.getByUserId(userId);
     res.status(200).send(tables);
@@ -33,21 +36,20 @@ router.post('/', (req, res) => {
   }, res);
 });
 
-router.put('/:id', (req, res) => {
-  const table = req.body;
-  const id = req.params.id;
-  table.id = id;
-  //if req.user && user owns table
-  //update table
-  res.status(200).send(JSON.stringify(table));
-});
+// router.put('/:id', (req, res) => {
+//   const table = req.body;
+//   const id = req.params.id;
+//   table.id = id;
+//   //if req.user && user owns table
+//   //update table
+//   res.status(200).send(JSON.stringify(table));
+// });
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', authorization.userOwnsTable, (req, res) => {
   tryCatch(async () => {
     const tableId = req.params.id;
     console.log("deleting table", tableId)
     const result = await tablesModel.delete(tableId);
-    console.log(result)
     res.status(200).json({ message: 'deleted' });
   }, res);
 });

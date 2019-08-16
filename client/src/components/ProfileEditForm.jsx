@@ -1,5 +1,6 @@
 import React from 'react'
 import {  Button , Form} from 'react-bootstrap';
+import http from '../../services/http/http.js';
 import global from '../../utils/global';
 
 export default class ProfileEditForm extends React.Component {
@@ -7,17 +8,33 @@ export default class ProfileEditForm extends React.Component {
     console.log('props', props);
     super(props)
     this.state = {
-      id: props.user.id,
+      id: props.userId,
       nameField: props.user.name,
       emailField: props.user.email,
-      passwordField: null
+      passwordField: null,
+      confirmPasswordField: null
     }
     this.submitProfileChanges = this.submitProfileChanges.bind(this)
   }
 
+  checkPasswords(){
+    const newPasswordInput = document.getElementById('newPassword')
+    if (this.state.passwordField === null ||
+        this.state.passwordField.length < 3 ||
+        this.state.passwordField !== this.state.confirmPasswordField){
+      newPasswordInput.setCustomValidity('Passwords must match')
+      newPasswordInput.reportValidity();
+      return false;
+    }
+    return true
+  }
+
   submitProfileChanges(e) {
     e.preventDefault();
-    http.users
+    console.log('i made a change');
+    if (this.checkPasswords()){
+      console.log('test');
+      http.users
       .put(
         this.state.id,
         this.state.nameField,
@@ -25,13 +42,14 @@ export default class ProfileEditForm extends React.Component {
         this.state.passwordField
       )
       .then(user => {
+        this.props.hideProfile();
         global.setState({user})
       })
       .catch(err => console.log('Error: ', err));
+    }
   }
 
   render(){
-    console.log(this.state);
     return (
       <div className="dashboardProfileForm" >
         <h2>edit profile</h2>
@@ -39,6 +57,7 @@ export default class ProfileEditForm extends React.Component {
           <div className="dashboardNameInput">
             <h4>name</h4>
             <input
+              required
               type="text"
               className="name"
               onChange={e => {
@@ -50,6 +69,7 @@ export default class ProfileEditForm extends React.Component {
           <div className="dashboardEmailInput">
             <h4>email</h4>
             <input
+              required
               type="text"
               className="email"
               onChange={e => {
@@ -59,15 +79,27 @@ export default class ProfileEditForm extends React.Component {
           </div>
 
           <div className="dashboardPasswordInput">
-            <h4>password</h4>
+            <h4>change password</h4>
             <input
+              id="newPassword"
               type="password"
               className="name"
-              placeholder="password"
+              placeholder="new password"
               onChange={e => {
                 this.setState({passwordField: e.target.value})
               }}
-              value={this.state.passwordField} />
+              value={this.state.passwordField ? this.state.passwordField : ''} />
+            <br />
+            <br />
+            <input
+              id="confirmNewPassword"
+              type="password"
+              className="name"
+              placeholder="confirm password"
+              onChange={e => {
+                this.setState({confirmPasswordField: e.target.value})
+              }}
+              value={this.state.confirmPasswordField ? this.state.confirmPasswordField : ''} />
           </div>
           <button type="submit" className="dashboardFormBtn">
             Save Changes

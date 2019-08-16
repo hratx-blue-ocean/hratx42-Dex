@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-// import DatePicker from 'react-date-picker';
 import { Button, Modal, Container, Row, Col, Form} from 'react-bootstrap';
 
 
-export default function CardModal({closeModal, showMe, deckNames, newCardData, users, labels}) {
+export default function CardModal({closeModal, card, showMe, deckNames, newCardData, users, labels}) {
   const [show, setShow] = useState(false);
 
   const [effort, setEffort] = useState(5);
@@ -12,17 +11,14 @@ export default function CardModal({closeModal, showMe, deckNames, newCardData, u
   const [players, setPlayers] = useState([]);
   const [tags, setTags] = useState([]);
   const [dueDate, setDate] = useState();
-  const [deck, setDeck] = useState();
+  const [deck, setDeck] = useState(deck);
   const [desc, setDesc] = useState();
 
 
   const handleClose = () => closeModal()
 //   const handleShow = () => setShow(true);
 
-function removePlayer() {
-    
-}
-
+// 
   return (
   <>
   <Modal size="lg" show={showMe} onHide={handleClose}>
@@ -102,7 +98,6 @@ function removePlayer() {
                             let labelsHolder = tags
                             let selectLabel = event.target.value  
                             let targetLabel ={color: null, label_name: selectLabel}
-                            console.log(JSON.stringify(event.target.value))
                             labelsHolder.push(targetLabel)
                             setTags(labelsHolder)
                         }}>
@@ -154,13 +149,20 @@ function removePlayer() {
               <div>Add To Card</div>
             </Row>
             <Row style={styles.addToCardTrait}>
-              <input placeholder="date due" onBlur={(event)=> setDate(event.target.value)} style={{width:'100%'}}/> 
+              {/* <input placeholder="date due" placeholder='Due Date' onBlur={(event)=> setDate(event.target.value)} style={{width:'100%'}}/>  */}
+              <input type="date" 
+              id="start" 
+              name="due date"
+              value = {new Date()}
+              onChange={(event)=> setDate(event.target.value)}
+              min={new Date()} />
             </Row>
             {/* <Row style={styles.addToCardTrait}>
                 <input placeholder="gitLink" style={{width:'100%'}}/> 
             </Row> */}
             <Row style={styles.addToCardTrait}>
             <select style={{width:'100%'}}  onChange={(event)=> setDeck(event.target.value)}>
+              <option></option>
             {deckNames.map(name =>{
                 return (
                     <option>{name.title}</option>
@@ -226,14 +228,14 @@ const styles = {
 
   //Content Column Row
   mainContent: {
-    "border": "1px solid black"
+    // "border": "1px solid black"
   },
   playersTagsTitles: {
-    "border": "1px solid black",
+    // "border": "1px solid black",
     width:'100%'
   },
   playersStyle: {
-    "border": "1px solid black"
+    // "border": "1px solid black"
   },
   tagsStyle: {
     // "border": "1px solid black"

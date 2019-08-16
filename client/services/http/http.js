@@ -45,6 +45,9 @@ const http = {
         : undefined;
       return auth.userIsLoggedIn();
     },
+    async logout() {
+      const deleteCookie = await tryAxios('/logout', 'get');
+    }
   },
   tables: {
     get(userId) {
@@ -90,13 +93,18 @@ const http = {
       return tryAxios(`/api/cards/${id}`, 'delete');
     },
     addUser(cardId, userId) {
-      return tryAxios(`/api/cards/${cardId}/members/${userId}`, 'post')
+      return tryAxios(`/api/cards/${cardId}/member/${userId}`, 'post')
     },
     addLabel(cardId, labelId) {
       return tryAxios(`/api/cards/${cardId}/label/${labelId}`, 'post')
     },
     removeLabel(cardId, labelId) {
       return tryAxios(`/api/cards/${cardId}/label/${labelId}`, 'delete')
+    }
+  },
+  invite: {
+    post(email, tableId) {
+      return tryAxios(`/api/invite/${email}`, 'post', tableId)
     }
   },
 };

@@ -98,6 +98,7 @@ export default class App extends Component {
 
   logOut() {
     auth.logout();
+    http.auth.logout();
     auth.setUser(this);
     this.setState({ userId: '' })
   }
@@ -143,6 +144,7 @@ export default class App extends Component {
                 // state props
                 state = {this.state}
                 user={this.state.user}
+                userId={this.state.userId}
                 tables={this.state.tables}
                 editProfileName={this.state.profile.editName}
                 editProfileEmail={this.state.profile.editEmail}
