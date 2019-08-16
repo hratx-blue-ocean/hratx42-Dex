@@ -10,6 +10,7 @@ export default function Deck(props) {
   const [title, setTitle] = useState(props.deck.title);
 
   const handleShow = () => setShow(true);
+
   const handleClose = () => setShow(false);
 
   let cards = [];
@@ -65,7 +66,10 @@ export default function Deck(props) {
               closeModal={handleClose.bind(this)}
               newCardData={props.newCardData}
               users={props.users}
-              labels={props.labels} />
+              labels={props.labels}
+              card={props.singleCard}
+
+            />
 
             <Button className='row' variant='outline-success' onClick={() => handleShow()}>
               Add Card
