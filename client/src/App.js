@@ -83,7 +83,6 @@ export default class App extends Component {
     const userID = auth.getUser();
     if (userID) {
       const cards = await http.users.getCardsByUser(userID);
-      console.log('here are cards???',cards)
       this.setState({cards})
     }
   }

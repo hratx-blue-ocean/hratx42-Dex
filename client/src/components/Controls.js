@@ -20,7 +20,6 @@ export default function Controls(props) {
   const [showModal, setShowModal] = useState(false);
   const [showInvite, showInviteToggler] = useState(false);
   const [invitationEmail, setInvitationEmail] = useState('');
-  const [showSearchCards, setShowSearchCards] = useState('hidden')
 
   const cards = props.cards.slice(0, 10);
   const sendInvite = async () => {
@@ -49,16 +48,18 @@ export default function Controls(props) {
       <Navbar className="tableControlsNavBar" bg="dark" variant="dark">
         <Navbar.Brand>{props.tableName}</Navbar.Brand>
         <Form.Control
-          onChange={e => {
-            setShowSearchCards('visible')
-            props.searchText(e.target.value)}}
+          onChange={e => props.searchText(e.target.value)}
           type="text"
           placeholder="Search cards"
           style={{ width: '15%' }}
+          onBlur = {() => props.loseFocusSearch()}
         />
-            <div className={showSearchCards === 'hidden' ? 'hideSearchSuggest ControlsSearchItems row' : 'ControlsSearchItems row'}>
+        {props.searchName === '' ? (
+          <></>
+        ) : (
+            <div className="ControlsSearchItems row">
               {cards.map(item => (
-                <div key={Math.random()} className={`ControlsSearchItem`}>
+                <div key={Math.random()} className="ControlsSearchItem">
                   <div style={{ paddingLeft: '160px' }} />
                   <CardThumbnails
                     singleCard={item}
@@ -70,6 +71,7 @@ export default function Controls(props) {
                 </div>
               ))}
             </div>
+          )}
         <DropdownButton
           className='tableControlsFilterBtn'
           id="dropdown-basic-button"
