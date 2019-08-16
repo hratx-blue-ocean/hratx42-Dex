@@ -1,23 +1,22 @@
 const express = require('express');
 const router = express.Router();
+
+//middleware
+const authorization = require('../middleware/authorization')
+
+//models
 const cardsModel = require('../../db/models/cards');
 const usersModel = require('../../db/models/users');
-const authorizationModel = require('../../db/models/authorization');
 
+//utils
 const tryCatch = require('../utils/tryCatch');
 
 //get card info by cardID
-router.get('/:id', (req, res) => {
+router.get('/:id', authorization.userOwnsCard, (req, res) => {
   const cardId = req.params.id;
-  const userId = req.user;
   tryCatch(async () => {
-    const authorized = await authorizationModel.user.ownsCard(userId, cardId);
-    if (authorized) {
-      const card = await cardsModel.getCardByID(cardId);
-      res.status(200).send(card);
-    } else {
-      res.status(401).send({ message: 'Unauthorized' });
-    }
+    const card = await cardsModel.getCardByID(cardId);
+    res.status(200).send(card);
   });
 });
 
@@ -25,58 +24,36 @@ router.get('/:id', (req, res) => {
 router.post('/', (req, res) => {
   const card = req.body;
   //@TODO: change this line
-  const userId = req.user || true;
   tryCatch(async () => {
-    if (userId) {
-      let newCard = await cardsModel.createNewCard(card);
-      let newPopulatedCard = await cardsModel.getCardByID(newCard.id)
-      res.status(200).send(newPopulatedCard);
-    } else {
-      res.status(401).send({ message: 'Unauthorized' });
-    }
+    let newCard = await cardsModel.createNewCard(card);
+    let newPopulatedCard = await cardsModel.getCardByID(newCard.id)
+    res.status(200).send(newPopulatedCard);
   });
 });
 
 //update card
-router.put('/:id', async (req, res) => {
-  const card = req.body;
-  const userId = req.user;
-  if (!card.id) {
-    res.status(400).send({
-      message: 'You need to send a card object with an id key and value',
-    });
-    return;
-  }
+router.put('/:id', authorization.userOwnsCard, async (req, res) => {
+  const card = req.body
+  card.id = req.params.id
   tryCatch(async () => {
-    const authorized = await authorizationModel.user.ownsCard(userId, card.id);
-    if (authorized) {
-      await cardsModel.updateCard(card);
-      const updatedCard = await cardsModel.getCardByID(card.id)
-      res.status(200).send(updatedCard);
-    } else {
-      res.status(401).send({ message: 'Unauthorized' });
-    }
+    await cardsModel.updateCard(card);
+    const updatedCard = await cardsModel.getCardByID(card.id)
+    res.status(200).send(updatedCard);
   });
 });
 
 //delete card by cardID
-router.delete('/:id', (req, res) => {
+router.delete('/:id', authorization.userOwnsCard, (req, res) => {
   const cardId = req.params.id;
-  const userId = req.user;
   tryCatch(async () => {
-    const authorized = await authorizationModel.user.ownsCard(userId, cardId);
-    if (authorized) {
-      await cardsModel.delete(cardId);
-      res.status(200).send({ message: 'Card Deleted' });
-    } else {
-      res.status(401).send({ message: 'Unauthorized' });
-    }
+    await cardsModel.delete(cardId);
+    res.status(200).send({ message: 'Card Deleted' });
   });
 });
 
-router.post('/:cardId/member/:userId', async (req, res) => {
+router.post('/:id/member/:userId', authorization.userOwnsCard, async (req, res) => {
   tryCatch(async () => {
-    const cardId = req.params.cardId;
+    const cardId = req.params.id;
     const userId = req.params.userId;
     console.log(cardId, userId)
     const user = await usersModel.getUserByID(userId);
@@ -91,9 +68,9 @@ router.post('/:cardId/member/:userId', async (req, res) => {
   }, res);
 });
 
-router.delete('/:cardId/member/:userId', async (req, res) => {
+router.delete('/:id/member/:userId', authorization.userOwnsCard, async (req, res) => {
   tryCatch(async () => {
-    const cardId = req.params.cardId;
+    const cardId = req.params.id;
     const userId = req.params.userId;
     let result = await cardsModel.removeUserFromCard(cardId, userId);
     if (result) {
@@ -107,9 +84,9 @@ router.delete('/:cardId/member/:userId', async (req, res) => {
   }, res);
 });
 
-router.post('/:cardId/label/:labelId', async (req, res) => {
+router.post('/:id/label/:labelId', authorization.userOwnsCard, async (req, res) => {
   tryCatch(async () => {
-    const cardId = req.params.cardId;
+    const cardId = req.params.id;
     const labelId = req.params.labelId;
     await cardsModel.addLabelToCard(cardId, labelId);
     const updatedCard = await cardsModel.getCardByID(cardId)
@@ -117,9 +94,9 @@ router.post('/:cardId/label/:labelId', async (req, res) => {
   }, res);
 });
 
-router.delete('/:cardId/label/:labelId', async (req, res) => {
+router.delete('/:id/label/:labelId', authorization.userOwnsCard, async (req, res) => {
   tryCatch(async () => {
-    const cardId = req.params.cardId;
+    const cardId = req.params.id;
     const labelId = req.params.labelId;
     let result = await cardsModel.removeLabelFromCard(cardId, labelId);
     if (result) {

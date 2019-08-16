@@ -1,10 +1,13 @@
 const jwt = require('jsonwebtoken');
 // const config =require('./config.js');
-const config = {secret: "supersecuresecret"};
+const config = { secret: "supersecuresecret" };
 
 const parseCookie = (cookieStr, cookie) => {
+  if (!cookieStr) {
+    return false
+  }
   const cookies = cookieStr.split(" ");
-  let value = cookies.filter((c) =>  {
+  let value = cookies.filter((c) => {
     if (c.indexOf(`${cookie}=`) > -1) {
       return true
     }
@@ -14,7 +17,7 @@ const parseCookie = (cookieStr, cookie) => {
 }
 
 const checkToken = (req, res, next) => {
-  let token = parseCookie(req.headers.cookie, 'token');
+  let token = req.headers.token
   if (token) {
     jwt.verify(token, config.secret, (err, decoded) => {
       if (err) {
@@ -31,9 +34,9 @@ const checkToken = (req, res, next) => {
   } else {
     return res.status(404).json({
       success: false,
-      message: 'Auth token is not supplied'
+      message: 'Please sign in'
     });
   }
 };
 
-module.exports =  {checkToken };
+module.exports = { checkToken };

@@ -4,11 +4,11 @@ const tablesModel = require('../../db/models/tables');
 const usersModel = require('../../db/models/users');
 const tryCatch = require('../utils/tryCatch');
 
+//jwtChecker returns response if user is not logged in
 // router.use(jwtChecker.checkToken);
 router.get('/', async (req, res) => {
   //query string like ?userId=123
   const { userId } = req.query;
-  //if req.user
   try {
     const tables = await tablesModel.getByUserId(userId);
     res.status(200).send(tables);
