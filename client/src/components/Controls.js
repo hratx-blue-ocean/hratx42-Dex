@@ -43,7 +43,7 @@ export default function Controls(props) {
   };
 
   return (
-    <div>
+    <div style={{ paddingBottom: '18px' }}>
       <Navbar className="tableControlsNavBar" bg="dark" variant="dark">
         <Navbar.Brand>{props.tableName}</Navbar.Brand>
         <Form.Control
@@ -87,6 +87,14 @@ export default function Controls(props) {
         </DropdownButton>
         <Button className="tableControlsAddDeckBtn" onClick={() => props.handleModal()} variant="success">
           Add Deck
+          </Button>
+        <Button
+          variant="outline-danger"
+          onClick={() => {
+            setShowModal(true);
+          }}
+        >
+          Delete Table
           </Button>
 
         <div style={{ position: 'relative', left: '30%' }}>
@@ -151,14 +159,7 @@ export default function Controls(props) {
               </Form>
             </Modal.Body>
           </Modal>
-          <Button
-            variant="outline-danger"
-            onClick={() => {
-              setShowModal(true);
-            }}
-          >
-            Delete
-          </Button>
+
         </div>
       </Navbar>
       {showModal ? (
