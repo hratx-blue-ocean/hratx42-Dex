@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Button, Modal, Container, Row, Col, Form} from 'react-bootstrap';
 
 
-export default function CardModal({closeModal, card, showMe, deckNames, newCardData, users, labels}) {
+export default function CardModal({closeModal, card, deckTitle, showMe, deckNames, newCardData, users, labels}) {
   const [show, setShow] = useState(false);
 
   const [effort, setEffort] = useState(5);
@@ -10,10 +10,9 @@ export default function CardModal({closeModal, card, showMe, deckNames, newCardD
   const [title, setTitle] = useState();
   const [players, setPlayers] = useState([]);
   const [tags, setTags] = useState([]);
-  const [dueDate, setDate] = useState();
-  const [deck, setDeck] = useState(deck);
+  const [dueDate, setDate] = useState(new Date());
+  const [deck, setDeck] = useState(deckTitle);
   const [desc, setDesc] = useState();
-
 
   const handleClose = () => closeModal()
 //   const handleShow = () => setShow(true);
@@ -153,7 +152,7 @@ export default function CardModal({closeModal, card, showMe, deckNames, newCardD
               <input type="date" 
               id="start" 
               name="due date"
-              value = {new Date()}
+              value = {dueDate}
               onChange={(event)=> setDate(event.target.value)}
               min={new Date()} />
             </Row>
@@ -162,7 +161,7 @@ export default function CardModal({closeModal, card, showMe, deckNames, newCardD
             </Row> */}
             <Row style={styles.addToCardTrait}>
             <select style={{width:'100%'}}  onChange={(event)=> setDeck(event.target.value)}>
-              <option></option>
+              <option>{deckTitle}</option>
             {deckNames.map(name =>{
                 return (
                     <option>{name.title}</option>

@@ -20,15 +20,7 @@ export default function CardModal({closeModal, showMe, card, deckTitle, deckName
   const [deck, setDeck] = useState(deckTitle);
   const [desc, setDesc] = useState(card.description);
 
-
-// let d = new Date()
-// let year = d.getFullYear()
-// let month = d.getMonth()
-// let day  = d.getDate()
-// const today = `${year}-${month}-${day}`
-// setDate(today)
-
-// console.log(year)
+console.log(card)
 
   return (
 
@@ -158,7 +150,7 @@ export default function CardModal({closeModal, showMe, card, deckTitle, deckName
               <input type="date" 
               id="start" 
               name="due dates"
-              value = {new Date()}
+              value = {dueDate}
               onChange={(event)=> setDate(event.target.value)}
               min={new Date()} />
             </Row>
