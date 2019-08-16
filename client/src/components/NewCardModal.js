@@ -3,7 +3,12 @@ import React, { useState } from "react";
 import { Button, Modal, Container, Row, Col, Form} from 'react-bootstrap';
 
 
+<<<<<<< HEAD
 export default function CardModal({closeModal, showMe, deckNames, newCardData, users, labels}) {
+=======
+export default function CardModal({closeModal, card, showMe, deckNames, newCardData, users, labels}) {
+  const [show, setShow] = useState(false);
+>>>>>>> 4909e23602afae6f49d424829a07999e604983d7
 
   const [effort, setEffort] = useState(5);
   const [impact, setImpact] = useState(3);
@@ -11,12 +16,19 @@ export default function CardModal({closeModal, showMe, deckNames, newCardData, u
   const [players, setPlayers] = useState([]);
   const [tags, setTags] = useState([]);
   const [dueDate, setDate] = useState();
-  const [deck, setDeck] = useState();
+  const [deck, setDeck] = useState(deck);
   const [desc, setDesc] = useState();
 
 
+<<<<<<< HEAD
   const handleClose = () => closeModal();
 
+=======
+  const handleClose = () => closeModal()
+//   const handleShow = () => setShow(true);
+
+// 
+>>>>>>> 4909e23602afae6f49d424829a07999e604983d7
   return (
   <>
   <Modal size="lg" show={showMe} onHide={handleClose}>
@@ -149,7 +161,12 @@ export default function CardModal({closeModal, showMe, deckNames, newCardData, u
                 <input placeholder="gitLink" style={{width:'100%'}}/> 
             </Row> */}
             <Row style={styles.addToCardTrait}>
+<<<<<<< HEAD
             <select style={{width:'100%'}}  onBlur={(event)=> setDeck(event.target.value)}>
+=======
+            <select style={{width:'100%'}}  onChange={(event)=> setDeck(event.target.value)}>
+              <option></option>
+>>>>>>> 4909e23602afae6f49d424829a07999e604983d7
             {deckNames.map(name =>{
                 return (
                     <option>{name.title}</option>
@@ -215,14 +232,14 @@ const styles = {
 
   //Content Column Row
   mainContent: {
-    "border": "1px solid black"
+    // "border": "1px solid black"
   },
   playersTagsTitles: {
-    "border": "1px solid black",
+    // "border": "1px solid black",
     width:'100%'
   },
   playersStyle: {
-    "border": "1px solid black"
+    // "border": "1px solid black"
   },
   tagsStyle: {
     // "border": "1px solid black"

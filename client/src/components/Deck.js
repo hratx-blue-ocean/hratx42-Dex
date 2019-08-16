@@ -10,23 +10,22 @@ export default function Deck(props) {
   const [title, setTitle] = useState(props.deck.title);
 
   const handleShow = () => setShow(true);
+
   const handleClose = () => setShow(false);
 
   let cards = [];
-  if (props.deck.cards) {
-    if (props.filterBy === 'Filter') {
-      cards = props.deck.cards.slice(0, 6);
-    } else {
-      props.deck.cards.forEach(card => {
-        card.cards_members.forEach(member => {
-          if (member.member_name){
-          if (member.member_name.includes(props.filterBy)) {
-            cards.push(card);
-          }}
-        });
+  if (props.filterBy === 'Filter') {
+    cards = props.deck.cards.slice(0, 6);
+  } else {
+    props.deck.cards.forEach(card => {
+      card.cards_members.forEach(member => {
+        if (member.member_name){
+        if (member.member_name.includes(props.filterBy)) {
+          cards.push(card);
+        }}
       });
-    }
-}
+    });
+  }
   return (
     <div style={{ width: '75%' }}>
       <div>
@@ -66,7 +65,11 @@ export default function Deck(props) {
               closeModal={handleClose.bind(this)}
               newCardData={props.newCardData}
               users={props.users} 
-              labels={props.labels}/>
+              labels={props.labels}
+              card = {props.singleCard} 
+
+              />
+              
 
             <Button variant='outline-success' onClick={() => handleShow()}>
               Add New Card

@@ -1,13 +1,44 @@
 import React, { useState } from 'react';
+<<<<<<< HEAD
 import {Navbar,Button,DropdownButton,Dropdown,Alert,OverlayTrigger,Tooltip} from 'react-bootstrap';
+=======
+import {
+  Navbar,
+  Button,
+  DropdownButton,
+  Dropdown,
+  Alert,
+  Modal,
+  Form,
+  OverlayTrigger,
+  Tooltip
+} from 'react-bootstrap';
+>>>>>>> 4909e23602afae6f49d424829a07999e604983d7
 import CardThumbnails from './CardThumbnails';
 
 import http from '../../services/http/http';
+import auth from '../../services/auth';
+import global from '../../utils/global';
 
 export default function Controls(props) {
   const [showModal, setShowModal] = useState(false);
+<<<<<<< HEAD
+=======
+  const [showInvite, showInviteToggler] = useState(false);
+  const [invitationEmail, setInvitationEmail] = useState('');
+>>>>>>> 4909e23602afae6f49d424829a07999e604983d7
   const cards = props.cards.slice(0, 10);
-  const handleDelete = async function (sure) {
+  const sendInvite = async () => {
+    let userId = auth.getUser();
+    let username; 
+    props.users.forEach((user) => user.id === userId ? username = user.name : null)
+    let invitation = await http.invite.post(invitationEmail, { tableId: props.tableId, invitedBy: username });
+    let {success, message} = invitation
+    console.log(success);
+    console.log(message);
+    global.flash(message, 'success', 2000);
+  }
+  const handleDelete = async function(sure) {
     setShowModal(false);
     if (sure) {
       const response = await http.tables.delete(props.tableId);
@@ -93,12 +124,38 @@ export default function Controls(props) {
           <Button
             style={{ width: '150px' }}
             variant="success"
-            onClick={() => {
-              console.log('clicked on invite a player to a table');
-            }}
+            onClick={showInviteToggler}
           >
             Invite
           </Button>
+          <Modal show={showInvite} onHide={showInviteToggler}>
+            <Modal.Header closeButton>
+              <Modal.Title>Send Invitation</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+            <Form>
+              <Form.Group controlId="formBasicEmail">
+                <Form.Label>Email address</Form.Label>
+                <Form.Control 
+                  type="email" 
+                  placeholder="Enter email" 
+                  onBlur={(e) => {
+                   setInvitationEmail(e.target.value)
+                   }} 
+                />
+                <Form.Text className="text-muted">
+                  Enter the email you wish to invite!
+                </Form.Text>
+              </Form.Group>
+              <Button variant="secondary" onClick={showInviteToggler}>
+                Close
+              </Button>
+              <Button variant="primary" onClick={sendInvite}>
+                Send
+              </Button>
+            </Form>
+            </Modal.Body>
+          </Modal>
           <Button
             variant="outline-danger"
             onClick={() => {
