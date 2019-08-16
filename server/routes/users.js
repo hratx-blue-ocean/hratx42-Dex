@@ -9,7 +9,7 @@ const auth = require('../middleware/auth.js');
 
 // router.use(jwtChecker.checkToken);
 router.get('/:id', (req, res) => {
-  const id = req.params.id;
+  const id = req .params.id;
   usersModel
     .getUserByID(id)
     .then(user => {
@@ -93,9 +93,10 @@ router.post(
 );
 
 router.put('/:id', (req, res) => {
-  const userObj = req.body;
   const userId = req.user;
   const id = req.params.id;
+  const userObj = req.body;
+  userObj.id = id;
   //@TODO: turn this back on
   // if (userId !== id) {
   //   return res.status(401).send({ message: 'Unauthorized' });
