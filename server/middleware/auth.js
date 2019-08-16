@@ -7,6 +7,7 @@ const config = { secret: 'supersecuresecret' };
 const usersModel = require('../../db/models/users');
 
 const auth = (req, res, next) => {
+  // console.log('COKIEOEKDUFID', req.cookies);
   const { email, password } = req.body;
   //get user email
   usersModel
@@ -34,6 +35,7 @@ const auth = (req, res, next) => {
                 expiresIn: '7 days',
               });
               res
+                .clearCookie('tableId')
                 .cookie('token', token)
                 .header('x-access-token', token)
                 .status(201)
