@@ -7,8 +7,6 @@ const tryCatch = require('../utils/tryCatch');
 //middleware
 const authorization = require("../middleware/authorization")
 
-//jwtChecker returns response if user is not logged in
-// router.use(jwtChecker.checkToken);
 router.get('/', async (req, res) => {
   //query string like ?userId=123
   const { userId } = req.query;
@@ -31,19 +29,11 @@ router.get('/:id/users', async (req, res) => {
 router.post('/', (req, res) => {
   tryCatch(async () => {
     const tableName = req.body.name;
-    const table = await tablesModel.create(tableName);
+    const userId = req.user
+    const table = await tablesModel.create(tableName, userId);
     res.status(200).json(table);
   }, res);
 });
-
-// router.put('/:id', (req, res) => {
-//   const table = req.body;
-//   const id = req.params.id;
-//   table.id = id;
-//   //if req.user && user owns table
-//   //update table
-//   res.status(200).send(JSON.stringify(table));
-// });
 
 router.delete('/:id', authorization.userOwnsTable, (req, res) => {
   tryCatch(async () => {
