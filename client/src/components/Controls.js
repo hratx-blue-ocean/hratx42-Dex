@@ -12,6 +12,8 @@ import CardThumbnails from './CardThumbnails';
 
 import http from '../../services/http/http';
 import auth from '../../services/auth';
+import global from '../../utils/global';
+
 export default function Controls(props) {
   const [showModal, setShowModal] = useState(false);
   const [showInvite, showInviteToggler] = useState(false);
@@ -21,7 +23,11 @@ export default function Controls(props) {
     let userId = auth.getUser();
     let username; 
     props.users.forEach((user) => user.id === userId ? username = user.name : null)
-    return await http.invite.post(invitationEmail, { tableId: props.tableId, invitedBy: username });
+    let invitation = await http.invite.post(invitationEmail, { tableId: props.tableId, invitedBy: username });
+    let {success, message} = invitation
+    console.log(success);
+    console.log(message);
+    global.flash(message, 'success', 2000);
   }
   const handleDelete = async function(sure) {
     setShowModal(false);
