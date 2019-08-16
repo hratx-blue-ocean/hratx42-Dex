@@ -1,9 +1,10 @@
 import React from 'react'
-import {  Button , Form} from 'react-bootstrap';
+import { Button, Form } from 'react-bootstrap';
 import global from '../../utils/global';
+import http from '../../services/http'
 
 export default class ProfileEditForm extends React.Component {
-  constructor(props){
+  constructor(props) {
     console.log('props', props);
     super(props)
     this.state = {
@@ -25,12 +26,12 @@ export default class ProfileEditForm extends React.Component {
         this.state.passwordField
       )
       .then(user => {
-        global.setState({user})
+        global.setState({ user })
       })
       .catch(err => console.log('Error: ', err));
   }
 
-  render(){
+  render() {
     console.log(this.state);
     return (
       <div className="dashboardProfileForm" >
@@ -42,7 +43,7 @@ export default class ProfileEditForm extends React.Component {
               type="text"
               className="name"
               onChange={e => {
-                this.setState({nameField: e.target.value})
+                this.setState({ nameField: e.target.value })
               }}
               value={this.state.nameField} />
           </div>
@@ -53,7 +54,7 @@ export default class ProfileEditForm extends React.Component {
               type="text"
               className="email"
               onChange={e => {
-                this.setState({emailField: e.target.value})
+                this.setState({ emailField: e.target.value })
               }}
               value={this.state.emailField} />
           </div>
@@ -65,7 +66,7 @@ export default class ProfileEditForm extends React.Component {
               className="name"
               placeholder="password"
               onChange={e => {
-                this.setState({passwordField: e.target.value})
+                this.setState({ passwordField: e.target.value })
               }}
               value={this.state.passwordField} />
           </div>
