@@ -14,7 +14,7 @@ const tablesRoute = require('./routes/tables');
 const decksRoute = require('./routes/decks');
 const cardsRoute = require('./routes/cards');
 const authRoute = require('./routes/auth');
-const inviteRoute = require('./routes/inviteRoute');
+const inviteRoute = require('./routes/invites');
 const cookieParser = require('cookie-parser');
 // open up CORS
 app.use((_, res, next) => {
