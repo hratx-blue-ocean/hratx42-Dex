@@ -85,39 +85,59 @@ export default function Controls(props) {
         </DropdownButton>
         <Button className="tableControlsAddDeckBtn" onClick={() => props.handleModal()} variant="success">
           Add Deck
-          </Button>
-
+        </Button>
+        <Button
+          variant="outline-danger"
+          onClick={() => {
+            setShowModal(true);
+          }}
+        >
+          Delete
+        </Button>
         <div style={{ position: 'relative', left: '30%' }}>
-          {props.users.map(user =>
-              <OverlayTrigger
-                key={Math.random()}
-                placement={'bottom'}
-                overlay={
-                  <Tooltip id={`tooltip-bottom`}>
-                    {user.name}
-                  </Tooltip>
-                }
-              >
-                <Button style={{ textAlign: "center" }} className="tableControlsUserNameCircles" variant="secondary">
-                  {(user.name.split(" ").map(char => char[0]).join("")).toUpperCase()}
-                </Button>
-              </OverlayTrigger>
+          {props.users.map((user, count) =>
+            { 
+              if (count < 4) 
+                return (
+                  <>
+                    <OverlayTrigger
+                      key={Math.random()}
+                      placement={'bottom'}
+                      overlay={
+                        <Tooltip id={`tooltip-bottom`}>
+                          {user.name}
+                        </Tooltip>
+                      }
+                    >
+                      <Button style={{ textAlign: "center" }} className="tableControlsUserNameCircles" variant="secondary">
+                        {(user.name.split(" ").map(char => char[0]).join("")).toUpperCase()}
+                      </Button>
+                    </OverlayTrigger>
+                  </>
+                )
+              return (<></>)
+            }
           )}
-
-
-          {/* 
-          <Button className="tableControlsUserNameCircles" variant="secondary">
-            ME
-          </Button>
-          <Button className="tableControlsUserNameCircles" variant="secondary">
-            GG
-          </Button> */}
-          <Button
-            style={{ width: '150px' }}
+          {/* <Button
+            style={{ width: '150px', float: "right" }}
             variant="success"
             onClick={showInviteToggler}
+          > */}
+          <Button 
+            style={{ textAlign: "center" }} 
+            className="tableControlsUserNameCircles" 
+            variant="secondary"
+            onClick={showInviteToggler}
           >
-            Invite
+            +
+          </Button>
+          <Button
+            style={{ textAlign: "center" }}
+            className="tableControlsUserNameCircles"
+            variant="secondary"
+            onClick={showInviteToggler}
+          >
+            +
           </Button>
           <Modal show={showInvite} onHide={showInviteToggler}>
             <Modal.Header closeButton>
@@ -147,14 +167,6 @@ export default function Controls(props) {
               </Form>
             </Modal.Body>
           </Modal>
-          <Button
-            variant="outline-danger"
-            onClick={() => {
-              setShowModal(true);
-            }}
-          >
-            Delete
-          </Button>
         </div>
       </Navbar>
       {showModal ? (
