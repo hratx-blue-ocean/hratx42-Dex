@@ -256,7 +256,7 @@ export default class Table extends Component {
     //submit new deck with this.state.newDeck.newDecktitle and table ID
     let { decks, newDeck } = this.state;
     http.decks
-    .post({ table_id: 1, title: this.state.newDeck.newDeckTitle })
+    .post({ table_id: this.props.match.params.id, title: this.state.newDeck.newDeckTitle })
     .then(res => {
       decks.push(res);
       newDeck.newDeckModal = false;
