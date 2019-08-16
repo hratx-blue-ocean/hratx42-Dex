@@ -1,11 +1,14 @@
 #!/usr/bin/env node
 process.title = "DexServer";
+if (process.env.NODE_ENV !== 'production'){
+  require('longjohn');
+}
 /**
  * Module dependencies.
  */
 
 var app = require('../server');
-var debug = require('debug')('BlueOcean:server');
+var debug = require('debug')('http');
 var http = require('http');
 
 /**
@@ -19,7 +22,7 @@ app.set('port', port);
  * Create HTTP server.
  */
 
-var server = http.createServer(app);
+const server = http.createServer(app);
 
 /**
  * Listen on provided port, on all network interfaces.
@@ -35,17 +38,14 @@ server.on('listening', onListening);
 
 function normalizePort(val) {
   var port = parseInt(val, 10);
-
   if (isNaN(port)) {
     // named pipe
     return val;
   }
-
   if (port >= 0) {
     // port number
     return port;
   }
-
   return false;
 }
 
@@ -85,3 +85,5 @@ function onListening() {
   console.log(bind);
   debug('Listening on ' + bind);
 }
+
+module.exports = server;

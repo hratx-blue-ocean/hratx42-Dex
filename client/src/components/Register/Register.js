@@ -12,7 +12,7 @@ export default function Register(props) {
   const [password1, setPassword1] = useState('');
   const [password2, setPassword2] = useState('');
 
-  const handleSubmit = function(event) {
+  const handleSubmit = function (event) {
     event.preventDefault();
     //verify passwords match
     if (password1 !== password2) {
@@ -49,11 +49,11 @@ export default function Register(props) {
       <h1>Dex lets you win at planning projects.</h1>
       <h4>Sign up - It's free and easy</h4>
       <Form onSubmit={event => handleSubmit(event)}>
-        <Form.Group controlId='formBasicEmail'>
+        <Form.Group>
           <Form.Label htmlFor={'register-email'}>Email: </Form.Label>
           <Form.Control
+            required
             type='email'
-            id='register-email'
             value={email}
             placeholder={'Email'}
             onChange={event => {
@@ -61,11 +61,11 @@ export default function Register(props) {
             }}
           />
         </Form.Group>
-        <Form.Group controlId='formBasicFirstName'>
+        <Form.Group>
           <Form.Label htmlFor={'register-first-name'}>First Name: </Form.Label>
           <Form.Control
+            required
             type='text'
-            id='register-first-name'
             value={firstName}
             placeholder={'First Name'}
             onChange={event => {
@@ -73,11 +73,11 @@ export default function Register(props) {
             }}
           />
         </Form.Group>
-        <Form.Group controlId='formBasicLastName'>
+        <Form.Group>
           <Form.Label htmlFor={'register-last-name'}>Last Name: </Form.Label>
           <Form.Control
+            required
             type='text'
-            id='register-last-name'
             value={lastName}
             placeholder={'Last Name'}
             onChange={event => {
@@ -85,11 +85,11 @@ export default function Register(props) {
             }}
           />
         </Form.Group>
-        <Form.Group controlId='formBasicPassword'>
+        <Form.Group>
           <Form.Label htmlFor={'register-password1'}>Password: </Form.Label>
           <Form.Control
-            type='text'
-            id='register-password1'
+            required
+            type='password'
             value={password1}
             placeholder={'Password'}
             onChange={event => {
@@ -97,13 +97,13 @@ export default function Register(props) {
             }}
           />
         </Form.Group>
-        <Form.Group controlId='formBasicConfirmPassword'>
+        <Form.Group>
           <Form.Label htmlFor={'register-password2'}>
-            Confirm Password:{' '}
+            Confirm Password:
           </Form.Label>
           <Form.Control
-            type='text'
-            id='register-password2'
+            required
+            type='password'
             value={password2}
             placeholder={'Password'}
             onChange={event => {

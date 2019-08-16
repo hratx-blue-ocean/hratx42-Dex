@@ -1,50 +1,40 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import TableSettings from './TableSettings';
-import { Navbar,Button, NavDropdown, Nav, Form } from "react-bootstrap";
-export default function NavBar(props) {
+import { Navbar, Button, NavDropdown, Nav, Form } from "react-bootstrap";
+function NavBar(props) {
+  const { history } = props;
+  let allTables = props.tables.map((item) => <NavDropdown.Item key={Math.random()} onClick={() => history.push(`/table/${item.id}`)}>{item.name}</NavDropdown.Item>)
   return (
+
     <div>
-        <Navbar bg="light" expand="lg" >
-          <Navbar.Brand href="#home" >
-            <h2 style={{ marginLeft: "15px"  }}>Dex</h2>
-          </Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="mr-auto" />
-            <Form style={{ marginRight: "25px" }}>
-              <Button variant="outline-primary" className="mr-sm-2" onClick={()=>props.changeTableModal()}>
-               <strong>+</strong>
-              </Button>
-            </Form>
-            <Form style={{ marginRight: "25px" }}>
-              <Button variant="outline-primary" className="mr-sm-2">
-              <Link to={"/dashboard"}>Dashboard</Link>
-              </Button>
-            </Form>
-            <NavDropdown title="Tables" id="collasible-nav-dropdown">
-              <NavDropdown.Item href="#action/3.2">
-                <Link to={"/table"}>Table 1</Link>
-                </NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.3">table 2</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">table 3</NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item onClick = {()=>{}} href="#action/3.4">
-                <Link to={"./TableSettings"}>Add a table</Link>
-              </NavDropdown.Item>
-            </NavDropdown>
-            <NavDropdown title="user name" id="collasible-nav-dropdown" style={{ marginRight: "15px" }}>
-            <NavDropdown.Item href="#action/3.1">
-                <Link to={"./dashboard"}>Dashboard</Link>
-              </NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">
-                <Link to={"/"} onClick={()=>props.logOut()}>logout</Link>
-              </NavDropdown.Item>
-            </NavDropdown>
-          </Navbar.Collapse>
-        </Navbar>
-      <TableSettings showModal = {props.showTableModal} changeTableModal = {props.changeTableModal} />
+      <Navbar bg="light" className='dexNavBar' expand="lg" >
+        <Navbar.Brand style={{ marginBottom: '22px' }}>
+          <Link style={{ color: 'black' }} to={"/dashboard"}><h2 style={{ marginLeft: "15px" }}>/Dex</h2></Link>
+        </Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="mr-auto" />
+          <Form style={{ marginRight: "25px" }}>
+            <Button variant="outline-primary" className="navBarAddTableBtn" onClick={() => props.changeTableModal()}>
+              <strong>+</strong>
+            </Button>
+          </Form>
+          <NavDropdown title="Tables">
+            {allTables}
+            <NavDropdown.Divider />
+            <NavDropdown.Item onClick={() => props.changeTableModal()}>Create Table</NavDropdown.Item>
+          </NavDropdown>
+          <NavDropdown className="navBarUserCircle" title={props.userName} id="collasible-nav-dropdown" style={{ marginTop: ".125rem", marginRight: "15px", marginBottom: "0", marginLeft: "- 70px" }}>
+            <div style = {{paddingLeft: '30px'}}><Link style = {{color: 'black'}} to={"/dashboard"}>Dashboard</Link></div>
+            <NavDropdown.Divider />
+            <NavDropdown.Item onClick={() => props.logOut()}>Log Out</NavDropdown.Item>
+          </NavDropdown>
+        </Navbar.Collapse>
+      </Navbar>
+      <TableSettings userName={props.userName} addTable={props.addTable} newPLayer={props.newPLayer} addPlayerToTable={props.addPlayerToTable} removePlayerToTable={props.removePlayerToTable} showTableModal={props.showTableModal} changeTableModal={props.changeTableModal} />
     </div>
   );
 }
+
+export default withRouter(NavBar)

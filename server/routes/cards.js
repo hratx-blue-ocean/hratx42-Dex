@@ -1,63 +1,116 @@
 const express = require('express');
 const router = express.Router();
-const db = require('../../db/hosteddb');
+
+//middleware
+const authorization = require('../middleware/authorization')
+
+//models
 const cardsModel = require('../../db/models/cards');
+const usersModel = require('../../db/models/users');
+
+//utils
+const tryCatch = require('../utils/tryCatch');
 
 //get card info by cardID
-router.get('/:id', (req, res) => {
+router.get('/:id', authorization.userOwnsCard, (req, res) => {
   const cardId = req.params.id;
-  //if req.user && user owns table associated with card
-  //get card
-  cardsModel.getCardByID(cardId)
-    .then(response => {
-      res.status(200).json(response);
-    })
-    .catch(err => {
-      res.status(404);
-    });
+  tryCatch(async () => {
+    const card = await cardsModel.getCardByID(cardId);
+    res.status(200).send(card);
+  });
 });
 
 //create new card
 router.post('/', (req, res) => {
   const card = req.body;
-  //if req.user
-  //post card
-  cardsModel.createNewCard(card)
-    .then(response => {
-      res.status(200).json(response);
-    })
-    .catch(err => {
-      res.status(404);
-    });
+  //@TODO: change this line
+  tryCatch(async () => {
+    let newCard = await cardsModel.createNewCard(card);
+    let newPopulatedCard = await cardsModel.getCardByID(newCard.id)
+    res.status(200).send(newPopulatedCard);
+  });
 });
 
 //update card
-router.put('/:id', (req, res) => {
-  const card = req.body;
-  const id = req.params.id;
-  //if req.user && user owns card's table
-  //update table
-  cardsModel.updateCard(card, id)
-    .then(response => {
-      res.status(200).json(response);
-    })
-    .catch(err => {
-      res.status(404);
-    });
+router.put('/:id', authorization.userOwnsCard, async (req, res) => {
+  const card = req.body
+  card.id = req.params.id
+  tryCatch(async () => {
+    await cardsModel.updateCard(card);
+    const updatedCard = await cardsModel.getCardByID(card.id)
+    res.status(200).send(updatedCard);
+  });
 });
 
-//delete card by cardID
-router.delete('/:id', (req, res) => {
-  const id = req.params.id;
-  //if req.user && user owns table of card
-  //delete card
-  cardsModel.deleteCard(id)
-    .then(response => {
-      res.status(200).send(`Deleted card ${id}`);
-    })
-    .catch(err => {
-      res.status(404);
-    });
+//delete card by cardID 
+router.delete('/:id', authorization.userOwnsCard, (req, res) => {
+  const cardId = req.params.id;
+  tryCatch(async () => {
+    await cardsModel.delete(cardId);
+    res.status(200).send({ message: 'Card Deleted' });
+  });
+});
+
+router.post('/:cardId/member/:userId', async (req, res) => {
+  tryCatch(async () => {
+    const cardId = req.params.cardId;
+    const userId = req.params.userId;
+    const user = await usersModel.getUserByID(userId);
+    if (!user) {
+      res.status(404).json({ error: 'not found' });
+      return;
+    } else {
+      await cardsModel.addUserToCard(cardId, userId);
+      const updatedCard = await cardsModel.getCardByID(cardId)
+      res.status(200).send(updatedCard);
+    }
+  }, res);
+});
+
+router.delete('/:id/member/:userId', authorization.userOwnsCard, async (req, res) => {
+  tryCatch(async () => {
+    const cardId = req.params.id;
+    const userId = req.params.userId;
+    let result = await cardsModel.removeUserFromCard(cardId, userId);
+    if (result) {
+      const updatedCard = await cardsModel.getCardByID(cardId)
+      res
+        .status(200)
+        .send(updatedCard);
+    } else {
+      res.status(404).json({ error: 'not found' });
+    }
+  }, res);
+});
+
+router.post('/:id/label/:labelId', authorization.userOwnsCard, async (req, res) => {
+  tryCatch(async () => {
+    const cardId = req.params.id;
+    const labelId = req.params.labelId;
+    if (labelId < 5 || labelId > 14) {
+      return res.status(400).send({ message: "Invalid label Id" })
+    }
+    await cardsModel.addLabelToCard(cardId, labelId);
+    const updatedCard = await cardsModel.getCardByID(cardId)
+    res.status(200).send(updatedCard);
+  }, res);
+});
+
+router.delete('/:id/label/:labelId', authorization.userOwnsCard, async (req, res) => {
+  tryCatch(async () => {
+    const cardId = req.params.id;
+    const labelId = req.params.labelId;
+    if (labelId < 5 || labelId > 14) {
+      return res.status(400).send({ message: "Invalid label Id" })
+    }
+    let result = await cardsModel.removeLabelFromCard(cardId, labelId);
+    if (result) {
+      const updatedCard = await cardsModel.getCardByID(cardId)
+      res.status(200).send(updatedCard);
+    } else {
+      res.status(404).json({ message: 'card not found' });
+    }
+  }, res);
 });
 
 module.exports = router;

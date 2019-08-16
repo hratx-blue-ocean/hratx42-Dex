@@ -1,19 +1,37 @@
 import React, { useState } from 'react';
-import { Card, Button, Row, Col, Table, Form, Modal } from 'react-bootstrap';
+import {
+  Container,
+  Button,
+  Row,
+  Col,
+  Table,
+  Form,
+  Modal
+} from 'react-bootstrap';
 //import styles from './tableSettings.module.css';
 
 export default function TableSettings(props) {
+  let newPLayer = props.newPLayer.map((item)=>{return(
+   
+  <tr>
+    <th>{item}</th>
+    <th onClick={()=>props.removePlayerToTable()} style = {{cursor: 'pointer'}}>x</th>
+  </tr>)})
   const [tableName, setTableName] = useState('');
   const [playerName, setPlayerName] = useState('');
-  const [descName, setDescName] = useState('');
   return (
-    <Modal style = {{width: '650px',height: '600px'}} className = 'container' show={props.showModal}>
-      <div >
-        <Card>
-          <div>
-            <div style = {{fontSize: '30px',textAlign: 'center'}}>Create/Edit<Button style = {{borderRadius: '50%'}} onClick = {()=> props.changeTableModal()} className = {` float-right`} variant = 'light'>x</Button></div>
-          </div>
-          <hr/>
+    <Modal show={props.showTableModal} centered>
+      <Modal.Header
+        closeButton
+        onClick={() => props.changeTableModal()}
+        className='createTableModalHeader'
+      >
+        <Modal.Title style={{ fontSize: '30px' }}>
+          Create/Edit Table
+        </Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <Container>
           <Row>
             <Col md = {{offset: 1}} style = {{paddingLeft: '10px'}}>
               <span>Table Name:</span>
@@ -22,50 +40,42 @@ export default function TableSettings(props) {
                 <input onChange = {(e) => setTableName(e.target.value)} value = {tableName} type="text" placeholder = 'Enter table name'/>
               </div>
               <div style = {{paddingTop: '10px'}}></div>
-              <div>Description</div>
-              <div style = {{paddingTop: '10px'}}></div>
-              <textarea style = {{height: '50px'}} onChange = {(e) => setDescName(e.target.value)} value = {descName} type="text" placeholder = 'Enter table name'/>
               <div style = {{paddingTop: '10px'}}></div>
               <div>Invite Players</div>
               <div style = {{paddingTop: '10px'}}></div>
               <div>
-                <input onChange = {(e) => setPlayerName(e.target.value)} type="text" placeholder = 'Enter table name'/>
-                <Button onClick = {() => props.newPlayer(playerName)} style = {{position: 'relative',top: '-1px'}} size = 'sm' variant= 'success'>+</Button>
+                <form>
+                <input onChange = {(e) => setPlayerName(e.target.value)} style = {{display: 'inline' ,width:'75%', marginRight:'5px'}} type="email" name="emailaddress" placeholder = 'Enter user Email'/>
+                <Button onClick = {() => props.addPlayerToTable(playerName)} style = {{display: 'inline', position: 'relative',top: '-1px'}} size = 'sm' variant= 'success'>+</Button>
+                </form>
               </div>
-              <div style = {{paddingTop: '10px'}}></div>
-              <Button onClick = {() => props.changeTableModal()} variant= 'success'>Save</Button>
-              <div style = {{paddingTop: '10px'}}></div>
             </Col>
             <Col>
               <span>Administrator(s): </span>
               <div style = {{paddingTop: '10px'}}></div>
               {/* map through administrators */}
-              <div>the dude</div>
+              <div>{props.userName}</div>
               <div style = {{paddingTop: '10px'}}></div>
               <div>
                 <Table size = 'sm'>
                   <thead>
-                    <tr>
-                      <th>Players</th>
-                      <th>Edit Admin</th>
-                      <th>Remove</th>
-                    </tr>
+
                   </thead>
                   <tbody>
                     {/* map through all players */}
-                    <tr>
-                      <td>brooke</td>
-                      <td><Form.Check  type = 'checkbox'/></td>
-                      <td style = {{cursor: 'pointer'}}>x</td>
-                    </tr>
+                      {newPLayer}
                   </tbody>
                 </Table>
               </div>
             </Col>
-            <Col md={1}></Col>
           </Row>
-        </Card>
-      </div>
+        </Container>
+      </Modal.Body>
+      <Modal.Footer>
+        <Button onClick = {() => props.addTable(tableName ,props.newPLayer)} variant='success'>
+          Save
+        </Button>
+      </Modal.Footer>
     </Modal>
-  )
+  );
 }

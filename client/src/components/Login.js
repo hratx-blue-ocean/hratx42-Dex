@@ -19,7 +19,7 @@ export default function Login(props) {
     <div>
       <Navbar className='login' bg='light' expand='lg'>
         <Navbar.Brand href='#home' style={{ marginBottom: '22px' }}>
-          <h2>/Dex</h2>
+          <h2 style={{ marginLeft: '15px' }}>/Dex</h2>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls='basic-navbar-nav' />
         <Navbar.Collapse id='basic-navbar-nav'>
@@ -29,6 +29,10 @@ export default function Login(props) {
             onChange={e => {
               setEmail(e.target.value);
               // capture email address
+            }}
+            onSubmit={(e) => {
+              e.preventDefault()
+              handleSubmit()
             }}
           >
             Email
@@ -40,6 +44,10 @@ export default function Login(props) {
               setPassword(e.target.value);
               // capture password
             }}
+            onSubmit={(e) => {
+              e.preventDefault()
+              handleSubmit()
+            }}
           >
             Password
             <FormControl type='password' placeholder='' className='mr-sm-2' />
@@ -47,7 +55,7 @@ export default function Login(props) {
           </Form>
           <Form style={{ marginRight: '25px' }}>
             <Button
-              className='signup'
+              className='loginBtn'
               variant='success'
               // className='mr-sm-2'
               onClick={() => {
