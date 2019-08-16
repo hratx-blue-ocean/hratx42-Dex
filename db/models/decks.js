@@ -15,13 +15,12 @@ const decksModel = {
   },
   async getCompoundData(id) {
     const { rows: decks } = await decksModel.getByTableId(id);
-    
     const decksWithCards = await Promise.all(
       decks.map(async deck => {
         deck.cards = await cardsModel.getCardsByDeckId(deck.id);
         return deck;
       })
-      );
+    );
     return decksWithCards;
   },
   async post(deck) {
