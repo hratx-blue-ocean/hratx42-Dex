@@ -8,7 +8,7 @@ export default function Landing(props) {
     props.history.push('/dashboard');
   }
   return (
-    <div style={{ backgroundColor: '#C3D1D1' }}>
+    <div id="landingPage" style={{ backgroundColor: '#C3D1D1' }}>
       <Login login={props.login} />
       <Container>
         <Row>
