@@ -54,7 +54,7 @@ export default class Table extends Component {
         })
         //populated deckname for tickets
         this.setState({ deckNames: deckHolder });
-        http.users.getByTableId(1).then(res => {
+        http.users.getByTableId(this.props.tableId).then(res => {
           this.setState({ users: res });
         });
       });
