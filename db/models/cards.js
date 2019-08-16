@@ -112,14 +112,12 @@ const cardsModel = {
     const { rows: cards } = await pgClient.query(query, [userId]);
     return cards;
   },
-
   async delete(id) {
     const query = 'delete from cards where id = $1';
     const values = [userId];
     const result = await pgClient.query(query, values);
     return result;
   },
-
   // create new card
   async createNewCard(card) {
     const columnString = getColumnsString(card);
@@ -129,7 +127,6 @@ const cardsModel = {
     const { rows: cards } = await pgClient.query(query, values);
     return cards[0];
   },
-
   // update card
   async updateCard(card) {
     const query = makeUpdateString(card, 'cards');
