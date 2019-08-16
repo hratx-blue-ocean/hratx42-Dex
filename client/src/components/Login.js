@@ -30,7 +30,7 @@ export default function Login(props) {
               setEmail(e.target.value);
               // capture email address
             }}
-            onSubmit={(e)=>{
+            onSubmit={(e) => {
               e.preventDefault()
               handleSubmit()
             }}
@@ -44,7 +44,7 @@ export default function Login(props) {
               setPassword(e.target.value);
               // capture password
             }}
-            onSubmit={(e)=>{
+            onSubmit={(e) => {
               e.preventDefault()
               handleSubmit()
             }}

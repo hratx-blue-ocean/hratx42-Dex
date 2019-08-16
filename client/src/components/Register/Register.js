@@ -12,7 +12,7 @@ export default function Register(props) {
   const [password1, setPassword1] = useState('');
   const [password2, setPassword2] = useState('');
 
-  const handleSubmit = function(event) {
+  const handleSubmit = function (event) {
     event.preventDefault();
     //verify passwords match
     if (password1 !== password2) {
@@ -52,6 +52,7 @@ export default function Register(props) {
         <Form.Group>
           <Form.Label htmlFor={'register-email'}>Email: </Form.Label>
           <Form.Control
+            required
             type='email'
             value={email}
             placeholder={'Email'}
@@ -63,6 +64,7 @@ export default function Register(props) {
         <Form.Group>
           <Form.Label htmlFor={'register-first-name'}>First Name: </Form.Label>
           <Form.Control
+            required
             type='text'
             value={firstName}
             placeholder={'First Name'}
@@ -74,6 +76,7 @@ export default function Register(props) {
         <Form.Group>
           <Form.Label htmlFor={'register-last-name'}>Last Name: </Form.Label>
           <Form.Control
+            required
             type='text'
             value={lastName}
             placeholder={'Last Name'}
@@ -85,6 +88,7 @@ export default function Register(props) {
         <Form.Group>
           <Form.Label htmlFor={'register-password1'}>Password: </Form.Label>
           <Form.Control
+            required
             type='password'
             value={password1}
             placeholder={'Password'}
@@ -98,6 +102,7 @@ export default function Register(props) {
             Confirm Password:
           </Form.Label>
           <Form.Control
+            required
             type='password'
             value={password2}
             placeholder={'Password'}
