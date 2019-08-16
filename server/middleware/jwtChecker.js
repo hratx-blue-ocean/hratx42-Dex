@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const config = { secret: "supersecuresecret" };
 
 const checkToken = (req, res, next) => {
-  console.log('headers: ', req.headers);
+  // console.log('headers: ', req.headers);
   const cookies = req.cookies;
   const tokenHeader = req.headers['x-access-token'];
   if (!cookies && !tokenHeader) {
@@ -19,7 +19,7 @@ const checkToken = (req, res, next) => {
       message: 'Please sign in'
     });
   }
-  console.log("The cookie token ", token)
+  // console.log("The cookie token ", token)
   if (token) {
     jwt.verify(token, config.secret, (err, decoded) => {
       if (err) {
