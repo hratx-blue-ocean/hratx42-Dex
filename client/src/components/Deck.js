@@ -63,6 +63,7 @@ export default function Deck(props) {
               newCardData={props.newCardData}
               key={Math.random()}
               showMe={show}
+              deckTitle={props.deck.title}
               deckNames={props.deckNames}
               closeModal={handleClose.bind(this)}
               newCardData={props.newCardData}
