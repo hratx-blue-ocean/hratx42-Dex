@@ -42,7 +42,7 @@ router.put('/:id', authorization.userOwnsCard, async (req, res) => {
   });
 });
 
-//delete card by cardID
+//delete card by cardID 
 router.delete('/:id', authorization.userOwnsCard, (req, res) => {
   const cardId = req.params.id;
   tryCatch(async () => {
@@ -57,6 +57,7 @@ router.post('/:id/member/:userId', authorization.userOwnsCard, async (req, res) 
     const userId = req.params.userId;
     console.log(cardId, userId)
     const user = await usersModel.getUserByID(userId);
+    console.log("The user ", user)
     if (!user) {
       res.status(404).json({ error: 'not found' });
       return;
@@ -88,6 +89,9 @@ router.post('/:id/label/:labelId', authorization.userOwnsCard, async (req, res) 
   tryCatch(async () => {
     const cardId = req.params.id;
     const labelId = req.params.labelId;
+    if (labelId < 5 || labelId > 14) {
+      return res.status(400).send({ message: "Invalid label Id" })
+    }
     await cardsModel.addLabelToCard(cardId, labelId);
     const updatedCard = await cardsModel.getCardByID(cardId)
     res.status(200).send(updatedCard);
@@ -98,6 +102,9 @@ router.delete('/:id/label/:labelId', authorization.userOwnsCard, async (req, res
   tryCatch(async () => {
     const cardId = req.params.id;
     const labelId = req.params.labelId;
+    if (labelId < 5 || labelId > 14) {
+      return res.status(400).send({ message: "Invalid label Id" })
+    }
     let result = await cardsModel.removeLabelFromCard(cardId, labelId);
     if (result) {
       const updatedCard = await cardsModel.getCardByID(cardId)
