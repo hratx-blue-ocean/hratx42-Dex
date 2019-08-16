@@ -8,7 +8,7 @@ if (process.env.NODE_ENV !== 'production'){
  */
 
 var app = require('../server');
-var debug = require('debug')('BlueOcean:server');
+var debug = require('debug')('http');
 var http = require('http');
 
 /**

@@ -76,14 +76,48 @@ const cardsModel = {
     const { rows: cards } = await pgClient.query(query, [id]);
     return cards[0];
   },
-
+  async getCardsByUserID(userId) {
+    const query = `
+        select 
+          c.id,
+          c.title,
+          c.description,
+          c.updated_at,
+          c.created_at,
+          c.weight,
+          c.impact,
+          array_agg(
+            json_build_object(
+                'id', l.id,
+                'label_name', l.label_name,
+                'color', l.color
+            )
+          ) as card_labels,
+          array_agg(
+            json_build_object(
+              'member_id', cast(u.id as varchar),
+              'member_name', u.name
+            )
+          ) as cards_members
+        from
+          cards c 
+          left outer join cards_members cm on c.id = cm.card_id
+          left join users u on cm.user_id = u.id
+          left outer join cards_labels cl on c.id = cl.card_id
+          left join labels l on cl.label_id = l.id
+          inner join cards_members cm2 on cm2.card_id = c.id
+          where cm2.user_id = $1
+        group by c.id;
+      `;
+    const { rows: cards } = await pgClient.query(query, [userId]);
+    return cards;
+  },
   async delete(id) {
     const query = 'delete from cards where id = $1';
     const values = [id];
     const result = await pgClient.query(query, values);
     return result;
   },
-
   // create new card
   async createNewCard(card) {
     const columnString = getColumnsString(card);
@@ -93,7 +127,6 @@ const cardsModel = {
     const { rows: cards } = await pgClient.query(query, values);
     return cards[0];
   },
-
   // update card
   async updateCard(card) {
     const query = makeUpdateString(card, 'cards');

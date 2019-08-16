@@ -1,6 +1,8 @@
 body {
+  height: 100%;
   margin: 0;
   padding: 0;
+  background-color: #C3D1D1;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -13,6 +15,7 @@ code {
     monospace;
 }
 
+/* BEGIN CARD THUMBNAIL STYLING? */
 .cardThumbnails_impact {
   border: 1px solid black;
   width: 35px;
@@ -51,6 +54,12 @@ code {
 .CardThumbnailsSingleCard:hover {
   background-color: #cdcdcd;
 }
+
+.CardThumbnailsSingleCard {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 10px;
+}
+/* END CARD THUMBNAIL STYLING? */
 
 /* BEGIN LOGIN/SIGNUP/LANDING STYLES */
 /* Login Component & Login Button */
@@ -132,12 +141,79 @@ code {
 .dexNavBar {
   background-color: #f1f0f0 !important;
 }
+
+.navBarAddTableBtn {
+  border-radius: var(--border-button-border-radius, 4px) !important;
+  font-size: var(--font-button-font-size, 16px) !important;
+  line-height: var(--font-button-line-height, 24px) !important;
+  letter-spacing: var(--font-button-letter-spacing, normal) !important;
+  font-family: var(
+    --font-button-font-family,
+    Circular,
+    -apple-system,
+    BlinkMacSystemFont,
+    Roboto,
+    Helvetica Neue,
+    sans-serif
+  ) !important;
+  text-transform: var(--font-button-text-transform, undefined) !important;
+  padding-top: var(--spacing-button-vertical, 6px) !important;
+  padding-bottom: var(--spacing-button-vertical, 6px) !important;
+  font-weight: var(--font-bold-font-weight, 800) !important;
+  border-width: var(--border-button-border-width, 2px) !important;
+  padding-left: var(--spacing-button-horizontal, 14px) !important;
+  padding-right: var(--spacing-button-horizontal, 14px) !important;
+  box-shadow: var(--shadow-button-level0-box-shadow, none) !important;
+  background: var(--color-buttons-primary-color, #ff5a5f) !important;
+  border-color: var(--color-buttons-primary-border, transparent) !important;
+  color: var(--color-buttons-primary-text, #ffffff) !important;
+}
+
+.navBarTablesDropdown {
+  border-radius: var(--border-button-border-radius, 4px) !important;
+  font-size: var(--font-button-font-size, 16px) !important;
+  padding-top: var(--spacing-button-vertical, 6px) !important;
+  padding-bottom: var(--spacing-button-vertical, 6px) !important;
+  font-weight: var(--font-bold-font-weight, 800) !important;
+  border-width: var(--border-button-border-width, 2px) !important;
+  padding-left: var(--spacing-button-horizontal, -20px) !important;
+  padding-right: var(--spacing-button-horizontal, -20px) !important;
+  box-shadow: var(--shadow-button-level0-box-shadow, none) !important;
+  background: var(--color-buttons-primary-color, #ff5a5f) !important;
+  border-color: var(--color-buttons-primary-border, transparent) !important;
+  color: #ffffff !important;
+}
+
+.navBarUserCircle {
+  align-items: center;
+  background-color: #dfe1e6;
+  background-position: 50%;
+  background-size: cover;
+  border: 0;
+  border-radius: 100%;
+  box-sizing: border-box;
+  color: #CB4243 !important;
+  display: inline-flex;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans,
+    Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  justify-content: center;
+  line-height: 28px;
+  opacity: 1;
+  height: 50px;
+  width: 50px;
+
+}
 /* END DEX NAVBAR STYLES */
 
 /* BEGIN CREATE/EDIT TABLE MODAL STYLES */
 /* END CREATE/EDIT TABLE MODAL STYLES */
 
 /* BEGIN TABLE CONTROL BAR STYLES */
+/* .tableControlsNavBar {
+ background-color: #757374 !important;
+} */
 .tableControlsUserNameCircles {
   align-items: center;
   background-color: #dfe1e6;
@@ -159,7 +235,85 @@ code {
   height: 40px;
   width: 40px;
 }
+
+.tableControlsFilterBtn {
+  padding-left: 20px;
+}
+
+.tableControlsAddDeckBtn {
+  margin-left: 20px;
+}
 /* END TABLE CONTROL BAR STYLES */
+
+/* BEGIN DECKS STYLES */
+#deckWrapper {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-bottom: 0px;
+  margin-top: 5px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.card-body {
+  padding: 2rem;
+}
+
+#deckContent {
+  border-radius: 3px;
+  position: relative;
+  background: #f1f0f0 !important;
+  border-radius: 4px !important;
+  padding: 32px !important;
+  padding-bottom: 24px !important;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.25) !important;
+  font-size: 14px !important;
+  line-height: 1.43;
+  margin-block-start: 0.83em;
+  margin-block-end: 0.83em;
+
+}
+
+#deckScrollbar {
+  display: flex;
+  flex-wrap: nowrap!important;
+  margin-right: -15px;
+  margin-left: -15px;
+  overflow: scroll;
+}
+
+#deckHeader {
+  padding-top: 0px;
+}
+
+.deckTitle {
+  width: 100% !important;
+  margin-right: -30px;
+  margin-left: 10px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 19px;
+  font-weight: bold;
+}
+
+.row {
+  display: flex;
+  flex-wrap: nowrap!important;
+  overflow: scroll;
+}
+
+.deckAddAnotherCardBtn {
+  font-size: var(--font-button-small-font-size, 14px) !important;
+  margin-left: 50px;
+
+}
+
+.deckEditBtn {
+  font-size: var(--font-button-small-font-size, 14px) !important;
+  margin-left: 50px;
+}
+
+/* END DECKS STYLES */
 
 /* BEGIN DASHBOARD STYLES */
 /* dashboard main container div */
@@ -259,6 +413,10 @@ code {
 
 .controls__modal button {
   margin: 0 20px;
+}
+
+.ControlsfilterNames {
+  background-color: grey;
 }
 
 /* END DASHBOARD STYLES */
