@@ -67,16 +67,26 @@ newCardDataCollector(players,tags,deck,cardInfo) {
   }
   let toMembersPost ={cards_members: this.obtainPlayersId(players)}
   let toLabelsPost = {card_labels: this.obtainLabelIds(tags)}
-  console.log(deck)
-    // http.cards.post(toPost)
-    //   .then((response)=>{
-    //     console.log(response)
-    //   })
-    //   .then((response)=>{
-    //     toMembersPost.forEach(async (member) =>{
-    //       await http.addUser(member)
-    //     })
-    //   })
+  // console.log(toLabelsPost.card_labels)
+  console.log(toMembersPost.cards_members)
+  let addedCard;
+    http.cards.post(toPost)
+        .then((response)=>{
+          console.log(response)
+          addedCard=response
+          console.log(addedCard)
+        })
+        .then((response)=>{
+          toMembersPost.cards_members.forEach(async (player) =>{
+            await http.cards.addUser(addedCard.id, player.member_id)
+          })
+          console.log(response)
+        })
+        .then(()=>{
+          toLabelsPost.card_labels.forEach(async (label) =>{
+            await http.cards.addLabel(addedCard.id,label.id)
+          })
+        })
 }
 
   editCardDataCollector(players,tags, deck, cardInfo) {
