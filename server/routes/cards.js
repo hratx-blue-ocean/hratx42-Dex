@@ -51,13 +51,11 @@ router.delete('/:id', authorization.userOwnsCard, (req, res) => {
   });
 });
 
-router.post('/:id/member/:userId', authorization.userOwnsCard, async (req, res) => {
+router.post('/:cardId/member/:userId', async (req, res) => {
   tryCatch(async () => {
-    const cardId = req.params.id;
+    const cardId = req.params.cardId;
     const userId = req.params.userId;
-    console.log(cardId, userId)
     const user = await usersModel.getUserByID(userId);
-    console.log("The user ", user)
     if (!user) {
       res.status(404).json({ error: 'not found' });
       return;
