@@ -100,7 +100,6 @@ export default class App extends Component {
     auth.logout();
     http.auth.logout();
     auth.setUser(this);
-    this.setState({ userId: '' })
   }
 
   changeTableModal() {
