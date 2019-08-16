@@ -150,7 +150,13 @@ export default function CardModal({closeModal, card, showMe, deckNames, newCardD
               <div>Add To Card</div>
             </Row>
             <Row style={styles.addToCardTrait}>
-              <input placeholder="date due" onBlur={(event)=> setDate(event.target.value)} style={{width:'100%'}}/> 
+              {/* <input placeholder="date due" placeholder='Due Date' onBlur={(event)=> setDate(event.target.value)} style={{width:'100%'}}/>  */}
+              <input type="date" 
+              id="start" 
+              name="due date"
+              value = {new Date()}
+              onChange={(event)=> setDate(event.target.value)}
+              min={new Date()} />
             </Row>
             {/* <Row style={styles.addToCardTrait}>
                 <input placeholder="gitLink" style={{width:'100%'}}/> 
