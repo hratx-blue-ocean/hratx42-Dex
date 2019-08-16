@@ -4,7 +4,8 @@ import Controls from './Controls';
 import Deck from './Deck';
 import http from '../../services/http/http.js';
 import table from '../../utils/table';
-import global from '../../utils/global'
+import global from '../../utils/global';
+
 
 export default class Table extends Component {
   constructor(props) {
@@ -38,11 +39,11 @@ export default class Table extends Component {
     this.editCardDataCollector = this.editCardDataCollector.bind(this);
   }
   componentDidMount() {
+    console.log('Table did mount')
     table.deleteCardById = this.deleteCardById.bind(this)
     http.decks
       .get(this.props.tableId)
       .then(response => {
-        console.log('table data', response);
         this.setState({ decks: response, tableName: this.props.tableName });
       })
       //populated deckname for tickets
@@ -57,6 +58,10 @@ export default class Table extends Component {
           this.setState({ users: res });
         });
       });
+  }
+
+  componentWillUnmount() {
+    console.log("Table will unmount")
   }
 
   findCardById(id) {
@@ -85,35 +90,42 @@ export default class Table extends Component {
     }
   }
 
+
   newCardDataCollector(players, tags, deck, cardInfo) {
     let toPost = {
       description: cardInfo.description,
-      card_labels: this.obtainLabelIds(tags),
       title: cardInfo.titl,
       weight: parseInt(cardInfo.eff),
       impact: parseInt(cardInfo.imp),
-      cards_members: this.obtainPlayersId(players),
       deck_id: this.obtainDeckID(deck),
       table_id: this.props.tableId,
-      table_index: this.props.tableId
     }
-    console.log(toPost)
+    let toMembersPost = { cards_members: this.obtainPlayersId(players) }
+    let toLabelsPost = { card_labels: this.obtainLabelIds(tags) }
+    console.log(deck)
+    http.cards.post(toPost)
+      .then((response) => {
+        console.log(response)
+      })
+    //   .then((response)=>{
+    //     toMembersPost.forEach(async (member) =>{
+    //       await http.addUser(member)
+    //     })
+    //   })
   }
 
   editCardDataCollector(players, tags, deck, cardInfo) {
     let toPost = {
       description: cardInfo.description,
       id: cardInfo.id,
-      card_labels: this.obtainLabelIds(tags),
       title: cardInfo.titl,
       weight: parseInt(cardInfo.eff),
       impact: parseInt(cardInfo.imp),
-      cards_members: this.obtainPlayersId(players),
       deck_id: this.obtainDeckID(deck),
       table_id: this.props.tableId,
-      table_index: this.props.tableId
     }
-    console.log(toPost)
+    let toMembersPost = { cards_members: this.obtainPlayersId(players) }
+    let toLabelsPost = { card_labels: this.obtainLabelIds(tags) }
   }
 
   obtainPlayersId(players) {
@@ -151,8 +163,6 @@ export default class Table extends Component {
     let decks = this.state.decks
     let result
     decks.forEach((deck, i) => {
-      console.log(deckName)
-      console.log(deck.title)
       if (deckName == deck.title) {
         result = deck.id
       }
@@ -243,6 +253,7 @@ export default class Table extends Component {
   }
 
   render() {
+    console.log('Rendering Table');
     return (
       <div>
         <Controls

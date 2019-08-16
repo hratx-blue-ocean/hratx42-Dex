@@ -98,6 +98,7 @@ export default class App extends Component {
 
   logOut() {
     auth.logout();
+    http.auth.logout();
     auth.setUser(this);
     this.setState({ userId: '' })
   }
@@ -107,9 +108,9 @@ export default class App extends Component {
 
   }
 
-  changeTable(id){
-    this.setState({showenTable:id})
-  }  
+  changeTable(id) {
+    this.setState({ showenTable: id })
+  }
 
   addPlayerToTable(playerName) {
     thePlayers.push(playerName);
@@ -128,6 +129,7 @@ export default class App extends Component {
           {auth.userIsLoggedIn() ? (
             <NavBar addTable={this.addTable.bind(this)} addPlayerToTable={this.addPlayerToTable.bind(this)} removePlayerToTable={this.removePlayerToTable.bind(this)} logOut={this.logOut.bind(this)} showTableModal={this.state.showTableModal} changeTableModal={this.changeTableModal.bind(this)} changeTable={this.changeTable.bind(this)} tables={this.state.tables} showenTable={this.state.showenTable} newPLayer={this.state.newPLayer} userName={this.state.user.name} />
           ) : null}
+          <button onClick={() => { this.flash('So Flashy!', 'danger', 2000) }}>Flash!</button>
           <Route
             path="/"
             exact
@@ -141,7 +143,7 @@ export default class App extends Component {
               <Dashboard
                 {...props}
                 // state props
-                state = {this.state}
+                state={this.state}
                 user={this.state.user}
                 tables={this.state.tables}
                 editProfileName={this.state.profile.editName}
@@ -159,7 +161,6 @@ export default class App extends Component {
           {this.state.tables.map(table =>
             <Route key={Math.random()} path={`/table/${table.id}`} render={() => <Table tableId={table.id} tableName={table.name} />} />
           )}
-
           <Route path="/TableSettings" component={TableSettings} />
         </Router>
         <Flash flashData={this.state.flash} />

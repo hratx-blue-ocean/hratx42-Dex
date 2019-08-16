@@ -72,8 +72,8 @@ export default function Controls(props) {
           ))}
         </DropdownButton>
         <div style={{ position: 'relative', left: '30%' }}>
-          {props.users.map(user => 
-            <>
+          {props.users.map(user =>
+            <span key={Math.random()}>
               <OverlayTrigger
                 key={'bottom'}
                 placement={'bottom'}
@@ -83,17 +83,17 @@ export default function Controls(props) {
                   </Tooltip>
                 }
               >
-                <Button style = {{textAlign: "center"}}className="tableControlsUserNameCircles" variant="secondary">
+                <Button style={{ textAlign: "center" }} className="tableControlsUserNameCircles" variant="secondary">
                   {(user.name.split(" ").map(char => char[0]).join("")).toUpperCase()}
-                </Button>
+                </Button>
               </OverlayTrigger>
-            </>
+            </span>
           )}
           <Button onClick={() => props.handleModal()} variant="success">
             New Deck
           </Button>
-         
-         
+
+
           {/* 
           <Button className="tableControlsUserNameCircles" variant="secondary">
             ME
