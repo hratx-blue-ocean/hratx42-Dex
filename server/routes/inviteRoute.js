@@ -23,19 +23,28 @@ router.post('/:email', async (req, res) => {
     const mailOptions = {
       from: 'dexteamhr@gmail.com', // sender address
       to: `${email}`, // list of receivers
-      subject: 'Hi DJ! this is dex tema', // Subject line
-      html: '\nhttp:\/\/' + req.headers.host + '\/confirmation\/' + token.token + '.\n'
+      subject: `Hi! this is dex team. You are invited by ${invitedBy}`, // Subject line
+      html: `\nhttp://${req.headers.host}/api/invite/${tableId}\n`
     };
     // send mail with defined transport object
     transporter.sendMail(mailOptions, function (err, info) {
-      if(err)
+      if(err) {
         console.log(err)
-      else
+        res.status(400).json({success: false, message: "Unexpected Error occurred, please try later"})
+      } else {
         console.log(info);
+        res.status(200).json({success: true, message: "Succesfully sent invitation!"})
+      }
    });
   }
   
-  // main().catch(console.error);
+  main().catch(console.error);
 });
+
+  router.get('/:tableId', (req, res) => {
+    let { tableId } = req.params
+    console.log(tableId);
+    res.cookie('tableId', tableId).redirect('/');
+  })
 
 module.exports = router;
