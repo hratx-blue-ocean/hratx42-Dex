@@ -14,7 +14,8 @@ const tablesRoute = require('./routes/tables');
 const decksRoute = require('./routes/decks');
 const cardsRoute = require('./routes/cards');
 const authRoute = require('./routes/auth');
-
+const inviteRoute = require('./routes/inviteRoute');
+const cookieParser = require('cookie-parser');
 // open up CORS
 app.use((_, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
@@ -28,11 +29,13 @@ app.use((_, res, next) => {
 // middleware
 app.use(logger('dev'));
 app.use(bodyParser.json());
+app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../client/public')));
 
 // routes
 app.use('/api/users', usersRoute);
 app.use('/api/auth', authRoute);
+app.use('/api/invite', inviteRoute);
 app.use(jwtChecker.checkToken);
 app.use('/api/tables', tablesRoute);
 app.use('/api/decks', decksRoute);
