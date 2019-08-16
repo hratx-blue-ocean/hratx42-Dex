@@ -36,6 +36,7 @@ const auth = (req, res, next) => {
               });
               res
                 .clearCookie('tableId')
+                .cookie('token', token)
                 .header('x-access-token', token)
                 .status(201)
                 .json({
