@@ -7,12 +7,14 @@ import { Button, Card } from "react-bootstrap";
 export default function Dashboard(props) {
   const images = ['http://bizcardtemplates.com/wp-content/uploads/2017/09/Landscape-Business-Card-Background-27.jpg', 'https://cdn.pixabay.com/photo/2015/12/19/18/47/decoration-1100137_960_720.jpg', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZEZJc-78-rYSHrZqh_T_M7qkEzHIHBsVSLKHpAU6UbWNnzUUa', 'https://png.pngtree.com/thumb_back/fh260/back_pic/04/32/47/035843e833dd111.jpg']
   const [showProfile, setShowProfile] = useState(false);
-  console.log(props.state)
+  const hideProfile = () => {
+    setShowProfile(false);
+  }
   return (
     <div className="dashboardContainer">
       <div>
         {showProfile ? (
-          <ProfileEditForm userId={props.userId} user={props.user} />
+          <ProfileEditForm hideProfile={hideProfile.bind(this)} userId={props.userId} user={props.user} />
         ) : (
           <div style = {{width: '350px', height: '450px'}}>
             <Card>
