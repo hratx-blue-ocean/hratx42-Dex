@@ -57,6 +57,7 @@ export default function Controls(props) {
           type="text"
           placeholder="Search cards"
           style={{ width: '15%' }}
+          onBlur = {() => props.loseFocusSearch()}
         />
         {props.searchName === '' ? (
           <></>

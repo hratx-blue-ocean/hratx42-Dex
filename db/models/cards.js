@@ -12,8 +12,6 @@ const cardsModel = {
           c.title,
           c.description,
           c.due_date,
-          c.updated_at,
-          c.created_at,
           c.weight,
           c.impact,
           c.table_id,
@@ -49,8 +47,6 @@ const cardsModel = {
           c.title,
           c.description,
           c.due_date,
-          c.updated_at,
-          c.created_at,
           c.weight,
           c.impact,
           array_agg(
@@ -85,8 +81,6 @@ const cardsModel = {
           c.title,
           c.description,
           c.due_date,
-          c.updated_at,
-          c.created_at,
           c.weight,
           c.impact,
           array_agg(
@@ -134,7 +128,6 @@ const cardsModel = {
   async updateCard(card) {
     const query = makeUpdateString(card, 'cards');
     const values = Object.values(card);
-    console.log(query);
     const { rows: cards } = await pgClient.query(query, values);
     return cards[0];
   },
