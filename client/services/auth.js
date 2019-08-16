@@ -8,6 +8,7 @@ function login(value) {
 
 function logout() {
   localStorage.removeItem(tokenKey);
+  document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
   window.location = '/';
 }
 
