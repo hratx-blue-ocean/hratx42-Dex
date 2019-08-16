@@ -34,6 +34,7 @@ const auth = (req, res, next) => {
                 expiresIn: '7 days',
               });
               res
+                .cookie('token', token)
                 .header('x-access-token', token)
                 .status(201)
                 .json({
