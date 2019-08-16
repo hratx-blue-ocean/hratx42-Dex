@@ -1,20 +1,23 @@
 const jwt = require('jsonwebtoken');
 // const config =require('./config.js');
-const config = {secret: "supersecuresecret"};
-
-const parseCookie = (cookieStr, cookie) => {
-  const cookies = cookieStr.split(" ");
-  let value = cookies.filter((c) =>  {
-    if (c.indexOf(`${cookie}=`) > -1) {
-      return true
-    }
-    return false;
-  })[0];
-  return value.slice(cookie.length + 1);
-}
+const config = { secret: "supersecuresecret" };
 
 const checkToken = (req, res, next) => {
-  let token = parseCookie(req.headers.cookie, 'token');
+  let cookies = req.cookies
+  if (!cookies) {
+    return res.status(404).json({
+      success: false,
+      message: 'Please sign in'
+    });
+  }
+  let token = req.cookies.token
+  if (!token) {
+    return res.status(404).json({
+      success: false,
+      message: 'Please sign in'
+    });
+  }
+  console.log("The cookie token ", token)
   if (token) {
     jwt.verify(token, config.secret, (err, decoded) => {
       if (err) {
@@ -24,16 +27,12 @@ const checkToken = (req, res, next) => {
           message: 'Token is not valid'
         });
       } else {
+        console.log("Token is valid")
         req.user = decoded.userId;
         next();
       }
     });
-  } else {
-    return res.status(404).json({
-      success: false,
-      message: 'Auth token is not supplied'
-    });
   }
 };
 
-module.exports =  {checkToken };
+module.exports = { checkToken };
