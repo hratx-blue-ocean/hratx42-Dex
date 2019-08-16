@@ -93,19 +93,37 @@ newCardDataCollector(players,tags,deck,cardInfo) {
         })
 }
 
-  editCardDataCollector(players,tags, deck, cardInfo) {
-    let toPost = {
-      description: cardInfo.description,
-      id: cardInfo.id,
-      title: cardInfo.titl,
-      weight: parseInt(cardInfo.eff),
-      impact: parseInt(cardInfo.imp),
-      deck_id: this.obtainDeckID(deck),
-      table_id: this.props.tableId,
-    }
-    let toMembersPost ={cards_members: this.obtainPlayersId(players)}
-    let toLabelsPost = {card_labels: this.obtainLabelIds(tags)}
+editCardDataCollector(players,tags, deck, cardInfo) {
+  let toPost = {
+    description: cardInfo.description,
+    id: cardInfo.id,
+    title: cardInfo.titl,
+    weight: parseInt(cardInfo.eff),
+    impact: parseInt(cardInfo.imp),
+    deck_id: this.obtainDeckID(deck),
+    table_id: this.props.tableId,
   }
+  let toMembersPost ={cards_members: this.obtainPlayersId(players)}
+  let toLabelsPost = {card_labels: this.obtainLabelIds(tags)}
+  let addedCard;
+  http.cards.put(toPost)
+      .then((response)=>{
+        console.log(response)
+        editCard=response
+        console.log(editCard)
+      })
+      // .then((response)=>{
+      //   toMembersPost.cards_members.forEach(async (player) =>{
+      //     await http.cards.addUser(addedCard.id, player.member_id)
+      //   })
+      //   console.log(response)
+      // })
+      // .then(()=>{
+      //   toLabelsPost.card_labels.forEach(async (label) =>{
+      //     await http.cards.addLabel(addedCard.id,label.id)
+      //   })
+      // })
+}
 
   obtainPlayersId(players) {
     let users = this.state.users
