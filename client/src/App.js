@@ -3,6 +3,7 @@ import 'regenerator-runtime/runtime';
 
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { Spinner } from 'react-bootstrap';
 
 //components
 import Landing from './components/Landing.js';
@@ -60,13 +61,29 @@ export default class App extends Component {
     };
   }
 
-  componentDidMount() {
-    console.log('App mounted');
+  async componentDidMount() {
+    this.loading(true);
     global.flash = this.flash.bind(this);
+    global.loading = this.loading.bind(this);
     global.setState = this.setState.bind(this);
     if (localStorage.getItem('token')) {
       this.login();
+      await this.getTables();
+      await this.getUser();
+      await this.getCards();
+      this.loading(false);
+    } else {
+      this.loading(false);
     }
+  }
+
+  loading(loading) {
+    this.setState({ loading });
+    setTimeout(() => {
+      if (this.state.loading) {
+        global.setState({ loading: false });
+      }
+    }, 5000);
   }
 
   flash(message, variant, interval) {
@@ -78,9 +95,6 @@ export default class App extends Component {
 
   login() {
     auth.setUser(this);
-    this.getTables();
-    this.getUser();
-    this.getCards();
   }
 
   async getCards() {
@@ -199,10 +213,22 @@ export default class App extends Component {
             )}
           />
           <Route path="/profile" component={Profile} />
-          <Route path={`/table/:id`} render={props => <Table {...props} />} />
+          <Route
+            path={`/table/:id`}
+            render={props => (
+              <Table {...props} loading={this.loading.bind(this)} />
+            )}
+          />
           <Route path="/TableSettings" component={TableSettings} />
         </Router>
         <Flash flashData={this.state.flash} />
+        {this.state.loading ? (
+          <Spinner
+            animation="border"
+            variant="success"
+            className="APP__spinner"
+          />
+        ) : null}
       </>
     );
   }

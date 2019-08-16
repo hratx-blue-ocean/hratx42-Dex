@@ -51,6 +51,7 @@ export default class Table extends Component {
 
   async getAllTheData(tableId) {
     console.log('Getting the data ', tableId);
+    this.props.loading(true)
     const table = await http.tables.getById(tableId);
     this.setState({ table });
     http.decks
@@ -67,7 +68,9 @@ export default class Table extends Component {
         //populated deckname for tickets
         this.setState({ deckNames: deckHolder });
         http.users.getByTableId(table.id).then(res => {
-          this.setState({ users: res });
+          this.setState({ users: res }, ()=>{
+            this.props.loading(false)
+          });
         });
       });
   }

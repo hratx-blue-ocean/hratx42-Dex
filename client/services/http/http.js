@@ -9,6 +9,7 @@ const tryAxios = async function(endpoint, method, payload) {
     const response = await axios[method](endpoint, payload);
     return response.data;
   } catch (error) {
+    global.loading(false)
     global.flash(error.response.data.message || error.message, 'danger', 2000);
   }
 };
