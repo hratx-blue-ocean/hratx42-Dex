@@ -2,10 +2,12 @@ var express = require('express');
 var router = express.Router();
 const usersModel = require('../../db/models/users');
 const tablesModel = require('../../db/models/tables.js');
+const cardsModel = require('../../db/models/cards.js');
 const bcrypt = require('bcrypt');
 const saltRounds = 12;
 const jwtChecker = require('../middleware/jwtChecker.js');
 const auth = require('../middleware/auth.js');
+const tryCatch = require('../utils/tryCatch');
 
 // router.use(jwtChecker.checkToken);
 router.get('/:id', (req, res) => {
@@ -180,5 +182,19 @@ router.delete('/:id', (req, res) => {
       res.status(404).json({ success: false, message: 'Error getting user' });
     });
 });
+
+router.get('/:id/cards/', async (req, res) => {
+  const userId = req.params.id;
+  tryCatch(async () => {
+    const user = await usersModel.getUserByID(userId);
+    if (user){
+      const cards = await cardsModel.getCardsByUserID(userId);
+      console.log(cards);
+      res.status(201).send(cards)
+    }else{
+      res.status(404).json({ success: false, message: 'Error getting user' });
+    }
+  }, res);
+})
 
 module.exports = router;
