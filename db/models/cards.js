@@ -134,7 +134,6 @@ const cardsModel = {
   async updateCard(card) {
     const query = makeUpdateString(card, 'cards');
     const values = Object.values(card);
-    console.log(query);
     const { rows: cards } = await pgClient.query(query, values);
     return cards[0];
   },

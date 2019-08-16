@@ -7,11 +7,9 @@ const tablesModel = {
     let query = 'insert into dex_tables (name) values ($1) returning *;';
     const { rows: tables } = await pgClient.query(query, [name]);
     const table = tables[0];
-    console.log('Table created ', table);
     query = 'insert into tables_members (table_id, member_id) values ($1, $2);';
     const values = [table.id, userId];
     let result = await pgClient.query(query, values);
-    console.log('tables_members updated ', result.rowCount);
     return tables[0];
   },
 
@@ -32,7 +30,6 @@ const tablesModel = {
     const decksWithCards = await Promise.all(
       decks.map(async deck => {
         deck.cards = await cardsModel.getCardsByDeckId(deck.id);
-        console.log('deck from within map', deck);
         return deck;
       })
     );

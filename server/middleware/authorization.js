@@ -21,7 +21,6 @@ module.exports = {
   userOwnsTable(req, res, next) {
     const tableId = req.params.id;
     const userId = req.user;
-    console.log('IDS ', tableId, userId);
     tryCatch(async () => {
       const authorized = await authorizationModel.user.ownsTable(
         userId,
