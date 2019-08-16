@@ -10,7 +10,7 @@ export default function CardModal({closeModal, card, deckTitle, showMe, deckName
   const [title, setTitle] = useState();
   const [players, setPlayers] = useState([]);
   const [tags, setTags] = useState([]);
-  const [dueDate, setDate] = useState(new Date());
+  const [dueDate, setDate] = useState('mm-dd-yyyy');
   const [deck, setDeck] = useState(deckTitle);
   const [desc, setDesc] = useState();
 
