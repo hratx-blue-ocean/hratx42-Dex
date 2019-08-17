@@ -148,7 +148,15 @@ code {
 
 /* BEGIN DEX NAVBAR STYLES */
 
+#logo {
+  padding-top: 10px;
+}
+
 #logoHover {
+  position: absolute;
+  top: 22px;
+  left: 15px;
+  opacity: 0;
   visibility: hidden;
 }
 
@@ -161,7 +169,7 @@ code {
 .logoWrapper:hover > #logoHover {
   visibility: visible;
   opacity: 1;
-  transition: 0.5s;
+  transition: 1s;
 }
 
 .dexNavBar {

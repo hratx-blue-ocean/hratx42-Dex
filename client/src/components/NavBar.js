@@ -30,7 +30,7 @@ function NavBar(props) {
     <div>
       <Navbar bg="light" className='dexNavBar' expand="lg" >
         <Navbar.Brand >
-          <Link className="logoWrapper" style={{ color: 'black' }} to={"/dashboard"}><img id="logo" src="/assets/Logo.png" style={{ marginLeft: "5px" }}></img><img id="logoHover" src="/assets/onHoverLogo.png" style={{ marginLeft: "5px" }}></img></Link>
+          <Link className="logoWrapper" style={{ color: 'black' }} to={"/dashboard"}><img id="logo" src="/assets/Logo.png" style={{ marginLeft: "5px" }}></img><img id="logoHover" src="/assets/LogoHover.png" style={{ marginLeft: "5px" }}></img></Link>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
@@ -49,7 +49,7 @@ function NavBar(props) {
                 </Button>
               </Form>
             </OverlayTrigger>
-            <NavDropdown  className="navBarUserCircle navBarDropdown" title={<img alt='' style={{width: '28px',height:'28px'}} src='/assets/tableIcon.png'></img>} style={{ marginRight: "25px"}}>
+            <NavDropdown  className="navBarUserCircle navBarDropdown" title={<img alt='' style={{width: '28px',height:'28px'}} src='/assets/imageHover.png'></img>} style={{ marginRight: "25px"}}>
                   {allTables}
               <NavDropdown.Divider />
               <NavDropdown.Item onClick={() => props.changeTableModal()}>Create Table</NavDropdown.Item>
