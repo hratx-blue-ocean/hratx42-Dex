@@ -62,14 +62,21 @@ export default function CardThumbnails(props) {
         </Row>
         <div style={{ fontSize: '12px', paddingLeft: '5px' }}>{props.singleCard.title}</div>
         <div style={{ position: "absolute", bottom: "0", width: "100%", marginBottom: "5px", marginLeft: "-5px"}}>
-          <div style={{ float: "left" }}>
-            <img 
-              style = {{ paddingLeft: "5px" }}
-              className='CardThumbnailsMove' 
-              height='25' src="/assets/downButton.png" 
-              onClick={() => props.moveCard(props.singleCard, props.cardIndex, props.deckIndex, 1)} 
-            />
-            <img className='CardThumbnailsMove' height='25' src="/assets/upButton.png" onClick={() => props.moveCard(props.singleCard, props.cardIndex, props.deckIndex, -1)} />
+            <div style={{ float: "left", paddingLeft: "5px" }}>       
+              <img 
+                  style={{ height: "12px", paddingRight: "5px", marginBottom: "-12px" }}
+                className='CardThumbnailsMove' 
+                height='25' src="/assets/downButton.png" 
+                alt = "Move Down"
+                onClick={() => props.moveCard(props.singleCard, props.cardIndex, props.deckIndex, 1)} 
+              />
+              <img 
+                style = {{ height: "12px", marginBottom: "-12px"}} 
+                className='CardThumbnailsMove' 
+                src="/assets/upButton.png" 
+                alt = "Move Up"
+                onClick={() => props.moveCard(props.singleCard, props.cardIndex, props.deckIndex, -1)} 
+              />
           </div>
           <div style={{ float: "right", paddingRight: "5px" }}>
             {/* more users button leads to edit form to view all users */}
