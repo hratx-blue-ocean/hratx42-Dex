@@ -474,7 +474,7 @@ code {
 
 #deckScrollbar {
   display: flex;
-  width: 90%;
+  width: 95%;
   flex-wrap: nowrap !important;
   margin-right: -15px;
   margin-left: -15px;
