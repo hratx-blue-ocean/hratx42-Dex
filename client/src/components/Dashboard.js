@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { NavLink } from "react-router-dom";
 import ProfileEditForm from './ProfileEditForm.jsx';
-import {Row,Col, Button, Card } from "react-bootstrap";
+import {Container, Row,Col, Button, Card } from "react-bootstrap";
 import DashboardCards from './DashboardCards.js'
 
 export default function Dashboard(props) {
@@ -11,29 +11,32 @@ export default function Dashboard(props) {
     setShowProfile(false);
   }
   return (
-    <Row className="dashboardContainer">
-      <Col xl lg md sm xs={3} >
+   
+    <Row style={{minHeight: '750px' ,maxHeight: '750px'}}>
+      <Col xl={4} lg={4} md={4} sm={4} xs={4} style={{paddingTop:'30'}}>
         {showProfile ? (
           <ProfileEditForm hideProfile={hideProfile.bind(this)} userId={props.userId} user={props.user} />
         ) : (
-          <div style = {{width: '350px', height: '450px'}}>
-            <Card>
-              <div style = {{fontSize: '30px'}}>Welcome back to your dashboard, {props.user.name}</div>
+          <div style={{minHeight: '750px' ,maxHeight: '750px'}}>
+            <Card style={{minHeight: '750px' ,maxHeight: '750px'}}>
+              <div style = {{marginTop:'40px',fontSize:'24px',textAlign:'center' }}><strong>Welcome back to your dashboard {props.user.name}</strong></div>
               <hr/>
-              <div>Please refer to our <span style = {{textDecoration: 'underline'}}>TOS</span> for any questions</div>
+              <div style = {{textAlign:'center' }}>Please refer to our <span style = {{textDecoration: 'underline'}}>TOS</span> for any questions</div>
               <hr/>
-              <div>Tables you are a member of: {props.tables.length}</div>
-              <div>Total Cards owned: {props.cards.length}</div>
-              <div>Cards per Table Average: {props.tables.length/5}</div>
-              <Button onClick = {() => setShowProfile(true)}>Edit Profile</Button>
+              <div style = {{textAlign:'center' }}>Tables you are a member of: {props.tables.length}</div>
+              <div style = {{textAlign:'center' }}>Total Cards owned: {props.cards.length}</div>
+              <div style = {{textAlign:'center' }}>Cards per Table Average: {props.tables.length/5}</div>
+              <div style = {{textAlign:'center', borderRadius:'50%' }}><img style = {{width:'70%'}} alt=''src='/assets/circle-cropped.png' ></img></div>
+              <Button style = {{width:'30%',marginLeft:'30px',marginTop:'50px', backgroundColor:'#60BE4E'}} onClick = {() => setShowProfile(true)}>Edit Profile</Button>
             </Card>
           </div>
         )}
       </Col>
-      {/* tables */}
-      <Col xl lg md sm xs={9} className="dashboardTables">
-        <Card>
-          <h2>{props.user.name}'s Tables</h2>
+      {/* tables */} 
+      <Col id='tableAndCards' xl={8} lg={8} md={8} sm={8} xs={8} className="dashboardTables" style={{paddingTop:'30',minHeight: '750px' ,maxHeight: '750px'}}>
+      
+        <Card style={{minHeight: '470px' ,maxHeight: '470px'}}>
+          <h2  style={{marginTop:'40px'}}>{props.user.name}'s Tables</h2>
             <div className="dashboardTablesContainer">
               {props.tables.map((table, index) =>
                 <ul key = {Math.random()}>
@@ -46,10 +49,12 @@ export default function Dashboard(props) {
               )}
             </div>
         </Card>
-        <div style = {{height: '50px'}}></div>
-        <Card>
+        <div style={{paddingTop:'30px'}}>
+
+        </div>
+        <Card style={{minHeight: '250px' ,maxHeight: '250px'}}>
           <div>
-            <h2>{props.user.name}'s Cards</h2>
+            <h2 style={{marginTop:'40px'}}>{props.user.name}'s Cards</h2>
               <div>
               {props.cards.map((singleCard, cardIndex) =>
               <div key={Math.random()}>
@@ -65,7 +70,9 @@ export default function Dashboard(props) {
               </div>
           </div>
         </Card>
+       
       </Col>
     </Row>
+   
   )
 }
