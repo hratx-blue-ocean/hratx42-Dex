@@ -144,12 +144,10 @@ export default class App extends Component {
   }
 
   removePlayerToTable(playerName) {
-    console.log(playerName)
     let index = this.state.newPlayer.indexOf(playerName);
-    // console.log(this.state.newPlayer.splice(index, 1))
     let tempArr = this.state.newPlayer.slice();
-
-    this.setState({newPlayer: tempArr.splice(index, 1)})
+    tempArr.splice(index, 1)
+    this.setState({newPlayer: tempArr})
   }
   render() {
     return (

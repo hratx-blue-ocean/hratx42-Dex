@@ -3,7 +3,6 @@ import { Link, withRouter } from "react-router-dom";
 import TableSettings from './TableSettings';
 import { Navbar, Button, NavDropdown, Nav, Form } from "react-bootstrap";
 function NavBar(props) {
-  console.log(props.userName)
   let initial='';
   if(props.userName !== undefined){
     initial = props.userName.split(" ").map(char => char[0]).join("").toUpperCase()

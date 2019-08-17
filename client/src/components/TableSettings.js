@@ -48,10 +48,9 @@ export default function TableSettings(props) {
               <div>
                 <form onSubmit={(e) => {
                   e.preventDefault();
-                  console.log('clicked!')
                   props.addPlayerToTable(playerName)
                 }}>
-                <input onChange = {(e) => {console.log(e.target.value); setPlayerName(e.target.value)}} style = {{display: 'inline' ,width:'75%', marginRight:'5px'}} type="email" name="emailaddress" placeholder = 'Enter user Email'/>
+                <input onChange = {(e) => { setPlayerName(e.target.value)}} style = {{display: 'inline' ,width:'75%', marginRight:'5px'}} type="email" name="emailaddress" placeholder = 'Enter user Email'/>
                 <Button
                   type="submit"
                   style = {{display: 'inline', position: 'relative',top: '-1px'}}
