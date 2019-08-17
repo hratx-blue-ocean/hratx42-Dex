@@ -11,7 +11,7 @@ const tryCatch = require('../utils/tryCatch');
 
 // router.use(jwtChecker.checkToken);
 router.get('/:id', (req, res) => {
-  const id = req .params.id;
+  const id = req.params.id;
   usersModel
     .getUserByID(id)
     .then(user => {

@@ -4,6 +4,7 @@ const tryCatch = require('../utils/tryCatch');
 const nodemailer = require('nodemailer');
 const tablesModel = require('../../db/models/tables.js');
 const usersModel = require('../../db/models/users.js');
+const emailInvite = require('../util/inviteHTML.js');
 
 router.post('/:email', async (req, res) => {
 
@@ -22,7 +23,7 @@ router.post('/:email', async (req, res) => {
     from: 'dexteamhr@gmail.com', // sender address
     to: `${email}`, // list of receivers
     subject: `Hi! this is dex team. You are invited by ${invitedBy}`, // Subject line
-    html: `\nhttp://${req.headers.host}/api/invite/${tableId}\n`
+    html: emailInvite(req.headers.host, tableId, invitedBy)
   };
 
   usersModel

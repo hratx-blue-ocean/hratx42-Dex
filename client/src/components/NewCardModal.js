@@ -17,7 +17,6 @@ export default function CardModal({ closeModal, card, deckTitle, showMe, deckNam
   const handleClose = () => closeModal()
   //   const handleShow = () => setShow(true);
 
-  // 
   return (
     <>
       <Modal size="lg" show={showMe} onHide={handleClose}>
@@ -133,10 +132,13 @@ export default function CardModal({ closeModal, card, deckTitle, showMe, deckNam
                 {/* Return ALL PLAYERS and LABELS/TAGS */}
                 <Row>
                   <Col xs={8} style={styles.playersStyle}>
-                    {players.map(player => {
+                    {players.map((player, i) => {
                       return (
                         <div onClick={() => {
-                          let curTags = tags
+                          console.log(players)
+                          let hold = players
+                          delete hold[i]
+                          setPlayers(hold)
                         }}>{player.member_name}</div>
                       )
                     })}
@@ -156,12 +158,21 @@ export default function CardModal({ closeModal, card, deckTitle, showMe, deckNam
                 <Row>
                   <Form style={{ width: '100%', paddingTop: 10 }}>
                     <Form.Group sm={8} controlId="exampleForm.ControlTextarea1">
-                      {/* <Form.Label>Description</Form.Label> */}
-                      <Form.Control as="textarea" rows="8" onBlur={(event) => setDesc(event.target.value)} placeholder="description" />
+                      <Form.Control as="textarea" rows="8" onBlur={(event) => setDesc(event.target.value)} placeholder="description" required />
                     </Form.Group>
                   </Form>
                 </Row>
               </Col>
+
+              {/* Text Input Area */}
+              <Row>
+                <Form style={{ width: '100%', paddingTop: 10 }}>
+                  <Form.Group sm={8} controlId="exampleForm.ControlTextarea1">
+                    {/* <Form.Label>Description</Form.Label> */}
+                    <Form.Control as="textarea" rows="8" onBlur={(event) => setDesc(event.target.value)} placeholder="description" />
+                  </Form.Group>
+                </Form>
+              </Row>
 
               {/* Header Container for effort, impact, title, and exit */}
               <Col xs={4} style={styles.addToCardCol}>
@@ -197,13 +208,16 @@ export default function CardModal({ closeModal, card, deckTitle, showMe, deckNam
           </Container>
         </Modal.Body>
         {/* Button to Submit */}
-        <Modal.Footer> <Button onClick={(event) => {
-          let cardInfo = { eff: effort, imp: impact, titl: title, description: desc, due: dueDate }
-          newCardData(players, tags, deck, cardInfo)
-          // newCardData(effort, impact, title, players, tags, dueDate, deck, desc)
-          handleClose()
-        }} variant="primary">Submit</Button></Modal.Footer>
-      </Modal>
+        <Row style={styles.submitButton}>
+          <Button onClick={(event) => {
+            let cardInfo = { eff: effort, imp: impact, titl: title, description: desc, due: dueDate }
+
+            newCardData(players, tags, deck, cardInfo)
+            // newCardData(effort, impact, title, players, tags, dueDate, deck, desc)
+            handleClose()
+          }} disabled={!(desc && title)} variant="primary">Submit</Button>
+        </Row>
+      </Modal >
     </>
   )
 }
