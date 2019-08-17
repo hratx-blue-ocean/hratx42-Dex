@@ -33,20 +33,19 @@ export default function Deck(props) {
     <div id="deckWrapper">
       <div id="deckContent" style={{ width: '100%' }} >
         <div id="deckHeader" style={{ width: '100%' }}> <span className="deckTitle">{props.deck.title} </span>
-          <Button
+          <div style={{ float: 'right' }}><Button
             className="deckEditBtn"
-            variant='outline-success'
+            variant='link'
             onClick={() => setShowEditDeck(true)}
           >
-            Edit Deck
-              </Button>
+            ...
+              </Button></div>
         </div>
         <div id="deckScrollbar" style={{ overflow: 'scroll' }}>
           <Card.Body className='row'>
             {cards.map((singleCard, cardIndex) =>
               <div key={Math.random()}>
                 <div style={{ paddingLeft: '160px' }}></div>
-
                 <CardThumbnail deckIndex={props.deckIndex}
                   cardIndex={cardIndex}
                   singleCard={singleCard}
@@ -72,7 +71,6 @@ export default function Deck(props) {
               card={props.singleCard}
 
             />
-
             <Button className="deckAddAnotherCardBtn" className='row' variant='outline-success' onClick={() => handleShow()}>
               Add Another Card
             </Button>
