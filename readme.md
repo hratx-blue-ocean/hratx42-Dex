@@ -85,6 +85,8 @@ We employed the Agile methodology and managed tasks with a ticketing system. We 
 
 We synced our github repo to [TravisCI](https://travis-ci.org/), with the goal of maintaining at least 80% test coverage on all submitted code, but extreme time pressure (a delivery time of eight days) limited our ability to write tests. As a result, bugs frequently crept into our code base. In order to address this problem within our time constraints, we increased scrutiny of submitted code and pulled approved code into a development branch, pulling into the master only when confident the development branch was bug free. Going forward, we would prefer to have complete test coverage and continuous integration.
 
+In early days of the project, we experienced frequent merge conflicts. To address this difficulty we developed a strict git workflow whereby every feature branch must be up to date with the dev branch before pulling into the dev branch.
+
 #### Technical
 
 Most of our technical difficulties were due to the complexity of our data: we have eight related SQL tables and 26 api endpoints. A significant portion of our time was spent designing the database, implementing the database models, and writing route handlers. Production of the front end was slow until we had a live back end. We think SQL is the correct choice for highly relational data, but using MongoDB would have streamlined production significantly and left more time to develop the front end.
