@@ -4,7 +4,6 @@ const authorizationModel = require('../../db/models/authorization');
 module.exports = {
   userOwnsCard(req, res, next) {
     console.log('Authenticating');
-    // next()//@TODO remove this line
     const cardId = req.params.id;
     const userId = req.user;
     tryCatch(async () => {
