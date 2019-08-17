@@ -67,14 +67,14 @@ code {
 /* BEGIN LOGIN/SIGNUP/LANDING STYLES */
 /* Login Component & Login Button */
 .login {
-  background: #f1f0f0 ;
+  background: #f1f0f0 !important;
 }
 
 .loginBtn {
-  border-radius: var(--border-button-border-radius, 4px) ;
-  font-size: var(--font-button-font-size, 16px) ;
-  line-height: var(--font-button-line-height, 24px) ;
-  letter-spacing: var(--font-button-letter-spacing, normal) ;
+  border-radius: var(--border-button-border-radius, 4px) !important;
+  font-size: var(--font-button-font-size, 16px) !important;
+  line-height: var(--font-button-line-height, 24px) !important;
+  letter-spacing: var(--font-button-letter-spacing, normal) !important;
   font-family: var(
     --font-button-font-family,
     Circular,
@@ -83,29 +83,29 @@ code {
     Roboto,
     Helvetica Neue,
     sans-serif
-  ) ;
-  text-transform: var(--font-button-text-transform, undefined) ;
-  padding-top: var(--spacing-button-vertical, 6px) ;
-  padding-bottom: var(--spacing-button-vertical, 6px) ;
-  font-weight: var(--font-bold-font-weight, 800) ;
-  border-width: var(--border-button-border-width, 2px) ;
-  padding-left: var(--spacing-button-horizontal, 22px) ;
-  padding-right: var(--spacing-button-horizontal, 22px) ;
-  box-shadow: var(--shadow-button-level0-box-shadow, none) ;
-  background: var(--color-buttons-primary-color, #ff5a5f) ;
-  border-color: var(--color-buttons-primary-border, transparent) ;
-  color: var(--color-buttons-primary-text, #ffffff) ;
+  ) !important;
+  text-transform: var(--font-button-text-transform, undefined) !important;
+  padding-top: var(--spacing-button-vertical, 6px) !important;
+  padding-bottom: var(--spacing-button-vertical, 6px) !important;
+  font-weight: var(--font-bold-font-weight, 800) !important;
+  border-width: var(--border-button-border-width, 2px) !important;
+  padding-left: var(--spacing-button-horizontal, 22px) !important;
+  padding-right: var(--spacing-button-horizontal, 22px) !important;
+  box-shadow: var(--shadow-button-level0-box-shadow, none) !important;
+  background: var(--color-buttons-primary-color, #ff5a5f) !important;
+  border-color: var(--color-buttons-primary-border, transparent) !important;
+  color: var(--color-buttons-primary-text, #ffffff) !important;
 }
 
 /* Register Component */
 #register {
-  background: #f1f0f0 ;
-  border-radius: 4px ;
-  padding: 32px ;
-  padding-bottom: 24px ;
-  width: 525px ;
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25) ;
-  font-size: 14px ;
+  background: #f1f0f0 !important;
+  border-radius: 4px !important;
+  padding: 32px !important;
+  padding-bottom: 24px !important;
+  width: 525px !important;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25) !important;
+  font-size: 14px !important;
   line-height: 1.43;
   margin-block-start: 0.83em;
   margin-block-end: 0.83em;
@@ -113,10 +113,10 @@ code {
 
 /* Sign Up Button */
 .signup {
-  border-radius: var(--border-button-border-radius, 4px) ;
-  font-size: var(--font-button-font-size, 16px) ;
-  line-height: var(--font-button-line-height, 24px) ;
-  letter-spacing: var(--font-button-letter-spacing, normal) ;
+  border-radius: var(--border-button-border-radius, 4px) !important;
+  font-size: var(--font-button-font-size, 16px) !important;
+  line-height: var(--font-button-line-height, 24px) !important;
+  letter-spacing: var(--font-button-letter-spacing, normal) !important;
   font-family: var(
     --font-button-font-family,
     Circular,
@@ -125,31 +125,31 @@ code {
     Roboto,
     Helvetica Neue,
     sans-serif
-  ) ;
-  text-transform: var(--font-button-text-transform, undefined) ;
-  padding-top: var(--spacing-button-vertical, 10px) ;
-  padding-bottom: var(--spacing-button-vertical, 10px) ;
-  font-weight: var(--font-bold-font-weight, 800) ;
-  border-width: var(--border-button-border-width, 2px) ;
-  padding-left: var(--spacing-button-horizontal, 22px) ;
-  padding-right: var(--spacing-button-horizontal, 22px) ;
-  box-shadow: var(--shadow-button-level0-box-shadow, none) ;
-  background: var(--color-buttons-primary-color, #ff5a5f) ;
-  border-color: var(--color-buttons-primary-border, transparent) ;
-  color: var(--color-buttons-primary-text, #ffffff) ;
+  ) !important;
+  text-transform: var(--font-button-text-transform, undefined) !important;
+  padding-top: var(--spacing-button-vertical, 10px) !important;
+  padding-bottom: var(--spacing-button-vertical, 10px) !important;
+  font-weight: var(--font-bold-font-weight, 800) !important;
+  border-width: var(--border-button-border-width, 2px) !important;
+  padding-left: var(--spacing-button-horizontal, 22px) !important;
+  padding-right: var(--spacing-button-horizontal, 22px) !important;
+  box-shadow: var(--shadow-button-level0-box-shadow, none) !important;
+  background: var(--color-buttons-primary-color, #ff5a5f) !important;
+  border-color: var(--color-buttons-primary-border, transparent) !important;
+  color: var(--color-buttons-primary-text, #ffffff) !important;
 }
 /* END LOGIN/SIGNUP/LANDING STYLES */
 
 /* BEGIN DEX NAVBAR STYLES */
 .dexNavBar {
-  background-color: #f1f0f0 ;
+  background-color: #f1f0f0 !important;
 }
 
 .navBarAddTableBtn {
-  border-radius: var(--border-button-border-radius, 4px) ;
-  font-size: var(--font-button-font-size, 16px) ;
-  line-height: var(--font-button-line-height, 24px) ;
-  letter-spacing: var(--font-button-letter-spacing, normal) ;
+  border-radius: var(--border-button-border-radius, 4px) !important;
+  font-size: var(--font-button-font-size, 16px) !important;
+  line-height: var(--font-button-line-height, 24px) !important;
+  letter-spacing: var(--font-button-letter-spacing, normal) !important;
   font-family: var(
     --font-button-font-family,
     Circular,
@@ -158,33 +158,33 @@ code {
     Roboto,
     Helvetica Neue,
     sans-serif
-  ) ;
-  text-transform: var(--font-button-text-transform, undefined) ;
-  padding-top: var(--spacing-button-vertical, 6px) ;
-  padding-bottom: var(--spacing-button-vertical, 6px) ;
-  font-weight: var(--font-bold-font-weight, 800) ;
-  border-width: var(--border-button-border-width, 2px) ;
-  padding-left: var(--spacing-button-horizontal, 14px) ;
-  padding-right: var(--spacing-button-horizontal, 14px) ;
-  box-shadow: var(--shadow-button-level0-box-shadow, none) ;
-  background: var(--color-buttons-primary-color, #ff5a5f) ;
-  border-color: var(--color-buttons-primary-border, transparent) ;
-  color: var(--color-buttons-primary-text, #ffffff) ;
+  ) !important;
+  text-transform: var(--font-button-text-transform, undefined) !important;
+  padding-top: var(--spacing-button-vertical, 6px) !important;
+  padding-bottom: var(--spacing-button-vertical, 6px) !important;
+  font-weight: var(--font-bold-font-weight, 800) !important;
+  border-width: var(--border-button-border-width, 2px) !important;
+  padding-left: var(--spacing-button-horizontal, 14px) !important;
+  padding-right: var(--spacing-button-horizontal, 14px) !important;
+  box-shadow: var(--shadow-button-level0-box-shadow, none) !important;
+  background: var(--color-buttons-primary-color, #ff5a5f) !important;
+  border-color: var(--color-buttons-primary-border, transparent) !important;
+  color: var(--color-buttons-primary-text, #ffffff) !important;
 }
 
 .navBarTablesDropdown {
-  border-radius: var(--border-button-border-radius, 4px) ;
-  font-size: var(--font-button-font-size, 16px) ;
-  padding-top: var(--spacing-button-vertical, 6px) ;
-  padding-bottom: var(--spacing-button-vertical, 6px) ;
-  font-weight: var(--font-bold-font-weight, 800) ;
-  border-width: var(--border-button-border-width, 2px) ;
-  padding-left: var(--spacing-button-horizontal, -20px) ;
-  padding-right: var(--spacing-button-horizontal, -20px) ;
-  box-shadow: var(--shadow-button-level0-box-shadow, none) ;
-  background: var(--color-buttons-primary-color, #ff5a5f) ;
-  border-color: var(--color-buttons-primary-border, transparent) ;
-  color: #ffffff ;
+  border-radius: var(--border-button-border-radius, 4px) !important;
+  font-size: var(--font-button-font-size, 16px) !important;
+  padding-top: var(--spacing-button-vertical, 6px) !important;
+  padding-bottom: var(--spacing-button-vertical, 6px) !important;
+  font-weight: var(--font-bold-font-weight, 800) !important;
+  border-width: var(--border-button-border-width, 2px) !important;
+  padding-left: var(--spacing-button-horizontal, -20px) !important;
+  padding-right: var(--spacing-button-horizontal, -20px) !important;
+  box-shadow: var(--shadow-button-level0-box-shadow, none) !important;
+  background: var(--color-buttons-primary-color, #ff5a5f) !important;
+  border-color: var(--color-buttons-primary-border, transparent) !important;
+  color: #ffffff !important;
 }
 
 .navBarUserCircle {
@@ -195,7 +195,7 @@ code {
   border: 0;
   border-radius: 100%;
   box-sizing: border-box;
-  color: #CB4243 ;
+  color: #CB4243 !important;
   display: inline-flex;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans,
     Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
@@ -215,7 +215,7 @@ code {
 
 /* BEGIN TABLE CONTROL BAR STYLES */
 /* .tableControlsNavBar {
- background-color: #757374 ;
+ background-color: #757374 !important;
 } */
 .tableControlsUserNameCircles {
   align-items: center;
@@ -266,12 +266,12 @@ code {
 #deckContent {
   border-radius: 3px;
   position: relative;
-  background: #f1f0f0 ;
-  border-radius: 4px ;
-  padding: 32px ;
-  padding-bottom: 24px ;
-  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.25) ;
-  font-size: 14px ;
+  background: #f1f0f0 !important;
+  border-radius: 4px !important;
+  padding: 32px !important;
+  padding-bottom: 24px !important;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.25) !important;
+  font-size: 14px !important;
   line-height: 1.43;
   margin-block-start: 0.83em;
   margin-block-end: 0.83em;
@@ -288,11 +288,11 @@ code {
 #deckHeader {
   display: flex;
   justify-content: space-around;
-  width: 300px ;
+  width: 300px !important;
 }
 
 .deckTitle {
-  width: 100% ;
+  width: 100% !important;
   margin-right: -30px;
   margin-left: 10px;
   font-family: 'Roboto', sans-serif;
@@ -307,13 +307,13 @@ code {
 }
 
 .deckAddAnotherCardBtn {
-  font-size: var(--font-button-small-font-size, 14px) ;
-  margin-left: 2rem ;
-  width: 200px ;
+  font-size: var(--font-button-small-font-size, 14px) !important;
+  margin-left: 2rem !important;
+  width: 200px !important;
 }
 
 .deckEditBtn {
-  font-size: var(--font-button-small-font-size, 14px) ;
+  font-size: var(--font-button-small-font-size, 14px) !important;
   margin-right: 50px;
 }
 
