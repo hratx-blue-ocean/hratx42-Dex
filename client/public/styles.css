@@ -150,7 +150,9 @@ code {
 .dexNavBar {
   background-color: #f1f0f0 !important;
 }
-
+.navBarDropdown > a {
+  color: black !important;
+}
 .navBarAddTableBtn {
   border-radius: var(--border-button-border-radius, 4px) !important;
   font-size: var(--font-button-font-size, 16px) !important;
@@ -212,6 +214,30 @@ code {
   opacity: 1;
   height: 50px;
   width: 50px;
+}
+.dropdown-toggle::after {
+  display: none;
+}
+.navBarPlusCircle {
+  align-items: center;
+  background-color: #dfe1e6;
+  background-position: 50%;
+  background-size: cover;
+  border: 0;
+  border-radius: 100%;
+  box-sizing: border-box;
+  color:#f1f0f0 ;
+  display: inline-flex;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans,
+    Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  justify-content: center;
+  line-height: 28px;
+  opacity: 1;
+  height: 50px;
+  width: 50px;
+
 }
 /* END DEX NAVBAR STYLES */
 
