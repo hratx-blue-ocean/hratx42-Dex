@@ -150,6 +150,7 @@ code {
 .dexNavBar {
   background-color: #f1f0f0 !important;
 }
+
 .navBarDropdown > a {
   color: black !important;
 }
@@ -214,6 +215,11 @@ code {
   opacity: 1;
   height: 50px;
   width: 50px;
+}
+
+.navBarUserDropDown {
+  position: relative;
+  left: -50px;
 }
 .dropdown-toggle::after {
   display: none;

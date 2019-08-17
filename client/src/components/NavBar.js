@@ -15,25 +15,25 @@ function NavBar(props) {
     <div>
       <Navbar bg="light" className='dexNavBar' expand="lg" >
         <Navbar.Brand >
-          <Link style={{ color: 'black' }} to={"/dashboard"}><img src='/assets/Logo.png' alt='' style={{ marginLeft: "5px" }}></img></Link>
+          <Link style={{ color: 'black' }} to={"/dashboard"}><img src='/assets/Logo.png' alt='' style={{ marginLeft: "5px" }} height = '65'></img></Link>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto" />
-          <Form style={{ marginRight: "25px" }}>
+          <Form style={{ marginRight: "45px" }}>
             <Button  className="navBarPlusCircle" style={{backgroundColor:'#FF5A5F', color:'#f1f0f0'}} onClick={() => props.changeTableModal()}>
               <strong>+</strong>
             </Button>
           </Form>
-          <NavDropdown  className="navBarUserCircle navBarDropdown" title={<img alt='' style={{color:'black',width: '28px',height:'28px'}} src='/assets/tableIcon.png'></img>} style={{ marginRight: "25px"}}>
+          <NavDropdown alignRight className="navBarUserCircle navBarDropdown" title={<img alt='' style={{color:'black',width: '28px',height:'28px'}} src='/assets/tableIcon.png'></img>} style={{ marginRight: "45px"}}>
             {allTables}
             <NavDropdown.Divider />
             <NavDropdown.Item onClick={() => props.changeTableModal()}>Create Table</NavDropdown.Item>
           </NavDropdown>
-          <NavDropdown className="navBarUserCircle navBarDropdown" title={initial} id="dropdown-menu-align-right" style={{  marginTop: ".125rem", marginRight: "40px", marginBottom: "0" }}>
-            <div style = {{paddingLeft: '25px'}}><Link style = {{color: 'black', fontWeight: 'lighter'}} to={"/dashboard"}>Dashboard</Link></div>
-            <NavDropdown.Divider />
-            <NavDropdown.Item onClick={() => props.logOut()}>Log Out</NavDropdown.Item>
+          <NavDropdown alignRight className="navBarUserCircle navBarDropdown" title={initial} id="dropdown-menu" style={{  marginTop: ".125rem", marginRight: "40px", marginBottom: "0" }}>
+              <div style = {{paddingLeft: '25px'}}><Link style = {{color: 'black', fontWeight: 'lighter'}} to={"/dashboard"}>Dashboard</Link></div>
+              <NavDropdown.Divider />
+              <NavDropdown.Item onClick={() => props.logOut()}>Log Out</NavDropdown.Item>
           </NavDropdown>
         </Navbar.Collapse>
       </Navbar>
