@@ -69,9 +69,9 @@ designed and implemented our [relational database](db/schemas), which includes e
 
 was part of the UI/UX team. Together with Brooke, Laine designed the UI, prototyped it with [wireframes #link](), and contributed much to the [CSS](client/public/styles.css). Laine also built the [dashboard]() view, which displays a user's projects and tasks. Together with DJ Park, Laine created an [invitation feature](server/routes/invites.js) that sends an html-styled email inviting a user to join a project and, if applicable, to join Dex.
 
-#### [Ibrahim Jabr #link](https://github.com/ibrahimjabr12)
+#### [Ibrahim Jabr](https://github.com/ibrahimjabr12)
 
-built the [nav bar](client/src/components/NavBar.js) and the view for creating a [new table](client/src/components/TableSettings.js). He also created our [logo](#logo) and favicon.
+built the [nav bar](client/src/components/NavBar.js) and the view for creating a [new table](client/src/components/TableSettings.js). He also created our logo and favicon.
 
 ## Work Flow
 
