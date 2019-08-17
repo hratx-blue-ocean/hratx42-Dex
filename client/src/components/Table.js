@@ -185,6 +185,15 @@ export default class Table extends Component {
         })
       }
     })
+    .then(() =>{
+      return http.cards.get(editCard.id)
+    })
+    .then((card)=>{
+      let decks = [...this.state.decks]
+      let cardIndex = this.findCardById(toPost.id)
+      decks[cardIndex.deckIndex].cards.splice(cardIndex.cardIndex,1,card)
+      this.setState({decks})
+    })
   }
 
   obtainPlayersId(players) {
