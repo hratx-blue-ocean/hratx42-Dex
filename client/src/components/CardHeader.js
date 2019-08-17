@@ -18,7 +18,7 @@ export default function CardHeader(props) {
     <div>
       <Row className = 'no-gutters' style = {{ overflow: "hidden" }}>
         <Col md={3}>
-          <div className='cardThumbnails_impact'>{props.weight} | {props.impact}</div>
+          <div className='cardThumbnails_impact'>{props.weight}|{props.impact}</div>
         </Col>
         <Col className = 'no-gutters' md = {9}>
           {labels.map((subLabel) =>
