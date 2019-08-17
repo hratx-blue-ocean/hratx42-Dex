@@ -65,8 +65,9 @@ export default function CardThumbnails(props) {
                   <Tooltip id={`tooltip-bottom`}>
                     test
                   </Tooltip>
-                  }>
-                <div>{member.member_name === null ? (<></>) : i < 3 ? (<Button key={Math.random()} className='CardThumbnails_userIcon float-right' variant='secondary'>{member.member_name.split(" ").map(char => char[0]).join("").toUpperCase()}</Button>) : ''}</div>
+                }
+              >
+                {member.member_name === null ? (<></>) : i < 3 ? (<Button key={Math.random()} className='CardThumbnails_userIcon float-right' variant='secondary'>{member.member_name.split(" ").map(char => char[0]).join("").toUpperCase()}</Button>) : <></>}
               </OverlayTrigger>
           )}
         </div>
