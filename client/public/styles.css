@@ -7,7 +7,7 @@ body {
   height: 100%;
   margin: 0;
   padding: 0;
-  background-color: #fedcd2;
+  background-color: #4bc06a;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -454,14 +454,14 @@ code {
 }
 
 .card-body {
-  height: 280px;
+  height: 180px;
   padding-bottom: 15px;
 }
 
 #deckContent {
   border-radius: 3px;
   position: relative;
-  background: #eee !important;
+  background: #dfe1e6 !important;
   border-radius: 4px !important;
   padding-left: 32px !important;
   padding-right: 32px !important;
@@ -471,7 +471,7 @@ code {
   line-height: 1.43;
   margin-block-start: 0.83em;
   margin-block-end: 0.83em;
-  height: 350px;
+  height: 250px;
 }
 
 #deckScrollbar {
@@ -480,7 +480,8 @@ code {
   flex-wrap: nowrap !important;
   margin-right: -15px;
   margin-left: -15px;
-  overflow: scroll;
+  overflow-x: scroll;
+  overflow-y: hidden;
 }
 
 .row {
@@ -516,7 +517,9 @@ code {
 .deckAddAnotherCardBtn {
   font-size: var(--font-button-small-font-size, 14px) !important;
   height: 30px;
-  border: 1px solid black !important;
+  position: absolute;
+  top: 80%;
+  left: 2%;
 }
 
 .deckEditBtn {

@@ -18,17 +18,17 @@ export default function CardHeader(props) {
     <div>
       <Row className = 'no-gutters' style = {{ overflow: "hidden", paddingTop: '5px' }}>
         <Col md={3}>
-          <div style = {{borderRadius: '10%'}} className='cardThumbnails_impact'>
+          <div style = {{borderRadius: '20%'}} className='cardThumbnails_impact'>
           <OverlayTrigger
               key={'bottom'}
               placement={'bottom'}
               overlay={
                 <Tooltip id={`tooltip-bottom`}>
-                  Effort/Priority
+                  Priority/Effort
                 </Tooltip>}>
                 <div>
-                  <p style = {{position: 'relative', top: '-3px', left: '0px'}}>{props.weight}</p>
                   <p style = {{position: 'relative', top: '-20px', left: '20px'}}>{props.impact}</p>
+                  <p style = {{position: 'relative', top: '-3px', left: '0px'}}>{props.weight}</p>
                 </div>
             </OverlayTrigger>
           </div>

@@ -32,7 +32,7 @@ export default function Deck(props) {
   return (
     <div id="deckWrapper">
       <div id="deckContent" style={{ width: '100%' }} >
-        <div id="deckHeader" style={{ width: '100%' }}> <span className="deckTitle">{props.deck.title} </span>
+        <div id="deckHeader" style={{ width: '100%' }}><span className="deckTitle">{props.deck.title}</span>
           <div style={{ float: 'right' }}>
             <Button
               className="deckEditBtn"
@@ -72,7 +72,7 @@ export default function Deck(props) {
               card={props.singleCard}
             />
           </Card.Body>
-          <div className="deckAddAnotherCardBtn" className='row' className="deckCardAddBtn" variant='outline-success' onClick={() => handleShow()}>
+          <div className="deckAddAnotherCardBtn deckCardAddBtn" variant='outline-success' onClick={() => handleShow()}>
               + Add Another Card
           </div>
         </div>
