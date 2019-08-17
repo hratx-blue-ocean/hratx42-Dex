@@ -66,7 +66,7 @@ export default function CardThumbnails(props) {
             <img className='CardThumbnailsMove' height='25' src="/assets/downButton.png" onClick={() => props.moveCard(props.singleCard, props.cardIndex, props.deckIndex, 1)} />
             <img className='CardThumbnailsMove' height='25' src="/assets/upButton.png" onClick={() => props.moveCard(props.singleCard, props.cardIndex, props.deckIndex, -1)} />
           </div>
-          <div style={{ float: "right" }}>
+          <div style={{ float: "right", paddingRight: "5px" }}>
             {/* more users button leads to edit form to view all users */}
             <OverlayTrigger
               key={'bottom'}
@@ -94,7 +94,7 @@ export default function CardThumbnails(props) {
                     </Tooltip>
                   }
                 >
-                  {member.member_name === null ? (<></>) : i < 3 ? (<Button key={Math.random()} className='CardThumbnails_userIcon float-right' variant='secondary'>{member.member_name.split(" ").map(char => char[0]).join("").toUpperCase()}</Button>) : <></>}
+                  {member.member_name === null ? (<></>) : i < 6 ? (<Button key={Math.random()} className='CardThumbnails_userIcon float-right' variant='secondary'>{member.member_name.split(" ").map(char => char[0]).join("").toUpperCase()}</Button>) : <></>}
                 </OverlayTrigger>
             )}
           </div>
