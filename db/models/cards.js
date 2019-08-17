@@ -49,6 +49,8 @@ const cardsModel = {
           c.due_date,
           c.weight,
           c.impact,
+          c.table_id,
+          c.deck_id,
           array_agg(
             json_build_object(
               'member_id', cast(u.id as varchar),
@@ -76,7 +78,7 @@ const cardsModel = {
   },
   async getCardsByUserID(userId) {
     const query = `
-        select 
+        select
           c.id,
           c.title,
           c.description,

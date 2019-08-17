@@ -8,11 +8,46 @@ export default function CardThumbnails(props) {
   const handleShow = () => setShow(true);
   const handleClose = () => setShow(false)
 
+  let { singleCard } = props
+  let card_labels = [];
+  let cards_members = [];
+  for (let  i = 0; i < singleCard.cards_members.length; i++){
+    let add = true;
+    for (let j = 0; j < cards_members.length; j++){
+      if (cards_members[j].member_id == singleCard.cards_members[i].member_id){
+        add = false;
+      }
+    }
+    if (add) {cards_members.push(singleCard.cards_members[i])}
+  }
+  for (let  i = 0; i < singleCard.card_labels.length; i++){
+    let add = true;
+    for (let j = 0; j < card_labels.length; j++){
+      if (card_labels[j].id == singleCard.card_labels[i].id){
+        add = false;
+      }
+    }
+    if (add) {card_labels.push(singleCard.card_labels[i])}
+  }
+  singleCard.card_labels = card_labels;
+  singleCard.cards_members = cards_members;
 
   return (
     <div style={{ width: '150px', height: '150px' }}>
 
-      <EditCardModal users={props.users} labels={props.labels} editCard={props.editCard} key={Math.random()} showMe={show} deckNames={props.deckNames} deckTitle={props.deckTitle} card={props.singleCard} closeModal={handleClose.bind(this)} />
+      <EditCardModal users={props.users}
+                    labels={props.labels}
+                    editCard={props.editCard}
+                    key={Math.random()}
+                    showMe={show}
+                    deckNames={props.deckNames}
+                    deckTitle={props.deckTitle}
+                    card={singleCard}
+                    closeModal={handleClose.bind(this)} 
+                    deckIndex = {props.deckIndex}
+                    cardIndex = {props.cardIndex}
+                    />
+
       <Card onClick={() => {
         setShow(true)
       }} style={{ width: '150px', height: '150px' }} className='CardThumbnailsSingleCard'>
@@ -34,9 +69,7 @@ export default function CardThumbnails(props) {
             overlay={
               <Tooltip id={`tooltip-bottom`}>
                 Add/View More
-              </Tooltip>
-            }
-          >
+              </Tooltip>}>
             <Button
               key={Math.random()}
               className='CardThumbnails_userIcon float-right'
@@ -53,7 +86,7 @@ export default function CardThumbnails(props) {
                 placement={'bottom'}
                 overlay={
                   <Tooltip id={`tooltip-bottom`}>
-                    {member.member_name}
+                    test
                   </Tooltip>
                 }
               >

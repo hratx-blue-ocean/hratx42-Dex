@@ -150,6 +150,7 @@ code {
 .dexNavBar {
   background-color: #f1f0f0 !important;
 }
+
 .navBarDropdown > a {
   color: black !important;
 }
@@ -215,6 +216,11 @@ code {
   height: 50px;
   width: 50px;
 }
+
+.navBarUserDropDown {
+  position: relative;
+  left: -50px;
+}
 .dropdown-toggle::after {
   display: none;
 }
@@ -248,6 +254,19 @@ code {
 /* .tableControlsNavBar {
  background-color: #757374 !important;
 } */
+
+.tableControlDeleteButton {
+  color: #F1F0F0;
+  border-color: #F1F0F0;
+  margin-left: 20px;
+}
+
+.tableControlDeleteButton:hover {
+  background-color: #F1F0F0;
+  color: #343a40;
+  border-color:  #F1F0F0;
+}
+
 .tableControlsUserNameCircles {
   align-items: center;
   background-color: #dfe1e6;
@@ -301,7 +320,7 @@ code {
   border-radius: 4px !important;
   padding: 32px !important;
   padding-bottom: 24px !important;
-  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.25) !important;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25) !important;
   font-size: 14px !important;
   line-height: 1.43;
   margin-block-start: 0.83em;
@@ -341,10 +360,15 @@ code {
 }
 
 .deckEditBtn {
-  font-size: var(--font-button-small-font-size, 14px) !important;
   margin-left: 50px;
+  color: black;
+  text-decoration: none;
+  font-size: 19px;
 }
 
+.deckEditBtn :hover {
+  text-decoration: none;
+}
 /* END DECKS STYLES */
 
 /* BEGIN DASHBOARD STYLES */
