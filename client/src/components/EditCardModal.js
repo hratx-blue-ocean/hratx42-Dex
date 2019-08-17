@@ -20,7 +20,7 @@ export default function CardModal({closeModal, showMe, card, deckTitle, deckName
   const [deck, setDeck] = useState(deckTitle);
   const [desc, setDesc] = useState(card.description);
 
-
+  // console.log(card)
   return (
 
   <>
