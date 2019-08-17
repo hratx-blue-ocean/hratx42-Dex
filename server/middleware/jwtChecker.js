@@ -3,23 +3,16 @@ const jwt = require('jsonwebtoken');
 const config = { secret: "supersecuresecret" };
 
 const checkToken = (req, res, next) => {
-  console.log('headers: ', req.headers);
   const cookies = req.cookies;
   const tokenHeader = req.headers['x-access-token'];
   if (!cookies && !tokenHeader) {
-    return res.status(404).json({
-      success: false,
-      message: 'Please sign in'
-    });
+    return res.status(404).redirect('/');
   }
   let token = req.cookies.token || tokenHeader;
   if (!token) {
-    return res.status(404).json({
-      success: false,
-      message: 'Please sign in'
-    });
+    return res.status(404).redirect('/');
   }
-  console.log("The cookie token ", token)
+  // console.log("The cookie token ", token)
   if (token) {
     jwt.verify(token, config.secret, (err, decoded) => {
       if (err) {
@@ -29,7 +22,6 @@ const checkToken = (req, res, next) => {
           message: 'Token is not valid'
         });
       } else {
-        console.log("Token is valid")
         req.user = decoded.userId;
         next();
       }

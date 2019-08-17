@@ -5,10 +5,8 @@ const usersModel = require('../../db/models/users');
 const tryCatch = require('../utils/tryCatch');
 
 //middleware
-const authorization = require("../middleware/authorization")
+const authorization = require('../middleware/authorization');
 
-//jwtChecker returns response if user is not logged in
-// router.use(jwtChecker.checkToken);
 router.get('/', async (req, res) => {
   //query string like ?userId=123
   const { userId } = req.query;
@@ -18,6 +16,14 @@ router.get('/', async (req, res) => {
   } catch (error) {
     res.status(500).send({ message: 'Internal server error' });
   }
+});
+
+router.get('/:id', async (req, res) => {
+  tryCatch(async () => {
+    const tableId = req.params.id;
+    const table = await tablesModel.get(tableId);
+    res.status(200).send(table);
+  }, res);
 });
 
 router.get('/:id/users', async (req, res) => {
@@ -31,24 +37,15 @@ router.get('/:id/users', async (req, res) => {
 router.post('/', (req, res) => {
   tryCatch(async () => {
     const tableName = req.body.name;
-    const table = await tablesModel.create(tableName);
+    const userId = req.user;
+    const table = await tablesModel.create(tableName, userId);
     res.status(200).json(table);
   }, res);
 });
 
-// router.put('/:id', (req, res) => {
-//   const table = req.body;
-//   const id = req.params.id;
-//   table.id = id;
-//   //if req.user && user owns table
-//   //update table
-//   res.status(200).send(JSON.stringify(table));
-// });
-
 router.delete('/:id', authorization.userOwnsTable, (req, res) => {
   tryCatch(async () => {
     const tableId = req.params.id;
-    console.log("deleting table", tableId)
     const result = await tablesModel.delete(tableId);
     res.status(200).json({ message: 'deleted' });
   }, res);
@@ -56,7 +53,6 @@ router.delete('/:id', authorization.userOwnsTable, (req, res) => {
 
 router.post('/:tableId/member', async (req, res) => {
   tryCatch(async () => {
-    console.log('Post route');
     const userEmail = req.body.email;
     const tableId = req.params.tableId;
     const user = await usersModel.getUserInfoByEmail(userEmail);
