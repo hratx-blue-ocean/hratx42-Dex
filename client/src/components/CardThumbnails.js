@@ -62,11 +62,11 @@ export default function CardThumbnails(props) {
           <div style={{ display: 'flex', height: '150px', alignItems: 'center', fontSize: '20px', paddingTop: '15px', paddingLeft: '5px' }}>{props.singleCard.title}</div>
         </div>
         <div style={{ position: "absolute", bottom: "0", width: "100%"}}>
-          <div style={{ float: "left" }}>
-            <img className='CardThumbnailsMove' height='25' src="/assets/downButton.png" onClick={() => props.moveCard(props.singleCard, props.cardIndex, props.deckIndex, 1)} />
-            <img className='CardThumbnailsMove' height='25' src="/assets/upButton.png" onClick={() => props.moveCard(props.singleCard, props.cardIndex, props.deckIndex, -1)} />
+          <div style={{ float: "left", paddingLeft: "5px" }}>
+            <img style = {{ height: "15px", marginBottom: "-12px", paddingRight: "5px" }} className='CardThumbnailsMove' src="/assets/downButton.png" onClick={() => props.moveCard(props.singleCard, props.cardIndex, props.deckIndex, 1)} />
+            <img style = {{ height: "15px", marginBottom: "-12px" }} className='CardThumbnailsMove' src="/assets/upButton.png" onClick={() => props.moveCard(props.singleCard, props.cardIndex, props.deckIndex, -1)} />
           </div>
-          <div style={{ float: "right", paddingRight: "5px" }}>
+          <div style={{ float: "right", paddingRight: "10px", paddingBottom: "5px" }}>
             {/* more users button leads to edit form to view all users */}
             <OverlayTrigger
               key={'bottom'}
