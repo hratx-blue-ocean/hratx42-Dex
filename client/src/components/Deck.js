@@ -46,7 +46,6 @@ export default function Deck(props) {
             {cards.map((singleCard, cardIndex) =>
               <div key={Math.random()}>
                 <div style={{ paddingLeft: '160px' }}></div>
-
                 <CardThumbnail deckIndex={props.deckIndex}
                   cardIndex={cardIndex}
                   singleCard={singleCard}
