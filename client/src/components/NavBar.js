@@ -30,7 +30,7 @@ function NavBar(props) {
     <div>
       <Navbar bg="light" className='dexNavBar' expand="lg" >
         <Navbar.Brand >
-          <Link className="logoWrapper" style={{ color: 'black' }} to={"/dashboard"}><img id="logo" src="/assets/Logo.png" style={{ marginLeft: "5px" }}></img><img id="logoHover" src="/assets/LogoHover.png" style={{ marginLeft: "5px" }}></img></Link>
+          <Link className="logoWrapper" style={{ color: 'black' }} to={"/dashboard"}><img id="logo" src="/assets/Logo.png" style={{ marginLeft: "5px", width: "150px" }}></img><img id="logoHover" src="/assets/LogoHover.png" style={{ marginLeft: "5px" }}></img></Link>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
