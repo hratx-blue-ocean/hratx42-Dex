@@ -38,7 +38,7 @@ export default function Dashboard(props) {
               {props.tables.map((table, index) =>
                 <ul key = {Math.random()}>
                     <li>
-                      <div style = {{backgroundImage: `url(${images[index % 4]})`}} onClick={() => props.history.push(`/table/${table.id}`)} className="newTable">
+                      <div className="newTable tableThumbnail" style = {{backgroundImage: `url(${images[index % 4]})`}} onClick={() => props.history.push(`/table/${table.id}`)} >
                         <h5>{table.name}</h5>
                       </div>
                     </li>
