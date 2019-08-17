@@ -38,26 +38,13 @@ export default function CardThumbnails(props) {
           </Col>
         </Row>
         <div style={{ fontSize: '12px', paddingLeft: '5px' }}>{props.singleCard.title}</div>
-        <div style = {{ display: "flex", justifyContent: "space-between" }}>
-          <div style={{ display: "flex", flexDirection: "row" }}>
+        <div style={{ position: "absolute", bottom: "0", width: "100%"}}>
+          <div style={{ float: "left" }}>
             <img className='CardThumbnailsMove' height='25' src="/assets/downButton.png" onClick={() => props.moveCard(props.singleCard, props.cardIndex, props.deckIndex, 1)} />
             <img className='CardThumbnailsMove' height='25' src="/assets/upButton.png" onClick={() => props.moveCard(props.singleCard, props.cardIndex, props.deckIndex, -1)} />
           </div>
-          <div style = {{ display: "flex", flexDirection: "row" }}>
+          <div style={{ float: "right" }}>
             {/* more users button leads to edit form to view all users */}
-            {props.singleCard.cards_members.map((member, i) =>
-                <OverlayTrigger
-                  key={Math.random()}
-                  placement={'bottom'}
-                  overlay={
-                    <Tooltip id={`tooltip-bottom`}>
-                      {member.member_name}
-                    </Tooltip>
-                  }
-                >
-                  {member.member_name === null ? (<></>) : i < 3 ? (<Button key={Math.random()} className='CardThumbnails_userIcon float-right' variant='secondary'>{member.member_name.split(" ").map(char => char[0]).join("").toUpperCase()}</Button>) : <></>}
-                </OverlayTrigger>
-            )}
             <OverlayTrigger
               key={'bottom'}
               placement={'bottom'}
@@ -75,6 +62,19 @@ export default function CardThumbnails(props) {
               ><strong>+</strong>
               </Button>
             </OverlayTrigger>
+            {props.singleCard.cards_members.map((member, i) =>
+                <OverlayTrigger
+                  key={Math.random()}
+                  placement={'bottom'}
+                  overlay={
+                    <Tooltip id={`tooltip-bottom`}>
+                      {member.member_name}
+                    </Tooltip>
+                  }
+                >
+                  {member.member_name === null ? (<></>) : i < 3 ? (<Button key={Math.random()} className='CardThumbnails_userIcon float-right' variant='secondary'>{member.member_name.split(" ").map(char => char[0]).join("").toUpperCase()}</Button>) : <></>}
+                </OverlayTrigger>
+            )}
           </div>
         </div>
       </Card>
