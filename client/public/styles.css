@@ -1,8 +1,9 @@
-* {
+/* * {
   color: #343a40;
-}
+} */
 
 body {
+  color: #343a40;
   height: 100%;
   margin: 0;
   padding: 0;
@@ -29,12 +30,18 @@ code {
 
 /* BEGIN CARD THUMBNAIL STYLING? */
 
-cardThumbnails_impact {
+.cardThumbnails_impact {
   border: 1px solid black;
-  width: 35px;
+  width: 45px;
   height: 35px;
   font-size: 12px;
+  background: #eee;
+  padding: 5px;
+  font-weight: bold;
+  padding: 0px, 0px, 0px, 0px;
+  background:linear-gradient(to top left, #fff calc(50% - 1px), black, #fff calc(50% + 1px) )
 }
+
 
 .CardThumbnails_userIcon {
   border-radius: 50%;
@@ -57,6 +64,34 @@ cardThumbnails_impact {
     opacity: 1;
     height: 25px;
     width: 5px;
+}
+
+.CardThumbnails_userIcon {
+  align-items: center;
+  background-color: #ff5a5f;
+  background-position: 50%;
+  background-size: cover;
+  border: 0;
+  border-radius: 100%;
+  box-sizing: border-box;
+  color:#fff !important ;
+  display: inline-flex;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans,
+    Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  justify-content: center;
+  line-height: 2px;
+  opacity: 1;
+  height: 25px;
+  width: 5px;
+}
+
+.CardThumbnails_userIcon:hover {
+  transition: 0.5s;
+  background: var(--color-buttons-primary-color, #fff) !important;
+  border-color: var(--color-buttons-primary-border, transparent) !important;
+  color: #ff5a5f !important;
 }
 
 .flash-container {
@@ -83,15 +118,14 @@ cardThumbnails_impact {
   background-color: #cdcdcd;
 }
 
-.CardThumbnailsSingleCard:hover {
-  background-color: #cdcdcd;
-}
+
 
 .CardThumbnailsSingleCard {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
     Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-size: 10px;
 }
+
 /* END CARD THUMBNAIL STYLING? */
 
 /* BEGIN LOGIN/SIGNUP/LANDING STYLES */
@@ -327,7 +361,7 @@ cardThumbnails_impact {
   border: 0;
   border-radius: 100%;
   box-sizing: border-box;
-  color:#fff ;
+  color:#fff !important ;
   display: inline-flex;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans,
     Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
@@ -419,7 +453,8 @@ cardThumbnails_impact {
 }
 
 .card-body {
-  padding: 2rem;
+  height: 280px;
+  padding-bottom: 15px;
 }
 
 #deckContent {
@@ -434,18 +469,28 @@ cardThumbnails_impact {
   line-height: 1.43;
   margin-block-start: 0.83em;
   margin-block-end: 0.83em;
+  height: 380px;
 }
 
 #deckScrollbar {
   display: flex;
+  width: 95%;
   flex-wrap: nowrap !important;
   margin-right: -15px;
   margin-left: -15px;
   overflow: scroll;
 }
 
+.row {
+  display: flex;
+  flex-wrap: nowrap !important;
+  border: none;
+}
+
 #deckHeader {
-  padding-top: 0px;
+  display: flex;
+  justify-content: space-around;
+  height: 20px;
 }
 
 .deckTitle {
@@ -457,15 +502,19 @@ cardThumbnails_impact {
   font-weight: bold;
 }
 
-.row {
-  display: flex;
-  flex-wrap: nowrap !important;
-  overflow: scroll;
+.deckCardAddBtn {
+  color: #28A745;
+  margin: .5rem;
+}
+
+.deckCardAddBtn:hover {
+  cursor: pointer;
 }
 
 .deckAddAnotherCardBtn {
   font-size: var(--font-button-small-font-size, 14px) !important;
-  margin-left: 50px;
+  height: 30px;
+  border: 1px solid black !important;
 }
 
 .deckEditBtn {
@@ -584,4 +633,7 @@ cardThumbnails_impact {
   background-color: grey;
 }
 
+.cardHeaderLabels:hover {
+  color: black;
+}
 /* END DASHBOARD STYLES */
