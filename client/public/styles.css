@@ -544,8 +544,9 @@ cardThumbnails_impact {
 
 .dashboardTablesContainer {
   display: flex;
+  justify-content: flex-start;
   flex-wrap: wrap;
-  width: 40vw;
+  width: 100%;
 }
 
 .dashboardTablesContainer { visibility: hidden; }
@@ -589,6 +590,7 @@ cardThumbnails_impact {
   padding: 0.5rem;
   width: 150px;
   height: 150px;
+  margin: 20px;
   border: 1px solid grey;
   border-radius: 5px;
 }

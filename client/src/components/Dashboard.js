@@ -12,11 +12,11 @@ export default function Dashboard(props) {
   }
   return (
     <Row className="dashboardContainer">
-      <Col xl lg md sm xs={3} >
+      <Col xl={3} lg={3} md={3} sm={3} xs={3} >
         {showProfile ? (
           <ProfileEditForm hideProfile={hideProfile.bind(this)} userId={props.userId} user={props.user} />
         ) : (
-          <div style = {{width: '350px', height: '450px'}}>
+          <div>
             <Card>
               <div style = {{fontSize: '30px'}}>Welcome back to your dashboard, {props.user.name}</div>
               <hr/>
@@ -31,18 +31,21 @@ export default function Dashboard(props) {
         )}
       </Col>
       {/* tables */}
-      <Col xl lg md sm xs={9} className="dashboardTables">
+      <Col xl={9} lg={9} md={9} sm={9} xs={9} className="dashboardTables">
         <Card>
           <h2>{props.user.name}'s Tables</h2>
             <div className="dashboardTablesContainer">
               {props.tables.map((table, index) =>
-                <ul key = {Math.random()}>
-                    <li>
-                      <div className="newTable tableThumbnail" style = {{backgroundImage: `url(${images[index % 4]})`}} onClick={() => props.history.push(`/table/${table.id}`)} >
-                        <h5>{table.name}</h5>
-                      </div>
-                    </li>
-                </ul>
+                <div 
+                  className="newTable tableThumbnail" 
+                  style = {{backgroundImage: `url(${images[index % 4]})`}} 
+                  onClick={() => props.history.push(`/table/${table.id}`)} 
+                >
+                  <Row style={{height: '5px', background: '#ff5a5f'}} />
+                  <Row>
+                    <h5>{table.name}</h5>
+                  </Row>
+                </div>
               )}
             </div>
         </Card>
