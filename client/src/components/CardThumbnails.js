@@ -51,7 +51,7 @@ export default function CardThumbnails(props) {
       <Card onClick={() => {
         setShow(true)
       }} style={{ width: '250px', height: '250px' }} className='CardThumbnailsSingleCard'>
-
+        <div style = {{ padding: "5px"}}>
         <Row style = {{ overflow: "hidden" }}>
           <Col md={1}>
             <div className='cardThumbnails_impact'> {props.singleCard.weight}/{props.singleCard.impact}</div>
@@ -61,12 +61,17 @@ export default function CardThumbnails(props) {
           </Col>
         </Row>
         <div style={{ fontSize: '12px', paddingLeft: '5px' }}>{props.singleCard.title}</div>
-        <div style={{ position: "absolute", bottom: "0", width: "100%"}}>
+        <div style={{ position: "absolute", bottom: "0", width: "100%", marginBottom: "5px", marginLeft: "-5px"}}>
           <div style={{ float: "left" }}>
-            <img className='CardThumbnailsMove' height='25' src="/assets/downButton.png" onClick={() => props.moveCard(props.singleCard, props.cardIndex, props.deckIndex, 1)} />
+            <img 
+              style = {{ paddingLeft: "5px" }}
+              className='CardThumbnailsMove' 
+              height='25' src="/assets/downButton.png" 
+              onClick={() => props.moveCard(props.singleCard, props.cardIndex, props.deckIndex, 1)} 
+            />
             <img className='CardThumbnailsMove' height='25' src="/assets/upButton.png" onClick={() => props.moveCard(props.singleCard, props.cardIndex, props.deckIndex, -1)} />
           </div>
-          <div style={{ float: "right" }}>
+          <div style={{ float: "right", paddingRight: "5px" }}>
             {/* more users button leads to edit form to view all users */}
             <OverlayTrigger
               key={'bottom'}
@@ -95,10 +100,11 @@ export default function CardThumbnails(props) {
                     </Tooltip>
                   }
                 >
-                  {member.member_name === null ? (<></>) : i < 3 ? (<Button key={Math.random()} className='CardThumbnails_userIcon float-right' variant='secondary'>{member.member_name.split(" ").map(char => char[0]).join("").toUpperCase()}</Button>) : <></>}
+                  {member.member_name === null ? (<></>) : i < 6 ? (<Button key={Math.random()} className='CardThumbnails_userIcon float-right' variant='secondary'>{member.member_name.split(" ").map(char => char[0]).join("").toUpperCase()}</Button>) : <></>}
                 </OverlayTrigger>
             )}
           </div>
+        </div>
         </div>
       </Card>
     </div>
