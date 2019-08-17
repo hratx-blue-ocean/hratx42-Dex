@@ -2,7 +2,7 @@ body {
   height: 100%;
   margin: 0;
   padding: 0;
-  background-color: #C3D1D1;
+  background-color: #c3d1d1;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -13,6 +13,14 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.APP__spinner {
+  width: 3rem;
+  height: 3rem;
+  position: fixed;
+  top: 50%;
+  left: 50%;
 }
 
 /* BEGIN CARD THUMBNAIL STYLING? */
@@ -56,10 +64,9 @@ code {
 }
 
 .CardThumbnailsSingleCard {
-  height: 30px;
-  width: 80px;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  font-size: 20px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 10px;
 }
 
 /* END CARD THUMBNAIL STYLING? */
@@ -145,6 +152,9 @@ code {
   background-color: #f1f0f0 !important;
 }
 
+.navBarDropdown > a {
+  color: black !important;
+}
 .navBarAddTableBtn {
   border-radius: var(--border-button-border-radius, 4px) !important;
   font-size: var(--font-button-font-size, 16px) !important;
@@ -195,11 +205,39 @@ code {
   border: 0;
   border-radius: 100%;
   box-sizing: border-box;
-  color: #CB4243 !important;
+  color: #cb4243 !important;
   display: inline-flex;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans,
     Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
   font-size: 18px;
+  font-weight: 700;
+  justify-content: center;
+  line-height: 28px;
+  opacity: 1;
+  height: 50px;
+  width: 50px;
+}
+
+.navBarUserDropDown {
+  position: relative;
+  left: -50px;
+}
+.dropdown-toggle::after {
+  display: none;
+}
+.navBarPlusCircle {
+  align-items: center;
+  background-color: #dfe1e6;
+  background-position: 50%;
+  background-size: cover;
+  border: 0;
+  border-radius: 100%;
+  box-sizing: border-box;
+  color:#f1f0f0 ;
+  display: inline-flex;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans,
+    Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+  font-size: 22px;
   font-weight: 700;
   justify-content: center;
   line-height: 28px;
@@ -217,6 +255,19 @@ code {
 /* .tableControlsNavBar {
  background-color: #757374 !important;
 } */
+
+.tableControlDeleteButton {
+  color: #F1F0F0;
+  border-color: #F1F0F0;
+  margin-left: 20px;
+}
+
+.tableControlDeleteButton:hover {
+  background-color: #F1F0F0;
+  color: #343a40;
+  border-color:  #F1F0F0;
+}
+
 .tableControlsUserNameCircles {
   align-items: center;
   background-color: #dfe1e6;
@@ -270,7 +321,7 @@ code {
   border-radius: 4px !important;
   padding: 32px !important;
   padding-bottom: 24px !important;
-  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.25) !important;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25) !important;
   font-size: 14px !important;
   line-height: 1.43;
   margin-block-start: 0.83em;
@@ -278,10 +329,10 @@ code {
 }
 
 #deckScrollbar {
-  /* display: flex;
-  flex-wrap: nowrap;
+  display: flex;
+  flex-wrap: nowrap !important;
   margin-right: -15px;
-  margin-left: -15px; */
+  margin-left: -15px;
   overflow-y: hidden;
 }
 
@@ -302,21 +353,25 @@ code {
 
 .row {
   display: flex;
-  flex-wrap: nowrap;
-  /* overflow: scroll; */
+  flex-wrap: nowrap !important;
+  overflow: scroll;
 }
 
 .deckAddAnotherCardBtn {
   font-size: var(--font-button-small-font-size, 14px) !important;
-  margin-left: 2rem !important;
-  width: 200px !important;
+  margin-left: 50px;
 }
 
 .deckEditBtn {
-  font-size: var(--font-button-small-font-size, 14px) !important;
-  margin-right: 50px;
+  margin-left: 50px;
+  color: black;
+  text-decoration: none;
+  font-size: 19px;
 }
 
+.deckEditBtn :hover {
+  text-decoration: none;
+}
 /* END DECKS STYLES */
 
 /* BEGIN DASHBOARD STYLES */
@@ -349,7 +404,7 @@ code {
   width: 300px;
   height: 30px;
   font-size: 1.2rem;
-  padding-left: .5rem;
+  padding-left: 0.5rem;
   border: 1px solid #cfcfcf;
   border-radius: 5px;
 }
@@ -392,7 +447,7 @@ code {
 }
 
 .dashboardTables .newTable {
-  padding: .5rem;
+  padding: 0.5rem;
   width: 150px;
   height: 150px;
   border: 1px solid grey;
@@ -424,4 +479,3 @@ code {
 }
 
 /* END DASHBOARD STYLES */
-

@@ -1,6 +1,6 @@
-module.exports = function(cb) {
+module.exports = async function(cb) {
   try {
-    cb();
+    await cb();
   } catch (error) {
     console.error(error);
   }

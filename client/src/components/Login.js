@@ -18,8 +18,8 @@ export default function Login(props) {
   return (
     <div>
       <Navbar className='login' bg='light' expand='lg'>
-        <Navbar.Brand href='#home' style={{ marginBottom: '22px' }}>
-          <h2 style={{ marginLeft: '15px' }}>/Dex</h2>
+        <Navbar.Brand href='#home' >
+        <img src='/assets/Logo.png' alt='' style={{ marginLeft: "15px" }} height = '65'></img>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls='basic-navbar-nav' />
         <Navbar.Collapse id='basic-navbar-nav'>
