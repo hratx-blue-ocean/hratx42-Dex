@@ -42,17 +42,10 @@ export default function Controls(props) {
 
   return (
     <div>
-      <Navbar 
-        key={Math.random()}
-        className="tableControlsNavBar" 
-        bg="dark" 
-        variant="dark"
-        style={{ display: "flex", justifyContent: "space-between" }}
-      >
-        <div key={Math.random()} style = {{ display: "flex", flexDirection: "row"}}>
-          <Navbar.Brand key={Math.random()}>{props.tableName}</Navbar.Brand>
-          <Form.Control
-            key={Math.random()}
+      <Navbar key={Math.random()}className="tableControlsNavBar" bg="dark" variant="dark"style={{ display: "flex", justifyContent: "space-between" }}>
+         <Navbar.Brand key={Math.random()}>{props.tableName}</Navbar.Brand>
+          <input
+            key = {Math.random()}
             onChange={e => props.searchText(e.target.value)}
             type="text"
             placeholder="Search cards"
@@ -109,7 +102,6 @@ export default function Controls(props) {
           >
             Delete
           </Button>
-        </div>
         <ul 
           key={Math.random()} 
           className="nav navbar-nav" 

@@ -36,17 +36,13 @@ export default function Deck(props) {
           <Button
             className="deckEditBtn"
             variant='outline-success'
-            onClick={() => setShowEditDeck(true)}
-          >
-            Edit Deck
-              </Button>
+            onClick={() => setShowEditDeck(true)}>Edit Deck</Button>
         </div>
         <div id="deckScrollbar" style={{ overflow: 'scroll' }}>
           <Card.Body className='row'>
             {cards.map((singleCard, cardIndex) =>
               <div key={Math.random()}>
                 <div style={{ paddingLeft: '160px' }}></div>
-
                 <CardThumbnail deckIndex={props.deckIndex}
                   cardIndex={cardIndex}
                   singleCard={singleCard}
