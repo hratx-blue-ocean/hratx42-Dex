@@ -62,7 +62,6 @@ export default function Deck(props) {
             <div style={{ paddingLeft: '20px' }} />
             <NewCardModal
               newCardData={props.newCardData}
-              key={Math.random()}
               showMe={show}
               deckTitle={props.deck.title}
               deckNames={props.deckNames}
@@ -71,7 +70,6 @@ export default function Deck(props) {
               users={props.users}
               labels={props.labels}
               card={props.singleCard}
-
             />
           </Card.Body>
           <div className="deckAddAnotherCardBtn" className='row' className="deckCardAddBtn" variant='outline-success' onClick={() => handleShow()}>
