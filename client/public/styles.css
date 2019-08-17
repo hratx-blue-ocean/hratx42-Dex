@@ -207,6 +207,9 @@ code {
   width: 50px;
 
 }
+.dropdown-toggle::after {
+  display: none;
+}
 .navBarPlusCircle {
   align-items: center;
   background-color: #dfe1e6;

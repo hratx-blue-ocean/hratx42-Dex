@@ -25,7 +25,7 @@ function NavBar(props) {
               <strong>+</strong>
             </Button>
           </Form>
-          <NavDropdown  className="navBarUserCircle navBarDropdown" title={<img alt='' style={{color:'black',width: '20px',height:'30px'}} src='/assets/LogoMakr_1QrEWb.png'></img>} style={{ marginRight: "25px"}}>
+          <NavDropdown  className="navBarUserCircle navBarDropdown" title={<img alt='' style={{color:'black',width: '28px',height:'28px'}} src='/assets/tableIcon.png'></img>} style={{ marginRight: "25px"}}>
             {allTables}
             <NavDropdown.Divider />
             <NavDropdown.Item onClick={() => props.changeTableModal()}>Create Table</NavDropdown.Item>
