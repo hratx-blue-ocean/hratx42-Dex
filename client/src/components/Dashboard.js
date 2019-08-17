@@ -11,7 +11,7 @@ export default function Dashboard(props) {
     setShowProfile(false);
   }
   return (
-    <Row className="dashboardContainer m">
+    <Row className="dashboardContainer">
       <Col xl lg md sm xs={3} >
         {showProfile ? (
           <ProfileEditForm hideProfile={hideProfile.bind(this)} userId={props.userId} user={props.user} />
