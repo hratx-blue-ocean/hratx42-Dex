@@ -56,6 +56,7 @@ export default class Table extends Component {
     http.decks
       .get(tableId)
       .then(response => {
+        console.log('response', response)
         this.setState({ decks: response, tableName: table.name });
       })
       //populated deckname for tickets
@@ -75,7 +76,6 @@ export default class Table extends Component {
 
   //ADD EDIT CARDS TO DB
   newCardDataCollector(players, tags, deck, cardInfo) {
-    console.log("the deck ", deck)
     let toPost = {
       description: cardInfo.description,
       title: cardInfo.titl,
@@ -123,43 +123,58 @@ export default class Table extends Component {
     let editCard = {};
     let oldMembers = this.state.decks[deckIndex].cards[cardIndex].cards_members;
     let oldLabels = this.state.decks[deckIndex].cards[cardIndex].card_labels;
+    toMembersPost.sort((a, b) =>  (a.member_id - b.member_id));
+    toLabelsPost.sort((a, b) =>  (a.label_name - b.label_name));
     
-    toMembersPost.sort();
-    toLabelsPost.sort();
-
+    let finalLabels = [];
+    let finalMembers = [];
     for (let i = 0; i < toMembersPost.length; i++){
-      if (toMembersPost[i] === toMembersPost[i+1]){
-        toMembersPost.splice(i+1, 1);
-      } 
-      if (oldMembers.includes(toMembersPost[i])){
-        toMembersPost.splice(i, 1);
+      let add = true;
+      if (toMembersPost[i+1]){
+        if (toMembersPost[i].member_id == toMembersPost[i+1].member_id){
+          add = false;
+        } 
       }
+      for (let j = 0; j < oldMembers.length; j++){
+        if (oldMembers[j].member_id == toMembersPost[i].member_id){
+          add = false
+        }
+      }
+      if (add){ finalMembers.push(toMembersPost[i])}
     }
-
+    
     for (let i = 0; i < toLabelsPost.length; i++){
-      if (toLabelsPost[i] === toLabelsPost[i+1]){
-        toLabelsPost.splice(i+1, 1);
+      let add = true;
+      if (toLabelsPost[i+1]){
+        if (toLabelsPost[i].label_name == toLabelsPost[i+1].label_name){
+          add = false;
+        }
       }
-      if (oldMembers.includes(toLabelsPost[i])){
-        toLabelsPost.splice(i, 1);
+      for (let j = 0; j < oldLabels.length; j++){
+        if (oldLabels[j].label_name == toLabelsPost[i].label_name){
+          add = false;
+        }
       }
+      if (add){ finalLabels.push(toLabelsPost[i])}
     }
-
     http.cards.put(toPost).then(response => {
       console.log(response);
       editCard = response;
       console.log(editCard);
     })
     .then((response)=>{
-      toMembersPost.cards_members.forEach(async (player) =>{
-        await http.cards.addUser(addedCard.id, player.member_id)
+      if (finalMembers.length){
+        finalMembers.forEach(async (player) =>{
+          await http.cards.addUser(editCard.id, player.member_id)
+        })
+      }
       })
-      console.log(response)
-    })
     .then(()=>{
-      toLabelsPost.card_labels.forEach(async (label) =>{
-        await http.cards.addLabel(addedCard.id,label.id)
-      })
+      if (finalLabels.length){
+        finalLabels.forEach(async (label) =>{
+          await http.cards.addLabel(editCard.id,label.id)
+        })
+      }
     })
   }
 
@@ -281,7 +296,7 @@ export default class Table extends Component {
     //submit new deck with this.state.newDeck.newDecktitle and table ID
     let { decks, newDeck } = this.state;
     http.decks
-    .post({ table_id: this.props.match.params.id, title: this.state.newDeck.newDeckTitle })
+    .post({ table_id: 1, title: this.state.newDeck.newDeckTitle })
     .then(res => {
       decks.push(res);
       newDeck.newDeckModal = false;
@@ -305,7 +320,7 @@ export default class Table extends Component {
 
   editDeck(id, title, deckIndex) {
     let { decks } = this.state;
-    http.decks.put({ id, title }).then(res => {
+    http.decks.put({ id, title, table_id: this.state.table.id }).then(res => {
       decks[deckIndex].title = title;
       this.setState({ decks });
     });

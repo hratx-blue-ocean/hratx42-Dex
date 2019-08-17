@@ -46,9 +46,7 @@ export default function CardThumbnails(props) {
             overlay={
               <Tooltip id={`tooltip-bottom`}>
                 Add/View More
-              </Tooltip>
-            }
-          >
+              </Tooltip>}>
             <Button
               key={Math.random()}
               className='CardThumbnails_userIcon float-right'
@@ -65,11 +63,10 @@ export default function CardThumbnails(props) {
                 placement={'bottom'}
                 overlay={
                   <Tooltip id={`tooltip-bottom`}>
-                    {member.member_name}
+                    test
                   </Tooltip>
-                }
-              >
-                {member.member_name === null ? (<></>) : i < 3 ? (<Button key={Math.random()} className='CardThumbnails_userIcon float-right' variant='secondary'>{member.member_name.split(" ").map(char => char[0]).join("").toUpperCase()}</Button>) : ''}
+                  }>
+                <div>{member.member_name === null ? (<></>) : i < 3 ? (<Button key={Math.random()} className='CardThumbnails_userIcon float-right' variant='secondary'>{member.member_name.split(" ").map(char => char[0]).join("").toUpperCase()}</Button>) : ''}</div>
               </OverlayTrigger>
           )}
         </div>

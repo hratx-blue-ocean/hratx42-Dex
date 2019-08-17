@@ -7,14 +7,13 @@ import table from '../../utils/table'
 
 export default function CardModal({closeModal, showMe, card, deckTitle, deckNames, editCard, users, labels, deckIndex, cardIndex}) {
 
-
   const [show, setShow] = useState(false);
   const handleClose = () => closeModal()
   const [effort, setEffort] = useState(card.weight);
   const [impact, setImpact] = useState(card.impact);
   const [title, setTitle] = useState(card.title);
-  const [players, setPlayers] = useState(card.cards_members);
-  const [tags, setTags] = useState(card.card_labels);
+  const [players, setPlayers] = useState([...card.cards_members]);
+  const [tags, setTags] = useState([...card.card_labels]);
   // add DUE DATE!
   const [dueDate, setDate] = useState('mm-dd-yyyy');
   const [deck, setDeck] = useState(deckTitle);
@@ -78,7 +77,7 @@ export default function CardModal({closeModal, showMe, card, deckTitle, deckName
                   <Col xs={8} style={styles.playersStyle}>
                     <select onChange={(event)=> {
                         let playerHolder = players
-                        let selectPlayer = event.target.value  
+                        let selectPlayer = event.target.value
                         let targetPlayer ={member_id: null, member_name: selectPlayer}
                         playerHolder.push(targetPlayer)
                         setPlayers(playerHolder)
