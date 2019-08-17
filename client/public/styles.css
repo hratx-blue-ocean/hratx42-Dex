@@ -1,3 +1,7 @@
+* {
+  color: #343a40;
+}
+
 body {
   height: 100%;
   margin: 0;
@@ -24,7 +28,8 @@ code {
 }
 
 /* BEGIN CARD THUMBNAIL STYLING? */
-.cardThumbnails_impact {
+
+cardThumbnails_impact {
   border: 1px solid black;
   width: 35px;
   height: 35px;
@@ -33,6 +38,25 @@ code {
 
 .CardThumbnails_userIcon {
   border-radius: 50%;
+  font-size: 10px;
+      align-items: center;
+    background-color: #dfe1e6;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border: 0;
+    border-radius: 100%;
+    box-sizing: border-box;
+    color: #172b4d;
+    display: inline-flex;
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    justify-content: center;
+    line-height: 2px;
+    opacity: 1;
+    height: 25px;
+    width: 5px;
 }
 
 .flash-container {
@@ -148,13 +172,72 @@ code {
 /* END LOGIN/SIGNUP/LANDING STYLES */
 
 /* BEGIN DEX NAVBAR STYLES */
+
+#logo {
+  padding-top: 10px;
+}
+
+#logoHover {
+  position: absolute;
+  top: 22px;
+  left: 15px;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.logoWrapper:hover > #logo {
+  visibility: hidden;
+  opacity: 0;
+  transition: 0.5s;
+}
+
+.logoWrapper:hover > #logoHover {
+  visibility: visible;
+  opacity: 1;
+  transition: 1s;
+}
+
 .dexNavBar {
   background-color: #f1f0f0 !important;
 }
 
 .navBarDropdown > a {
-  color: black !important;
+  color: #fff;
 }
+
+.dropdown-menu div a {
+  color: black
+}
+
+.dropdown-menu > .dropdown-divider {
+  margin: 0;
+}
+
+.navBarDropdown > .dropdown-menu {
+  padding-top: 0px;
+  padding-bottom: 0px;
+  visibility: hidden;
+  display: block;
+  opacity: 0;
+  transition: visibility 0s, opacity 0.5s linear;
+}
+
+.navBarDropdown:hover > .dropdown-menu {
+  visibility: visible;
+  opacity: 1;
+  /* display: block; */
+  color:black;
+  margin-top: -1px;
+  margin-left: -70px;
+}
+
+.navBarDropdown:hover .dropdown-item:hover {
+  background:  #ff5a5f !important;
+  transition: 0.3s;
+  border-color: transparent !important;
+  color:  #f1f0f0 !important;
+}
+
 .navBarAddTableBtn {
   border-radius: var(--border-button-border-radius, 4px) !important;
   font-size: var(--font-button-font-size, 16px) !important;
@@ -177,9 +260,9 @@ code {
   padding-left: var(--spacing-button-horizontal, 14px) !important;
   padding-right: var(--spacing-button-horizontal, 14px) !important;
   box-shadow: var(--shadow-button-level0-box-shadow, none) !important;
-  background: var(--color-buttons-primary-color, #ff5a5f) !important;
+  color: var(--color-buttons-primary-color, #ff5a5f) !important;
   border-color: var(--color-buttons-primary-border, transparent) !important;
-  color: var(--color-buttons-primary-text, #ffffff) !important;
+  background: var(--color-buttons-primary-text, #f1f0f0) !important;
 }
 
 .navBarTablesDropdown {
@@ -197,15 +280,17 @@ code {
   color: #ffffff !important;
 }
 
+
+
 .navBarUserCircle {
   align-items: center;
-  background-color: #dfe1e6;
+  background-color: #ff5a5f;
   background-position: 50%;
   background-size: cover;
   border: 0;
   border-radius: 100%;
   box-sizing: border-box;
-  color: #cb4243 !important;
+  color: #fff !important;
   display: inline-flex;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans,
     Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
@@ -218,22 +303,32 @@ code {
   width: 50px;
 }
 
-.navBarUserDropDown {
-  position: relative;
-  left: -50px;
+.navBarUserCircle:hover {
+  transition: 0.5s;
+  background: var(--color-buttons-primary-color, #fff) !important;
+  border-color: var(--color-buttons-primary-border, transparent) !important;
+  color: #ff5a5f !important;
 }
+
+.navBarUserCircle:hover > .dropdown-toggle {
+  transition: 0.5s;
+  color: #ff5a5f !important;
+}
+
 .dropdown-toggle::after {
   display: none;
 }
+
+
 .navBarPlusCircle {
   align-items: center;
-  background-color: #dfe1e6;
+  background-color: #ff5a5f;
   background-position: 50%;
   background-size: cover;
   border: 0;
   border-radius: 100%;
   box-sizing: border-box;
-  color:#f1f0f0 ;
+  color:#fff ;
   display: inline-flex;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans,
     Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
@@ -244,11 +339,25 @@ code {
   opacity: 1;
   height: 50px;
   width: 50px;
+}
 
+.navBarPlusCircle:hover {
+  transition: 0.5s;
+  background: var(--color-buttons-primary-color, #fff) !important;
+  border-color: var(--color-buttons-primary-border, transparent) !important;
+  color: #ff5a5f !important;
 }
 /* END DEX NAVBAR STYLES */
 
 /* BEGIN CREATE/EDIT TABLE MODAL STYLES */
+
+.modal-header {
+  text-align: center;
+}
+
+.modal-title {
+  width: 100%;
+}
 /* END CREATE/EDIT TABLE MODAL STYLES */
 
 /* BEGIN TABLE CONTROL BAR STYLES */
