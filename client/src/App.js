@@ -29,7 +29,7 @@ export default class App extends Component {
       userId: '', //NB userId should be deprecated in favor of user, which contains id
       user: {},
       tables: [],
-      showenTable: null,
+      shownTable: null,
       newPlayer: [],
       // dashboard edit profile form
       profile: {

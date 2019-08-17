@@ -415,12 +415,10 @@ export default class Table extends Component {
           show={this.state.newDeck.newDeckModal}
           onHide={() => this.handleModal()}
         >
-          <Modal.Header
-            closeButton
-            onClick={() => this.handleModal()}
-            onHide={() => this.handleModal()}
-          >
-            <Modal.Title>Add Deck</Modal.Title>
+          <Modal.Header closeButton onClick={() => this.handleModal()} onHide={() => this.handleModal()}>
+            <Modal.Title>
+              <div style = {{marginLeft: '155px'}}>Add New Deck</div>
+            </Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <p>Enter Deck Title</p>
