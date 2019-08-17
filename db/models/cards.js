@@ -76,24 +76,6 @@ const cardsModel = {
     const { rows: cards } = await pgClient.query(query, [id]);
     return cards[0];
   },
-  // async deltaGetCardByID(id) {
-  //   const cardQuery = `
-  //       select 
-  //         c.id,
-  //         c.title,
-  //         c.description,
-  //         c.due_date,
-  //         c.weight,
-  //         c.impact,
-  //         c.table_id,
-  //         c.deck_id,
-  //         
-  //       where c.id = $1 
-  //       group by c.id;
-  //     `;
-  //   const { rows: cards } = await pgClient.query(query, [id]);
-  //   return cards[0];
-  // },
   async getCardsByUserID(userId) {
     const query = `
         select
