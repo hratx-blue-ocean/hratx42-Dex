@@ -255,6 +255,19 @@ code {
 /* .tableControlsNavBar {
  background-color: #757374 !important;
 } */
+
+.tableControlDeleteButton {
+  color: #F1F0F0;
+  border-color: #F1F0F0;
+  margin-left: 20px;
+}
+
+.tableControlDeleteButton:hover {
+  background-color: #F1F0F0;
+  color: #343a40;
+  border-color:  #F1F0F0;
+}
+
 .tableControlsUserNameCircles {
   align-items: center;
   background-color: #dfe1e6;
