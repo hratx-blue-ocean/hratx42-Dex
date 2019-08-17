@@ -57,7 +57,6 @@ export default function CardThumbnails(props) {
           labels = {props.singleCard.card_labels}
           weight = {props.singleCard.weight}
           impact = {props.singleCard.impact} />
-        
         <div>
           <div style={{ display: 'flex', height: '150px', alignItems: 'center', fontSize: '20px', paddingTop: '15px', paddingLeft: '5px' }}>{props.singleCard.title}</div>
         </div>

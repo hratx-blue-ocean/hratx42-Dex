@@ -12,25 +12,25 @@ Users can invite other users to contribute to their projects. All of a project's
 #### Front End
 
 <div style="display:flex; justify-content:left; align-items:center">
-  <img src="./readme/logos/react-router.png" alt="React-Router" style="width: 10rem;margin:2rem"/>
-  <img src="./readme/logos/react.png" alt="React" style="width: 10rem; margin:2rem"/>
-  <img src="./readme/logos/download.jpeg" alt="Bootstrap" style="width: 10rem;margin:2rem"/>
+  <img src="./readme/logos/react-router.png" alt="React-Router" width="150"/>
+  <img src="./readme/logos/react.png" alt="React" width="150"/>
+  <img src="./readme/logos/download.jpeg" alt="Bootstrap" width="150"/>
 </div>
 
 #### Back End
 
   <div style="display:flex; justify-content:left; align-items:center">
-    <img src="./readme/logos/node.png" alt="NodeJs" style="width: 10rem;margin:2rem"/>
-    <img src="./readme/logos/express.png" alt="ExpressJS" style="width: 14rem; margin:2rem"/>
-    <img src="./readme/logos/postgres.png" alt="PostgreSQL" style="width: 8rem;margin:2rem"/>
-    <img src="./readme/logos/nodemailer.png" alt="Node Mailer" style="width: 8rem;margin:2rem"/>
+    <img src="./readme/logos/node.png" alt="NodeJs" width="150"/>
+    <img src="./readme/logos/express.png" alt="ExpressJS" width="150"/>
+    <img src="./readme/logos/postgres.png" alt="PostgreSQL" width="150"/>
+    <img src="./readme/logos/nodemailer.png" alt="Node Mailer" width="150"/>
   </div>
 
 #### Deployment
 
   <div style="display:flex; justify-content:left; align-items:center">
-    <img src="./readme/logos/aws.png" alt="React-Router" style="width: 8rem;margin:2rem"/>
-    <img src="./readme/logos/docker.png" alt="React" style="width: 8rem; margin:2rem"/>
+    <img src="./readme/logos/aws.png" alt="React-Router" width="150"/>
+    <img src="./readme/logos/docker.png" alt="React" width="150"/>
   </div>
 
 ## Contributors
