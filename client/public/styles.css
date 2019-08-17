@@ -468,7 +468,7 @@ code {
   line-height: 1.43;
   margin-block-start: 0.83em;
   margin-block-end: 0.83em;
-  height: 370px;
+  height: 380px;
 }
 
 #deckScrollbar {
@@ -484,8 +484,6 @@ code {
   display: flex;
   flex-wrap: nowrap !important;
   border: none;
-  color: #28A745;
-  z-index: 10;
 }
 
 #deckHeader {
@@ -504,10 +502,8 @@ code {
 }
 
 .deckCardAddBtn {
-  position: absolute;
-  bottom: 4%;
-  left: 2%;
   color: #28A745;
+  margin: .5rem;
 }
 
 .deckCardAddBtn:hover {
