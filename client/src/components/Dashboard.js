@@ -37,14 +37,13 @@ export default function Dashboard(props) {
             <div className="dashboardTablesContainer">
               {props.tables.map((table, index) =>
                 <div 
-                  className="newTable tableThumbnail" 
-                  style = {{backgroundImage: `url(${images[index % 4]})`}} 
+                  key={Math.random()}
+                  className="newTable tableThumbnail"  
                   onClick={() => props.history.push(`/table/${table.id}`)} 
                 >
-                  <Row style={{height: '5px', background: '#ff5a5f'}} />
-                  <Row>
-                    <h5>{table.name}</h5>
-                  </Row>
+                  <div className="tableThumbnailText">
+                    {table.name}
+                  </div>
                 </div>
               )}
             </div>

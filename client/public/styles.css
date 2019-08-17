@@ -587,12 +587,19 @@ cardThumbnails_impact {
 }
 
 .dashboardTables .newTable {
+  display: flex;
+  flex-direction: column;
   padding: 0.5rem;
+  background-image: url('/assets/tableThumbnail.png');
+  background-size: cover;
   width: 150px;
   height: 150px;
   margin: 20px;
   border: 1px solid grey;
-  border-radius: 5px;
+  border-radius: 10px;
+  box-shadow: 5px 5px #ff5a6055;
+  justify-content: center;
+  align-items: center;
 }
 
 .dashboardTables .newTable:hover {
