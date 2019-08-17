@@ -12,9 +12,9 @@ const pgClient = new pg.Pool({
   database: 'dexdb',
 });
 
-pgClient.connect(err => {
-  if (err) console.log('Could not connect to database:', err);
-  else console.log('Connected to database!');
-});
+// pgClient.connect(err => {
+//   if (err) console.log('Could not connect to database:', err);
+//   else console.log('Connected to database!');
+// });
 
 module.exports = pgClient;

@@ -171,12 +171,72 @@ cardThumbnails_impact {
 /* END LOGIN/SIGNUP/LANDING STYLES */
 
 /* BEGIN DEX NAVBAR STYLES */
+
+#logo {
+  padding-top: 10px;
+}
+
+#logoHover {
+  position: absolute;
+  top: 22px;
+  left: 15px;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.logoWrapper:hover > #logo {
+  visibility: hidden;
+  opacity: 0;
+  transition: 0.5s;
+}
+
+.logoWrapper:hover > #logoHover {
+  visibility: visible;
+  opacity: 1;
+  transition: 1s;
+}
+
 .dexNavBar {
   background-color: #f1f0f0 !important;
 }
-.navBarDropdown > button {
-  background-color: #ff5a5f !important;
+
+.navBarDropdown > a {
+  color: #fff;
 }
+
+.dropdown-menu div a {
+  color: black
+}
+
+.dropdown-menu > .dropdown-divider {
+  margin: 0;
+}
+
+.navBarDropdown > .dropdown-menu {
+  padding-top: 0px;
+  padding-bottom: 0px;
+  visibility: hidden;
+  display: block;
+  opacity: 0;
+  transition: visibility 0s, opacity 0.5s linear;
+}
+
+.navBarDropdown:hover > .dropdown-menu {
+  visibility: visible;
+  opacity: 1;
+  /* display: block; */
+  color:black;
+  margin-top: -1px;
+  margin-left: -70px;
+}
+
+.navBarDropdown:hover .dropdown-item:hover {
+  background:  #ff5a5f !important;
+  transition: 0.3s;
+  border-color: transparent !important;
+  color:  #f1f0f0 !important;
+}
+
 .navBarAddTableBtn {
   border-radius: var(--border-button-border-radius, 4px) !important;
   font-size: var(--font-button-font-size, 16px) !important;
@@ -199,9 +259,9 @@ cardThumbnails_impact {
   padding-left: var(--spacing-button-horizontal, 14px) !important;
   padding-right: var(--spacing-button-horizontal, 14px) !important;
   box-shadow: var(--shadow-button-level0-box-shadow, none) !important;
-  background: var(--color-buttons-primary-color, #ff5a5f) !important;
+  color: var(--color-buttons-primary-color, #ff5a5f) !important;
   border-color: var(--color-buttons-primary-border, transparent) !important;
-  color: var(--color-buttons-primary-text, #ffffff) !important;
+  background: var(--color-buttons-primary-text, #f1f0f0) !important;
 }
 
 .navBarTablesDropdown {
@@ -219,15 +279,17 @@ cardThumbnails_impact {
   color: #ffffff !important;
 }
 
+
+
 .navBarUserCircle {
   align-items: center;
-  background-color: #dfe1e6;
+  background-color: #ff5a5f;
   background-position: 50%;
   background-size: cover;
   border: 0;
   border-radius: 100%;
   box-sizing: border-box;
-  color: #cb4243 !important;
+  color: #fff !important;
   display: inline-flex;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans,
     Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
@@ -239,18 +301,33 @@ cardThumbnails_impact {
   height: 50px;
   width: 50px;
 }
+
+.navBarUserCircle:hover {
+  transition: 0.5s;
+  background: var(--color-buttons-primary-color, #fff) !important;
+  border-color: var(--color-buttons-primary-border, transparent) !important;
+  color: #ff5a5f !important;
+}
+
+.navBarUserCircle:hover > .dropdown-toggle {
+  transition: 0.5s;
+  color: #ff5a5f !important;
+}
+
 .dropdown-toggle::after {
   display: none;
 }
+
+
 .navBarPlusCircle {
   align-items: center;
-  background-color: #dfe1e6;
+  background-color: #ff5a5f;
   background-position: 50%;
   background-size: cover;
   border: 0;
   border-radius: 100%;
   box-sizing: border-box;
-  color:#f1f0f0 ;
+  color:#fff ;
   display: inline-flex;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans,
     Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
@@ -261,7 +338,13 @@ cardThumbnails_impact {
   opacity: 1;
   height: 50px;
   width: 50px;
+}
 
+.navBarPlusCircle:hover {
+  transition: 0.5s;
+  background: var(--color-buttons-primary-color, #fff) !important;
+  border-color: var(--color-buttons-primary-border, transparent) !important;
+  color: #ff5a5f !important;
 }
 /* END DEX NAVBAR STYLES */
 
@@ -338,7 +421,7 @@ cardThumbnails_impact {
   border-radius: 4px !important;
   padding: 32px !important;
   padding-bottom: 24px !important;
-  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.25) !important;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25) !important;
   font-size: 14px !important;
   line-height: 1.43;
   margin-block-start: 0.83em;
@@ -378,10 +461,15 @@ cardThumbnails_impact {
 }
 
 .deckEditBtn {
-  font-size: var(--font-button-small-font-size, 14px) !important;
   margin-left: 50px;
+  color: black;
+  text-decoration: none;
+  font-size: 19px;
 }
 
+.deckEditBtn :hover {
+  text-decoration: none;
+}
 /* END DECKS STYLES */
 
 /* BEGIN DASHBOARD STYLES */

@@ -33,20 +33,19 @@ export default function Deck(props) {
     <div id="deckWrapper">
       <div id="deckContent" style={{ width: '100%' }} >
         <div id="deckHeader" style={{ width: '100%' }}> <span className="deckTitle">{props.deck.title} </span>
-          <Button
+          <div style={{ float: 'right' }}><Button
             className="deckEditBtn"
-            variant='outline-success'
+            variant='link'
             onClick={() => setShowEditDeck(true)}
           >
-            Edit Deck
-              </Button>
+            ...
+              </Button></div>
         </div>
         <div id="deckScrollbar" style={{ overflow: 'scroll' }}>
           <Card.Body className='row'>
             {cards.map((singleCard, cardIndex) =>
               <div key={Math.random()}>
                 <div style={{ paddingLeft: '160px' }}></div>
-
                 <CardThumbnail deckIndex={props.deckIndex}
                   cardIndex={cardIndex}
                   singleCard={singleCard}
@@ -72,7 +71,6 @@ export default function Deck(props) {
               card={props.singleCard}
 
             />
-
             <Button className="deckAddAnotherCardBtn" className='row' variant='outline-success' onClick={() => handleShow()}>
               Add Another Card
             </Button>
@@ -80,13 +78,14 @@ export default function Deck(props) {
         </div>
       </div>
       <div>
-        <Modal size='lg' show={showEditDeck} onHide={() => setShowEditDeck(false)}>
+        <Modal show={showEditDeck} onHide={() => setShowEditDeck(false)}>
           <Modal.Header closeButton>
             <Modal.Title>
-              <div>Delete/Edit Deck</div>
+              <div style = {{paddingLeft: '140px'}}>Delete/Edit Deck</div>
             </Modal.Title>
+          </Modal.Header>
             <Modal.Body>
-              <p>Change Deck Title</p>
+              <p>Change Deck Title:</p>
               <input onChange={(e) => setTitle(e.target.value)} value={title} type="text" />
             </Modal.Body>
             <Modal.Footer>
@@ -100,7 +99,6 @@ export default function Deck(props) {
                 props.deleteDeck(props.deck.id, props.deckIndex)
               }}>Delete Deck</Button>
             </Modal.Footer>
-          </Modal.Header>
         </Modal>
       </div>
     </div >
