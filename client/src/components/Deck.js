@@ -74,7 +74,7 @@ export default function Deck(props) {
 
             />
           </Card.Body>
-          <div className="deckAddAnotherCardBtn" className='row' variant='outline-success' onClick={() => handleShow()}>
+          <div className="deckAddAnotherCardBtn" className='row' className="deckCardAddBtn" variant='outline-success' onClick={() => handleShow()}>
               + Add Another Card
           </div>
         </div>

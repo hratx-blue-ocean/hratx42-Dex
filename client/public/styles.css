@@ -424,6 +424,7 @@ cardThumbnails_impact {
 }
 
 #deckContent {
+  position: relative;
   border-radius: 3px;
   position: relative;
   background: #f1f0f0 !important;
@@ -433,8 +434,9 @@ cardThumbnails_impact {
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25) !important;
   font-size: 14px !important;
   line-height: 1.43;
-  /* margin-block-start: 0.83em;
-  margin-block-end: 0.83em; */
+  margin-block-start: 0.83em;
+  margin-block-end: 0.83em;
+  height: 320px;
 }
 
 #deckScrollbar {
@@ -449,6 +451,7 @@ cardThumbnails_impact {
 #deckHeader {
   display: flex;
   justify-content: space-around;
+  height: 20px;
 }
 
 .deckTitle {
@@ -467,15 +470,25 @@ cardThumbnails_impact {
   width: 200px;
   border: none;
   color: #28A745;
+  z-index: 10;
 }
 
 .row:hover {
   cursor: pointer;
 }
 
+.deckCardAddBtn {
+  position: absolute;
+  bottom: 4%;
+  left: 2%;
+  color: #28A745;
+}
+
+.deckCardAddBtn:hover {
+  cursor: pointer;
+}
+
 .deckAddAnotherCardBtn {
-  padding:0;
-  margin-left: 2rem;
   font-size: var(--font-button-small-font-size, 14px) !important;
   height: 30px;
   border: 1px solid black !important;
