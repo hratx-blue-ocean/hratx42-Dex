@@ -5,41 +5,41 @@ const getValuesString = require('../utils/getValuesString');
 const makeUpdateString = require('../utils/makeUpdateString');
 
 const cardsModel = {
-  async getCardsByDeckId(deckId) {
-    const query = `
-        select 
-          c.id,
-          c.title,
-          c.description,
-          c.due_date,
-          c.weight,
-          c.impact,
-          c.table_id,
-          c.deck_id,
-          array_agg(
-            json_build_object(
-              'member_id', cast(u.id as varchar),
-              'member_name', u.name
-            )
-          ) as cards_members,
-          array_agg(
-            json_build_object(
-                'id', l.id,
-                'label_name', l.label_name,
-                'color', l.color
-            )
-          ) as card_labels
-        from
-          cards c 
-          left outer join cards_members cm on c.id = cm.card_id
-          left join users u on cm.user_id = u.id
-          left outer join cards_labels cl on c.id = cl.card_id
-          left join labels l on cl.label_id = l.id
-        where c.deck_id = $1 
-        group by c.id;`;
-    const { rows: cards } = await pgClient.query(query, [deckId]);
-    return cards;
-  },
+   async getCardsByDeckId(deckId) {
+     const query = `
+         select 
+           c.id,
+           c.title,
+           c.description,
+           c.due_date,
+           c.weight,
+           c.impact,
+           c.table_id,
+           c.deck_id,
+           array_agg(
+             json_build_object(
+               'member_id', cast(u.id as varchar),
+               'member_name', u.name
+             )
+           ) as cards_members,
+           array_agg(
+             json_build_object(
+                 'id', l.id,
+                 'label_name', l.label_name,
+                 'color', l.color
+             )
+           ) as card_labels
+         from
+           cards c 
+           left outer join cards_members cm on c.id = cm.card_id
+           left join users u on cm.user_id = u.id
+           left outer join cards_labels cl on c.id = cl.card_id
+           left join labels l on cl.label_id = l.id
+         where c.deck_id = $1 
+         group by c.id;`;
+     const { rows: cards } = await pgClient.query(query, [deckId]);
+     return cards;
+   },
   async getCardByID(id) {
     const query = `
         select 
