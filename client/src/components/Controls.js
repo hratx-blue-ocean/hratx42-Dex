@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Navbar, Button, Form, DropdownButton, Dropdown, Alert, Modal, OverlayTrigger, Tooltip} from 'react-bootstrap';
+import { Navbar, Button, Form, DropdownButton, Dropdown, Alert, Modal, OverlayTrigger, Tooltip, Toast} from 'react-bootstrap';
 import CardThumbnails from './CardThumbnails';
 
 import http from '../../services/http/http';
@@ -10,11 +10,14 @@ export default function Controls(props) {
   const [showModal, setShowModal] = useState(false);
   const [showInvite, showInviteToggler] = useState(false);
   const [invitationEmail, setInvitationEmail] = useState('');
+  const [showInvitedToast, showInvitedToastTogger] = useState(false);
 
   const cards = props.cards.slice(0, 10);
   const sendInvite = async () => {
     let userId = auth.getUser();
     let username;
+    showInviteToggler(false);
+    showInvitedToastTogger(true);
     props.users.forEach((user) => user.id === userId ? username = user.name : null)
     let invitation = await http.invite.post(invitationEmail, { tableId: props.tableId, invitedBy: username });
     let { success, message } = invitation;
@@ -181,10 +184,7 @@ export default function Controls(props) {
                   Enter the email you wish to invite!
                 </Form.Text>
               </Form.Group>
-              <Button variant="secondary" onClick={showInviteToggler}>
-                Close
-              </Button>
-              <Button variant="primary" onClick={sendInvite}>
+              <Button variant="success" onClick={sendInvite}>
                 Send
               </Button>
             </Form>
@@ -212,6 +212,25 @@ export default function Controls(props) {
           </Button>
         </Alert>
       ) : null}
+      <Toast
+        style={{
+          position: 'absolute',
+          top: '200px',
+          right: 0,
+          zIndex: 10
+        }}
+        onClose={() => showInvitedToastTogger(false)} 
+        show={showInvitedToast} 
+        delay={3000} 
+        autohide
+      >
+        <Toast.Header>
+          <img style={{width: '20px', height: '20px'}} src="/assets/favicon.png" className="rounded mr-2" alt="" />
+          <strong className="mr-auto">Invitation Sent!</strong>
+          <small>just now</small>
+        </Toast.Header>
+        <Toast.Body>{`To: ${invitationEmail}`}</Toast.Body>
+      </Toast>
     </div>
   );
 }
