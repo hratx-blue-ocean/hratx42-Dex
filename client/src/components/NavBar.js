@@ -15,7 +15,7 @@ function NavBar(props) {
     <div>
       <Navbar bg="light" className='dexNavBar' expand="lg" >
         <Navbar.Brand >
-          <Link style={{ color: 'black' }} to={"/dashboard"}><img src='/assets/Logo.png' alt='' style={{ marginLeft: "5px" }} height = '65'></img></Link>
+          <Link style={{ color: 'black' }} to={"/dashboard"}><img src='/assets/Logo.png' alt='' style={{ marginLeft: "5px" }} height = '60'></img></Link>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
