@@ -349,6 +349,14 @@ cardThumbnails_impact {
 /* END DEX NAVBAR STYLES */
 
 /* BEGIN CREATE/EDIT TABLE MODAL STYLES */
+
+.modal-header {
+  text-align: center;
+}
+
+.modal-title {
+  width: 100%;
+}
 /* END CREATE/EDIT TABLE MODAL STYLES */
 
 /* BEGIN TABLE CONTROL BAR STYLES */

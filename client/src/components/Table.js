@@ -427,7 +427,7 @@ export default class Table extends Component {
         >
           <Modal.Header closeButton onClick={() => this.handleModal()} onHide={() => this.handleModal()}>
             <Modal.Title>
-              <div style = {{marginLeft: '155px'}}>Add New Deck</div>
+              Add New Deck
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
