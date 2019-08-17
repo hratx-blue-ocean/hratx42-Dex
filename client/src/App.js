@@ -29,7 +29,7 @@ export default class App extends Component {
       userId: '', //NB userId should be deprecated in favor of user, which contains id
       user: {},
       tables: [],
-      showenTable: null,
+      shownTable: null,
       newPlayer: [],
       // dashboard edit profile form
       profile: {
@@ -108,6 +108,14 @@ export default class App extends Component {
     const userId = auth.getUser();
     if (userId) {
       const tables = await http.tables.get(userId);
+      tables.sort((a,b) => {return a.id - b.id});
+      for (let i = 0; i < tables.length; i++){
+        if (tables[i+1] && tables[i+1].id === tables[i].id){
+          tables.splice(i+1, 1);
+          i--;
+        }
+      }
+      console.log(tables)
       this.setState({ tables });
       if (table.mounted) {
         const theTable = this.getTableObject(table.id);

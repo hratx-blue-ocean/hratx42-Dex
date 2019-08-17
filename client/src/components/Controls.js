@@ -1,15 +1,5 @@
 import React, { useState } from 'react';
-import {
-  Navbar,
-  Button,
-  Form,
-  DropdownButton,
-  Dropdown,
-  Alert,
-  Modal,
-  OverlayTrigger,
-  Tooltip
-} from 'react-bootstrap';
+import { Navbar, Button, Form, DropdownButton, Dropdown, Alert, Modal, OverlayTrigger, Tooltip, Toast} from 'react-bootstrap';
 import CardThumbnails from './CardThumbnails';
 
 import http from '../../services/http/http';
@@ -20,11 +10,14 @@ export default function Controls(props) {
   const [showModal, setShowModal] = useState(false);
   const [showInvite, showInviteToggler] = useState(false);
   const [invitationEmail, setInvitationEmail] = useState('');
+  const [showInvitedToast, showInvitedToastTogger] = useState(false);
 
   const cards = props.cards.slice(0, 10);
   const sendInvite = async () => {
     let userId = auth.getUser();
     let username;
+    showInviteToggler(false);
+    showInvitedToastTogger(true);
     props.users.forEach((user) => user.id === userId ? username = user.name : null)
     let invitation = await http.invite.post(invitationEmail, { tableId: props.tableId, invitedBy: username });
     let { success, message } = invitation;
@@ -42,66 +35,60 @@ export default function Controls(props) {
 
   return (
     <div>
-      <Navbar 
-        key={Math.random()}
-        className="tableControlsNavBar" 
-        bg="dark" 
+      <Navbar
+        className="tableControlsNavBar"
+        bg="dark"
         variant="dark"
         style={{ display: "flex", justifyContent: "space-between" }}
       >
-        <div key={Math.random()} style = {{ display: "flex", flexDirection: "row"}}>
-          <Navbar.Brand key={Math.random()}>{props.tableName}</Navbar.Brand>
+        <div style={{ display: "flex", flexDirection: "row" }}>
+          <Navbar.Brand >{props.tableName}</Navbar.Brand>
           <Form.Control
-            key={Math.random()}
+            style = {{width: '15%'}}
             onChange={e => props.searchText(e.target.value)}
             type="text"
             placeholder="Search cards"
             style={{ width: '25%' }}
-            onBlur = {() => props.loseFocusSearch()}
+            onBlur={() => props.loseFocusSearch()}
           />
           {props.searchName === '' ? (
             <></>
-          ) 
-          : 
-          (
-            <div className="ControlsSearchItems row" key={Math.random()}>
-              {cards.map(item => (
-                <div key={Math.random()} className="ControlsSearchItem">
-                  <div key={Math.random()} style={{ paddingLeft: '160px' }} />
-                  <CardThumbnails
-                    singleCard={item}
-                    deckNames={props.deckNames}
-                    users={props.users}
-                    labels={props.labels}
-                    background='true'
-                    key={Math.random()}
-                  />
-                </div>
-              ))}
-            </div>
-          )}
+          )
+            :
+            (
+              <div className="ControlsSearchItems row" key={Math.random()}>
+                {props.cards.map(item => (
+                  <div className="ControlsSearchItem">
+                    <div style={{ paddingLeft: '160px' }} />
+                    <CardThumbnails
+                      singleCard={item}
+                      deckNames={props.deckNames}
+                      users={props.users}
+                      labels={props.labels}
+                      background='true'
+                    />
+                  </div>
+                ))}
+              </div>
+            )}
           <DropdownButton
             className='tableControlsFilterBtn'
             id="dropdown-basic-button"
             variant="success"
             title={`${props.filterBy}`}
           >
-          {props.users.map(user => (
-            <Dropdown.Item 
-              className = {props.filterBy === user.name ? 'ControlsfilterNames': null} 
-              key={Math.random()} 
-              onClick={e => props.changeFilter(e)}
-            >
-              {user.name}
-            </Dropdown.Item>
-          ))}
+            {props.users.map(user => (
+              <Dropdown.Item
+                className={props.filterBy === user.name ? 'ControlsfilterNames' : null}
+                key={Math.random()}
+                onClick={e => props.changeFilter(e)}>{user.name}</Dropdown.Item>
+            ))}
           </DropdownButton>
-          <Button key={Math.random()} className="tableControlsAddDeckBtn" onClick={() => props.handleModal()} variant="success">
+          <Button className="tableControlsAddDeckBtn" onClick={() => props.handleModal()} variant="success">
             Add Deck
           </Button>
           <Button
-            className = "tableControlDeleteButton"
-            key={Math.random()}
+            className="tableControlDeleteButton"
             variant="outline-danger"
             onClick={() => {
               setShowModal(true);
@@ -110,12 +97,11 @@ export default function Controls(props) {
             Delete
           </Button>
         </div>
-        <ul 
-          key={Math.random()} 
-          className="nav navbar-nav" 
+        <ul
+          className="nav navbar-nav"
           style={{ float: "right", display: "flex", flexDirection: "row" }}>
-          {props.users.map((user, count) =>
-            { if (count < 4) {
+          {props.users.map((user, count) => {
+            if (count < 4) {
               return (
                 <li key={Math.random()} className="navbar-nav pull-right">
                   <OverlayTrigger
@@ -126,30 +112,30 @@ export default function Controls(props) {
                       </Tooltip>
                     }
                   >
-                    <Button 
-                      style={{ textAlign: "center" }} 
-                      className="tableControlsUserNameCircles" 
+                    <Button
+                      style={{ textAlign: "center" }}
+                      className="tableControlsUserNameCircles"
                       variant="secondary"
-                      key={Math.random()}
                     >
                       {(user.name.split(" ").map(char => char[0]).join("")).toUpperCase()}
                     </Button>
                   </OverlayTrigger>
                 </li>
-              )}
-              return ('')
+              )
             }
+            return ('')
+          }
           )}
           {
-            props.users.length > 4 
-            ?
-            <li key={Math.random()} className="navbar-nav pull-right">
+            props.users.length > 4
+              ?
+              <li key={Math.random()} className="navbar-nav pull-right">
                 <OverlayTrigger
                   placement={'bottom'}
                   overlay={
                     <Tooltip id={`tooltip-bottom`}>
-                      <ul style = {{ listStyle: "none", padding: "0" }}>
-                        {props.users.map(({ name }) => 
+                      <ul style={{ listStyle: "none", padding: "0" }}>
+                        {props.users.map(({ name }) =>
                           <li>{name}</li>
                         )}
                       </ul>
@@ -157,65 +143,58 @@ export default function Controls(props) {
                   }
                 >
                   <Button
-                    key={Math.random()}
                     style={{ textAlign: "center" }}
                     className="tableControlsUserNameCircles"
                     variant="secondary"
                   >
-                   {props.users.length - 4}+
+                    {props.users.length - 4}+
                   </Button>
                 </OverlayTrigger>
-            </li>
-            :
-            ''
+              </li>
+              :
+              ''
           }
-          <li key={Math.random()} className="navbar-nav pull-right">
-          <Button 
-            key={Math.random()}
-            style={{ textAlign: "center" }} 
-            className="tableControlsUserNameCircles invite" 
-            variant="secondary"
-            onClick={showInviteToggler}
-          >
-            <img src="/assets/LogoMakr_3QVBAS.png" height = "25"/>
-          </Button>
+          <li className="navbar-nav pull-right">
+            <Button
+              style={{ textAlign: "center" }}
+              className="tableControlsUserNameCircles invite"
+              variant="secondary"
+              onClick={showInviteToggler}
+            >
+              <img src="/assets/LogoMakr_3QVBAS.png" height="25" />
+            </Button>
           </li>
         </ul>
-        <Modal key={Math.random()} show={showInvite} onHide={showInviteToggler}>
+        <Modal show={showInvite} onHide={showInviteToggler}>
           <Modal.Header closeButton key={Math.random()}>
-            <Modal.Title key={Math.random()}>Send Invitation</Modal.Title>
-            </Modal.Header>
-          <Modal.Body key={Math.random()}>
-            <Form key={Math.random()}>
-              <Form.Group key={Math.random()}controlId="formBasicEmail">
-                <Form.Label key={Math.random()}>Email address</Form.Label>
-                  <Form.Control
-                    key={Math.random()}
-                    type="email"
-                    placeholder="Enter email"
-                    onBlur={(e) => {
-                      setInvitationEmail(e.target.value)
-                    }}
-                  />
-                <Form.Text key={Math.random()} className="text-muted">
-                    Enter the email you wish to invite!
+            <Modal.Title ><div style={{textAlign: 'center'}}>Send Invitation</div></Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Form>
+              <Form.Group controlId="formBasicEmail">
+                <Form.Label>Email address</Form.Label>
+                <Form.Control
+                  type="email"
+                  placeholder="Enter email"
+                  onBlur={(e) => {
+                    setInvitationEmail(e.target.value)
+                  }}
+                />
+                <Form.Text className="text-muted">
+                  Enter the email you wish to invite!
                 </Form.Text>
-                </Form.Group>
-              <Button key={Math.random()} variant="secondary" onClick={showInviteToggler}>
-                  Close
+              </Form.Group>
+              <Button style={{float: 'right'}} variant="success" onClick={sendInvite}>
+                Send
               </Button>
-                <Button key={Math.random()} variant="primary" onClick={sendInvite}>
-                  Send
-              </Button>
-              </Form>
-            </Modal.Body>
-          </Modal>
+            </Form>
+          </Modal.Body>
+        </Modal>
       </Navbar>
       {showModal ? (
-        <Alert key={Math.random()} variant="danger" className="controls__modal">
+        <Alert variant="danger" className="controls__modal">
           Are you sure you want to delete this table?
           <Button
-            key={Math.random()}
             variant="danger"
             onClick={() => {
               handleDelete(true);
@@ -224,7 +203,6 @@ export default function Controls(props) {
             Yes
           </Button>
           <Button
-            key={Math.random()}
             variant="secondary"
             onClick={() => {
               handleDelete(false);
@@ -234,6 +212,25 @@ export default function Controls(props) {
           </Button>
         </Alert>
       ) : null}
+      <Toast
+        style={{
+          position: 'absolute',
+          top: '180px',
+          left: '0px',
+          zIndex: 10
+        }}
+        onClose={() => showInvitedToastTogger(false)} 
+        show={showInvitedToast} 
+        delay={3000} 
+        autohide
+      >
+        <Toast.Header>
+          <img style={{width: '20px', height: '20px'}} src="/assets/favicon.png" className="rounded mr-2" alt="" />
+          <strong className="mr-auto">Invitation Sent!</strong>
+          <small>just now</small>
+        </Toast.Header>
+        <Toast.Body>{`To: ${invitationEmail}`}</Toast.Body>
+      </Toast>
     </div>
   );
 }

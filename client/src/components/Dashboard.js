@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { NavLink } from "react-router-dom";
 import ProfileEditForm from './ProfileEditForm.jsx';
-import { Button, Card } from "react-bootstrap";
+import {Row,Col, Button, Card } from "react-bootstrap";
 import DashboardCards from './DashboardCards.js'
 
 export default function Dashboard(props) {
@@ -11,8 +11,8 @@ export default function Dashboard(props) {
     setShowProfile(false);
   }
   return (
-    <div className="dashboardContainer">
-      <div>
+    <Row className="dashboardContainer">
+      <Col xl lg md sm xs={3} >
         {showProfile ? (
           <ProfileEditForm hideProfile={hideProfile.bind(this)} userId={props.userId} user={props.user} />
         ) : (
@@ -29,9 +29,9 @@ export default function Dashboard(props) {
             </Card>
           </div>
         )}
-      </div>
+      </Col>
       {/* tables */}
-      <div className="dashboardTables">
+      <Col xl lg md sm xs={9} className="dashboardTables">
         <Card>
           <h2>{props.user.name}'s Tables</h2>
             <div className="dashboardTablesContainer">
@@ -65,7 +65,7 @@ export default function Dashboard(props) {
               </div>
           </div>
         </Card>
-      </div>
-    </div>
+      </Col>
+    </Row>
   )
 }
