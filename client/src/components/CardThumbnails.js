@@ -51,16 +51,16 @@ export default function CardThumbnails(props) {
 
       <Card onClick={() => {
         setShow(true)
-      }} style={{ width: '250px', height: '250px' }} className='CardThumbnailsSingleCard'>
+      }} style={{ width: '250px', height: '150px', borderRadius: '10%' }} className='CardThumbnailsSingleCard'>
       <div style ={{padding: '5px'}}>
         <CardHeader 
           labels = {props.singleCard.card_labels}
           weight = {props.singleCard.weight}
           impact = {props.singleCard.impact} />
         <div>
-          <div style={{ display: 'flex', height: '150px', alignItems: 'center', fontSize: '20px', paddingTop: '15px', paddingLeft: '5px' }}>{props.singleCard.title}</div>
+          <div style={{ display: 'flex', height: '70px', alignItems: 'center', fontSize: '14px', paddingTop: '0px', paddingLeft: '5px' }}>{props.singleCard.title}</div>
         </div>
-        <div style={{ position: "absolute", bottom: "0", width: "100%"}}>
+        <div style={{ position: "absolute", top: "80%", width: "100%"}}>
           <div style={{ float: "left", paddingLeft: "5px" }}>
             <img style = {{ height: "15px", marginBottom: "-12px", paddingRight: "5px" }} className='CardThumbnailsMove' src="/assets/downButton.png" onClick={() => props.moveCard(props.singleCard, props.cardIndex, props.deckIndex, 1)} />
             <img style = {{ height: "15px", marginBottom: "-12px" }} className='CardThumbnailsMove' src="/assets/upButton.png" onClick={() => props.moveCard(props.singleCard, props.cardIndex, props.deckIndex, -1)} />
