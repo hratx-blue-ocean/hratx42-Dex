@@ -21,7 +21,7 @@ function NavBar(props) {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto" />
           <Form style={{ marginRight: "25px" }}>
-            <Button  className="navBarPlusCircle" style={{backgroundColor:'#FF5A5F', color:'#f1f0f0'}} onClick={() => props.changeTableModal()}>
+            <Button className="navBarPlusCircle" onClick={() => props.changeTableModal()}>
               <strong>+</strong>
             </Button>
           </Form>
