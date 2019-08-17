@@ -51,7 +51,7 @@ export default function CardThumbnails(props) {
 
       <Card onClick={() => {
         setShow(true)
-      }} style={{ width: '250px', height: '250px' }} className='CardThumbnailsSingleCard'>
+      }} style={{ width: '250px', height: '250px', borderRadius: '10%' }} className='CardThumbnailsSingleCard'>
       <div style ={{padding: '5px'}}>
         <CardHeader 
           labels = {props.singleCard.card_labels}

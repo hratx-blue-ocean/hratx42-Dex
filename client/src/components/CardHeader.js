@@ -16,9 +16,9 @@ export default function CardHeader(props) {
   }
   return (
     <div>
-      <Row className = 'no-gutters' style = {{ overflow: "hidden" }}>
+      <Row className = 'no-gutters' style = {{ overflow: "hidden", paddingTop: '5px' }}>
         <Col md={3}>
-          <div className='cardThumbnails_impact'>
+          <div style = {{borderRadius: '10%'}} className='cardThumbnails_impact'>
           <OverlayTrigger
               key={'bottom'}
               placement={'bottom'}

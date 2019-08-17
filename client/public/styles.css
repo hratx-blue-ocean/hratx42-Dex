@@ -460,16 +460,17 @@ code {
 #deckContent {
   border-radius: 3px;
   position: relative;
-  background: #f1f0f0 !important;
+  background: #eee !important;
   border-radius: 4px !important;
-  padding: 32px !important;
-  padding-bottom: 24px !important;
+  padding-left: 32px !important;
+  padding-right: 32px !important;
+  padding-top: 8px !important;
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25) !important;
   font-size: 14px !important;
   line-height: 1.43;
   margin-block-start: 0.83em;
   margin-block-end: 0.83em;
-  height: 380px;
+  height: 350px;
 }
 
 #deckScrollbar {
