@@ -32,10 +32,14 @@ code {
 
 .cardThumbnails_impact {
   border: 1px solid black;
-  width: 35px;
+  width: 45px;
   height: 35px;
-  font-size: 12px;
+  font-size: 10px;
+  background: #eee;
+  padding: 5px;
+  font-weight: bold;
 }
+
 
 .CardThumbnails_userIcon {
   border-radius: 50%;
@@ -378,6 +382,14 @@ code {
 /* END DEX NAVBAR STYLES */
 
 /* BEGIN CREATE/EDIT TABLE MODAL STYLES */
+
+.modal-header {
+  text-align: center;
+}
+
+.modal-title {
+  width: 100%;
+}
 /* END CREATE/EDIT TABLE MODAL STYLES */
 
 /* BEGIN TABLE CONTROL BAR STYLES */
@@ -459,6 +471,7 @@ code {
 
 #deckScrollbar {
   display: flex;
+  width: 90%;
   flex-wrap: nowrap !important;
   margin-right: -15px;
   margin-left: -15px;

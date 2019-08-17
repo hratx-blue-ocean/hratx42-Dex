@@ -60,7 +60,6 @@ export default function Deck(props) {
             <div style={{ paddingLeft: '20px' }} />
             <NewCardModal
               newCardData={props.newCardData}
-              key={Math.random()}
               showMe={show}
               deckTitle={props.deck.title}
               deckNames={props.deckNames}
@@ -69,7 +68,6 @@ export default function Deck(props) {
               users={props.users}
               labels={props.labels}
               card={props.singleCard}
-
             />
             <Button className="deckAddAnotherCardBtn" className='row' variant='outline-success' onClick={() => handleShow()}>
               Add Another Card
@@ -81,7 +79,7 @@ export default function Deck(props) {
         <Modal show={showEditDeck} onHide={() => setShowEditDeck(false)}>
           <Modal.Header closeButton>
             <Modal.Title>
-              <div style = {{paddingLeft: '140px'}}>Delete/Edit Deck</div>
+              Delete/Edit Deck
             </Modal.Title>
           </Modal.Header>
             <Modal.Body>
