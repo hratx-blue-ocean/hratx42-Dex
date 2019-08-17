@@ -81,7 +81,7 @@ export default function Deck(props) {
         <Modal show={showEditDeck} onHide={() => setShowEditDeck(false)}>
           <Modal.Header closeButton>
             <Modal.Title>
-              <div style = {{paddingLeft: '140px'}}>Delete/Edit Deck</div>
+              Delete/Edit Deck
             </Modal.Title>
           </Modal.Header>
             <Modal.Body>

@@ -167,7 +167,7 @@ export default function Controls(props) {
         </ul>
         <Modal show={showInvite} onHide={showInviteToggler}>
           <Modal.Header closeButton key={Math.random()}>
-            <Modal.Title >Send Invitation</Modal.Title>
+            <Modal.Title ><div style={{textAlign: 'center'}}>Send Invitation</div></Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <Form>
@@ -184,7 +184,7 @@ export default function Controls(props) {
                   Enter the email you wish to invite!
                 </Form.Text>
               </Form.Group>
-              <Button variant="success" onClick={sendInvite}>
+              <Button style={{float: 'right'}} variant="success" onClick={sendInvite}>
                 Send
               </Button>
             </Form>
@@ -215,8 +215,8 @@ export default function Controls(props) {
       <Toast
         style={{
           position: 'absolute',
-          top: '200px',
-          right: 0,
+          top: '180px',
+          left: '0px',
           zIndex: 10
         }}
         onClose={() => showInvitedToastTogger(false)} 
