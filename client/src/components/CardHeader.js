@@ -25,7 +25,7 @@ export default function CardHeader(props) {
             <Row key={Math.random()} className = 'no-gutters' style = {{paddingTop: '0px', paddingBottom: '0px'}}>
               {subLabel.map((label) => 
               <Col key={Math.random()} md = {4}>
-                <div  style={{ height: '11px', fontSize: '8px', backgroundColor: `${label.color}`, borderRadius: '10%', color: `${label.color}` }}>
+                <div  style={{ height: '11px', fontSize: '7px', backgroundColor: `${label.color}`, borderRadius: '10%', color: `${label.color}` }}>
                   <p className = 'cardHeaderLabels'>{label.label_name}</p>
                 </div>
               </Col>
