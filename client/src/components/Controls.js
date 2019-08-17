@@ -42,14 +42,14 @@ export default function Controls(props) {
 
   return (
     <div>
-      <Navbar 
+      <Navbar
         key={Math.random()}
-        className="tableControlsNavBar" 
-        bg="dark" 
+        className="tableControlsNavBar"
+        bg="dark"
         variant="dark"
         style={{ display: "flex", justifyContent: "space-between" }}
       >
-        <div key={Math.random()} style = {{ display: "flex", flexDirection: "row"}}>
+        <div key={Math.random()} style={{ display: "flex", flexDirection: "row" }}>
           <Navbar.Brand key={Math.random()}>{props.tableName}</Navbar.Brand>
           <Form.Control
             key={Math.random()}
@@ -57,50 +57,50 @@ export default function Controls(props) {
             type="text"
             placeholder="Search cards"
             style={{ width: '25%' }}
-            onBlur = {() => props.loseFocusSearch()}
+            onBlur={() => props.loseFocusSearch()}
           />
           {props.searchName === '' ? (
             <></>
-          ) 
-          : 
-          (
-            <div className="ControlsSearchItems row" key={Math.random()}>
-              {cards.map(item => (
-                <div key={Math.random()} className="ControlsSearchItem">
-                  <div key={Math.random()} style={{ paddingLeft: '160px' }} />
-                  <CardThumbnails
-                    singleCard={item}
-                    deckNames={props.deckNames}
-                    users={props.users}
-                    labels={props.labels}
-                    background='true'
-                    key={Math.random()}
-                  />
-                </div>
-              ))}
-            </div>
-          )}
+          )
+            :
+            (
+              <div className="ControlsSearchItems row" key={Math.random()}>
+                {cards.map(item => (
+                  <div key={Math.random()} className="ControlsSearchItem">
+                    <div key={Math.random()} style={{ paddingLeft: '160px' }} />
+                    <CardThumbnails
+                      singleCard={item}
+                      deckNames={props.deckNames}
+                      users={props.users}
+                      labels={props.labels}
+                      background='true'
+                      key={Math.random()}
+                    />
+                  </div>
+                ))}
+              </div>
+            )}
           <DropdownButton
             className='tableControlsFilterBtn'
             id="dropdown-basic-button"
             variant="success"
             title={`${props.filterBy}`}
           >
-          {props.users.map(user => (
-            <Dropdown.Item 
-              className = {props.filterBy === user.name ? 'ControlsfilterNames': null} 
-              key={Math.random()} 
-              onClick={e => props.changeFilter(e)}
-            >
-              {user.name}
-            </Dropdown.Item>
-          ))}
+            {props.users.map(user => (
+              <Dropdown.Item
+                className={props.filterBy === user.name ? 'ControlsfilterNames' : null}
+                key={Math.random()}
+                onClick={e => props.changeFilter(e)}
+              >
+                {user.name}
+              </Dropdown.Item>
+            ))}
           </DropdownButton>
           <Button key={Math.random()} className="tableControlsAddDeckBtn" onClick={() => props.handleModal()} variant="success">
             Add Deck
           </Button>
           <Button
-            className = "tableControlDeleteButton"
+            className="tableControlDeleteButton"
             key={Math.random()}
             variant="outline-danger"
             onClick={() => {
@@ -110,12 +110,12 @@ export default function Controls(props) {
             Delete
           </Button>
         </div>
-        <ul 
-          key={Math.random()} 
-          className="nav navbar-nav" 
+        <ul
+          key={Math.random()}
+          className="nav navbar-nav"
           style={{ float: "right", display: "flex", flexDirection: "row" }}>
-          {props.users.map((user, count) =>
-            { if (count < 4) {
+          {props.users.map((user, count) => {
+            if (count < 4) {
               return (
                 <li key={Math.random()} className="navbar-nav pull-right">
                   <OverlayTrigger
@@ -126,9 +126,9 @@ export default function Controls(props) {
                       </Tooltip>
                     }
                   >
-                    <Button 
-                      style={{ textAlign: "center" }} 
-                      className="tableControlsUserNameCircles" 
+                    <Button
+                      style={{ textAlign: "center" }}
+                      className="tableControlsUserNameCircles"
                       variant="secondary"
                       key={Math.random()}
                     >
@@ -136,20 +136,21 @@ export default function Controls(props) {
                     </Button>
                   </OverlayTrigger>
                 </li>
-              )}
-              return ('')
+              )
             }
+            return ('')
+          }
           )}
           {
-            props.users.length > 4 
-            ?
-            <li key={Math.random()} className="navbar-nav pull-right">
+            props.users.length > 4
+              ?
+              <li key={Math.random()} className="navbar-nav pull-right">
                 <OverlayTrigger
                   placement={'bottom'}
                   overlay={
                     <Tooltip id={`tooltip-bottom`}>
-                      <ul style = {{ listStyle: "none", padding: "0" }}>
-                        {props.users.map(({ name }) => 
+                      <ul style={{ listStyle: "none", padding: "0" }}>
+                        {props.users.map(({ name }) =>
                           <li>{name}</li>
                         )}
                       </ul>
@@ -162,54 +163,54 @@ export default function Controls(props) {
                     className="tableControlsUserNameCircles"
                     variant="secondary"
                   >
-                   {props.users.length - 4}+
+                    {props.users.length - 4}+
                   </Button>
                 </OverlayTrigger>
-            </li>
-            :
-            ''
+              </li>
+              :
+              ''
           }
           <li key={Math.random()} className="navbar-nav pull-right">
-          <Button 
-            key={Math.random()}
-            style={{ textAlign: "center" }} 
-            className="tableControlsUserNameCircles invite" 
-            variant="secondary"
-            onClick={showInviteToggler}
-          >
-            <img src="/assets/LogoMakr_3QVBAS.png" height = "25"/>
-          </Button>
+            <Button
+              key={Math.random()}
+              style={{ textAlign: "center" }}
+              className="tableControlsUserNameCircles invite"
+              variant="secondary"
+              onClick={showInviteToggler}
+            >
+              <img src="/assets/LogoMakr_3QVBAS.png" height="25" />
+            </Button>
           </li>
         </ul>
         <Modal key={Math.random()} show={showInvite} onHide={showInviteToggler}>
           <Modal.Header closeButton key={Math.random()}>
             <Modal.Title key={Math.random()}>Send Invitation</Modal.Title>
-            </Modal.Header>
+          </Modal.Header>
           <Modal.Body key={Math.random()}>
             <Form key={Math.random()}>
-              <Form.Group key={Math.random()}controlId="formBasicEmail">
+              <Form.Group key={Math.random()} controlId="formBasicEmail">
                 <Form.Label key={Math.random()}>Email address</Form.Label>
-                  <Form.Control
-                    key={Math.random()}
-                    type="email"
-                    placeholder="Enter email"
-                    onBlur={(e) => {
-                      setInvitationEmail(e.target.value)
-                    }}
-                  />
+                <Form.Control
+                  key={Math.random()}
+                  type="email"
+                  placeholder="Enter email"
+                  onBlur={(e) => {
+                    setInvitationEmail(e.target.value)
+                  }}
+                />
                 <Form.Text key={Math.random()} className="text-muted">
-                    Enter the email you wish to invite!
+                  Enter the email you wish to invite!
                 </Form.Text>
-                </Form.Group>
+              </Form.Group>
               <Button key={Math.random()} variant="secondary" onClick={showInviteToggler}>
-                  Close
+                Close
               </Button>
-                <Button key={Math.random()} variant="primary" onClick={sendInvite}>
-                  Send
+              <Button key={Math.random()} variant="primary" onClick={sendInvite}>
+                Send
               </Button>
-              </Form>
-            </Modal.Body>
-          </Modal>
+            </Form>
+          </Modal.Body>
+        </Modal>
       </Navbar>
       {showModal ? (
         <Alert key={Math.random()} variant="danger" className="controls__modal">
