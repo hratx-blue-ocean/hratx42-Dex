@@ -75,7 +75,7 @@ export default class Table extends Component {
   //ADD EDIT CARDS TO DB
   newCardDataCollector(players, tags, deck, cardInfo) {
     console.log("the deck ", deck)
-    let toPost = {
+    var toPost = {
       description: cardInfo.description,
       title: cardInfo.titl,
       weight: parseInt(cardInfo.eff),
@@ -85,26 +85,33 @@ export default class Table extends Component {
     };
     let toMembersPost = { cards_members: this.obtainPlayersId(players) };
     let toLabelsPost = { card_labels: this.obtainLabelIds(tags) };
-    // console.log(toLabelsPost.card_labels)
-    let addedCard;
+    let addedCard
     http.cards
       .post(toPost)
       .then(response => {
-        console.log(response);
         addedCard = response;
-        console.log(addedCard);
       })
       .then(response => {
         toMembersPost.cards_members.forEach(async player => {
           await http.cards.addUser(addedCard.id, player.member_id);
         });
-        console.log(response);
       })
       .then(() => {
         toLabelsPost.card_labels.forEach(async label => {
           await http.cards.addLabel(addedCard.id, label.id);
-        });
-      });
+        })
+      })
+      .then(() =>{
+        return http.cards.get(addedCard.id)
+      })
+      .then((card)=>{
+        console.log(`the card`, card)
+        let decks = [...this.state.decks]
+        let deckIndex = this.findDeckIndex(toPost.deck_id)
+        console.log(deckIndex)
+        decks[deckIndex].cards.push(card)
+        this.setState({decks})
+      })
   }
 
   editCardDataCollector(players, tags, deck, cardInfo) {
@@ -178,6 +185,17 @@ export default class Table extends Component {
       }
     });
     return result;
+  }
+
+  findDeckIndex(deckId){
+    const decks = [...this.state.decks]
+    for(let i = 0; i < decks.length; i++){
+      let currentDeck = decks[i]
+      if(currentDeck.id == deckId){
+        return i
+      }
+    }
+    return false
   }
 
   //FOR EDIT CARD

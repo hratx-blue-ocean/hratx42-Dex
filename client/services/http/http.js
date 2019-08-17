@@ -86,6 +86,9 @@ const http = {
     },
   },
   cards: {
+    get(id) {
+      return tryAxios(`/api/cards/${id}`, 'get');
+    },
     post(card) {
       return tryAxios('/api/cards', 'post', card);
     },
