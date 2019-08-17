@@ -5,13 +5,21 @@ import { Button, Modal, Container, Row, Col, Form} from 'react-bootstrap';
 export default function CardModal({closeModal, card, deckTitle, showMe, deckNames, newCardData, users, labels}) {
   const [show, setShow] = useState(false);
 
+
+let holdDeckTitle 
+if (!deckTitle) {
+  holdDeckTitle= ''
+} else {
+  holdDeckTitle = deckTitle
+}
+
   const [effort, setEffort] = useState(5);
   const [impact, setImpact] = useState(3);
   const [title, setTitle] = useState();
   const [players, setPlayers] = useState([]);
   const [tags, setTags] = useState([]);
-  const [dueDate, setDate] = useState('mm-dd-yyyy');
-  const [deck, setDeck] = useState(deckTitle);
+  const [dueDate, setDate] = useState(new Date().toISOString().slice(0,10));
+  const [deck, setDeck] = useState(holdDeckTitle);
   const [desc, setDesc] = useState();
 
   const handleClose = () => closeModal()
