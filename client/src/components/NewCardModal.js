@@ -34,7 +34,7 @@ export default function CardModal({ closeModal, card, deckTitle, showMe, deckNam
           <Col>
             <div className='priorityEffortWrapper'>
               <p className='priority'>Priority</p>
-              <select id='selectPriorityBtn' onChange={console.log(e.target.value)}>
+              <select id='selectPriorityBtn' onBlur={(event) => { console.log(event.target.value) }}>
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -42,7 +42,7 @@ export default function CardModal({ closeModal, card, deckTitle, showMe, deckNam
                 <option value="5">5</option>
               </select>
               <p className='effort'>Effort</p>
-              <select className='selectEffortBtn' onChange={console.log(e.target.value)}>
+              <select className='selectEffortBtn' onBlur={(event) => { console.log(event.target.value) }}>
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
