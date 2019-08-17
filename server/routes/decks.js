@@ -45,6 +45,7 @@ router.put('/:id', async (req, res) => {
       let result = await decksModel.put(deck);
       res.status(200).send(result);
     } else {
+      console.log('Unauthorized ', tableId, userId);
       res.status(401).send({ message: 'Unathorized' });
     }
   }, res);
