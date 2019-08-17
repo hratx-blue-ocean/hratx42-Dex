@@ -56,7 +56,10 @@ export default class Table extends Component {
     http.decks
       .get(tableId)
       .then(response => {
-        this.setState({ decks: response, tableName: table.name });
+        console.log('response from decks query', response);
+        if (response.length){
+          this.setState({ decks: response, tableName: table.name });
+        }
       })
       //populated deckname for tickets
       .then(() => {

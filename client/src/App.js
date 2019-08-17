@@ -21,7 +21,6 @@ import auth from '../services/auth.js';
 import global from '../utils/global';
 import table from '../utils/table';
 
-let thePlayers = [];
 export default class App extends Component {
   constructor(props) {
     super(props);
@@ -139,8 +138,9 @@ export default class App extends Component {
   }
 
   addPlayerToTable(playerName) {
-    thePlayers.push(playerName);
-    this.setState({ newPLayer: thePlayers });
+    this.setState(prevState => ({
+      newPlayer: [...prevState.newPlayer, playerName]  
+    }));
   }
 
   removePlayerToTable(playerName) {
