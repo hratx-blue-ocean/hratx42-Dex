@@ -8,7 +8,7 @@ export default function CardModal({ closeModal, card, deckTitle, showMe, deckNam
   } else {
     holdDeckTitle = deckTitle
   }
-  const [effort, setEffort] = useState(5);
+  const [effort, setEffort] = useState(3);
   const [impact, setImpact] = useState(3);
   const [title, setTitle] = useState();
   const [players, setPlayers] = useState([]);
@@ -35,7 +35,8 @@ export default function CardModal({ closeModal, card, deckTitle, showMe, deckNam
                   <Form.Control as="textarea" rows="8" onBlur={(event) => setDesc(event.target.value)} placeholder="description" required />
                 </Form.Group>
                 {/* Due Date */}
-                <Form.Group className="row">
+                <Form.Group>
+                <Form.Label className="rowTitleModal">Due Date</Form.Label>
                   <Form.Control type="date"
                     name="due date"
                     value={dueDate}
@@ -43,12 +44,12 @@ export default function CardModal({ closeModal, card, deckTitle, showMe, deckNam
                     min={new Date()} ></Form.Control>
                 </Form.Group>
               </div>
-              {/* Priority */}
               <div className="col-6">
-                <div className="row">
+                <div className="rowTitleModal">
+                  {/* Priority */}
                   <Form.Group className="col-6">
                     <Form.Label>Priority</Form.Label>
-                    <Form.Control as="select">
+                    <Form.Control value={impact} onChange={()=> setImpact(event.target.value)} as="select">
                       <option value="1">1</option>
                       <option value="2">2</option>
                       <option value="3">3</option>
@@ -59,7 +60,7 @@ export default function CardModal({ closeModal, card, deckTitle, showMe, deckNam
                   {/* Effort */}
                   <Form.Group className="col-6">
                     <Form.Label>Effort</Form.Label>
-                    <Form.Control as="select">
+                    <Form.Control value={effort} onChange={()=> setEffort(event.target.value)} as="select">
                       <option value="1">1</option>
                       <option value="2">2</option>
                       <option value="3">3</option>
@@ -69,7 +70,7 @@ export default function CardModal({ closeModal, card, deckTitle, showMe, deckNam
                   </Form.Group>
                 </div>
                 <Form.Group>
-                  <Form.Label className="row" style={{ marginLeft: '70px' }}>Deck</Form.Label>
+                  <Form.Label className="rowTitleModal">Deck</Form.Label>
                   <Form.Control as="select" onChange={(event) => setDeck(event.target.value)}>
                     <option>{deckTitle}</option>
                     {deckNames.map(name => {
@@ -80,7 +81,7 @@ export default function CardModal({ closeModal, card, deckTitle, showMe, deckNam
                   </Form.Control>
                 </Form.Group>
                 <Form.Group>
-                  <Form.Label className="row">Tags</Form.Label>
+                  <Form.Label className="rowTitleModal">Tags</Form.Label>
                   <Form.Control as="select" onChange={(event) => {
                     let labelsHolder = tags
                     let selectLabel = event.target.value
@@ -95,8 +96,8 @@ export default function CardModal({ closeModal, card, deckTitle, showMe, deckNam
                     })}
                   </Form.Control>
                 </Form.Group>
-                <Form.Group className="row">
-                  <Form.Label>Players</Form.Label>
+                <Form.Group>
+                  <Form.Label className="rowTitleModal">Players</Form.Label>
                   <Form.Control as="select"
                     onChange={(event) => {
                       let playerHolder = players

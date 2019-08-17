@@ -490,6 +490,13 @@ code {
   border: none;
 }
 
+.rowTitleModal {
+  display: flex;
+  flex-wrap: nowrap !important;
+  border: none;
+  padding-left: 10px;
+}
+
 #deckHeader {
   display: flex;
   justify-content: space-around;
