@@ -78,7 +78,7 @@ export default function TableSettings(props) {
                   </thead>
                   <tbody>
                     {/* map through all players */}
-                      {newPlayer}
+                    {newPlayer}
                   </tbody>
                 </Table>
               </div>

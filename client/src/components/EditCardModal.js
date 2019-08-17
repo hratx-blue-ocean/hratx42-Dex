@@ -7,6 +7,14 @@ import table from '../../utils/table'
 
 export default function CardModal({closeModal, showMe, card, deckTitle, deckNames, editCard, users, labels, deckIndex, cardIndex}) {
 
+  let holdDate
+  if (!card.due_date) {
+    holdDate= new Date().toISOString().slice(0,10)
+  } else {
+    holdDate = card.due_date.slice(0,10)
+  }
+
+
   const [show, setShow] = useState(false);
   const handleClose = () => closeModal()
   const [effort, setEffort] = useState(card.weight);
@@ -15,11 +23,11 @@ export default function CardModal({closeModal, showMe, card, deckTitle, deckName
   const [players, setPlayers] = useState([...card.cards_members]);
   const [tags, setTags] = useState([...card.card_labels]);
   // add DUE DATE!
-  const [dueDate, setDate] = useState('mm-dd-yyyy');
+  const [dueDate, setDate] = useState(holdDate);
   const [deck, setDeck] = useState(deckTitle);
   const [desc, setDesc] = useState(card.description);
 
-  // console.log(card)
+
   return (
 
   <>
@@ -44,16 +52,16 @@ export default function CardModal({closeModal, showMe, card, deckTitle, deckName
         {/* CONTENT FOR Header Container for effort, impact, title, and exit */}
         <Row xs={12} style={styles.headerRow}>
           <Col xs={1} style={styles.effortImpactInput}>
-          <input max={21} min={1} placeholder={card.weight} onBlur={(event)=> setEffort(event.target.value)}  type="number" style={styles.effImpInputBox}/>
+          <input max={21} min={1} value={effort} onChange={(event)=> setEffort(event.target.value)}  type="number" style={styles.effImpInputBox}/>
           </Col>
           <Col xs={1} style={styles.effortImpactInput}>
-          <input max={21} min={1} placeholder={card.impact} onBlur={(event)=> setImpact(event.target.value)} type="number" style={styles.effImpInputBox}/>
+          <input max={21} min={1} value={impact} onChange={(event)=> setImpact(event.target.value)} type="number" style={styles.effImpInputBox}/>
           </Col>
           {/* title input area */}
           <Col xs={10} style={styles.titleStyle}>
             <Form style={{width: '100%'}}>
               <Form.Group sm={8} controlId="exampleForm.ControltitleArea">
-                <Form.Control as="textarea" placeholder={card.title} onBlur={(event)=> setTitle(event.target.value)} rows="1"/>
+                <Form.Control as="textarea" value={title} onChange={(event)=> setTitle(event.target.value)} rows="1"/>
               </Form.Group>
             </Form>
           </Col>
@@ -132,7 +140,7 @@ export default function CardModal({closeModal, showMe, card, deckTitle, deckName
               <Form style={{width: '100%', paddingTop:10}}>
               <Form.Group sm={8} controlId="exampleForm.ControlTextarea1">
                 {/* <Form.Label>Description</Form.Label> */}
-                <Form.Control as="textarea" rows="8" placeholder={card.description} onBlur={(event)=> setDesc(event.target.value)}/>
+                <Form.Control as="textarea" rows="8" value={desc} onChange={(event)=> setDesc(event.target.value)}/>
               </Form.Group>
               </Form>
             </Row>
@@ -144,7 +152,6 @@ export default function CardModal({closeModal, showMe, card, deckTitle, deckName
               <div>Add To Card</div>
             </Row>
             <Row style={styles.addToCardTrait}>
-              {/* <input placeholder="date due" placeholder='Due Date' onBlur={(event)=> setDate(event.target.value)} style={{width:'100%'}}/>  */}
               <input type="date" 
               id="start" 
               name="due dates"

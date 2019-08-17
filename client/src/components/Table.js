@@ -50,7 +50,7 @@ export default class Table extends Component {
   }
 
   async getAllTheData(tableId) {
-    console.log('Getting the data ', tableId);
+    // console.log('Getting the data ', tableId);
     this.props.loading(true)
     const table = await http.tables.getById(tableId);
     this.setState({ table });
@@ -82,6 +82,7 @@ export default class Table extends Component {
     var toPost = {
       description: cardInfo.description,
       title: cardInfo.titl,
+      due_date: cardInfo.due,
       weight: parseInt(cardInfo.eff),
       impact: parseInt(cardInfo.imp),
       deck_id: this.obtainDeckID(deck),
@@ -109,19 +110,19 @@ export default class Table extends Component {
         return http.cards.get(addedCard.id)
       })
       .then((card)=>{
-        console.log(`the card`, card)
         let decks = [...this.state.decks]
         let deckIndex = this.findDeckIndex(toPost.deck_id)
-        console.log(deckIndex)
         decks[deckIndex].cards.push(card)
         this.setState({decks})
       })
   }
 
   editCardDataCollector(players, tags, deck, cardInfo, deckIndex, cardIndex) {
+    console.log(cardInfo.due)
     let toPost = {
       description: cardInfo.description,
       id: cardInfo.id,
+      due_date: cardInfo.due,
       title: cardInfo.titl,
       weight: parseInt(cardInfo.eff),
       impact: parseInt(cardInfo.imp),
@@ -168,9 +169,7 @@ export default class Table extends Component {
       if (add){ finalLabels.push(toLabelsPost[i])}
     }
     http.cards.put(toPost).then(response => {
-      console.log(response);
       editCard = response;
-      console.log(editCard);
     })
     .then((response)=>{
       if (finalMembers.length){
@@ -317,7 +316,7 @@ export default class Table extends Component {
     //submit new deck with this.state.newDeck.newDecktitle and table ID
     let { decks, newDeck } = this.state;
     http.decks
-    .post({ table_id: 1, title: this.state.newDeck.newDeckTitle })
+    .post({ table_id: this.props.match.params.id, title: this.state.newDeck.newDeckTitle })
     .then(res => {
       decks.push(res);
       newDeck.newDeckModal = false;
@@ -415,12 +414,10 @@ export default class Table extends Component {
           show={this.state.newDeck.newDeckModal}
           onHide={() => this.handleModal()}
         >
-          <Modal.Header
-            closeButton
-            onClick={() => this.handleModal()}
-            onHide={() => this.handleModal()}
-          >
-            <Modal.Title>Add Deck</Modal.Title>
+          <Modal.Header closeButton onClick={() => this.handleModal()} onHide={() => this.handleModal()}>
+            <Modal.Title>
+              <div style = {{marginLeft: '155px'}}>Add New Deck</div>
+            </Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <p>Enter Deck Title</p>
