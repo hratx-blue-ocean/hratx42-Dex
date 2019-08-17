@@ -116,9 +116,7 @@ code {
   background-color: #cdcdcd;
 }
 
-.CardThumbnailsSingleCard:hover {
-  background-color: #cdcdcd;
-}
+
 
 .CardThumbnailsSingleCard {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
@@ -618,4 +616,7 @@ code {
   background-color: grey;
 }
 
+.cardHeaderLabels:hover {
+  color: black;
+}
 /* END DASHBOARD STYLES */
