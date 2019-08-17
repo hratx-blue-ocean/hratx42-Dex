@@ -38,6 +38,7 @@ code {
   background: #eee;
   padding: 5px;
   font-weight: bold;
+  padding: 0px, 0px, 0px, 0px;
 }
 
 
@@ -116,9 +117,7 @@ code {
   background-color: #cdcdcd;
 }
 
-.CardThumbnailsSingleCard:hover {
-  background-color: #cdcdcd;
-}
+
 
 .CardThumbnailsSingleCard {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
@@ -453,11 +452,11 @@ code {
 }
 
 .card-body {
-  height: 220px;
+  height: 280px;
+  padding-bottom: 15px;
 }
 
 #deckContent {
-  position: relative;
   border-radius: 3px;
   position: relative;
   background: #f1f0f0 !important;
@@ -469,7 +468,7 @@ code {
   line-height: 1.43;
   margin-block-start: 0.83em;
   margin-block-end: 0.83em;
-  height: 320px;
+  height: 370px;
 }
 
 #deckScrollbar {
@@ -478,7 +477,15 @@ code {
   flex-wrap: nowrap !important;
   margin-right: -15px;
   margin-left: -15px;
-  overflow-y: hidden;
+  overflow: scroll;
+}
+
+.row {
+  display: flex;
+  flex-wrap: nowrap !important;
+  border: none;
+  color: #28A745;
+  z-index: 10;
 }
 
 #deckHeader {
@@ -494,17 +501,6 @@ code {
   font-family: 'Roboto', sans-serif;
   font-size: 19px;
   font-weight: bold;
-}
-
-.row {
-  display: flex;
-  flex-wrap: nowrap !important;
-  padding-left: 2rem;
-  border: none;
-}
-
-.row:hover {
-  cursor: pointer;
 }
 
 .deckCardAddBtn {
@@ -640,4 +636,7 @@ code {
   background-color: grey;
 }
 
+.cardHeaderLabels:hover {
+  color: black;
+}
 /* END DASHBOARD STYLES */
