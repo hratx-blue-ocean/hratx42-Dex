@@ -15,17 +15,17 @@ export default function TableSettings(props) {
     return(
       <tr>
         <th>{item}</th>
-        <th onClick={()=>props.removePlayerToTable()} style = {{cursor: 'pointer'}}>x</th>
+        <th onClick={()=>props.removePlayerToTable(item)} style = {{cursor: 'pointer'}}>x</th>
       </tr>
     )
   })
   const [tableName, setTableName] = useState('');
   const [playerName, setPlayerName] = useState('');
   return (
-    <Modal show={props.showTableModal} centered>
+    <Modal show={props.showTableModal} centered onHide={() => props.changeTableModal()}>
       <Modal.Header
         closeButton
-        onClick={() => props.changeTableModal()}
+        // onClick={() => props.changeTableModal()}
         className='createTableModalHeader'
       >
         <Modal.Title style={{ fontSize: '30px' }}>
@@ -50,7 +50,7 @@ export default function TableSettings(props) {
                   e.preventDefault();
                   props.addPlayerToTable(playerName)
                 }}>
-                <input onChange = {(e) => setPlayerName(e.target.value)} style = {{display: 'inline' ,width:'75%', marginRight:'5px'}} type="email" name="emailaddress" placeholder = 'Enter user Email'/>
+                <input onChange = {(e) => { setPlayerName(e.target.value)}} style = {{display: 'inline' ,width:'75%', marginRight:'5px'}} type="email" name="emailaddress" placeholder = 'Enter user Email'/>
                 <Button
                   type="submit"
                   style = {{display: 'inline', position: 'relative',top: '-1px'}}
@@ -70,7 +70,11 @@ export default function TableSettings(props) {
               <div>
                 <Table size = 'sm'>
                   <thead>
-                    <tr><th>Players</th></tr>
+                    <tr>
+                      <th>
+                        Players
+                      </th>
+                    </tr>
                   </thead>
                   <tbody>
                     {/* map through all players */}

@@ -96,7 +96,7 @@ const cardsModel = {
   // },
   async getCardsByUserID(userId) {
     const query = `
-        select 
+        select
           c.id,
           c.title,
           c.description,

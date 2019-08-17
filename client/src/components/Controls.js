@@ -27,16 +27,13 @@ export default function Controls(props) {
     let username;
     props.users.forEach((user) => user.id === userId ? username = user.name : null)
     let invitation = await http.invite.post(invitationEmail, { tableId: props.tableId, invitedBy: username });
-    let { success, message } = invitation
-    console.log(success);
-    console.log(message);
+    let { success, message } = invitation;
     global.flash(message, 'success', 2000);
   }
   const handleDelete = async function (sure) {
     setShowModal(false);
     if (sure) {
       const response = await http.tables.delete(props.tableId);
-      console.log(response)
       if (response) {
         window.location = '/';
       }
@@ -45,110 +42,66 @@ export default function Controls(props) {
 
   return (
     <div>
-      <Navbar className="tableControlsNavBar" bg="dark" variant="dark">
-        <Navbar.Brand>{props.tableName}</Navbar.Brand>
-        <Form.Control
-          onChange={e => props.searchText(e.target.value)}
-          type="text"
-          placeholder="Search cards"
-          style={{ width: '15%' }}
-          onBlur = {() => props.loseFocusSearch()}
-        />
-        {props.searchName === '' ? (
-          <></>
-        ) : (
-            <div className="ControlsSearchItems row">
+      <Navbar 
+        key={Math.random()}
+        className="tableControlsNavBar" 
+        bg="dark" 
+        variant="dark"
+        style={{ display: "flex", justifyContent: "space-between" }}
+      >
+        <div key={Math.random()} style = {{ display: "flex", flexDirection: "row"}}>
+          <Navbar.Brand key={Math.random()}>{props.tableName}</Navbar.Brand>
+          <Form.Control
+            key={Math.random()}
+            onChange={e => props.searchText(e.target.value)}
+            type="text"
+            placeholder="Search cards"
+            style={{ width: '25%' }}
+            onBlur = {() => props.loseFocusSearch()}
+          />
+          {props.searchName === '' ? (
+            <></>
+          ) 
+          : 
+          (
+            <div className="ControlsSearchItems row" key={Math.random()}>
               {cards.map(item => (
                 <div key={Math.random()} className="ControlsSearchItem">
-                  <div style={{ paddingLeft: '160px' }} />
+                  <div key={Math.random()} style={{ paddingLeft: '160px' }} />
                   <CardThumbnails
                     singleCard={item}
                     deckNames={props.deckNames}
                     users={props.users}
                     labels={props.labels}
                     background='true'
+                    key={Math.random()}
                   />
                 </div>
               ))}
             </div>
           )}
-        <DropdownButton
-          className='tableControlsFilterBtn'
-          id="dropdown-basic-button"
-          variant="success"
-          title={`${props.filterBy}`}
-        >
+          <DropdownButton
+            className='tableControlsFilterBtn'
+            id="dropdown-basic-button"
+            variant="success"
+            title={`${props.filterBy}`}
+          >
           {props.users.map(user => (
-            <Dropdown.Item key = {Math.random()} className = {props.filterBy === user.name ? 'ControlsfilterNames': null} key={Math.random()} onClick={e => props.changeFilter(e)}>
+            <Dropdown.Item 
+              className = {props.filterBy === user.name ? 'ControlsfilterNames': null} 
+              key={Math.random()} 
+              onClick={e => props.changeFilter(e)}
+            >
               {user.name}
             </Dropdown.Item>
           ))}
-        </DropdownButton>
-        <Button className="tableControlsAddDeckBtn" onClick={() => props.handleModal()} variant="success">
-          Add Deck
+          </DropdownButton>
+          <Button key={Math.random()} className="tableControlsAddDeckBtn" onClick={() => props.handleModal()} variant="success">
+            Add Deck
           </Button>
-
-        <div style={{ position: 'relative', left: '30%' }}>
-          {props.users.map(user =>
-              <OverlayTrigger
-                key={Math.random()}
-                placement={'bottom'}
-                overlay={
-                  <Tooltip id={`tooltip-bottom`}>
-                    {user.name}
-                  </Tooltip>
-                }
-              >
-                <Button style={{ textAlign: "center" }} className="tableControlsUserNameCircles" variant="secondary">
-                  {(user.name.split(" ").map(char => char[0]).join("")).toUpperCase()}
-                </Button>
-              </OverlayTrigger>
-          )}
-
-
-          {/* 
-          <Button className="tableControlsUserNameCircles" variant="secondary">
-            ME
-          </Button>
-          <Button className="tableControlsUserNameCircles" variant="secondary">
-            GG
-          </Button> */}
           <Button
-            style={{ width: '150px' }}
-            variant="success"
-            onClick={showInviteToggler}
-          >
-            Invite
-          </Button>
-          <Modal show={showInvite} onHide={showInviteToggler}>
-            <Modal.Header closeButton>
-              <Modal.Title>Send Invitation</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              <Form>
-                <Form.Group controlId="formBasicEmail">
-                  <Form.Label>Email address</Form.Label>
-                  <Form.Control
-                    type="email"
-                    placeholder="Enter email"
-                    onBlur={(e) => {
-                      setInvitationEmail(e.target.value)
-                    }}
-                  />
-                  <Form.Text className="text-muted">
-                    Enter the email you wish to invite!
-                </Form.Text>
-                </Form.Group>
-                <Button variant="secondary" onClick={showInviteToggler}>
-                  Close
-              </Button>
-                <Button variant="primary" onClick={sendInvite}>
-                  Send
-              </Button>
-              </Form>
-            </Modal.Body>
-          </Modal>
-          <Button
+            className = "tableControlDeleteButton"
+            key={Math.random()}
             variant="outline-danger"
             onClick={() => {
               setShowModal(true);
@@ -157,11 +110,112 @@ export default function Controls(props) {
             Delete
           </Button>
         </div>
+        <ul 
+          key={Math.random()} 
+          className="nav navbar-nav" 
+          style={{ float: "right", display: "flex", flexDirection: "row" }}>
+          {props.users.map((user, count) =>
+            { if (count < 4) {
+              return (
+                <li key={Math.random()} className="navbar-nav pull-right">
+                  <OverlayTrigger
+                    placement={'bottom'}
+                    overlay={
+                      <Tooltip id={`tooltip-bottom`}>
+                        {user.name}
+                      </Tooltip>
+                    }
+                  >
+                    <Button 
+                      style={{ textAlign: "center" }} 
+                      className="tableControlsUserNameCircles" 
+                      variant="secondary"
+                      key={Math.random()}
+                    >
+                      {(user.name.split(" ").map(char => char[0]).join("")).toUpperCase()}
+                    </Button>
+                  </OverlayTrigger>
+                </li>
+              )}
+              return ('')
+            }
+          )}
+          {
+            props.users.length > 4 
+            ?
+            <li key={Math.random()} className="navbar-nav pull-right">
+                <OverlayTrigger
+                  placement={'bottom'}
+                  overlay={
+                    <Tooltip id={`tooltip-bottom`}>
+                      <ul style = {{ listStyle: "none", padding: "0" }}>
+                        {props.users.map(({ name }) => 
+                          <li>{name}</li>
+                        )}
+                      </ul>
+                    </Tooltip>
+                  }
+                >
+                  <Button
+                    key={Math.random()}
+                    style={{ textAlign: "center" }}
+                    className="tableControlsUserNameCircles"
+                    variant="secondary"
+                  >
+                   {props.users.length - 4}+
+                  </Button>
+                </OverlayTrigger>
+            </li>
+            :
+            ''
+          }
+          <li key={Math.random()} className="navbar-nav pull-right">
+          <Button 
+            key={Math.random()}
+            style={{ textAlign: "center" }} 
+            className="tableControlsUserNameCircles invite" 
+            variant="secondary"
+            onClick={showInviteToggler}
+          >
+            <img src="/assets/LogoMakr_3QVBAS.png" height = "25"/>
+          </Button>
+          </li>
+        </ul>
+        <Modal key={Math.random()} show={showInvite} onHide={showInviteToggler}>
+          <Modal.Header closeButton key={Math.random()}>
+            <Modal.Title key={Math.random()}>Send Invitation</Modal.Title>
+            </Modal.Header>
+          <Modal.Body key={Math.random()}>
+            <Form key={Math.random()}>
+              <Form.Group key={Math.random()}controlId="formBasicEmail">
+                <Form.Label key={Math.random()}>Email address</Form.Label>
+                  <Form.Control
+                    key={Math.random()}
+                    type="email"
+                    placeholder="Enter email"
+                    onBlur={(e) => {
+                      setInvitationEmail(e.target.value)
+                    }}
+                  />
+                <Form.Text key={Math.random()} className="text-muted">
+                    Enter the email you wish to invite!
+                </Form.Text>
+                </Form.Group>
+              <Button key={Math.random()} variant="secondary" onClick={showInviteToggler}>
+                  Close
+              </Button>
+                <Button key={Math.random()} variant="primary" onClick={sendInvite}>
+                  Send
+              </Button>
+              </Form>
+            </Modal.Body>
+          </Modal>
       </Navbar>
       {showModal ? (
-        <Alert variant="danger" className="controls__modal">
+        <Alert key={Math.random()} variant="danger" className="controls__modal">
           Are you sure you want to delete this table?
           <Button
+            key={Math.random()}
             variant="danger"
             onClick={() => {
               handleDelete(true);
@@ -170,6 +224,7 @@ export default function Controls(props) {
             Yes
           </Button>
           <Button
+            key={Math.random()}
             variant="secondary"
             onClick={() => {
               handleDelete(false);

@@ -3,6 +3,7 @@ import 'regenerator-runtime/runtime';
 
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { Spinner } from 'react-bootstrap';
 
 //components
 import Landing from './components/Landing.js';
@@ -59,13 +60,26 @@ export default class App extends Component {
     };
   }
 
-  componentDidMount() {
-    console.log('App mounted');
+  async componentDidMount() {
+    this.loading(true);
     global.flash = this.flash.bind(this);
+    global.loading = this.loading.bind(this);
     global.setState = this.setState.bind(this);
     if (localStorage.getItem('token')) {
-      this.login();
+      await this.login();
+      this.loading(false);
+    } else {
+      this.loading(false);
     }
+  }
+
+  loading(loading) {
+    this.setState({ loading });
+    setTimeout(() => {
+      if (this.state.loading) {
+        global.setState({ loading: false });
+      }
+    }, 5000);
   }
 
   flash(message, variant, interval) {
@@ -75,11 +89,11 @@ export default class App extends Component {
     }, interval);
   }
 
-  login() {
+  async login() {
     auth.setUser(this);
-    this.getTables();
-    this.getUser();
-    this.getCards();
+    await this.getTables();
+    await this.getUser();
+    await this.getCards();
   }
 
   async getCards() {
@@ -139,14 +153,15 @@ export default class App extends Component {
 
   addPlayerToTable(playerName) {
     this.setState(prevState => ({
-      newPlayer: [...prevState.newPlayer, playerName]  
-    }));
+      newPlayer: [... new Set([...prevState.newPlayer, playerName])]
+    }))
   }
 
   removePlayerToTable(playerName) {
-    let index = thePlayers.indexOf(playerName);
-    thePlayers.splice(index, 1);
-    this.setState({ newPLayer: thePlayers });
+    let index = this.state.newPlayer.indexOf(playerName);
+    let tempArr = this.state.newPlayer.slice();
+    tempArr.splice(index, 1)
+    this.setState({newPlayer: tempArr})
   }
   render() {
     return (
@@ -198,10 +213,22 @@ export default class App extends Component {
             )}
           />
           <Route path="/profile" component={Profile} />
-          <Route path={`/table/:id`} render={props => <Table {...props} />} />
+          <Route
+            path={`/table/:id`}
+            render={props => (
+              <Table {...props} loading={this.loading.bind(this)} />
+            )}
+          />
           <Route path="/TableSettings" component={TableSettings} />
         </Router>
         <Flash flashData={this.state.flash} />
+        {this.state.loading ? (
+          <Spinner
+            animation="border"
+            variant="success"
+            className="APP__spinner"
+          />
+        ) : null}
       </>
     );
   }
