@@ -21,7 +21,6 @@ import auth from '../services/auth.js';
 import global from '../utils/global';
 import table from '../utils/table';
 
-let thePlayers = [];
 export default class App extends Component {
   constructor(props) {
     super(props);
@@ -139,14 +138,18 @@ export default class App extends Component {
   }
 
   addPlayerToTable(playerName) {
-    thePlayers.push(playerName);
-    this.setState({ newPLayer: thePlayers });
+    this.setState(prevState => ({
+      newPlayer: [... new Set([...prevState.newPlayer, playerName])]
+    }))
   }
 
   removePlayerToTable(playerName) {
-    let index = thePlayers.indexOf(playerName);
-    thePlayers.splice(index, 1);
-    this.setState({ newPLayer: thePlayers });
+    console.log(playerName)
+    let index = this.state.newPlayer.indexOf(playerName);
+    // console.log(this.state.newPlayer.splice(index, 1))
+    let tempArr = this.state.newPlayer.slice();
+
+    this.setState({newPlayer: tempArr.splice(index, 1)})
   }
   render() {
     return (
