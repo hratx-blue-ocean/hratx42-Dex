@@ -34,7 +34,7 @@ if (!deckTitle) {
               <div style={{ fontSize: 11 }}>Impact</div>
             </Col>
             <Col xs={8} style={styles.titleStyle}>
-              <div style={{ width: '100%', paddingTop: 5 }}></div>
+              <div style={{ width: '100%', paddingTop: 5 }}>Title<span style={{color:'red'}}>*</span></div>
             </Col>
             <Col xs={2} style={{ justifyContent: 'center' }}>
               <Modal.Header closeButton>  </Modal.Header>
@@ -49,7 +49,7 @@ if (!deckTitle) {
               <input max={21} min={1} placeholder={3} type="number" onBlur={(event) => setImpact(event.target.value)} style={styles.effImpInputBox} />
             </Col>
             {/* title input area */}
-            <Col xs={10} style={styles.titleStyle}>
+            <Col xs={10} style={styles.titleInputStyle}>
               <Form style={{ width: '100%' }}>
                 <Form.Group sm={8} controlId="exampleForm.ControltitleArea">
                   {/* <Form.Label>Description</Form.Label> */}
@@ -134,8 +134,10 @@ if (!deckTitle) {
               </Row>
 
               {/* Text Input Area */}
+              <Row style={{height:30}}xs={12}><div> </div></Row>
+              <Row><div>Description <span style={{color:'red'}}>*</span></div></Row>
               <Row>
-                <Form style={{ width: '100%', paddingTop: 10 }}>
+                <Form style={{ width: '100%'}}>
                   <Form.Group sm={8} controlId="exampleForm.ControlTextarea1">
                     <Form.Control as="textarea" rows="8" onBlur={(event) => setDesc(event.target.value)} placeholder="description" required />
                   </Form.Group>
@@ -215,6 +217,10 @@ const styles = {
     paddingLeft: 15,
   },
   titleStyle: {
+    // "border": "1px solid black"
+    paddingTop:35,
+  },
+  titleInputStyle: {
     // "border": "1px solid black"
   },
   //Content Column Row
