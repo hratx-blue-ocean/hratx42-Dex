@@ -57,6 +57,7 @@ export default class Table extends Component {
     http.decks
       .get(tableId)
       .then(response => {
+        console.log('response', response)
         this.setState({ decks: response, tableName: table.name });
       })
       //populated deckname for tickets
@@ -117,7 +118,7 @@ export default class Table extends Component {
       })
   }
 
-  editCardDataCollector(players, tags, deck, cardInfo) {
+  editCardDataCollector(players, tags, deck, cardInfo, deckIndex, cardIndex) {
     let toPost = {
       description: cardInfo.description,
       id: cardInfo.id,
@@ -127,25 +128,64 @@ export default class Table extends Component {
       deck_id: this.obtainDeckID(deck),
       table_id: this.state.table.id,
     };
-    let toMembersPost = { cards_members: this.obtainPlayersId(players) };
-    let toLabelsPost = { card_labels: this.obtainLabelIds(tags) };
-    let editCard;
+    let toMembersPost = this.obtainPlayersId(players);
+    let toLabelsPost = this.obtainLabelIds(tags);
+    let editCard = {};
+    let oldMembers = this.state.decks[deckIndex].cards[cardIndex].cards_members;
+    let oldLabels = this.state.decks[deckIndex].cards[cardIndex].card_labels;
+    toMembersPost.sort((a, b) =>  (a.member_id - b.member_id));
+    toLabelsPost.sort((a, b) =>  (a.label_name - b.label_name));
+    
+    let finalLabels = [];
+    let finalMembers = [];
+    for (let i = 0; i < toMembersPost.length; i++){
+      let add = true;
+      if (toMembersPost[i+1]){
+        if (toMembersPost[i].member_id == toMembersPost[i+1].member_id){
+          add = false;
+        } 
+      }
+      for (let j = 0; j < oldMembers.length; j++){
+        if (oldMembers[j].member_id == toMembersPost[i].member_id){
+          add = false
+        }
+      }
+      if (add){ finalMembers.push(toMembersPost[i])}
+    }
+    
+    for (let i = 0; i < toLabelsPost.length; i++){
+      let add = true;
+      if (toLabelsPost[i+1]){
+        if (toLabelsPost[i].label_name == toLabelsPost[i+1].label_name){
+          add = false;
+        }
+      }
+      for (let j = 0; j < oldLabels.length; j++){
+        if (oldLabels[j].label_name == toLabelsPost[i].label_name){
+          add = false;
+        }
+      }
+      if (add){ finalLabels.push(toLabelsPost[i])}
+    }
     http.cards.put(toPost).then(response => {
       console.log(response);
       editCard = response;
       console.log(editCard);
-    });
-    // .then((response)=>{
-    //   toMembersPost.cards_members.forEach(async (player) =>{
-    //     await http.cards.addUser(addedCard.id, player.member_id)
-    //   })
-    //   console.log(response)
-    // })
-    // .then(()=>{
-    //   toLabelsPost.card_labels.forEach(async (label) =>{
-    //     await http.cards.addLabel(addedCard.id,label.id)
-    //   })
-    // })
+    })
+    .then((response)=>{
+      if (finalMembers.length){
+        finalMembers.forEach(async (player) =>{
+          await http.cards.addUser(editCard.id, player.member_id)
+        })
+      }
+      })
+    .then(()=>{
+      if (finalLabels.length){
+        finalLabels.forEach(async (label) =>{
+          await http.cards.addLabel(editCard.id,label.id)
+        })
+      }
+    })
   }
 
   obtainPlayersId(players) {
@@ -277,7 +317,7 @@ export default class Table extends Component {
     //submit new deck with this.state.newDeck.newDecktitle and table ID
     let { decks, newDeck } = this.state;
     http.decks
-    .post({ table_id: this.props.match.params.id, title: this.state.newDeck.newDeckTitle })
+    .post({ table_id: 1, title: this.state.newDeck.newDeckTitle })
     .then(res => {
       decks.push(res);
       newDeck.newDeckModal = false;
@@ -301,7 +341,7 @@ export default class Table extends Component {
 
   editDeck(id, title, deckIndex) {
     let { decks } = this.state;
-    http.decks.put({ id, title }).then(res => {
+    http.decks.put({ id, title, table_id: this.state.table.id }).then(res => {
       decks[deckIndex].title = title;
       this.setState({ decks });
     });

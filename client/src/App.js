@@ -66,10 +66,7 @@ export default class App extends Component {
     global.loading = this.loading.bind(this);
     global.setState = this.setState.bind(this);
     if (localStorage.getItem('token')) {
-      this.login();
-      await this.getTables();
-      await this.getUser();
-      await this.getCards();
+      await this.login();
       this.loading(false);
     } else {
       this.loading(false);
@@ -92,8 +89,11 @@ export default class App extends Component {
     }, interval);
   }
 
-  login() {
+  async login() {
     auth.setUser(this);
+    await this.getTables();
+    await this.getUser();
+    await this.getCards();
   }
 
   async getCards() {
