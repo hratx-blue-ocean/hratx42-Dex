@@ -1,5 +1,5 @@
 import React from 'react';
-import { Col, Row } from 'react-bootstrap';
+import { Col, Row, OverlayTrigger, Tooltip } from 'react-bootstrap';
 
 export default function CardHeader(props) {
   const labels = [];
@@ -18,7 +18,20 @@ export default function CardHeader(props) {
     <div>
       <Row className = 'no-gutters' style = {{ overflow: "hidden" }}>
         <Col md={3}>
-          <div className='cardThumbnails_impact'>{props.weight}|{props.impact}</div>
+          <div className='cardThumbnails_impact'>
+          <OverlayTrigger
+              key={'bottom'}
+              placement={'bottom'}
+              overlay={
+                <Tooltip id={`tooltip-bottom`}>
+                  Effort/Priority
+                </Tooltip>}>
+                <div>
+                  <p style = {{position: 'relative', top: '-3px', left: '0px'}}>{props.weight}</p>
+                  <p style = {{position: 'relative', top: '-20px', left: '20px'}}>{props.impact}</p>
+                </div>
+            </OverlayTrigger>
+          </div>
         </Col>
         <Col className = 'no-gutters' md = {9}>
           {labels.map((subLabel) =>

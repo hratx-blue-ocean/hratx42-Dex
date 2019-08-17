@@ -34,11 +34,12 @@ code {
   border: 1px solid black;
   width: 45px;
   height: 35px;
-  font-size: 10px;
+  font-size: 12px;
   background: #eee;
   padding: 5px;
   font-weight: bold;
   padding: 0px, 0px, 0px, 0px;
+  background:linear-gradient(to top left, #fff calc(50% - 1px), black, #fff calc(50% + 1px) )
 }
 
 
