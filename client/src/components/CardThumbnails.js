@@ -69,10 +69,10 @@ export default function CardThumbnails(props) {
           <div style={{ float: "right", paddingRight: "10px", paddingBottom: "5px" }}>
             {/* more users button leads to edit form to view all users */}
             <OverlayTrigger
-              key={'bottom'}
-              placement={'bottom'}
+              key = {Math.random()}
+              placement={'top'}
               overlay={
-                <Tooltip id={`tooltip-bottom`}>
+                <Tooltip id={`tooltip-top`}>
                   Add/View More
                 </Tooltip>}>
               <Button
@@ -87,9 +87,9 @@ export default function CardThumbnails(props) {
             {props.singleCard.cards_members.map((member, i) =>
                 <OverlayTrigger
                   key={Math.random()}
-                  placement={'bottom'}
+                  placement={'top'}
                   overlay={
-                    <Tooltip id={`tooltip-bottom`}>
+                    <Tooltip id={`tooltip-top`}>
                       {member.member_name}
                     </Tooltip>
                   }
