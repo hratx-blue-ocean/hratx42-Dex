@@ -1,4 +1,4 @@
-const pgClient = require('../hosteddb');
+const { pgClient } = require('../hosteddb');
 const decksModel = require('./decks.js');
 const cardsModel = require('./cards.js');
 

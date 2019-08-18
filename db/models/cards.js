@@ -1,4 +1,4 @@
-const pgClient = require('../hosteddb');
+const { pgClient } = require('../hosteddb');
 
 const getColumnsString = require('../utils/getColumns');
 const getValuesString = require('../utils/getValuesString');

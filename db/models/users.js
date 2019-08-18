@@ -1,4 +1,4 @@
-const pgClient = require('../hosteddb');
+const { pgClient } = require('../hosteddb');
 const makeUpdateString = require('../utils/makeUpdateString');
 
 const usersModel = {
