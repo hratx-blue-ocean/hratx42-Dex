@@ -7,7 +7,7 @@ body {
   height: 100%;
   margin: 0;
   padding: 0;
-  background-color: #4bc06a;
+  background-color: white;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -542,7 +542,7 @@ code {
   display: flex;
   padding: 5rem 15rem 0 15rem;
   justify-content: space-between;
-  background: rgb(195, 209, 209);
+  background: white;
   height: 100vh;
 }
 
