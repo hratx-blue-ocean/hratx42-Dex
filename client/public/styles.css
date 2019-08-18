@@ -594,7 +594,6 @@ code {
 .dashboardTablesContainer {
   display: flex;
   flex-wrap: wrap;
-  width: 40vw;
 }
 
 .dashboardTables ul {

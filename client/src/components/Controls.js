@@ -113,6 +113,7 @@ export default function Controls(props) {
                     }
                   >
                     <Button
+                      key = {Math.random()}
                       style={{ textAlign: "center" }}
                       className="tableControlsUserNameCircles"
                       variant="secondary"

@@ -5,7 +5,6 @@ import {Row,Col, Button, Card } from "react-bootstrap";
 import DashboardCards from './DashboardCards.js'
 
 export default function Dashboard(props) {
-  const images = ['http://bizcardtemplates.com/wp-content/uploads/2017/09/Landscape-Business-Card-Background-27.jpg', 'https://cdn.pixabay.com/photo/2015/12/19/18/47/decoration-1100137_960_720.jpg', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZEZJc-78-rYSHrZqh_T_M7qkEzHIHBsVSLKHpAU6UbWNnzUUa', 'https://png.pngtree.com/thumb_back/fh260/back_pic/04/32/47/035843e833dd111.jpg']
   const [showProfile, setShowProfile] = useState(false);
   const hideProfile = () => {
     setShowProfile(false);
@@ -38,7 +37,15 @@ export default function Dashboard(props) {
               {props.tables.map((table, index) =>
                 <ul key = {Math.random()}>
                     <li>
-                      <div style = {{backgroundImage: `url(${images[index % 4]})`}} onClick={() => props.history.push(`/table/${table.id}`)} className="newTable">
+                      <div style = {{
+                        backgroundImage: `url(/assets/card${index%4}.${index % 2 === 0 ? 'jpg' : 'png'})`,
+                        height: '250px',
+                        width: '175px',
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'center center',
+                        opacity: '0.6'
+                        }} 
+                        onClick={() => props.history.push(`/table/${table.id}`)} className="newTable">
                         <h5>{table.name}</h5>
                       </div>
                     </li>
