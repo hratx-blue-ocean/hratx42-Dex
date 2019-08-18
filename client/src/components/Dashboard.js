@@ -8,12 +8,22 @@ import CardThumbnails from './CardThumbnails';
 import TableThumbnail from './TableThumbnail';
 
 export default function Dashboard(props) {
-  const images = ['http://bizcardtemplates.com/wp-content/uploads/2017/09/Landscape-Business-Card-Background-27.jpg', 'https://cdn.pixabay.com/photo/2015/12/19/18/47/decoration-1100137_960_720.jpg', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZEZJc-78-rYSHrZqh_T_M7qkEzHIHBsVSLKHpAU6UbWNnzUUa', 'https://png.pngtree.com/thumb_back/fh260/back_pic/04/32/47/035843e833dd111.jpg']
   const [showProfile, setShowProfile] = useState(false);
   const hideProfile = () => {
     setShowProfile(false);
   }
-  console.log(props.cards)
+  let pastDueCards = [];
+  let dueSoonCards = [];
+  let currentDate = new Date().toISOString().split('T')[0];
+  if (props.cards.length){
+    for (let i = 0; i < props.cards.length; i++){
+      if ((new Date(props.cards[i].due_date)) - new Date(currentDate) < 0){
+        pastDueCards.push(props.cards[i])
+      } else if ((new Date(props.cards[i].due_date)) - new Date(currentDate) < 86400000){
+        dueSoonCards.push(props.cards[i])
+      }
+    }
+  }
   {/* <div>Tables you are a member of: {props.tables.length}</div>
               <div>Total Cards owned: {props.cards.length}</div>
               <div>Cards per Table Average: {props.tables.length/5}</div>
@@ -58,7 +68,7 @@ export default function Dashboard(props) {
 
       <div id="deckWrapper">
         <div id="dashboardContent" style={{ width: '75%' }} >
-          <div id="deckHeader" style={{ width: '100%' }}><span className="deckTitle">{props.user.name}'s Cards due today</span>
+          <div id="deckHeader" style={{ width: '100%' }}><span className="deckTitle">{props.user.name}'s Past due cards</span>
             <div style={{ float: 'right' }}>
               <Button
                 className="deckEditBtn"
@@ -71,7 +81,7 @@ export default function Dashboard(props) {
           </div>
           <div id="deckScrollbar">
             <Card.Body className='dashboardrow row'>
-              {props.cards.map((singleCard, cardIndex) =>
+              {pastDueCards.map((singleCard, cardIndex) =>
                 <div key={Math.random()}>
                   <div style={{ paddingLeft: '160px' }}></div>
                   <DashboardCards 

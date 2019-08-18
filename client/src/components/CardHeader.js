@@ -27,8 +27,8 @@ export default function CardHeader(props) {
                   Priority/Effort
                 </Tooltip>}>
                 <div>
-                  <p style = {{position: 'relative', top: '-20px', left: '20px'}}>{props.impact}</p>
-                  <p style = {{position: 'relative', top: '-3px', left: '0px'}}>{props.weight}</p>
+                  <p style = {{position: 'relative', top: '-3px', left: '0px'}}>{props.impact}</p>
+                  <p style = {{position: 'relative', top: '-20px', left: '20px'}}>{props.weight}</p>
                 </div>
             </OverlayTrigger>
           </div>
