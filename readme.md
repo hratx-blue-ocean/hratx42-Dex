@@ -59,7 +59,7 @@ wrote the [Users route handlers](server/routes/users.js), and associated [databa
 
 #### [Michael Bergeron](https://github.com/Michael-Bergeron)
 
-created the table view that shows all the tasks for a particular project. The table view includes several React components: [Table](client/src/components/Table.js), [Deck](client/src/components/Deck.js), [Card Thumbnail](client/src/components/CardThumbnails.js), [Controls](client/src/components/Controls.js), and [Table Settings](client/src/components/TableSettings.js). Michael also wrote the front end search and filter logic.
+created and designed the table view that shows all the tasks for a particular project. The table view includes several React components: [Table](client/src/components/Table.js), [Deck](client/src/components/Deck.js), [Card Thumbnail](client/src/components/CardThumbnails.js), [Controls](client/src/components/Controls.js), and [Table Settings](client/src/components/TableSettings.js). Michael also wrote the front end search and filter logic.
 
 #### [Zona Gilreath](https://github.com/zonagilreath)
 

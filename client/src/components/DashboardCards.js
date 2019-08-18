@@ -29,26 +29,25 @@ export default function DashboardCards(props) {
 
   return (
     <div style={{ width: '250px', height: '250px'}}>
-      
-      <Card  style={{ width: '250px', height: '250px' }} className='CardThumbnailsSingleCard'>
+
+      <Card style={{ width: '250px', height: '150px', borderRadius: '10%' }} className='CardThumbnailsSingleCard'>
       <div style ={{padding: '5px'}}>
         <CardHeader 
           labels = {props.singleCard.card_labels}
           weight = {props.singleCard.weight}
           impact = {props.singleCard.impact} />
         <div>
-          <div style={{ display: 'flex', height: '150px', alignItems: 'center', fontSize: '20px', paddingTop: '15px', paddingLeft: '5px' }}>{props.singleCard.title}</div>
+          <div style={{ display: 'flex', height: '70px', alignItems: 'center', fontSize: '14px', paddingTop: '0px', paddingLeft: '5px' }}>{props.singleCard.title}</div>
         </div>
-        <div style={{ position: "absolute", bottom: "0", width: "100%"}}>
+        <div style={{ position: "absolute", top: "80%", width: "100%"}}>
           <div style={{ float: "right", paddingRight: "10px", paddingBottom: "5px" }}>
-            {/* more users button leads to edit form to view all users */}
-            
+
             {props.singleCard.cards_members.map((member, i) =>
                 <OverlayTrigger
                   key={Math.random()}
-                  placement={'bottom'}
+                  placement={'top'}
                   overlay={
-                    <Tooltip id={`tooltip-bottom`}>
+                    <Tooltip id={`tooltip-top`}>
                       {member.member_name}
                     </Tooltip>
                   }
