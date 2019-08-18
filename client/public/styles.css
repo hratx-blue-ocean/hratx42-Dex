@@ -106,19 +106,14 @@ code {
 
 .ControlsSearchItems {
   position: absolute;
-  width: 500px;
+  width: 350px;
+  height: 150px;
   top: 50px;
   left: 65px;
   border: 1px solid black;
   z-index: 1;
   background-color: #eee;
 }
-
-.ControlsSearchItem:hover {
-  background-color: #cdcdcd;
-}
-
-
 
 .CardThumbnailsSingleCard {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
