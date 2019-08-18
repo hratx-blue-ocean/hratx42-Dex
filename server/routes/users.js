@@ -195,4 +195,9 @@ router.get('/:id/cards/', async (req, res) => {
   }, res);
 })
 
+router.get('/:userId/table/:tableId/cards', async (req, res) => {
+  const {userId, tableId} = req.params; 
+  return
+})
+
 module.exports = router;

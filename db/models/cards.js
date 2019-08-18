@@ -160,12 +160,14 @@ const cardsModel = {
     return deletedLabel;
   },
   // delete card
-  async deleteCard(cardID) {
-    const deletedCard = await pgClient.query(
-      `DELETE FROM cards WHERE id = ${cardID} RETURNING id;`
-    );
+  async deleteCard(cardId) {
+    const query = 'delete from cards where id = $1 returning id;'
+    const deletedCard = await pgClient.query(query, [cardId]);
     return deletedCard;
   },
+  async countUsersCardsByTable(userId, TableId){
+    const query = 'select count(id) from '
+  }
 };
 
 module.exports = cardsModel;
