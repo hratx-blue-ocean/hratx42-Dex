@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import io from 'socket.io-client';
-const socket = io('http://localhost:8000/');
+
 import { Button, Modal } from 'react-bootstrap';
 import Controls from './Controls';
 import Deck from './Deck';
@@ -45,7 +45,11 @@ export default class Table extends Component {
     tableUtil.deleteCardById = this.deleteCardById.bind(this);
     this.getAllTheData(tableId);
     console.log('im updated boss!');
-    const socket = io.connect('/tableSocket/');
+    console.log(window.location);
+    const socket = io(window.location.origin + '/table/')
+    // const socket = io(window.location.origin + '/table/').connect('/table/');
+    console.log(socket);
+    // const socket = io.connect('/table/');
     socket.on('connect', () => {
       console.log('Successfully connected!');
       socket.emit('room', tableId);

@@ -44,7 +44,7 @@ const pubSubDriver = async () =>{
     }
   });
  
-  const socketByTable = io.of('/tableSocket/')
+  const socketByTable = io.of('/table/')
   socketByTable.on('connection', async socket=>{
     console.log('socket connected');
     socketByTable.emit('connected', `successfully connected to tableSocket`);
