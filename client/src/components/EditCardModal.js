@@ -46,7 +46,8 @@ export default function CardModal({closeModal, showMe, card, deckTitle, deckName
                   <Form.Control as="textarea" rows="8" value={desc} onChange={(event) => setDesc(event.target.value)} placeholder="description" required />
                 </Form.Group>
                 {/* Due Date */}
-                <Form.Group className="row">
+                <Form.Group>
+                <Form.Label className="rowTitleModal">Due Date</Form.Label>
                   <Form.Control type="date"
                     name="due date"
                     value={dueDate}
@@ -54,12 +55,12 @@ export default function CardModal({closeModal, showMe, card, deckTitle, deckName
                     min={new Date()} ></Form.Control>
                 </Form.Group>
               </div>
-              {/* Priority */}
               <div className="col-6">
                 <div className="row">
+                  {/* Priority */}
                   <Form.Group className="col-6">
                     <Form.Label>Priority</Form.Label>
-                    <Form.Control as="select">
+                    <Form.Control value={impact} onChange={()=> setImpact(event.target.value)} as="select">
                       <option value="1">1</option>
                       <option value="2">2</option>
                       <option value="3">3</option>
@@ -70,7 +71,7 @@ export default function CardModal({closeModal, showMe, card, deckTitle, deckName
                   {/* Effort */}
                   <Form.Group className="col-6">
                     <Form.Label>Effort</Form.Label>
-                    <Form.Control as="select">
+                    <Form.Control value={effort} onChange={()=> setEffort(event.target.value)} as="select">
                       <option value="1">1</option>
                       <option value="2">2</option>
                       <option value="3">3</option>
@@ -80,7 +81,7 @@ export default function CardModal({closeModal, showMe, card, deckTitle, deckName
                   </Form.Group>
                 </div>
                 <Form.Group>
-                  <Form.Label className="row" style={{ marginLeft: '70px' }}>Deck</Form.Label>
+                  <Form.Label className="rowTitleModal">Deck</Form.Label>
                   <Form.Control as="select" onChange={(event) => setDeck(event.target.value)}>
                     <option>{deckTitle}</option>
                     {deckNames.map(name => {
@@ -91,7 +92,7 @@ export default function CardModal({closeModal, showMe, card, deckTitle, deckName
                   </Form.Control>
                 </Form.Group>
                 <Form.Group>
-                  <Form.Label className="row">Tags</Form.Label>
+                  <Form.Label className="rowTitleModal">Tags</Form.Label>
                   <Form.Control as="select" onChange={(event) => {
                     let labelsHolder = tags
                     let selectLabel = event.target.value
@@ -106,8 +107,8 @@ export default function CardModal({closeModal, showMe, card, deckTitle, deckName
                     })}
                   </Form.Control>
                 </Form.Group>
-                <Form.Group className="row">
-                  <Form.Label>Players</Form.Label>
+                <Form.Group>
+                  <Form.Label className="rowTitleModal">Players</Form.Label>
                   <Form.Control as="select"
                     onChange={(event) => {
                       let playerHolder = players
@@ -130,6 +131,7 @@ export default function CardModal({closeModal, showMe, card, deckTitle, deckName
         </Modal.Body >
         <Modal.Footer>
           {/* Button to Submit */}
+          <Button variant="danger" onClick={() => { table.deleteCardById(card.id) }}>Delete</Button>
           <Button onClick={(event) => {
             let cardInfo={id: card.id, eff:effort, imp:impact, titl:title, description:desc, due: dueDate}
             editCard(players, tags, deck, cardInfo, deckIndex, cardIndex)
@@ -141,6 +143,8 @@ export default function CardModal({closeModal, showMe, card, deckTitle, deckName
     </div >
   )
 }
+
+
   ////////////////////////////////////////////////////////////////////
   
     
