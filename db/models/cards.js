@@ -165,8 +165,16 @@ const cardsModel = {
     const deletedCard = await pgClient.query(query, [cardId]);
     return deletedCard;
   },
-  async countUsersCardsByTable(userId, TableId){
-    const query = 'select count(id) from '
+  async countUserCardsByTable(userId, tableId){
+    const query = `
+    select count(c.id) from cards c
+    inner join 
+      (select * from cards_members where user_id = $1) cm
+    on c.id = cm.card_id
+    where c.table_id = $2;
+    `;
+    const {rows: results} = await pgClient.query(query, [userId, tableId]);
+    return results[0];
   }
 };
 
