@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import io from 'socket.io-client';
+const socket = io('http://localhost:8000/');
 import { Button, Modal } from 'react-bootstrap';
 import Controls from './Controls';
 import Deck from './Deck';
@@ -42,6 +44,15 @@ export default class Table extends Component {
     const tableId = this.props.match.params.id;
     tableUtil.deleteCardById = this.deleteCardById.bind(this);
     this.getAllTheData(tableId);
+    console.log('im updated boss!');
+    const socket = io.connect('/tableSocket/');
+    socket.on('connect', () => {
+      console.log('Successfully connected!');
+      socket.emit('room', tableId);
+    });
+    socket.on('connected', (message)=>{
+      console.log(message);
+    })
   }
   componentWillReceiveProps(nextProps) {
     if (nextProps.match.params.id !== this.props.match.params.id) {

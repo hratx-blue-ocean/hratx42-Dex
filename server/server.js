@@ -41,7 +41,7 @@ app.use('/api/tables', tablesRoute);
 app.use('/api/decks', decksRoute);
 app.use('/api/cards', cardsRoute);
 
-app.use('/*', express.static(path.join(__dirname, '../client/public')));
+// app.use('/*', express.static(path.join(__dirname, '../client/public')));
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

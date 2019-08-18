@@ -40,7 +40,6 @@ const usersModel = {
   updateUser: async user => {
     const query = makeUpdateString(user, 'users');
     const values = Object.values(user);
-    console.log(query);
     const { rows: users } = await pgClient.query(query, values);
     return users[0];
   },

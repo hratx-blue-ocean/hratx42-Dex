@@ -1,19 +1,7 @@
    // const path = require('path');
 const { notifClient } = require('../db/hosteddb.js');
- // const server = require('./bin/www');
- // const io = require('socket.io')(server);
- //  require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
- //  require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
- //  const pg = require('pg');
- //   
- //  const pgClient = new pg.Client({
- //    host: process.env.DB_HOST,
- //    port: 5432,
- //    user: process.env.DB_USERNAME,
- //    password: process.env.DB_PASSWORD || '',
- //    database: 'dexdb',
- //  });
-
+const server = require('./bin/www');
+const io = require('socket.io')(server);
 
 const pubSubDriver = async () =>{
   notifClient.connect(async err => {
@@ -56,19 +44,16 @@ const pubSubDriver = async () =>{
     }
   });
  
- //   const socketByTable = io.of('/tableSocket/')
- //   socketByTable.on('connection', async socket=>{
- //     console.log('socket connected');
- // 
- //     socket.on('table', function(table) {
- //       socket.join(table);
- //     });
- // 
- //     socket.on('add_card', async data => {
- // 
- //     });
- //   })
- //   
+  const socketByTable = io.of('/tableSocket/')
+  socketByTable.on('connection', async socket=>{
+    console.log('socket connected');
+    socketByTable.emit('connected', `successfully connected to tableSocket`);
+    socket.on('table', function(table) {
+      socket.join(table);
+    });
+
+  })
+  
   notifClient.on('notification', async (message) => {
     console.log('database broadcast:', message);
   })

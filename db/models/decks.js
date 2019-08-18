@@ -18,7 +18,6 @@ const decksModel = {
     const decksWithCards = await Promise.all(
       decks.map(async deck => {
         deck.cards = await cardsModel.getCardsByDeckId(deck.id);
-        console.log(deck.cards);
         return deck;
       })
     );

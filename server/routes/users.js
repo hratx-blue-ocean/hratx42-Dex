@@ -187,7 +187,6 @@ router.get('/:id/cards/', async (req, res) => {
     const user = await usersModel.getUserByID(userId);
     if (user){
       const cards = await cardsModel.getCardsByUserID(userId);
-      console.log(cards);
       res.status(201).send(cards)
     }else{
       res.status(404).json({ success: false, message: 'Error getting user' });
