@@ -39,6 +39,9 @@ const http = {
     getCardsByUser(userID) {
       return tryAxios(`/api/users/${userID}/cards`, 'get');
     },
+    getCardCountForUserByTable(userId, tableId) {
+      return tryAxios(`/api/users/${userId}/table/${tableId}/cards`, 'get');
+    }
   },
   auth: {
     async post(email, password) {
