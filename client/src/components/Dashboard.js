@@ -11,7 +11,7 @@ export default function Dashboard(props) {
   }
   return (
     <Row className="dashboardContainer">
-      <Col xl lg md sm xs={3} >
+      {/* <Col xl lg md sm xs={3} >
         {showProfile ? (
           <ProfileEditForm hideProfile={hideProfile.bind(this)} userId={props.userId} user={props.user} />
         ) : (
@@ -28,35 +28,53 @@ export default function Dashboard(props) {
             </Card>
           </div>
         )}
-      </Col>
+      </Col> */}
       {/* tables */}
       <Col xl lg md sm xs={9} className="dashboardTables">
-        <Card>
-          <h2>{props.user.name}'s Tables</h2>
+        <Card style = {{ border: "none" }}>
+          <div style = {{ textAlign: "center", paddingBottom: "15px" }}><h1>Welcome back, {props.user.name}</h1></div>
+          <h2>Your Tables</h2>
+          <hr style = {{ marginTop: "8px" }}/>
             <div className="dashboardTablesContainer">
-              {props.tables.map((table, index) =>
-                <ul key = {Math.random()}>
-                    <li>
-                      <div style = {{
-                        backgroundImage: `url(/assets/card${index%4}.${index % 2 === 0 ? 'jpg' : 'png'})`,
-                        height: '250px',
-                        width: '175px',
-                        backgroundSize: 'cover',
-                        backgroundPosition: 'center center',
-                        opacity: '0.6'
-                        }} 
-                        onClick={() => props.history.push(`/table/${table.id}`)} className="newTable">
-                        <h5>{table.name}</h5>
-                      </div>
-                    </li>
-                </ul>
+              {props.tables.map((table, index) => {
+                const randCard = Math.floor(Math.random() * 4);
+                return (
+                  <ul key = {Math.random()}>
+                      <li>
+                        <div
+                          style={{
+                            position: "relative",
+                            top: "2em",
+                            overflow: "hidden",
+                            height: "250px",
+                            width: "170px",
+                            textAlign: "center"
+                          }}
+                        >
+                          <h3>{table.name.length < 40 ? table.name : table.name.slice(0, 40) + "..."}</h3>
+                        </div>
+                        <div style = {{
+                          backgroundImage: `url(/assets/card${randCard}.${randCard % 2 === 0 ? 'jpg' : 'png'})`,
+                          height: '250px',
+                          width: '175px',
+                          backgroundSize: 'cover',
+                          backgroundPosition: 'center center',
+                          opacity: '0.2',
+                          marginTop: "-250px"
+                          }} 
+                          onClick={() => props.history.push(`/table/${table.id}`)} className="newTable">
+                        </div>
+                      </li>
+                  </ul>
+                )}
               )}
             </div>
         </Card>
         <div style = {{height: '50px'}}></div>
-        <Card>
+        <Card style={{ border: "none" }}>
           <div>
-            <h2>{props.user.name}'s Cards</h2>
+            <h2>Your Cards</h2>
+            <hr style={{ marginTop: "8px" }} />
               <div>
               {props.cards.map((singleCard, cardIndex) =>
               <div key={Math.random()}>

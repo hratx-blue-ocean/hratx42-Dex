@@ -79,12 +79,18 @@ export default function Controls(props) {
           >
             {props.users.map(user => (
               <Dropdown.Item
+                style={{ backgroundColor: "#19b86a", borderColor: "#19b86a" }}
                 className={props.filterBy === user.name ? 'ControlsfilterNames' : null}
                 key={Math.random()}
                 onClick={e => props.changeFilter(e)}>{user.name}</Dropdown.Item>
             ))}
           </DropdownButton>
-          <Button className="tableControlsAddDeckBtn" onClick={() => props.handleModal()} variant="success">
+          <Button 
+            className="tableControlsAddDeckBtn" 
+            onClick={() => props.handleModal()} 
+            variant="success"
+            style={{ backgroundColor: "#19b86a", borderColor: "#19b86a"}}
+          >
             Add Deck
           </Button>
           <Button

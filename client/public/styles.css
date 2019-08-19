@@ -8,7 +8,7 @@ body {
   margin: 0;
   padding: 0;
   background-color: white;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: -apple-system, 'Raleway',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -432,6 +432,11 @@ code {
   padding-left: 20px;
 }
 
+.tableControlsFilterBtn > button {
+  background-color: #19b86a;
+  border-color: #19b86a;
+}
+
 .tableControlsAddDeckBtn {
   margin-left: 20px;
 }
@@ -540,7 +545,7 @@ code {
 /* dashboard main container div */
 .dashboardContainer {
   display: flex;
-  padding: 5rem 15rem 0 15rem;
+  padding: 2rem 15rem 0 15rem;
   justify-content: space-between;
   background: white;
   height: 100vh;
