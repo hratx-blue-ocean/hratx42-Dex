@@ -54,7 +54,7 @@ function NavBar(props) {
               <NavDropdown.Divider />
               <NavDropdown.Item onClick={() => props.changeTableModal()}>Create Table</NavDropdown.Item>
             </NavDropdown>
-          <NavDropdown className="navBarUserCircle navBarDropdown" title={initial} id="dropdown-menu-align-right" style={{  marginTop: ".125rem", marginRight: "40px", marginBottom: "0" }}>
+          <NavDropdown className="navBarUserCircle navBarDropdown" title={initial} id="dropdown-menu-align-right" style={{  marginTop: ".125rem", marginRight: "0", marginBottom: "0" }}>
             <Link className={'dropdown-item'} style={{fontWeight: 'lighter'}} to={"/dashboard"}>Dashboard</Link>
             <NavDropdown.Divider />
             <NavDropdown.Item onClick={() => props.logOut()}>Log Out</NavDropdown.Item>
