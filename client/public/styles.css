@@ -486,6 +486,7 @@ code {
 
 .back {
   transform: rotateY(90deg);
+  cursor: pointer;
 }
 
 @keyframes flip {
@@ -495,6 +496,10 @@ code {
 @keyframes flipback {
   0% { transform: rotateY(90deg)}
   100% { transform: rotateY(0deg)}
+}
+
+.cardBackText {
+  opacity: 1 !important;
 }
 
 .hoverCard:hover div.back{
