@@ -40,30 +40,19 @@ export default function Dashboard(props) {
                 const randCard = Math.floor(Math.random() * 4);
                 return (
                   <ul key = {Math.random()}>
-                      <li>
-                        <div
-                          style={{
-                            position: "relative",
-                            top: "2em",
-                            overflow: "hidden",
-                            height: "250px",
-                            width: "170px",
-                            textAlign: "center"
-                          }}
-                        >
-                          <h3>{table.name.length < 40 ? table.name : table.name.slice(0, 40) + "..."}</h3>
+                      <li className = 'hoverCard' style = {{position: 'relative'}}>
+                        <div className = 'front'>
+                          <div style={{ position: "relative", top: "2em", overflow: "hidden", height: "250px", width: "170px", textAlign: "center"}} >
+                            <h3>{table.name.length < 40 ? table.name : table.name.slice(0, 40) + "..."}</h3>
+                          </div>
+                          <div style = {{ backgroundImage: `url(/assets/card${randCard}.${randCard % 2 === 0 ? 'jpg' : 'png'})`, height: '250px', width: '175px', backgroundSize: 'cover', backgroundPosition: 'center center', opacity: '0.2', marginTop: "-250px" }} 
+                            onClick={() => props.history.push(`/table/${table.id}`)} className="newTable">
+                          </div>
                         </div>
-                        <div style = {{
-                          backgroundImage: `url(/assets/card${randCard}.${randCard % 2 === 0 ? 'jpg' : 'png'})`,
-                          height: '250px',
-                          width: '175px',
-                          backgroundSize: 'cover',
-                          backgroundPosition: 'center center',
-                          opacity: '0.2',
-                          marginTop: "-250px"
-                          }} 
-                          onClick={() => props.history.push(`/table/${table.id}`)} className="newTable">
-                        </div>
+                        <div className = 'back' style={{ position: "absolute", top: '0px', overflow: "hidden", height: "245px", width: "170px", textAlign: "center", backgroundSize: 'cover', backgroundPosition: 'center center', opacity: '0.2', backgroundImage: 'url(/assets/aceCard.png)'}}
+                          onClick={() => props.history.push(`/table/${table.id}`)}></div>
+                          {props.cardCount.length ? (<div className = 'back cardBackText' style = {{position: 'absolute', top: '80px', fontSize: '18px'}}>You have {props.cardCount[index].count} Cards in this deck</div>) : (<></>)}
+                        
                       </li>
                   </ul>
                 )}

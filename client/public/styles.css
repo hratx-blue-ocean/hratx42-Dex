@@ -31,7 +31,6 @@ code {
 /* BEGIN CARD THUMBNAIL STYLING? */
 
 .cardThumbnails_impact {
-  border: 1px solid black;
   width: 45px;
   height: 35px;
   font-size: 12px;
@@ -484,6 +483,32 @@ code {
   overflow-y: hidden;
 }
 
+.back {
+  transform: rotateY(90deg);
+  cursor: pointer;
+}
+
+@keyframes flip {
+  0% { transform: rotateY(0deg)}
+  100% { transform: rotateY(90deg)}
+}
+@keyframes flipback {
+  0% { transform: rotateY(90deg)}
+  100% { transform: rotateY(0deg)}
+}
+
+.cardBackText {
+  opacity: 1 !important;
+}
+
+.hoverCard:hover div.back{
+  animation: flipback .2s .2s ease-out forwards;
+}
+
+.hoverCard:hover div.front{
+  animation: flip .2s ease-in forwards;
+}
+
 .row {
   display: flex;
   flex-wrap: nowrap !important;
@@ -645,6 +670,6 @@ code {
 }
 
 .cardHeaderLabels:hover {
-  color: black;
+  color: white;
 }
 /* END DASHBOARD STYLES */

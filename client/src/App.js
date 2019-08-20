@@ -31,6 +31,7 @@ export default class App extends Component {
       tables: [],
       shownTable: null,
       newPlayer: [],
+      cardCount: [],
       // dashboard edit profile form
       profile: {
         editName: '',
@@ -92,8 +93,21 @@ export default class App extends Component {
   async login() {
     auth.setUser(this);
     await this.getTables();
+    await this.getCardCountForUserByTable();
     await this.getUser();
     await this.getCards();
+  }
+
+  async getCardCountForUserByTable() {
+    let cardCount = [];
+    let tempCardCount =[];
+    for (let i = 0; i < this.state.tables.length; i++){
+      tempCardCount.push(http.users.getCardCountForUserByTable(this.state.userId, this.state.tables[i].id))
+    }
+    for (let j = 0; j < this.state.tables.length; j++){
+      cardCount.push(await tempCardCount[j])
+    }
+    this.setState({cardCount})
   }
 
   async getCards() {
@@ -203,6 +217,7 @@ export default class App extends Component {
               <Dashboard
                 {...props}
                 // state props
+                cardCount = {this.state.cardCount}
                 state={this.state}
                 user={this.state.user}
                 userId={this.state.userId}
