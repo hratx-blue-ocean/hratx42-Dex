@@ -51,7 +51,7 @@ export default function Dashboard(props) {
                         </div>
                         <div className = 'back' style={{ position: "absolute", top: '0px', overflow: "hidden", height: "245px", width: "170px", textAlign: "center", backgroundSize: 'cover', backgroundPosition: 'center center', opacity: '0.2', backgroundImage: 'url(/assets/aceCard.png)'}}
                           onClick={() => props.history.push(`/table/${table.id}`)}></div>
-                          {props.cardCount.length ? (<div className = 'back cardBackText' style = {{position: 'absolute', top: '80px', fontSize: '18px'}}>You have {props.cardCount[index].count} Cards in this deck</div>) : (<></>)}
+                      {props.cardCount.length ? (<div className='back cardBackText' style={{ position: 'absolute', top: '80px', fontSize: '18px' }} onClick={() => props.history.push(`/table/${table.id}`)} >You have {props.cardCount[index].count} Cards in this deck</div>) : (<></>)}
                         
                       </li>
                   </ul>
