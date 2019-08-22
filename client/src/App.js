@@ -107,6 +107,7 @@ export default class App extends Component {
     for (let j = 0; j < this.state.tables.length; j++){
       cardCount.push(await tempCardCount[j])
     }
+    console.log(cardCount)
     this.setState({cardCount})
   }
 
@@ -153,11 +154,13 @@ export default class App extends Component {
     http.tables.postUser(tableId, this.state.user.email);
     const tables = [...this.state.tables];
     tables.push(newTable);
-    this.setState({ tables });
+    const cardCount = this.state.cardCount;
+    cardCount.push({id:tableId, name})
     for (let email of emails) {
       http.tables.postUser(tableId, email);
     }
     this.changeTableModal();
+    this.setState({ tables, cardCount });
   }
 
   logOut() {
