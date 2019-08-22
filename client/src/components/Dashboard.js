@@ -11,24 +11,6 @@ export default function Dashboard(props) {
   }
   return (
     <Row className="dashboardContainer">
-      {/* <Col xl lg md sm xs={3} >
-        {showProfile ? (
-          <ProfileEditForm hideProfile={hideProfile.bind(this)} userId={props.userId} user={props.user} />
-        ) : (
-          <div style = {{width: '350px', height: '450px'}}>
-            <Card>
-              <div style = {{fontSize: '30px'}}>Welcome back to your dashboard, {props.user.name}</div>
-              <hr/>
-              <div>Please refer to our <span style = {{textDecoration: 'underline'}}>TOS</span> for any questions</div>
-              <hr/>
-              <div>Tables you are a member of: {props.tables.length}</div>
-              <div>Total Cards owned: {props.cards.length}</div>
-              <div>Cards per Table Average: {props.tables.length/5}</div>
-              <Button onClick = {() => setShowProfile(true)}>Edit Profile</Button>
-            </Card>
-          </div>
-        )}
-      </Col> */}
       {/* tables */}
       <Col xl lg md sm xs={9} className="dashboardTables">
         <Card style = {{ border: "none" }}>
@@ -58,6 +40,24 @@ export default function Dashboard(props) {
                 )}
               )}
             </div>
+          {/* <Col xl lg md sm xs={3} >
+        {showProfile ? (
+          <ProfileEditForm hideProfile={hideProfile.bind(this)} userId={props.userId} user={props.user} />
+        ) : (
+          <div style = {{width: '350px', height: '450px'}}>
+            <Card>
+              <div style = {{fontSize: '30px'}}>Welcome back to your dashboard, {props.user.name}</div>
+              <hr/>
+              <div>Please refer to our <span style = {{textDecoration: 'underline'}}>TOS</span> for any questions</div>
+              <hr/>
+              <div>Tables you are a member of: {props.tables.length}</div>
+              <div>Total Cards owned: {props.cards.length}</div>
+              <div>Cards per Table Average: {props.tables.length/5}</div>
+              <Button onClick = {() => setShowProfile(true)}>Edit Profile</Button>
+            </Card>
+          </div>
+        )}
+      </Col> */}
         </Card>
         <div style = {{height: '50px'}}></div>
         <Card style={{ border: "none" }}>
