@@ -195,4 +195,12 @@ router.get('/:id/cards/', async (req, res) => {
   }, res);
 })
 
+router.get('/:userId/table/:tableId/cards', async (req, res) => {
+  const {userId, tableId} = req.params; 
+  tryCatch(async () => {
+    const count = await cardsModel.countUserCardsByTable(userId, tableId);
+    res.status(201).send(count);
+  })
+})
+
 module.exports = router;

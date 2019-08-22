@@ -28,7 +28,7 @@ export default function DashboardCards(props) {
   singleCard.cards_members = cards_members;
 
   return (
-    <div style={{ width: '250px', height: '250px'}}>
+    <div style={{ width: '250px', height: '250px', float: "left", padding: "15px"}}>
       
       <Card  style={{ width: '250px', height: '250px' }} className='CardThumbnailsSingleCard'>
       <div style ={{padding: '5px'}}>
