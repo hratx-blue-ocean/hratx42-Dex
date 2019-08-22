@@ -59,9 +59,9 @@ export default function Dashboard(props) {
         )}
       </Col> */}
         </Card>
-        <div style = {{height: '50px'}}></div>
-        <Card style={{ border: "none" }}>
-          <div>
+        {/* <div style = {{height: '50px'}}></div> */}
+        {/* <Card style={{ border: "none" }}> */}
+          {/* <div>
             <h2>Your Cards</h2>
             <hr style={{ marginTop: "8px" }} />
               <div>
@@ -77,8 +77,8 @@ export default function Dashboard(props) {
               </div>
             )}
               </div>
-          </div>
-        </Card>
+          </div> */}
+        {/* </Card> */}
       </Col>
     </Row>
   )

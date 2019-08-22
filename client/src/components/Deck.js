@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Card, Button, Modal } from 'react-bootstrap';
+import { Card, Button, Modal, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import CardThumbnail from './CardThumbnails';
 import NewCardModal from './NewCardModal';
 
@@ -35,20 +35,36 @@ export default function Deck(props) {
         <div id="deckHeader" style={{ width: '100%' }}>
           <div style = {{ float: "left"}}><span className="deckTitle" style = {{ marginLeft: "-10px" }}>{props.deck.title}</span></div>
           <div style={{ float: 'right' }}>
-            <Button
-              className="deckEditBtn"
-              variant='link'
-              onClick={() => setShowEditDeck(true)}
-            >
-            ...
-            </Button>
-            <Button
-              className="deckEditBtn"
-              variant='link'
-              onClick={() => handleShow()}
-            >
-              +
-            </Button>
+            <OverlayTrigger
+              key={'editdecktop'}
+              placement={'top'}
+              overlay={
+                <Tooltip id={`tooltip-top`}>
+                  Edit Deck
+                </Tooltip>}>
+              <Button
+                className="deckEditBtn"
+                variant='link'
+                onClick={() => setShowEditDeck(true)}
+              >
+              ...
+              </Button>
+            </OverlayTrigger>
+            <OverlayTrigger
+              key={'addcardtop'}
+              placement={'top'}
+              overlay={
+                <Tooltip id={`tooltip-top`}>
+                  Add Card
+                </Tooltip>}>
+              <Button
+                className="deckEditBtn"
+                variant='link'
+                onClick={() => handleShow()}
+              >
+                +
+              </Button>
+            </OverlayTrigger>
           </div>
         </div>
         <div id="deckScrollbar">
