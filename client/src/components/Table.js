@@ -192,6 +192,8 @@ export default class Table extends Component {
     })
     .then((card)=>{
       let decks = [...this.state.decks]
+      decks[deckIndex].cards[cardIndex].cards_members = finalMembers;
+      decks[deckIndex].cards[cardIndex].card_labels = finalLabels;
       let cardIndex = this.findCardById(toPost.id)
       decks[cardIndex.deckIndex].cards.splice(cardIndex.cardIndex,1,card)
       this.setState({decks})
