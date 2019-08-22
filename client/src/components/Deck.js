@@ -32,7 +32,7 @@ export default function Deck(props) {
   return (
     <div id="deckWrapper">
       <div id="deckContent" style={{ width: '100%' }} >
-        <div id="deckHeader" style={{ width: '100%' }}><span className="deckTitle">{props.deck.title}</span>
+        <div id="deckHeader" style={{ width: '100%' }}><span className="deckTitle" style = {{ marginLeft: "-10px" }}>{props.deck.title}</span>
           <div style={{ float: 'right' }}>
             <Button
               className="deckEditBtn"
