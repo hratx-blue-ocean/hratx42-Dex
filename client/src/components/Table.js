@@ -38,7 +38,8 @@ export default class Table extends Component {
     this.newCardDataCollector = this.newCardDataCollector.bind(this);
     this.editCardDataCollector = this.editCardDataCollector.bind(this);
   }
-  async componentDidMount() {
+  //on mount, get all decks and cards for the table 
+  componentDidMount() {
     const tableId = this.props.match.params.id;
     tableUtil.deleteCardById = this.deleteCardById.bind(this);
     this.getAllTheData(tableId);
@@ -49,6 +50,7 @@ export default class Table extends Component {
     }
   }
 
+  //fill all data from API into state
   async getAllTheData(tableId) {
     // console.log('Getting the data ', tableId);
     this.props.loading(true)
@@ -117,8 +119,8 @@ export default class Table extends Component {
       })
   }
 
+  //edit card, also limits data to only unique labels and members
   editCardDataCollector(players, tags, deck, cardInfo, deckIndex, cardIndex) {
-    console.log(cardInfo.due)
     let toPost = {
       description: cardInfo.description,
       id: cardInfo.id,
@@ -196,6 +198,7 @@ export default class Table extends Component {
     })
   }
 
+  //get players that are part of the table
   obtainPlayersId(players) {
     let users = this.state.users;
     let result = players;
@@ -211,6 +214,7 @@ export default class Table extends Component {
     return result;
   }
 
+  //use state labels to fill in data from database;
   obtainLabelIds(tags) {
     let labels = this.state.labels;
     let result = tags;
