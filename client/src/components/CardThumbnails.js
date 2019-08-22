@@ -58,7 +58,9 @@ export default function CardThumbnails(props) {
           weight = {props.singleCard.weight}
           impact = {props.singleCard.impact} />
         <div>
-          <div style={{ display: 'flex', height: '70px', alignItems: 'center', fontSize: '14px', paddingTop: '0px', paddingLeft: '5px' }}>{props.singleCard.title}</div>
+          <div style={{ display: 'flex', height: '70px', alignItems: 'center', fontSize: '14px', paddingTop: '0px', paddingLeft: '5px' }}>
+              {props.singleCard.title.length < 90 ? props.singleCard.title : props.singleCard.title.slice(0, 90) + "..."}
+        </div>
         </div>
         <div style={{ position: "absolute", top: "80%", width: "100%"}}>
           <div style={{ float: "left", paddingLeft: "5px" }}>
