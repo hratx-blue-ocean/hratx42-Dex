@@ -5,10 +5,12 @@ const config = { secret: 'supersecuresecret' };
 
 //connect to db later
 const usersModel = require('../../db/models/users');
+const tablesModel = require('../../db/models/tables');
 
 const auth = (req, res, next) => {
   // console.log('COKIEOEKDUFID', req.cookies);
   const { email, password } = req.body;
+  const { tableId } = req.cookies;
   //get user email
   usersModel
     .getUserInfoByEmail(email)
@@ -34,16 +36,24 @@ const auth = (req, res, next) => {
               let token = jwt.sign({ userId: user.id }, config.secret, {
                 expiresIn: '7 days',
               });
-              res
-                .clearCookie('tableId')
-                .cookie('token', token)
-                .header('x-access-token', token)
-                .status(201)
-                .json({
-                  success: true,
-                  message: 'Authentication Successful',
-                  token,
-                });
+              if(tableId) {
+                usersModel.getUserInfoByEmail(email)
+                .then((user) => {
+                  return tablesModel.addUserToTable(tableId, user.id)
+                })
+                .then(() => {
+                  res.clearCookie('tableId').cookie('token', token).header('x-access-token', token).status(201).json({success: true,message: 'Authentication Successful',token,});
+                })
+                .catch((err) => {
+                  console.log('Error with invitation to existing user', err)
+                  res.status(404).json({
+                    success: false,
+                    message: 'Unexpected Error Occurred',
+                  })
+                })
+              } else {
+                res.clearCookie('tableId').cookie('token', token).header('x-access-token', token).status(201).json({success: true,message: 'Authentication Successful',token,});
+              }
             } else {
               res.status(403).json({
                 success: false,

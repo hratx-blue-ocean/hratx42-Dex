@@ -6,13 +6,22 @@ export default function Login(props) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = () => {
-    http.auth.post(email, password).then(loggedIn => {
-      console.log('singin data', loggedIn);
-      if (loggedIn) {
-        props.login();
-      }
-    });
+  const handleSubmit = (guest) => {
+    if(guest) {
+      http.auth.post('guest@dex.com', '123').then(loggedIn => {
+        console.log('singin data', loggedIn);
+        if (loggedIn) {
+          props.login();
+        }
+      });
+    } else {
+      http.auth.post(email, password).then(loggedIn => {
+        console.log('singin data', loggedIn);
+        if (loggedIn) {
+          props.login();
+        }
+      });
+    }
   };
 
   return (
@@ -24,6 +33,7 @@ export default function Login(props) {
         <Navbar.Toggle aria-controls='basic-navbar-nav' />
         <Navbar.Collapse id='basic-navbar-nav'>
           <Nav className='mr-auto' />
+          
           <Form
             style={{ marginRight: '10px', marginBottom: '24px' }}
             onChange={e => {
@@ -59,12 +69,20 @@ export default function Login(props) {
               variant='success'
               // className='mr-sm-2'
               onClick={() => {
-                console.log('clicked log in');
                 handleSubmit();
                 // send get request for user information to render dashboard
               }}
             >
               Log In
+            </Button>
+            <Button 
+            className='guestBtn'
+            variant='success'
+            onClick={() => {
+              handleSubmit('guest');
+            }}
+            >
+              Guest
             </Button>
           </Form>
         </Navbar.Collapse>
