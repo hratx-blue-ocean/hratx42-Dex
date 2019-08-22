@@ -20,10 +20,10 @@ export default function CardHeader(props) {
         <Col md={3}>
           <div style = {{borderRadius: '20%'}} className='cardThumbnails_impact'>
           <OverlayTrigger
-              key={'bottom'}
-              placement={'bottom'}
+              key={'top'}
+              placement={'top'}
               overlay={
-                <Tooltip id={`tooltip-bottom`}>
+                <Tooltip id={`tooltip-top`}>
                   Priority/Effort
                 </Tooltip>}>
                 <div>
@@ -38,9 +38,17 @@ export default function CardHeader(props) {
             <Row key={Math.random()} className = 'no-gutters' style = {{paddingTop: '0px', paddingBottom: '0px'}}>
               {subLabel.map((label) => 
               <Col key={Math.random()} md = {4}>
-                <div  style={{ height: '11px', fontSize: '7px', backgroundColor: `${label.color}`, borderRadius: '10%', color: `${label.color}` }}>
-                  <p className = 'cardHeaderLabels'>{label.label_name}</p>
-                </div>
+                  <OverlayTrigger
+                    key={'bottom'}
+                    placement={'bottom'}
+                    overlay={
+                      <Tooltip id={`tooltip-bottom`}>
+                        {label.label_name}
+                      </Tooltip>}>
+                    <div style={{ height: '11px', fontSize: '7px', backgroundColor: `${label.color}`, borderRadius: '10%', color: `${label.color}` }}>
+                      {/* <p className='cardHeaderLabels'>{label.label_name}</p> */}
+                    </div>
+                  </OverlayTrigger>
               </Col>
               )}
             </Row>

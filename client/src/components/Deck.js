@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Card, Button, Modal } from 'react-bootstrap';
+import { Card, Button, Modal, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import CardThumbnail from './CardThumbnails';
 import NewCardModal from './NewCardModal';
 
@@ -32,15 +32,39 @@ export default function Deck(props) {
   return (
     <div id="deckWrapper">
       <div id="deckContent" style={{ width: '100%' }} >
-        <div id="deckHeader" style={{ width: '100%' }}><span className="deckTitle">{props.deck.title}</span>
+        <div id="deckHeader" style={{ width: '100%' }}>
+          <div style = {{ float: "left"}}><span className="deckTitle" style = {{ marginLeft: "-10px" }}>{props.deck.title}</span></div>
           <div style={{ float: 'right' }}>
-            <Button
-              className="deckEditBtn"
-              variant='link'
-              onClick={() => setShowEditDeck(true)}
-            >
-            ...
-            </Button>
+            <OverlayTrigger
+              key={'editdecktop'}
+              placement={'top'}
+              overlay={
+                <Tooltip id={`tooltip-top`}>
+                  Edit Deck
+                </Tooltip>}>
+              <Button
+                className="deckEditBtn"
+                variant='link'
+                onClick={() => setShowEditDeck(true)}
+              >
+              ...
+              </Button>
+            </OverlayTrigger>
+            <OverlayTrigger
+              key={'addcardtop'}
+              placement={'top'}
+              overlay={
+                <Tooltip id={`tooltip-top`}>
+                  Add Card
+                </Tooltip>}>
+              <Button
+                className="deckEditBtn"
+                variant='link'
+                onClick={() => handleShow()}
+              >
+                +
+              </Button>
+            </OverlayTrigger>
           </div>
         </div>
         <div id="deckScrollbar">
@@ -56,10 +80,11 @@ export default function Deck(props) {
                   moveCard={props.moveCard}
                   editCard={props.editCard}
                   users={props.users}
-                  labels={props.labels} />
+                  labels={props.labels} 
+                />
               </div>
             )}
-            <div style={{ paddingLeft: '20px' }} />
+            {/* <div style={{ paddingLeft: '20px' }} /> */}
             <NewCardModal
               newCardData={props.newCardData}
               showMe={show}
@@ -70,11 +95,11 @@ export default function Deck(props) {
               users={props.users}
               labels={props.labels}
               card={props.singleCard}
-            />
+            /> 
           </Card.Body>
-          <div className="deckAddAnotherCardBtn deckCardAddBtn" variant='outline-success' onClick={() => handleShow()}>
+          {/* <div className="deckAddAnotherCardBtn deckCardAddBtn" variant='outline-success' onClick={() => handleShow()}>
               + Add Another Card
-          </div>
+            </div> */}
         </div>
       </div>
       <div>

@@ -11,24 +11,6 @@ export default function Dashboard(props) {
   }
   return (
     <Row className="dashboardContainer">
-      {/* <Col xl lg md sm xs={3} >
-        {showProfile ? (
-          <ProfileEditForm hideProfile={hideProfile.bind(this)} userId={props.userId} user={props.user} />
-        ) : (
-          <div style = {{width: '350px', height: '450px'}}>
-            <Card>
-              <div style = {{fontSize: '30px'}}>Welcome back to your dashboard, {props.user.name}</div>
-              <hr/>
-              <div>Please refer to our <span style = {{textDecoration: 'underline'}}>TOS</span> for any questions</div>
-              <hr/>
-              <div>Tables you are a member of: {props.tables.length}</div>
-              <div>Total Cards owned: {props.cards.length}</div>
-              <div>Cards per Table Average: {props.tables.length/5}</div>
-              <Button onClick = {() => setShowProfile(true)}>Edit Profile</Button>
-            </Card>
-          </div>
-        )}
-      </Col> */}
       {/* tables */}
       <Col xl lg md sm xs={9} className="dashboardTables">
         <Card style = {{ border: "none" }}>
@@ -51,17 +33,35 @@ export default function Dashboard(props) {
                         </div>
                         <div className = 'back' style={{ position: "absolute", top: '0px', overflow: "hidden", height: "245px", width: "170px", textAlign: "center", backgroundSize: 'cover', backgroundPosition: 'center center', opacity: '0.2', backgroundImage: 'url(/assets/aceCard.png)'}}
                           onClick={() => props.history.push(`/table/${table.id}`)}></div>
-                          {props.cardCount.length ? (<div className = 'back cardBackText' style = {{position: 'absolute', top: '80px', fontSize: '18px'}}>You have {props.cardCount[index].count} Cards in this deck</div>) : (<></>)}
+                      {props.cardCount.length ? (<div className='back cardBackText' style={{ position: 'absolute', top: '80px', fontSize: '18px' }} onClick={() => props.history.push(`/table/${table.id}`)} >You have {props.cardCount[index].count} Cards in this deck</div>) : (<></>)}
                         
                       </li>
                   </ul>
                 )}
               )}
             </div>
+          {/* <Col xl lg md sm xs={3} >
+        {showProfile ? (
+          <ProfileEditForm hideProfile={hideProfile.bind(this)} userId={props.userId} user={props.user} />
+        ) : (
+          <div style = {{width: '350px', height: '450px'}}>
+            <Card>
+              <div style = {{fontSize: '30px'}}>Welcome back to your dashboard, {props.user.name}</div>
+              <hr/>
+              <div>Please refer to our <span style = {{textDecoration: 'underline'}}>TOS</span> for any questions</div>
+              <hr/>
+              <div>Tables you are a member of: {props.tables.length}</div>
+              <div>Total Cards owned: {props.cards.length}</div>
+              <div>Cards per Table Average: {props.tables.length/5}</div>
+              <Button onClick = {() => setShowProfile(true)}>Edit Profile</Button>
+            </Card>
+          </div>
+        )}
+      </Col> */}
         </Card>
-        <div style = {{height: '50px'}}></div>
-        <Card style={{ border: "none" }}>
-          <div>
+        {/* <div style = {{height: '50px'}}></div> */}
+        {/* <Card style={{ border: "none" }}> */}
+          {/* <div>
             <h2>Your Cards</h2>
             <hr style={{ marginTop: "8px" }} />
               <div>
@@ -77,8 +77,8 @@ export default function Dashboard(props) {
               </div>
             )}
               </div>
-          </div>
-        </Card>
+          </div> */}
+        {/* </Card> */}
       </Col>
     </Row>
   )
