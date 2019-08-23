@@ -7,7 +7,11 @@ const usersModel = require('../../db/models/users.js');
 const emailInvite = require('../util/inviteHTML.js');
 
 router.post('/:email', async (req, res) => {
-
+  console.log('REQ.HOSTNAME: ', req.hostname);
+  console.log('REQ.HEADERS.HOST: ', req.headers.host)
+  console.log('REQ.HEADERS.FOWARDED: ', req.headers.forwarded)
+  console.log('REQ.HEADERS.FROM: ', req.headers.from);
+  console.log('REQ.ORIGINALURL: ', req.originalUrl);
   const {email} = req.params;
   const {tableId, invitedBy} = req.body;
 
@@ -23,7 +27,7 @@ router.post('/:email', async (req, res) => {
     from: 'dexteamhr@gmail.com', // sender address
     to: `${email}`, // list of receivers
     subject: `Hi! this is dex team. You are invited by ${invitedBy}`, // Subject line
-    html: emailInvite(req.headers.host, tableId, invitedBy)
+    html: emailInvite(req.hostname, tableId, invitedBy)
   };
 
   usersModel
