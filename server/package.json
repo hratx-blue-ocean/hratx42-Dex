@@ -34,7 +34,7 @@
     "http-errors": "^1.7.2",
     "install": "^0.12.2",
     "longjohn": "^0.2.12",
-    "mocha": "^6.1.4",
+    "mocha": "^10.2.0",
     "morgan": "^1.9.1",
     "supertest": "^4.0.2"
   }
